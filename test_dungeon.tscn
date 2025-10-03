@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://r0rlptslyw58"]
+[gd_scene load_steps=4 format=3 uid="uid://r0rlptslyw58"]
 
 [ext_resource type="Script" uid="uid://t6rnai4uey85" path="res://characters/character.gd" id="1_7y2ak"]
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://player/player_character_controller.gd" id="1_nsxo0"]
+[ext_resource type="Texture2D" uid="uid://h2fitiuextwe" path="res://icon.svg" id="3_xsdle"]
 
 [node name="TestDungeon" type="Node2D"]
 
@@ -13,5 +14,10 @@ metadata/_custom_type_script = "uid://kygkbg3kqosp"
 [node name="Terrain" type="TileMapLayer" parent="."]
 
 [node name="Player" type="Node2D" parent="."]
+position = Vector2(912, 516)
 script = ExtResource("1_7y2ak")
 metadata/_custom_type_script = "uid://t6rnai4uey85"
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(2, 0)
+texture = ExtResource("3_xsdle")
