@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://r0rlptslyw58"]
+
+[ext_resource type="Script" uid="uid://t6rnai4uey85" path="res://characters/character.gd" id="1_7y2ak"]
+[ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://player/player_character_controller.gd" id="1_nsxo0"]
+
+[node name="TestDungeon" type="Node2D"]
+
+[node name="PlayerCharacterController" type="Node" parent="." node_paths=PackedStringArray("_character")]
+script = ExtResource("1_nsxo0")
+_character = NodePath("../Player")
+metadata/_custom_type_script = "uid://kygkbg3kqosp"
+
+[node name="Terrain" type="TileMapLayer" parent="."]
+
+[node name="Player" type="Node2D" parent="."]
+script = ExtResource("1_7y2ak")
+metadata/_custom_type_script = "uid://t6rnai4uey85"
