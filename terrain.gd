@@ -15,14 +15,18 @@ var fancyFloorAtlas: Vector2 = Vector2(0, 0)
 @export var ROOM_DIM_RANGE: int = 10
 @export var BOX_ROOMS_QTY: int = 60
 
+
 func _ready():
 	#generate_random_world()		# works bad
 	#generate_dungeon_world()	# works worse
 	#generate_box_world()		# kinda works, but still sucks
 	generate_catacombs()
+	_generate_nav_mesh()
+
 
 func generate_catacombs() -> void:
 	pass
+
 
 func generate_box_world() -> void:
 	place_box_rooms(BOX_ROOMS_QTY)
@@ -31,6 +35,7 @@ func generate_box_world() -> void:
 	set_cell(Vector2(0, 7), 0, floorAtlas)
 	set_cell(Vector2(0, 8), 0, floorAtlas)
 	build_walls()
+
 
 func place_box_rooms(numRooms: int) -> void:
 	#var roomArray: Array
@@ -178,10 +183,12 @@ func tunnel(startPoint: Vector2, destination: Rect2) -> Vector2:
 				tunneling = false
 	return startPoint
 
+
 func point_is_in_rect(point: Vector2, rect: Rect2) -> bool:
 	if point.x >= rect.position.x and point.x <= rect.position.x + rect.size.x and point.y >= rect.position.y and point.y <= rect.position.y + rect.size.y:
 		return true
 	return false
+
 
 func get_y_dist(point: Vector2, rect: Rect2) -> bool:
 	if point.x >= rect.position.x and point.x <= rect.position.x + rect.size.x:
@@ -190,12 +197,14 @@ func get_y_dist(point: Vector2, rect: Rect2) -> bool:
 		return point.x - rect.position.x
 	return point.x - (rect.position.x + rect.size.x)
 
+
 func get_x_dist(point: Vector2, rect: Rect2) -> bool:
 	if point.y >= rect.position.y and point.y <= rect.position.y + rect.size.y:
 		return 0
 	if point.y < rect.position.y:
 		return point.y - rect.position.y
 	return point.y - (rect.position.y + rect.size.y)
+
 
 func generate_random_world() -> void:
 	for i in range(width):
@@ -207,6 +216,7 @@ func generate_random_world() -> void:
 					set_cell(Vector2(i, j), 0, floorAtlas)
 	build_walls()
 
+
 func build_walls() -> void:
 	for i in range(width):
 		for j in range(height):
@@ -217,3 +227,19 @@ func build_walls() -> void:
 				var S = get_cell_tile_data(Vector2(i,j+1))
 				if E or N or W or S:
 					set_cell(Vector2(i, j), 0, wallAtlas)
+
+
+func _generate_nav_mesh() -> void:
+	var tile_size := tile_set.tile_size.x
+	var navigation_region := NavigationRegion2D.new()
+	var navigation_polygon := NavigationPolygon.new()
+	navigation_polygon.add_outline(PackedVector2Array([
+		Vector2(0, 0),
+		Vector2(width * tile_size, 0),
+		Vector2(width * tile_size, height * tile_size),
+		Vector2(0, height * tile_size)
+	]))
+	navigation_region.navigation_polygon = navigation_polygon
+	navigation_region.bake_navigation_polygon()
+	add_child(navigation_region)
+
