@@ -9,7 +9,7 @@ func _process(_delta_time: float) -> void:
 	if not _should_process():
 		return
 
-	var action = Action.new()
+	var action = Character.Action.new()
 	action.move_input = _get_move_input()
 	action.aim_direction = _get_aim_direction()
 	_character.act(action)
@@ -38,8 +38,10 @@ func _get_aim_direction() -> Vector2:
 
 
 func _get_interact_target() -> Interactable:
-	# todo raycast or something
-	return null
+	if _is_mouse_aiming():
+		return null
+	else:
+		return null
 
 
 func _is_mouse_aiming() -> bool:

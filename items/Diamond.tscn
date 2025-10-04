@@ -8,7 +8,9 @@
 radius = 18.13
 
 [node name="Diamond" type="RigidBody2D"]
+collision_layer = 4
 gravity_scale = 0.0
+linear_damp = 2.0
 script = ExtResource("1_trtk7")
 item_data = ExtResource("2_2okec")
 metadata/_custom_type_script = "uid://dj61bulh8wvlg"
