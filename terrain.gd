@@ -3,9 +3,6 @@ extends TileMapLayer
 var source_id: int = 0
 var width: int = 58
 var height: int = 32
-var wallAtlas: Vector2 = Vector2(3, 0)
-var floorAtlas: Vector2 = Vector2(3, 2)
-var fancyFloorAtlas: Vector2 = Vector2(0, 0)
 
 @export var RAND_FLOOR_FRACTION: float = 2.0/3.0
 @export var ROOM_QTY_MIN: int = 8
@@ -15,6 +12,19 @@ var fancyFloorAtlas: Vector2 = Vector2(0, 0)
 @export var ROOM_DIM_RANGE: int = 10
 @export var BOX_ROOMS_QTY: int = 60
 
+<<<<<<< Updated upstream
+=======
+const wallAtlas: Vector2 = Vector2(3, 0)
+const floorAtlas: Vector2 = Vector2(3, 2)
+const fancyFloorAtlas: Vector2 = Vector2(0, 0)
+const crossAtlas: Vector2 = Vector2(0, 2)
+const deadEndAtlas: Vector2 = Vector2(1, 0)
+const hallAtlas: Vector2 = Vector2(1, 1)
+const cornerAtlas: Vector2 = Vector2(1, 2)
+const teeAtlas: Vector2 = Vector2(2, 2)
+const crossBlockAtlas: Vector2 = Vector2(2, 1)
+const deadEndBlockAtlas: Vector2 = Vector2(2, 0)
+>>>>>>> Stashed changes
 
 func _ready():
 	#generate_random_world()		# works bad
