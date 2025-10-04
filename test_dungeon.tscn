@@ -119,9 +119,9 @@ sources/0 = SubResource("TileSetAtlasSource_gsb4j")
 
 [node name="TestDungeon" type="Node"]
 
-[node name="PlayerCharacterController" type="Node" parent="." node_paths=PackedStringArray("_character")]
+[node name="PlayerCharacterController" type="Node" parent="." node_paths=PackedStringArray("character")]
 script = ExtResource("1_nsxo0")
-_character = NodePath("../World/PlayerGoblin")
+character = NodePath("../World/PlayerGoblin")
 metadata/_custom_type_script = "uid://kygkbg3kqosp"
 
 [node name="UI" type="Control" parent="."]

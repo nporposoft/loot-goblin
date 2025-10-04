@@ -1,6 +1,5 @@
-extends Node
-
 class_name ItemSpawnerUtility
+extends Node
 
 
 func spawn_item(item_data: ItemData, position: Vector2, velocity: Vector2 = Vector2.ZERO) -> Item:

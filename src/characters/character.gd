@@ -1,9 +1,10 @@
-extends CharacterBody2D
-
 class_name Character
+extends CharacterBody2D
 
 @export var move_speed: float = 200.0
 @export var held_item: ItemData = null
+
+var aim_direction: Vector2 = Vector2.ZERO
 
 @onready var _spritesheet: AnimatedSprite2D = $Spritesheet
 
@@ -15,15 +16,12 @@ class Action extends Object:
 	var aim_direction: Vector2 = Vector2.ZERO
 	var interact_target: Interactable = null
 	var pickup_item: Item = null
-	var drop_item: bool = false
-
-
-var _aim_direction: Vector2 = Vector2.ZERO
+	var throw_force: float = 0.0
 
 
 func act(action: Action) -> void:
-	_process_movement(action.move_input)
-	_process_aiming(action.aim_direction)
+	_process_movement(action)
+	_process_aiming(action)
 	_process_pickup_and_drop(action)
 
 
@@ -35,8 +33,8 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 
-func _process_movement(move_input: Vector2) -> void:
-	velocity = move_input.normalized() * move_speed
+func _process_movement(action: Action) -> void:
+	velocity = action.move_input.normalized() * move_speed
 	if is_zero_approx(velocity.length()):
 		_spritesheet.play("idle")
 	else:
@@ -47,13 +45,13 @@ func _process_movement(move_input: Vector2) -> void:
 		_spritesheet.play("run")
 
 
-func _process_aiming(aim_direction: Vector2) -> void:
-	_aim_direction = aim_direction.normalized()
+func _process_aiming(action: Action) -> void:
+	aim_direction = action.aim_direction.normalized()
 
 
 func _process_pickup_and_drop(action: Action) -> void:
-	if is_holding() and action.drop_item:
-		ItemSpawner.spawn_item(held_item, global_position + _aim_direction * 10, _aim_direction * 50)
+	if is_holding() and !is_zero_approx(action.throw_force):
+		ItemSpawner.spawn_item(held_item, global_position + action.aim_direction * 10, action.aim_direction * action.throw_force)
 		held_item = null
 	elif not is_holding() and action.pickup_item != null:
 		held_item = action.pickup_item.pickup()

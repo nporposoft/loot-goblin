@@ -1,8 +1,8 @@
+class_name Item
 extends RigidBody2D
 
-class_name Item
-
 @export var item_data: ItemData = null
+
 
 func pickup() -> ItemData:
 	var data = item_data
