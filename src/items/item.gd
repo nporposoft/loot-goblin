@@ -8,4 +8,3 @@ func pickup() -> ItemData:
 	var data = item_data
 	call_deferred("queue_free")
 	return data
-
