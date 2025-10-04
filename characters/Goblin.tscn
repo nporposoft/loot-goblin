@@ -64,7 +64,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 1.0
+"speed": 1.5
 }, {
 "frames": [{
 "duration": 1.0,
@@ -99,7 +99,7 @@ radius = 8.0
 radius = 32.0
 
 [node name="Goblin" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 7
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_bjga1")
@@ -108,7 +108,7 @@ metadata/_custom_type_script = "uid://t6rnai4uey85"
 [node name="Spritesheet" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_7rm0i")
-animation = &"run"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="Collider" type="CollisionShape2D" parent="."]
