@@ -16,3 +16,4 @@ var aim_direction: Vector2 = Vector2.ZERO
 var interact_target: Interactable = null
 var interact_type: InteractionType = InteractionType.NONE
 
+

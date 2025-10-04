@@ -1,27 +1,44 @@
 [gd_scene load_steps=5 format=3 uid="uid://r0rlptslyw58"]
 
-[ext_resource type="Script" uid="uid://t6rnai4uey85" path="res://characters/character.gd" id="1_7y2ak"]
-[ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://player/player_character_controller.gd" id="1_nsxo0"]
+[ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="1_nsxo0"]
+[ext_resource type="PackedScene" uid="uid://i08uo4dcy5dr" path="res://characters/Goblin.tscn" id="3_d8tm3"]
 [ext_resource type="Texture2D" uid="uid://h2fitiuextwe" path="res://icon.svg" id="3_xsdle"]
-[ext_resource type="Script" uid="uid://dj61bulh8wvlg" path="res://items/item.gd" id="4_d8tm3"]
+[ext_resource type="PackedScene" uid="uid://ykf6nsdak0fj" path="res://items/Diamond.tscn" id="4_d8tm3"]
 
-[node name="TestDungeon" type="Node2D"]
+[node name="TestDungeon" type="Node"]
 
 [node name="PlayerCharacterController" type="Node" parent="." node_paths=PackedStringArray("_character")]
 script = ExtResource("1_nsxo0")
-_character = NodePath("../Player")
+_character = NodePath("../World/PlayerGoblin")
 metadata/_custom_type_script = "uid://kygkbg3kqosp"
 
-[node name="Terrain" type="TileMapLayer" parent="."]
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
 
-[node name="Player" type="Node2D" parent="."]
-position = Vector2(912, 516)
-script = ExtResource("1_7y2ak")
-metadata/_custom_type_script = "uid://t6rnai4uey85"
-
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(2, 0)
+[node name="Diamond" type="TextureRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_right = 64.0
+offset_bottom = 128.0
+grow_horizontal = 2
 texture = ExtResource("3_xsdle")
 
-[node name="Item" type="Node2D" parent="."]
-script = ExtResource("4_d8tm3")
+[node name="World" type="Node2D" parent="."]
+
+[node name="Terrain" type="TileMapLayer" parent="World"]
+
+[node name="PlayerGoblin" parent="World" instance=ExtResource("3_d8tm3")]
+position = Vector2(912, 516)
+
+[node name="Diamond" parent="World" instance=ExtResource("4_d8tm3")]
+position = Vector2(535, 430)

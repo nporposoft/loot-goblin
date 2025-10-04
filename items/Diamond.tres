@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bhfxa754v7msh"]
+
+[ext_resource type="Script" uid="uid://ctqjnf2yg1uvt" path="res://src/items/item_data.gd" id="1_2rn6s"]
+[ext_resource type="Texture2D" uid="uid://h2fitiuextwe" path="res://icon.svg" id="2_2q4mt"]
+
+[resource]
+script = ExtResource("1_2rn6s")
+display_name = "Diamond"
+description = "So shiny"
+ui_sprite = ExtResource("2_2q4mt")
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"

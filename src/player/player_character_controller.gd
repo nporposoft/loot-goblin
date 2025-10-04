@@ -37,6 +37,11 @@ func _get_aim_direction() -> Vector2:
 		return aim_input.normalized()
 
 
+func _get_interact_target() -> Interactable:
+	# todo raycast or something
+	return null
+
+
 func _is_mouse_aiming() -> bool:
 	# todo maybe?
 	return true
