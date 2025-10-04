@@ -29,11 +29,11 @@ func get_vision_collider() -> CollisionShape2D:
 	return $VisionCollider
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# NOTE: is it a good idea to separate processing from action? seems maybe okay
 	# but there might be some async weirdness?
 	if is_instance_valid(_last_action):
-		_process_movement(_last_action.move_input, delta)
+		_process_movement(_last_action.move_input)
 		_process_aiming(_last_action.aim_direction)
 		_process_interaction(_last_action.interact_target)
 
@@ -42,7 +42,7 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 
-func _process_movement(move_input: Vector2, delta: float) -> void:
+func _process_movement(move_input: Vector2) -> void:
 	velocity = move_input.normalized() * move_speed
 
 
