@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="1_nsxo0"]
 [ext_resource type="Texture2D" uid="uid://dqjadwadqkpha" path="res://assets/tileset2.png" id="3_5o8a4"]
 [ext_resource type="PackedScene" uid="uid://i08uo4dcy5dr" path="res://characters/Goblin.tscn" id="3_d8tm3"]
-[ext_resource type="Script" uid="uid://patkktgw1bbd" path="res://terrain.gd" id="4_cnrih"]
+[ext_resource type="Script" path="res://terrain.gd" id="4_cnrih"]
 [ext_resource type="PackedScene" uid="uid://ykf6nsdak0fj" path="res://items/Diamond.tscn" id="4_d8tm3"]
 [ext_resource type="Resource" uid="uid://bhfxa754v7msh" path="res://items/Diamond.tres" id="5_x2o3n"]
 
@@ -143,6 +143,7 @@ script = ExtResource("4_cnrih")
 
 [node name="PlayerGoblin" parent="World" instance=ExtResource("3_d8tm3")]
 position = Vector2(912, 516)
+collision_layer = 2
 
 [node name="Diamond" parent="World" instance=ExtResource("4_d8tm3")]
 position = Vector2(535, 430)
