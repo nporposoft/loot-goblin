@@ -14,11 +14,23 @@ func _process(_delta: float) -> void:
 	if not _has_character():
 		return
 
+	# safety check if interact target gets deleted for some reason
+	if _interact_target != null and not is_instance_valid(_interact_target):
+		_interact_target = null
+
+	# toggle interaction if the target is no longer in reach
+	if _interact_target != null:
+		if !character.reach.get_interactables().has(_interact_target):
+			_interact_target.interact(self)
+			_interact_target = null
+
 	if Input.is_action_just_pressed("interact"):
+		# if already interacting with something, stop interacting
 		if _interact_target != null and is_instance_valid(_interact_target):
 			_interact_target.interact(self)
 			_interact_target = null
 		else:
+			# interact if there's a target in reach
 			_interact_target = _get_interact_target()
 			if _interact_target != null: _interact_target.interact(self)
 
