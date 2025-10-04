@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ykf6nsdak0fj" path="res://items/Diamond.tscn" id="3_vxkwb"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_2rn6s")
 display_name = "Diamond"
 description = "So shiny"

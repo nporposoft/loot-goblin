@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3u6nyytl22wp"]
+
+[ext_resource type="Script" uid="uid://dj61bulh8wvlg" path="res://src/items/item.gd" id="1_1vhlq"]
+[ext_resource type="Texture2D" uid="uid://h2fitiuextwe" path="res://icon.svg" id="2_adi3s"]
+[ext_resource type="Script" uid="uid://4x62ah40g3dn" path="res://src/player/interactable.gd" id="3_udecq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2okec"]
+radius = 18.13
+
+[node name="Bucket" type="RigidBody2D"]
+collision_layer = 4
+gravity_scale = 0.0
+linear_damp = 2.0
+script = ExtResource("1_1vhlq")
+metadata/_custom_type_script = "uid://dj61bulh8wvlg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2okec")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_adi3s")
+
+[node name="Interactable" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("3_udecq")
+metadata/_custom_type_script = "uid://4x62ah40g3dn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("CircleShape2D_2okec")
+
+[connection signal="on_interact" from="Interactable" to="." method="interact"]
