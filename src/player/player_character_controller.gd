@@ -69,18 +69,27 @@ func _get_interact_target() -> Interactable:
 
 func _get_item_target() -> Item:
 	if _is_mouse_aiming():
-		var query = PhysicsPointQueryParameters2D.new()
-		query.position = _get_mouse_position()
-		query.collision_mask = 1 << 2
-		var space_state = character.get_world_2d().direct_space_state
-		var result = space_state.intersect_point(query)
-		for hit in result:
-			var collider = hit.collider
-			if collider is Item:
-				return collider
-		return null
+		var items_in_reach = character.get_items_in_reach()
+		var item_under_mouse = _get_item_under_mouse()
+		if item_under_mouse in items_in_reach:
+			return _get_item_under_mouse()
 	else:
-		return null
+		pass
+
+	return null
+
+
+func _get_item_under_mouse() -> Item:
+	var query = PhysicsPointQueryParameters2D.new()
+	query.position = _get_mouse_position()
+	query.collision_mask = 1 << 2
+	var space_state = character.get_world_2d().direct_space_state
+	var result = space_state.intersect_point(query)
+	for hit in result:
+		var collider = hit.collider
+		if collider is Item:
+			return collider
+	return null
 
 
 func _get_mouse_position() -> Vector2:

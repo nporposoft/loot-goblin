@@ -7,6 +7,7 @@ extends CharacterBody2D
 var aim_direction: Vector2 = Vector2.ZERO
 
 @onready var _spritesheet: AnimatedSprite2D = $Spritesheet
+@onready var _interact_area: Area2D = $InteractArea
 
 # Action is used by controllers to interact with characters.
 # Specifically -- player controller can pass to the player character,
@@ -27,6 +28,13 @@ func act(action: Action) -> void:
 
 func is_holding() -> bool:
 	return held_item != null
+
+
+func get_items_in_reach() -> Array[Item]:
+	var items_in_reach: Array[Item] = []
+	for body in _interact_area.get_overlapping_bodies():
+		if body is Item: items_in_reach.append(body)
+	return items_in_reach
 
 
 func _physics_process(_delta: float) -> void:
@@ -54,4 +62,6 @@ func _process_pickup_and_drop(action: Action) -> void:
 		ItemSpawner.spawn_item(held_item, global_position + action.aim_direction * 10, action.aim_direction * action.throw_force)
 		held_item = null
 	elif not is_holding() and action.pickup_item != null:
-		held_item = action.pickup_item.pickup()
+		var items_in_reach = get_items_in_reach()
+		if action.pickup_item in items_in_reach:
+			held_item = action.pickup_item.pickup()
