@@ -5,7 +5,7 @@ class_name Character
 @export var move_speed: float = 200.0
 @export var held_item: ItemData = null
 
-@onready var _animated_sprite: AnimatedSprite2D = $Spritesheet
+@onready var _spritesheet: AnimatedSprite2D = $Spritesheet
 
 # Action is used by controllers to interact with characters.
 # Specifically -- player controller can pass to the player character,
@@ -34,11 +34,14 @@ func _physics_process(_delta: float) -> void:
 func _process_movement(move_input: Vector2) -> void:
 	velocity = move_input.normalized() * move_speed
 	if is_zero_approx(velocity.length()):
-		_animated_sprite.play("idle")
+		_spritesheet.play("idle")
 	else:
-		_animated_sprite.play("run")
+		if velocity.x < 0:
+			_spritesheet.set_flip_h(true)
+		if velocity.x > 0:
+			_spritesheet.set_flip_h(false)
+		_spritesheet.play("run")
 
 
 func _process_aiming(_aim_direction: Vector2) -> void:
 	pass
-
