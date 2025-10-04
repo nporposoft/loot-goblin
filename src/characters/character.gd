@@ -18,9 +18,13 @@ class Action extends Object:
 	var drop_item: bool = false
 
 
+var _aim_direction: Vector2 = Vector2.ZERO
+
+
 func act(action: Action) -> void:
 	_process_movement(action.move_input)
 	_process_aiming(action.aim_direction)
+	_process_pickup_and_drop(action)
 
 
 func is_holding() -> bool:
@@ -43,5 +47,13 @@ func _process_movement(move_input: Vector2) -> void:
 		_spritesheet.play("run")
 
 
-func _process_aiming(_aim_direction: Vector2) -> void:
-	pass
+func _process_aiming(aim_direction: Vector2) -> void:
+	_aim_direction = aim_direction.normalized()
+
+
+func _process_pickup_and_drop(action: Action) -> void:
+	if is_holding() and action.drop_item:
+		ItemSpawner.spawn_item(held_item, global_position + _aim_direction * 10, _aim_direction * 50)
+		held_item = null
+	elif not is_holding() and action.pickup_item != null:
+		held_item = action.pickup_item.pickup()
