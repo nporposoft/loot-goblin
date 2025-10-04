@@ -137,8 +137,7 @@ description = "What a nice bucket"
 ui_sprite = ExtResource("7_gsb4j")
 world_scene = ExtResource("8_isiae")
 is_container = true
-rows = 2
-columns = 2
+capacity = 4
 ui_scene = ExtResource("9_isiae")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 

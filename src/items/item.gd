@@ -13,30 +13,6 @@ func pickup() -> ItemData:
 	return data
 
 
-func add_item(item: ItemData) -> bool:
-	if not item_data.is_container:
-		push_warning("Tried to add item to non-container item.")
-		return false
-
-	if item_data.items.size() >= item_data.container_capacity:
-		return false
-
-	item_data.items.append(item)
-	return true
-
-
-func remove_item(item: ItemData) -> bool:
-	if not item_data.is_container:
-		push_warning("Tried to remove item from non-container item.")
-		return false
-
-	if item not in item_data.items:
-		return false
-
-	item_data.items.erase(item)
-	return true
-
-
 func interact(controller: PlayerCharacterController) -> void:
 	if item_data.is_container:
 		if _is_open:
@@ -55,9 +31,8 @@ func open_container(controller: PlayerCharacterController) -> void:
 		return
 
 	_container_ui = item_data.ui_scene.instantiate()
-	_container_ui.position = position
+	_container_ui.set_position(position)
 	_container_ui.setup(controller, self)
-	_container_ui.on_close.connect(close_container)
 	get_tree().current_scene.add_child(_container_ui)
 	_is_open = true
 
