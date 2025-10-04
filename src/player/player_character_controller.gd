@@ -12,6 +12,15 @@ func _process(_delta: float) -> void:
 	var action = Character.Action.new()
 	action.move_input = _get_move_input()
 	action.aim_direction = _get_aim_direction()
+
+	if Input.is_action_just_pressed("interact"):
+		action.interact_target = _get_interact_target()
+	elif Input.is_action_just_pressed("pickup_item"):
+		# todo implement item pickup
+		action.pickup_item = null
+	elif Input.is_action_just_pressed("drop_item"):
+		action.drop_item = true
+
 	_character.act(action)
 
 

@@ -14,30 +14,17 @@ class Action extends Object:
 	var move_input: Vector2 = Vector2.ZERO
 	var aim_direction: Vector2 = Vector2.ZERO
 	var interact_target: Interactable = null
-
-
-var _last_action: Action = null
+	var pickup_item: Item = null
+	var drop_item: bool = false
 
 
 func act(action: Action) -> void:
-	_last_action = action
+	_process_movement(action.move_input)
+	_process_aiming(action.aim_direction)
 
 
-func stop() -> void:
-	_last_action = null
-
-
-func get_vision_collider() -> CollisionShape2D:
-	return $VisionCollider
-
-
-func _process(_delta: float) -> void:
-	# NOTE: is it a good idea to separate processing from action? seems maybe okay
-	# but there might be some async weirdness?
-	if is_instance_valid(_last_action):
-		_process_movement(_last_action.move_input)
-		_process_aiming(_last_action.aim_direction)
-		_process_interaction(_last_action.interact_target)
+func is_holding() -> bool:
+	return held_item != null
 
 
 func _physics_process(_delta: float) -> void:
@@ -55,6 +42,3 @@ func _process_movement(move_input: Vector2) -> void:
 func _process_aiming(_aim_direction: Vector2) -> void:
 	pass
 
-
-func _process_interaction(_interact_target: Interactable) -> void:
-	pass
