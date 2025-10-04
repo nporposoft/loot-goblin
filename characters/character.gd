@@ -3,12 +3,18 @@ extends Node2D
 class_name Character
 
 @export var move_speed: float = 200.0
+@export var held_item: ItemData = null
+@export var carried_items: Array[ItemData] = []
 
 var _last_action: Action = null
 
 
 func act(action: Action) -> void:
 	_last_action = action
+
+
+func stop() -> void:
+	_last_action = null
 
 
 func _process(delta_time: float) -> void:
