@@ -884,7 +884,8 @@ tile_set = SubResource("TileSet_cnrih")
 
 [node name="PlayerGoblin" parent="World" instance=ExtResource("3_d8tm3")]
 position = Vector2(912, 516)
+collision_mask = 7
 
 [node name="Diamond" parent="World" instance=ExtResource("4_d8tm3")]
 position = Vector2(535, 430)
-linear_damp = 2.0
+collision_mask = 3

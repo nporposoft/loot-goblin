@@ -5,7 +5,7 @@ class_name PlayerCharacterController
 @export var _character: Character = null
 
 
-func _process(_delta_time: float) -> void:
+func _process(_delta: float) -> void:
 	if not _should_process():
 		return
 
@@ -23,7 +23,7 @@ func _get_move_input() -> Vector2:
 	var move_input: Vector2
 	move_input.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	move_input.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-	return move_input.normalized()
+	return move_input
 
 
 func _get_aim_direction() -> Vector2:
