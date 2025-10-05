@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://dvwyd2tet2qr5"]
+
+[ext_resource type="Script" uid="uid://dj61bulh8wvlg" path="res://src/items/item.gd" id="1_6phc3"]
+[ext_resource type="Texture2D" uid="uid://dkrq5othh4xcw" path="res://assets/containers.png" id="2_j2i3j"]
+[ext_resource type="Resource" uid="uid://dfeldsb6mbdi1" path="res://items/containers/Carton.tres" id="2_p808s"]
+[ext_resource type="Script" uid="uid://4x62ah40g3dn" path="res://src/player/interactable.gd" id="3_p808s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_udecq"]
+size = Vector2(12, 9)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2okec"]
+radius = 26.019224
+
+[node name="Carton" type="RigidBody2D"]
+collision_layer = 4
+gravity_scale = 0.0
+linear_damp = 2.0
+script = ExtResource("1_6phc3")
+item_data = ExtResource("2_p808s")
+metadata/_custom_type_script = "uid://dj61bulh8wvlg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_udecq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -3)
+texture = ExtResource("2_j2i3j")
+region_enabled = true
+region_rect = Rect2(17, 0, 16, 16)
+
+[node name="Interactable" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("3_p808s")
+metadata/_custom_type_script = "uid://4x62ah40g3dn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("CircleShape2D_2okec")
+
+[connection signal="on_interact" from="Interactable" to="." method="interact"]

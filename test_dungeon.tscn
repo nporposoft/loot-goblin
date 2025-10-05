@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://r0rlptslyw58"]
+[gd_scene load_steps=24 format=3 uid="uid://r0rlptslyw58"]
 
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="1_nsxo0"]
 [ext_resource type="Script" uid="uid://5i4gw4mikjjm" path="res://src/navmesh.gd" id="2_0ak11"]
@@ -10,8 +10,10 @@
 [ext_resource type="Script" uid="uid://ctqjnf2yg1uvt" path="res://src/items/item_data.gd" id="6_cnrih"]
 [ext_resource type="Texture2D" uid="uid://h2fitiuextwe" path="res://icon.svg" id="7_gsb4j"]
 [ext_resource type="Script" uid="uid://wt6vf8g2ns3k" path="res://src/characters/ai/passive_ai.gd" id="8_0ak11"]
-[ext_resource type="PackedScene" uid="uid://d3u6nyytl22wp" path="res://items/Bucket.tscn" id="8_isiae"]
-[ext_resource type="PackedScene" uid="uid://c1ejvgyrv6nmb" path="res://items/BucketUI.tscn" id="9_isiae"]
+[ext_resource type="PackedScene" uid="uid://d3u6nyytl22wp" path="res://items/containers/Bucket.tscn" id="8_isiae"]
+[ext_resource type="PackedScene" uid="uid://c1ejvgyrv6nmb" path="res://items/containers/BucketUI.tscn" id="9_isiae"]
+[ext_resource type="Texture2D" uid="uid://dkrq5othh4xcw" path="res://assets/containers.png" id="13_0ak11"]
+[ext_resource type="PackedScene" uid="uid://dvwyd2tet2qr5" path="res://items/containers/Carton.tscn" id="14_du6b4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4qov3"]
 source_geometry_mode = 1
@@ -27,15 +29,6 @@ agent_radius = 16.0
 source_geometry_mode = 1
 source_geometry_group_name = &"navmesh_sources"
 agent_radius = 32.0
-
-[sub_resource type="Resource" id="Resource_ure5g"]
-resource_local_to_scene = true
-script = ExtResource("6_cnrih")
-display_name = "Diamond"
-description = "So shiny"
-ui_sprite = ExtResource("7_gsb4j")
-world_scene = ExtResource("4_d8tm3")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
 [sub_resource type="Resource" id="Resource_0ak11"]
 resource_local_to_scene = true
@@ -67,12 +60,24 @@ metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 [sub_resource type="Resource" id="Resource_8qjoy"]
 resource_local_to_scene = true
 script = ExtResource("6_cnrih")
+display_name = "Diamond"
+description = "So shiny"
+ui_sprite = ExtResource("7_gsb4j")
+world_scene = ExtResource("4_d8tm3")
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2qbg"]
+atlas = ExtResource("13_0ak11")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="Resource" id="Resource_w2phg"]
+resource_local_to_scene = true
+script = ExtResource("6_cnrih")
 display_name = "Bucket"
 description = "What a nice bucket"
-ui_sprite = ExtResource("7_gsb4j")
+ui_sprite = SubResource("AtlasTexture_l2qbg")
 world_scene = ExtResource("8_isiae")
 is_container = true
-capacity = 4
 ui_scene = ExtResource("9_isiae")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
@@ -84,6 +89,7 @@ character = NodePath("../World/PlayerGoblin")
 metadata/_custom_type_script = "uid://kygkbg3kqosp"
 
 [node name="World" type="Node2D" parent="."]
+texture_filter = 1
 
 [node name="FollowCamera" type="Camera2D" parent="World" node_paths=PackedStringArray("target")]
 zoom = Vector2(4, 4)
@@ -132,27 +138,28 @@ map = NodePath("../../Terrain")
 [node name="Diamond" parent="World" instance=ExtResource("4_d8tm3")]
 position = Vector2(23.999989, 174)
 rotation = 0.41302407
-item_data = SubResource("Resource_ure5g")
+item_data = SubResource("Resource_0ak11")
 
 [node name="Diamond2" parent="World" instance=ExtResource("4_d8tm3")]
 position = Vector2(98, 157.00002)
 rotation = 0.41302407
-item_data = SubResource("Resource_0ak11")
+item_data = SubResource("Resource_du6b4")
 
 [node name="Diamond3" parent="World" instance=ExtResource("4_d8tm3")]
 position = Vector2(25.999998, 232.00003)
 rotation = 0.41302407
-item_data = SubResource("Resource_du6b4")
+item_data = SubResource("Resource_m8l71")
 
 [node name="Diamond4" parent="World" instance=ExtResource("4_d8tm3")]
 position = Vector2(46, 154.00002)
 rotation = 0.41302407
-item_data = SubResource("Resource_m8l71")
+item_data = SubResource("Resource_8qjoy")
 
 [node name="Bucket" parent="World" instance=ExtResource("8_isiae")]
+texture_filter = 1
 position = Vector2(95.99988, 217.99988)
 rotation = -0.38087726
-item_data = SubResource("Resource_8qjoy")
+item_data = SubResource("Resource_w2phg")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -163,3 +170,6 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 40.0
 grow_horizontal = 2
+
+[node name="Carton" parent="." instance=ExtResource("14_du6b4")]
+position = Vector2(-38, 217)

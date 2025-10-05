@@ -124,8 +124,7 @@ func _create_held_item_sprite() -> void:
 
 	_held_item_sprite = Sprite2D.new()
 	_held_item_sprite.texture = held_item.ui_sprite
-	_held_item_sprite.scale = Vector2(0.1, 0.1)
-	_held_item_sprite.position = Vector2(0, -20)
+	_held_item_sprite.position = Vector2(0, -16)
 	add_child(_held_item_sprite)
 
 
