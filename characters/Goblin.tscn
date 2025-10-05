@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://i08uo4dcy5dr"]
+[gd_scene load_steps=18 format=3 uid="uid://i08uo4dcy5dr"]
 
 [ext_resource type="Script" uid="uid://t6rnai4uey85" path="res://src/characters/character.gd" id="1_bjga1"]
 [ext_resource type="Texture2D" uid="uid://cc35tdwbren27" path="res://assets/goblinsheet1.png" id="2_bjga1"]
 [ext_resource type="Script" uid="uid://qsfrpdnrgtng" path="res://src/characters/reach.gd" id="3_7ybme"]
+[ext_resource type="Script" uid="uid://bok3t1i4s5p7d" path="res://src/characters/vision.gd" id="4_5xsi5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7ybme"]
 atlas = ExtResource("2_bjga1")
@@ -99,12 +100,16 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ybme"]
 radius = 32.0
 
-[node name="Goblin" type="CharacterBody2D" node_paths=PackedStringArray("reach", "nav_agent")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_47a61"]
+radius = 150.0
+
+[node name="Goblin" type="CharacterBody2D" node_paths=PackedStringArray("reach", "vision", "nav_agent")]
 collision_layer = 2
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_bjga1")
-reach = NodePath("InteractArea")
+reach = NodePath("ReachArea")
+vision = NodePath("VisionArea")
 nav_agent = NodePath("NavigationAgent2D")
 metadata/_custom_type_script = "uid://t6rnai4uey85"
 
@@ -117,16 +122,23 @@ autoplay = "idle"
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_bjga1")
 
-[node name="InteractArea" type="Area2D" parent="."]
+[node name="ReachArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 12
 script = ExtResource("3_7ybme")
 metadata/_custom_type_script = "uid://qsfrpdnrgtng"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReachArea"]
 shape = SubResource("CircleShape2D_7ybme")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="VisionArea" type="Area2D" parent="."]
+script = ExtResource("4_5xsi5")
+metadata/_custom_type_script = "uid://bok3t1i4s5p7d"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea"]
+shape = SubResource("CircleShape2D_47a61")
