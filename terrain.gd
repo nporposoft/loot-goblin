@@ -14,6 +14,7 @@ var height: int = 32
 @export var ROOM_DIM_MIN: int = 5
 @export var ROOM_DIM_RANGE: int = 10
 @export var BOX_ROOMS_QTY: int = 60
+@export var MAX_CATACOMBS_ROOMS: int = 250
 
 # Small tiles atlas coordinates: 
 const wallAtlas: Vector2i = Vector2i(3, 0)
@@ -53,8 +54,9 @@ func _ready():
 func generate_catacombs() -> void:
 	var roomsToGen: Array = [Vector2i(1, 1), Vector2i(0, 2), Vector2i(-1, 1)]
 	var validAtlasCoords: Array
+	var roomsLeft:int = MAX_CATACOMBS_ROOMS
 	
-	while roomsToGen.size() > 0:
+	while roomsToGen.size() > 0 and roomsLeft > 0:
 		var currentRoom: Vector2i = roomsToGen.pop_front()
 		var currentPaths: Array = findPaths(currentRoom)
 		validAtlasCoords = [crossAtlas, cross_Block_Atlas, deadEnd_S_Atlas, deadEnd_W_Atlas,
@@ -62,8 +64,54 @@ func generate_catacombs() -> void:
 			corner_SW_Atlas, corner_NW_Atlas, tee_NSW_Atlas, tee_NWE_Atlas,
 			tee_NES_Atlas, tee_ESW_Atlas, hall_NS_Atlas, hall_EW_Atlas,
 			deadEnd_BlockS_Atlas, deadEnd_BlockN_Atlas]
-		if currentPaths[0] != Path.ANY:
-			if currentPaths[0] == Path.CLOSED: # if no W door in E neighbor
+		
+		# Check Eastern neighbor:
+		if currentPaths[0] != Path.ANY:			# Empty: no rooms eliminated 
+			if currentPaths[0] == Path.CLOSED:	# No W door in E neighbor: remove all w/ E doors
+				validAtlasCoords.erase(crossAtlas)
+				validAtlasCoords.erase(cross_Block_Atlas)
+				validAtlasCoords.erase(deadEnd_E_Atlas)
+				validAtlasCoords.erase(corner_NE_Atlas)
+				validAtlasCoords.erase(corner_SE_Atlas)
+				validAtlasCoords.erase(tee_NWE_Atlas)
+				validAtlasCoords.erase(tee_NES_Atlas)
+				validAtlasCoords.erase(tee_ESW_Atlas)
+				validAtlasCoords.erase(hall_EW_Atlas)
+			else:								# W door exists in E neighbor: remove all w/o E doors
+				validAtlasCoords.erase(deadEnd_S_Atlas)
+				validAtlasCoords.erase(deadEnd_W_Atlas)
+				validAtlasCoords.erase(deadEnd_N_Atlas)
+				validAtlasCoords.erase(corner_SW_Atlas)
+				validAtlasCoords.erase(corner_NW_Atlas)
+				validAtlasCoords.erase(tee_NSW_Atlas)
+				validAtlasCoords.erase(hall_NS_Atlas)
+				validAtlasCoords.erase(deadEnd_BlockS_Atlas)
+				validAtlasCoords.erase(deadEnd_BlockN_Atlas)
+		# Check Northern neighbor:
+		if currentPaths[1] != Path.ANY:			# Empty: no rooms eliminated
+			if currentPaths[1] == Path.CLOSED:	# No S door in N neighbor: remove all w/ N doors
+				validAtlasCoords.erase(crossAtlas)
+				validAtlasCoords.erase(cross_Block_Atlas)
+				validAtlasCoords.erase(deadEnd_N_Atlas)
+				validAtlasCoords.erase(corner_NE_Atlas)
+				validAtlasCoords.erase(corner_NW_Atlas)
+				validAtlasCoords.erase(tee_NSW_Atlas)
+				validAtlasCoords.erase(tee_NWE_Atlas)
+				validAtlasCoords.erase(tee_NES_Atlas)
+				validAtlasCoords.erase(hall_NS_Atlas)
+				validAtlasCoords.erase(deadEnd_BlockN_Atlas)
+			else:								# S door exists in N neighbor: remove all w/o N doors
+				validAtlasCoords.erase(deadEnd_S_Atlas)
+				validAtlasCoords.erase(deadEnd_W_Atlas)
+				validAtlasCoords.erase(deadEnd_E_Atlas)
+				validAtlasCoords.erase(corner_SE_Atlas)
+				validAtlasCoords.erase(corner_SW_Atlas)
+				validAtlasCoords.erase(tee_ESW_Atlas)
+				validAtlasCoords.erase(hall_EW_Atlas)
+				validAtlasCoords.erase(deadEnd_BlockS_Atlas)
+		# Check Western neighbor:
+		if currentPaths[2] != Path.ANY:			# Empty: no rooms eliminated
+			if currentPaths[2] == Path.CLOSED:	# No E door in W neighbor: remove all w/ W doors
 				validAtlasCoords.erase(crossAtlas)
 				validAtlasCoords.erase(cross_Block_Atlas)
 				validAtlasCoords.erase(deadEnd_W_Atlas)
@@ -73,17 +121,92 @@ func generate_catacombs() -> void:
 				validAtlasCoords.erase(tee_NWE_Atlas)
 				validAtlasCoords.erase(tee_ESW_Atlas)
 				validAtlasCoords.erase(hall_EW_Atlas)
-			else:								# W door already exists in E neighbor 
+			else:								# E door exists in W neighbor: remove all w/o W doors
+				validAtlasCoords.erase(deadEnd_S_Atlas)
+				validAtlasCoords.erase(deadEnd_N_Atlas)
+				validAtlasCoords.erase(deadEnd_E_Atlas)
+				validAtlasCoords.erase(corner_NE_Atlas)
+				validAtlasCoords.erase(corner_SE_Atlas)
+				validAtlasCoords.erase(tee_NES_Atlas)
+				validAtlasCoords.erase(hall_NS_Atlas)
+				validAtlasCoords.erase(deadEnd_BlockS_Atlas)
+				validAtlasCoords.erase(deadEnd_BlockN_Atlas)
+		# Check Southern neighbor:
+		if currentPaths[3] != Path.ANY:			# Empty: no rooms eliminated
+			if currentPaths[3] == Path.CLOSED:	# No N door in S neighbor: remove all w/ S doors
 				validAtlasCoords.erase(crossAtlas)
 				validAtlasCoords.erase(cross_Block_Atlas)
-				validAtlasCoords.erase(deadEnd_W_Atlas)
+				validAtlasCoords.erase(deadEnd_S_Atlas)
+				validAtlasCoords.erase(corner_SE_Atlas)
 				validAtlasCoords.erase(corner_SW_Atlas)
-				validAtlasCoords.erase(corner_NW_Atlas)
 				validAtlasCoords.erase(tee_NSW_Atlas)
-				validAtlasCoords.erase(tee_NWE_Atlas)
+				validAtlasCoords.erase(tee_NES_Atlas)
 				validAtlasCoords.erase(tee_ESW_Atlas)
+				validAtlasCoords.erase(hall_NS_Atlas)
+				validAtlasCoords.erase(deadEnd_BlockS_Atlas)
+			else:								# N door exists in S neighbor: remove all w/o S doors
+				validAtlasCoords.erase(deadEnd_W_Atlas)
+				validAtlasCoords.erase(deadEnd_N_Atlas)
+				validAtlasCoords.erase(deadEnd_E_Atlas)
+				validAtlasCoords.erase(corner_NE_Atlas)
+				validAtlasCoords.erase(corner_NW_Atlas)
+				validAtlasCoords.erase(tee_NWE_Atlas)
 				validAtlasCoords.erase(hall_EW_Atlas)
+				validAtlasCoords.erase(deadEnd_BlockN_Atlas)
 				
+				# ALL POSSIBLE ROOMS:
+				#validAtlasCoords.erase(crossAtlas)
+				#validAtlasCoords.erase(cross_Block_Atlas)
+				#validAtlasCoords.erase(deadEnd_S_Atlas)
+				#validAtlasCoords.erase(deadEnd_W_Atlas)
+				#validAtlasCoords.erase(deadEnd_N_Atlas)
+				#validAtlasCoords.erase(deadEnd_E_Atlas)
+				#validAtlasCoords.erase(corner_NE_Atlas)
+				#validAtlasCoords.erase(corner_SE_Atlas)
+				#validAtlasCoords.erase(corner_SW_Atlas)
+				#validAtlasCoords.erase(corner_NW_Atlas)
+				#validAtlasCoords.erase(tee_NSW_Atlas)
+				#validAtlasCoords.erase(tee_NWE_Atlas)
+				#validAtlasCoords.erase(tee_NES_Atlas)
+				#validAtlasCoords.erase(tee_ESW_Atlas)
+				#validAtlasCoords.erase(hall_NS_Atlas)
+				#validAtlasCoords.erase(hall_EW_Atlas)
+				#validAtlasCoords.erase(deadEnd_BlockS_Atlas)
+				#validAtlasCoords.erase(deadEnd_BlockN_Atlas)
+		var roomChoice: Vector2i
+		if validAtlasCoords.size() > 0:
+			roomChoice = validAtlasCoords[randi() % validAtlasCoords.size()]
+		else:
+			roomChoice = crossAtlas
+		set_cell(currentRoom, 1, roomChoice)
+		
+		var roomsToStack: Array = get_rooms_to_stack(currentRoom)
+		for r in roomsToStack:
+			roomsToGen.push_back(r)
+		
+		roomsLeft = roomsLeft - 1
+
+func get_rooms_to_stack(newRoom: Vector2i) -> Array:
+	var outputArray: Array
+	var paths: Array = findPaths(newRoom)
+	if [crossAtlas, cross_Block_Atlas, deadEnd_E_Atlas, corner_NE_Atlas,
+		corner_SE_Atlas, tee_NWE_Atlas, tee_NES_Atlas, tee_ESW_Atlas,
+		hall_EW_Atlas].has(get_cell_atlas_coords(newRoom)): # if newroom has E door
+			outputArray.push_back(Vector2i(newRoom.x+1,newRoom.y)) # stack room to be gen'd E
+	if [crossAtlas, cross_Block_Atlas, deadEnd_N_Atlas, corner_NE_Atlas,
+		corner_NW_Atlas, tee_NSW_Atlas, tee_NWE_Atlas, tee_NES_Atlas,
+		hall_NS_Atlas, deadEnd_BlockN_Atlas].has(get_cell_atlas_coords(newRoom)): # if newroom has N door
+			outputArray.push_back(Vector2i(newRoom.x,newRoom.y-1)) # stack room to be gen'd N
+	if [crossAtlas, cross_Block_Atlas, deadEnd_W_Atlas, corner_SW_Atlas,
+		corner_NW_Atlas, tee_NSW_Atlas, tee_NWE_Atlas, tee_ESW_Atlas,
+		hall_EW_Atlas].has(get_cell_atlas_coords(newRoom)): # if newroom has W door
+			outputArray.push_back(Vector2i(newRoom.x-1,newRoom.y)) # stack room to be gen'd W
+	if [crossAtlas, cross_Block_Atlas, deadEnd_S_Atlas, corner_SE_Atlas,
+		corner_SW_Atlas, tee_NSW_Atlas, tee_NES_Atlas, tee_ESW_Atlas,
+		hall_NS_Atlas, deadEnd_BlockS_Atlas].has(get_cell_atlas_coords(newRoom)): # if newroom has S door
+			outputArray.push_back(Vector2i(newRoom.x,newRoom.y+1)) # stack room to be gen'd S
+		
+	return outputArray
 
 func findPaths(room: Vector2i) -> Array:
 	var outputArray: Array

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://r0rlptslyw58"]
+[gd_scene load_steps=20 format=3 uid="uid://r0rlptslyw58"]
 
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="1_nsxo0"]
 [ext_resource type="Script" uid="uid://5i4gw4mikjjm" path="res://src/navmesh.gd" id="2_0ak11"]
@@ -27,7 +27,7 @@ source_geometry_mode = 1
 source_geometry_group_name = &"navmesh_sources"
 agent_radius = 32.0
 
-[sub_resource type="Resource" id="Resource_isiae"]
+[sub_resource type="Resource" id="Resource_y6jnv"]
 resource_local_to_scene = true
 script = ExtResource("6_cnrih")
 display_name = "Diamond"
@@ -36,7 +36,34 @@ ui_sprite = ExtResource("7_gsb4j")
 world_scene = ExtResource("4_d8tm3")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_4qov3"]
+[sub_resource type="Resource" id="Resource_ure5g"]
+resource_local_to_scene = true
+script = ExtResource("6_cnrih")
+display_name = "Diamond"
+description = "So shiny"
+ui_sprite = ExtResource("7_gsb4j")
+world_scene = ExtResource("4_d8tm3")
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
+
+[sub_resource type="Resource" id="Resource_0ak11"]
+resource_local_to_scene = true
+script = ExtResource("6_cnrih")
+display_name = "Diamond"
+description = "So shiny"
+ui_sprite = ExtResource("7_gsb4j")
+world_scene = ExtResource("4_d8tm3")
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
+
+[sub_resource type="Resource" id="Resource_du6b4"]
+resource_local_to_scene = true
+script = ExtResource("6_cnrih")
+display_name = "Diamond"
+description = "So shiny"
+ui_sprite = ExtResource("7_gsb4j")
+world_scene = ExtResource("4_d8tm3")
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
+
+[sub_resource type="Resource" id="Resource_m8l71"]
 resource_local_to_scene = true
 script = ExtResource("6_cnrih")
 display_name = "Bucket"
@@ -99,27 +126,27 @@ metadata/_custom_type_script = "uid://nrm5flnhsfxu"
 [node name="Diamond" parent="World" instance=ExtResource("4_d8tm3")]
 position = Vector2(23.999989, 174)
 rotation = 0.41302407
-item_data = SubResource("Resource_isiae")
+item_data = SubResource("Resource_y6jnv")
 
 [node name="Diamond2" parent="World" instance=ExtResource("4_d8tm3")]
 position = Vector2(98, 157.00002)
 rotation = 0.41302407
-item_data = SubResource("Resource_isiae")
+item_data = SubResource("Resource_ure5g")
 
 [node name="Diamond3" parent="World" instance=ExtResource("4_d8tm3")]
 position = Vector2(25.999998, 232.00003)
 rotation = 0.41302407
-item_data = SubResource("Resource_isiae")
+item_data = SubResource("Resource_0ak11")
 
 [node name="Diamond4" parent="World" instance=ExtResource("4_d8tm3")]
 position = Vector2(46, 154.00002)
 rotation = 0.41302407
-item_data = SubResource("Resource_isiae")
+item_data = SubResource("Resource_du6b4")
 
 [node name="Bucket" parent="World" instance=ExtResource("8_isiae")]
 position = Vector2(95.99988, 217.99988)
 rotation = -0.38087726
-item_data = SubResource("Resource_4qov3")
+item_data = SubResource("Resource_m8l71")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
