@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://r0rlptslyw58"]
+[gd_scene load_steps=16 format=3 uid="uid://r0rlptslyw58"]
 
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="1_nsxo0"]
+[ext_resource type="Script" uid="uid://5i4gw4mikjjm" path="res://src/navmesh.gd" id="2_0ak11"]
 [ext_resource type="TileSet" uid="uid://crffpbfvta0hh" path="res://assets/terrain_tileset.tres" id="2_isiae"]
 [ext_resource type="PackedScene" uid="uid://i08uo4dcy5dr" path="res://characters/Goblin.tscn" id="3_d8tm3"]
 [ext_resource type="Script" uid="uid://patkktgw1bbd" path="res://terrain.gd" id="4_cnrih"]
@@ -9,6 +10,21 @@
 [ext_resource type="Texture2D" uid="uid://h2fitiuextwe" path="res://icon.svg" id="7_gsb4j"]
 [ext_resource type="PackedScene" uid="uid://d3u6nyytl22wp" path="res://items/Bucket.tscn" id="8_isiae"]
 [ext_resource type="PackedScene" uid="uid://c1ejvgyrv6nmb" path="res://items/BucketUI.tscn" id="9_isiae"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_4qov3"]
+source_geometry_mode = 1
+source_geometry_group_name = &"navmesh_sources"
+agent_radius = 8.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_y6jnv"]
+source_geometry_mode = 1
+source_geometry_group_name = &"navmesh_sources"
+agent_radius = 16.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ure5g"]
+source_geometry_mode = 1
+source_geometry_group_name = &"navmesh_sources"
+agent_radius = 32.0
 
 [sub_resource type="Resource" id="Resource_isiae"]
 resource_local_to_scene = true
@@ -40,7 +56,27 @@ metadata/_custom_type_script = "uid://kygkbg3kqosp"
 
 [node name="World" type="Node2D" parent="."]
 
-[node name="Terrain" type="TileMapLayer" parent="World"]
+[node name="NavMeshSmall" type="NavigationRegion2D" parent="World" node_paths=PackedStringArray("map")]
+navigation_polygon = SubResource("NavigationPolygon_4qov3")
+script = ExtResource("2_0ak11")
+map = NodePath("../Terrain")
+metadata/_custom_type_script = "uid://5i4gw4mikjjm"
+
+[node name="NavMeshMedium" type="NavigationRegion2D" parent="World" node_paths=PackedStringArray("map")]
+navigation_polygon = SubResource("NavigationPolygon_y6jnv")
+navigation_layers = 2
+script = ExtResource("2_0ak11")
+map = NodePath("../Terrain")
+metadata/_custom_type_script = "uid://5i4gw4mikjjm"
+
+[node name="NavMeshLarge" type="NavigationRegion2D" parent="World" node_paths=PackedStringArray("map")]
+navigation_polygon = SubResource("NavigationPolygon_ure5g")
+navigation_layers = 4
+script = ExtResource("2_0ak11")
+map = NodePath("../Terrain")
+metadata/_custom_type_script = "uid://5i4gw4mikjjm"
+
+[node name="Terrain" type="TileMapLayer" parent="World" groups=["navmesh_sources"]]
 texture_filter = 1
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 tile_set = ExtResource("2_isiae")
