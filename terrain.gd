@@ -341,4 +341,3 @@ func build_walls() -> void:
 				var S = get_cell_tile_data(Vector2i(i,j+1))
 				if E or N or W or S:
 					set_cell(Vector2i(i, j), 0, wallAtlas)
-
