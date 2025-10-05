@@ -12,7 +12,6 @@ func _ready():
 
 
 func _handle_state_change(new_state: AggressiveAI.State) -> void:
-	print("State changed to: %s" % AggressiveAI.State.keys()[new_state])
 	match new_state:
 		AggressiveAI.State.SUSPICIOUS:
 			text = "?"
