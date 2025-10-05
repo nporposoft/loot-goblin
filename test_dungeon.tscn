@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://r0rlptslyw58"]
+[gd_scene load_steps=32 format=3 uid="uid://r0rlptslyw58"]
 
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="1_nsxo0"]
 [ext_resource type="Script" uid="uid://5i4gw4mikjjm" path="res://src/navmesh.gd" id="2_0ak11"]
@@ -13,7 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://d3u6nyytl22wp" path="res://items/containers/Bucket.tscn" id="8_isiae"]
 [ext_resource type="PackedScene" uid="uid://c1ejvgyrv6nmb" path="res://items/containers/BucketUI.tscn" id="9_isiae"]
 [ext_resource type="Texture2D" uid="uid://dkrq5othh4xcw" path="res://assets/containers.png" id="13_0ak11"]
-[ext_resource type="PackedScene" uid="uid://dvwyd2tet2qr5" path="res://items/containers/Carton.tscn" id="14_du6b4"]
+[ext_resource type="PackedScene" uid="uid://dvwyd2tet2qr5" path="res://items/containers/Carton.tscn" id="14_m8l71"]
+[ext_resource type="Script" uid="uid://d4mgxpys1m80c" path="res://src/player/container_ui.gd" id="15_w2phg"]
+[ext_resource type="Texture2D" uid="uid://cdlafytbjx7lg" path="res://assets/bag slot.png" id="16_cx5mk"]
+[ext_resource type="Script" uid="uid://bqtvaidnp5b3q" path="res://src/player/container_ui_slot.gd" id="17_1v8wj"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4qov3"]
 source_geometry_mode = 1
@@ -30,7 +33,7 @@ source_geometry_mode = 1
 source_geometry_group_name = &"navmesh_sources"
 agent_radius = 32.0
 
-[sub_resource type="Resource" id="Resource_0ak11"]
+[sub_resource type="Resource" id="Resource_u0lc2"]
 resource_local_to_scene = true
 script = ExtResource("6_cnrih")
 display_name = "Diamond"
@@ -39,7 +42,7 @@ ui_sprite = ExtResource("7_gsb4j")
 world_scene = ExtResource("4_d8tm3")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_du6b4"]
+[sub_resource type="Resource" id="Resource_5n4mp"]
 resource_local_to_scene = true
 script = ExtResource("6_cnrih")
 display_name = "Diamond"
@@ -48,7 +51,7 @@ ui_sprite = ExtResource("7_gsb4j")
 world_scene = ExtResource("4_d8tm3")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_m8l71"]
+[sub_resource type="Resource" id="Resource_6qv62"]
 resource_local_to_scene = true
 script = ExtResource("6_cnrih")
 display_name = "Diamond"
@@ -57,7 +60,7 @@ ui_sprite = ExtResource("7_gsb4j")
 world_scene = ExtResource("4_d8tm3")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_8qjoy"]
+[sub_resource type="Resource" id="Resource_xueig"]
 resource_local_to_scene = true
 script = ExtResource("6_cnrih")
 display_name = "Diamond"
@@ -70,7 +73,7 @@ metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 atlas = ExtResource("13_0ak11")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="Resource" id="Resource_w2phg"]
+[sub_resource type="Resource" id="Resource_6rh88"]
 resource_local_to_scene = true
 script = ExtResource("6_cnrih")
 display_name = "Bucket"
@@ -79,6 +82,42 @@ ui_sprite = SubResource("AtlasTexture_l2qbg")
 world_scene = ExtResource("8_isiae")
 is_container = true
 ui_scene = ExtResource("9_isiae")
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4yo1c"]
+atlas = ExtResource("16_cx5mk")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkvuq"]
+atlas = ExtResource("16_cx5mk")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="PackedScene" id="PackedScene_gxenx"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("CartonUI", "Control", "texture_filter", "layout_mode", "anchors_preset", "anchor_right", "anchor_bottom", "offset_right", "offset_bottom", "grow_horizontal", "grow_vertical", "script", "Slot 1", "TextureButton", "layout_mode", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 2", "TextureButton", "layout_mode", "offset_left", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 3", "TextureButton", "layout_mode", "offset_top", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 4", "TextureButton", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode"),
+"node_count": 9,
+"node_paths": [NodePath("."), NodePath("./Slot 1"), NodePath("."), NodePath("./Slot 2"), NodePath("."), NodePath("./Slot 3"), NodePath("."), NodePath("./Slot 4")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 10, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 10, 8, 11, 9, 0, 1073741824, 0, 13, 12, -1, 7, 14, 10, 15, 11, 16, 12, 17, 13, 18, 14, 19, 15, 20, 16, 0, 1073741825, 0, 22, 21, -1, 7, 23, 17, 24, 18, 25, 19, 26, 20, 27, 21, 28, 22, 29, 23, 0, 1073741826, 0, 31, 30, -1, 8, 32, 24, 33, 25, 34, 26, 35, 27, 36, 28, 37, 29, 38, 30, 39, 31, 0, 1073741827, 0, 41, 40, -1, 7, 42, 32, 43, 33, 44, 34, 45, 35, 46, 36, 47, 37, 48, 38, 0, 1073741828, 0, 50, 49, -1, 8, 51, 39, 52, 40, 53, 41, 54, 42, 55, 43, 56, 44, 57, 45, 58, 46, 0, 1073741829, 0, 60, 59, -1, 7, 61, 47, 62, 48, 63, 49, 64, 50, 65, 51, 66, 52, 67, 53, 0, 1073741830, 0, 69, 68, -1, 9, 70, 54, 71, 55, 72, 56, 73, 57, 74, 58, 75, 59, 76, 60, 77, 61, 78, 62, 0, 1073741831, 0, 80, 79, -1, 7, 81, 63, 82, 64, 83, 65, 84, 66, 85, 67, 86, 68, 87, 69, 0),
+"variants": [1, 3, 15, 1.0, 1.0, -1553.0, -790.0, 2, 2, ExtResource("15_w2phg"), 0, 32.0, 32.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("17_1v8wj"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 32.0, 64.0, 32.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("17_1v8wj"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 32.0, 32.0, 64.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("17_1v8wj"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 32.0, 32.0, 64.0, 64.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("17_1v8wj"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5],
+"version": 3
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwmej"]
+atlas = ExtResource("13_0ak11")
+region = Rect2(17, 0, 16, 16)
+
+[sub_resource type="Resource" id="Resource_2pp7j"]
+resource_local_to_scene = true
+script = ExtResource("6_cnrih")
+display_name = "Carton"
+description = "What a nice carton"
+ui_sprite = SubResource("AtlasTexture_cwmej")
+world_scene = ExtResource("14_m8l71")
+is_container = true
+ui_scene = SubResource("PackedScene_gxenx")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
 [node name="TestDungeon" type="Node"]
@@ -138,28 +177,32 @@ map = NodePath("../../Terrain")
 [node name="Diamond" parent="World" instance=ExtResource("4_d8tm3")]
 position = Vector2(23.999989, 174)
 rotation = 0.41302407
-item_data = SubResource("Resource_0ak11")
+item_data = SubResource("Resource_u0lc2")
 
 [node name="Diamond2" parent="World" instance=ExtResource("4_d8tm3")]
 position = Vector2(98, 157.00002)
 rotation = 0.41302407
-item_data = SubResource("Resource_du6b4")
+item_data = SubResource("Resource_5n4mp")
 
 [node name="Diamond3" parent="World" instance=ExtResource("4_d8tm3")]
 position = Vector2(25.999998, 232.00003)
 rotation = 0.41302407
-item_data = SubResource("Resource_m8l71")
+item_data = SubResource("Resource_6qv62")
 
 [node name="Diamond4" parent="World" instance=ExtResource("4_d8tm3")]
 position = Vector2(46, 154.00002)
 rotation = 0.41302407
-item_data = SubResource("Resource_8qjoy")
+item_data = SubResource("Resource_xueig")
 
 [node name="Bucket" parent="World" instance=ExtResource("8_isiae")]
 texture_filter = 1
 position = Vector2(95.99988, 217.99988)
 rotation = -0.38087726
-item_data = SubResource("Resource_w2phg")
+item_data = SubResource("Resource_6rh88")
+
+[node name="Carton" parent="World" instance=ExtResource("14_m8l71")]
+position = Vector2(55, 229)
+item_data = SubResource("Resource_2pp7j")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -170,6 +213,3 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 40.0
 grow_horizontal = 2
-
-[node name="Carton" parent="." instance=ExtResource("14_du6b4")]
-position = Vector2(-38, 217)
