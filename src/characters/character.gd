@@ -10,8 +10,8 @@ extends CharacterBody2D
 @export var held_item: ItemData = null
 
 @export_group("Components")
-@export var reach: Reach = null
-@export var vision: Vision = null
+@export var reach: Detector = null
+@export var vision: Detector = null
 @export var nav_agent: NavigationAgent2D = null
 
 var aim_direction: Vector2 = Vector2.ZERO

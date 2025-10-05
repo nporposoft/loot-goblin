@@ -1,6 +1,8 @@
 class_name AggressiveAI
 extends Node
 
+signal state_changed(new_state: State)
+
 enum State {
 	IDLING,
 	WANDERING,
@@ -17,6 +19,7 @@ enum State {
 @export var max_idle_time: float = 10.0
 @export var min_alert_time: float = 0.0
 @export var max_alert_time: float = 2.0
+@export var display_state_indicator: bool = true
 
 @export_group("State")
 @export var state: State = State.IDLING
@@ -32,6 +35,11 @@ enum State {
 @onready var _timer: Timer = _create_timer()
 
 
+func _ready() -> void:
+	_create_state_indicator()
+	_start_idling()
+
+
 func _process(_delta: float):
 	var action := Character.Action.new()
 
@@ -39,13 +47,13 @@ func _process(_delta: float):
 		State.IDLING:
 			var target: Character = _find_nearest_visible_target()
 			if target != null:
-				_start_attacking(target)
+				_start_alerting(target)
 			else:
 				if _timer.is_stopped(): _start_wandering()
 		State.WANDERING:
 			var target: Character = _find_nearest_visible_target()
 			if target != null:
-				_start_attacking(target)
+				_start_alerting(target)
 			else:
 				if character.nav_agent.is_navigation_finished():
 					_start_idling()
@@ -63,52 +71,60 @@ func _process(_delta: float):
 					_start_searching()
 		State.ATTACKING:
 			if !_can_see(current_target):
-				_start_searching()
+				if character.nav_agent.is_navigation_finished():
+					_start_searching()
+				else:
+					action.move_input = character.nav_agent.get_next_path_position() - character.global_position
 			else:
 				last_known_target_position = current_target.global_position
 				if _can_reach(current_target):
 					action.aim_direction = (current_target.global_position - character.global_position).normalized()
 					action.attack = true
 				else:
-					character.nav_agent.set_target_position(current_target.global_position)
+					character.nav_agent.set_target_position(last_known_target_position)
 					action.move_input = character.nav_agent.get_next_path_position() - character.global_position
 		State.SEARCHING:
 			var target: Character = _find_nearest_visible_target()
 			if target != null:
 				_start_attacking(target)
+			else:
+				if character.nav_agent.is_navigation_finished():
+					pass
+				else:
+					action.move_input = character.nav_agent.get_next_path_position() - character.global_position
 
 	character.act(action)
 
 
-func _process_physics(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var space_state = character.get_world_2d().direct_space_state
 	visible_characters.clear()
 	for target in character.vision.get_characters():
 		var query = PhysicsRayQueryParameters2D.create(character.global_position, target.global_position, 1 << 0 | 1 << 1, [character])
 		var result = space_state.intersect_ray(query)
-		if result["collider"] == target:
+		if result.has("collider") and result["collider"] == target:
 			visible_characters.append(target)
 
 
 func _start_idling() -> void:
-	state = State.IDLING
+	_set_state(State.IDLING)
 	_timer.wait_time = randf_range(min_idle_time, max_idle_time)
 	_timer.start()
 
 
 func _start_wandering() -> void:
-	state = State.WANDERING
+	_set_state(State.WANDERING)
 	character.nav_agent.set_target_position(_pick_random_destination())
 
 
 func _start_attacking(target: Character) -> void:
-	state = State.ATTACKING
+	_set_state(State.ATTACKING)
 	current_target = target
 	last_known_target_position = target.global_position
 
 
 func _start_alerting(target: Character) -> void:
-	state = State.ALERTING
+	_set_state(State.ALERTING)
 	current_target = target
 	last_known_target_position = target.global_position
 	_timer.wait_time = randf_range(min_search_time, max_search_time)
@@ -116,7 +132,7 @@ func _start_alerting(target: Character) -> void:
 
 
 func _start_searching() -> void:
-	state = State.SEARCHING
+	_set_state(State.SEARCHING)
 	_timer.wait_time = randf_range(min_search_time, max_search_time)
 	_timer.start()
 
@@ -150,6 +166,11 @@ func _can_see(target: Character) -> bool:
 	return visible_characters.has(target)
 
 
+func _set_state(new_state: State) -> void:
+	state = new_state
+	state_changed.emit(new_state)
+
+
 func _pick_random_destination(max_range: float = 0.0) -> Vector2:
 	var tile_size: int = map.tile_set.tile_size.x
 	var map_rect: Rect2 = map.get_used_rect()
@@ -167,3 +188,10 @@ func _create_timer() -> Timer:
 	add_child(timer)
 	return timer
 
+
+func _create_state_indicator() -> void:
+	if display_state_indicator:
+		var indicator: StateIndicator = StateIndicator.new()
+		indicator.ai_controller = self
+		character.call_deferred("add_child", indicator)
+		indicator.position.y -= 40
