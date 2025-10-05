@@ -51,6 +51,9 @@ script = ExtResource("9_gyr7j")
 display_name = "Diamond"
 <<<<<<< Updated upstream
 shininess = 100.0
+=======
+shininess = 100
+>>>>>>> Stashed changes
 description = "So shiny!"
 ui_sprite = SubResource("AtlasTexture_ipdfa")
 world_scene = ExtResource("8_iyvki")
@@ -62,6 +65,9 @@ script = ExtResource("9_gyr7j")
 display_name = "Diamond"
 <<<<<<< Updated upstream
 shininess = 100.0
+=======
+shininess = 100
+>>>>>>> Stashed changes
 description = "So shiny!"
 ui_sprite = SubResource("AtlasTexture_ipdfa")
 world_scene = ExtResource("8_iyvki")
@@ -73,6 +79,9 @@ script = ExtResource("9_gyr7j")
 display_name = "Diamond"
 <<<<<<< Updated upstream
 shininess = 100.0
+=======
+shininess = 100
+>>>>>>> Stashed changes
 description = "So shiny!"
 ui_sprite = SubResource("AtlasTexture_ipdfa")
 world_scene = ExtResource("8_iyvki")
@@ -84,6 +93,9 @@ script = ExtResource("9_gyr7j")
 display_name = "Diamond"
 <<<<<<< Updated upstream
 shininess = 100.0
+=======
+shininess = 100
+>>>>>>> Stashed changes
 description = "So shiny!"
 ui_sprite = SubResource("AtlasTexture_ipdfa")
 world_scene = ExtResource("8_iyvki")
@@ -97,7 +109,6 @@ region = Rect2(0, 0, 16, 16)
 resource_local_to_scene = true
 script = ExtResource("9_gyr7j")
 display_name = "Bucket"
-shininess = 0.1
 shininess = 1
 description = "What a nice bucket"
 ui_sprite = SubResource("AtlasTexture_l2qbg")
@@ -135,7 +146,6 @@ region = Rect2(17, 0, 16, 16)
 resource_local_to_scene = true
 script = ExtResource("9_gyr7j")
 display_name = "Carton"
-shininess = 0.1
 shininess = 1
 description = "What a nice carton"
 ui_sprite = SubResource("AtlasTexture_cwmej")
@@ -153,7 +163,6 @@ region = Rect2(0, 17, 16, 16)
 resource_local_to_scene = true
 script = ExtResource("9_gyr7j")
 display_name = "Bucket"
-shininess = 2.0
 shininess = 20
 description = "What a nice bucket"
 ui_sprite = SubResource("AtlasTexture_gyr7j")
@@ -172,7 +181,6 @@ region = Rect2(0, 34, 16, 16)
 resource_local_to_scene = true
 script = ExtResource("9_gyr7j")
 display_name = "Chest"
-shininess = 50.0
 shininess = 250
 description = "Look at that chest!"
 ui_sprite = SubResource("AtlasTexture_3kbks")
@@ -190,7 +198,6 @@ region = Rect2(0, 0, 16, 16)
 resource_local_to_scene = true
 script = ExtResource("9_gyr7j")
 display_name = "Torch"
-shininess = 0.1
 shininess = 2
 description = "So bright"
 ui_sprite = SubResource("AtlasTexture_yh1pe")
