@@ -2,13 +2,14 @@ class_name PlayerCharacterController
 extends Node
 
 @export var character: Character = null
-@export var max_throw_charge_time: float = 3.0
-@export var throw_force_multiplier: float = 200.0
+@export var max_throw_charge_time: float = 2.0
+# TODO: force multiplier should be based on character stats
+@export var throw_force_multiplier: float = 300.0
 
 var _throw_charge_time: float = 0.0
-var _charging_throw: bool = false
 var _interact_target: Interactable = null
-
+var _picking_up: bool = false
+var _charging_throw: bool = false
 
 func _process(_delta: float) -> void:
 	if not _has_character():
@@ -42,20 +43,25 @@ func _process(_delta: float) -> void:
 		# TODO
 		pass
 
-	# Only process pickup/throw if an interaction is not already happening
+	# Only process pickup/throw if we're not interacting with something
 	if _interact_target == null:
 		if _charging_throw: _throw_charge_time += _delta
 
 		if Input.is_action_just_pressed("pickup") and !character.is_holding():
 			action.pickup_item = _get_item_target()
+			_picking_up = true
 		elif Input.is_action_just_pressed("pickup") and character.is_holding():
 			_charging_throw = true
-			pass
 		elif Input.is_action_just_released("pickup") and character.is_holding():
-			_throw_charge_time = clamp(_throw_charge_time, 0.0, max_throw_charge_time)
-			action.throw_force = _throw_charge_time**2 * throw_force_multiplier
-			_charging_throw = false
-			_throw_charge_time = 0.0
+			if _picking_up:
+				# don't throw immediately after picking up
+				_picking_up = false
+			else:
+				action.throw = true
+				_charging_throw = false
+				_throw_charge_time = clamp(_throw_charge_time, 0.0, max_throw_charge_time)
+				action.throw_force = _throw_charge_time**2 * throw_force_multiplier
+				_throw_charge_time = 0.0
 
 	character.act(action)
 

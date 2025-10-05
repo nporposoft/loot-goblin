@@ -3,8 +3,12 @@ extends CharacterBody2D
 
 @export_group("Stats")
 @export var move_speed: float = 200.0
+@export var max_health: int = 100
+@export var current_health: int = max_health
+
 @export_group("State")
 @export var held_item: ItemData = null
+
 @export_group("Components")
 @export var reach: Reach = null
 @export var vision: Vision = null
@@ -22,9 +26,15 @@ var _held_item_sprite: Sprite2D = null
 class Action extends Object:
 	var move_input: Vector2 = Vector2.ZERO
 	var aim_direction: Vector2 = Vector2.ZERO
+
 	var trigger: Trigger = null
+
 	var pickup_item: Item = null
+
+	var throw: bool = false
 	var throw_force: float = 0.0
+
+	var attack: bool = false
 
 
 func _ready() -> void:
@@ -36,6 +46,7 @@ func act(action: Action) -> void:
 	_process_aiming(action)
 	_process_pickup_and_drop(action)
 	_process_trigger(action)
+	_process_attack(action)
 
 
 func is_holding() -> bool:
@@ -89,7 +100,7 @@ func _process_aiming(action: Action) -> void:
 
 
 func _process_pickup_and_drop(action: Action) -> void:
-	if is_holding() and !is_zero_approx(action.throw_force):
+	if is_holding() and action.throw:
 		toss_item(aim_direction * action.throw_force)
 	elif not is_holding() and action.pickup_item != null:
 		var items_in_reach = reach.get_items()
@@ -100,6 +111,10 @@ func _process_pickup_and_drop(action: Action) -> void:
 func _process_trigger(action: Action) -> void:
 	if action.trigger in reach.get_triggers():
 		action.trigger.trigger()
+
+
+func _process_attack(_action: Action) -> void:
+	pass
 
 
 func _create_held_item_sprite() -> void:
