@@ -185,7 +185,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bjga1"]
-radius = 8.0
+radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7ybme"]
 radius = 32.0
@@ -238,6 +238,7 @@ metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
 shape = SubResource("CircleShape2D_47a61")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.2509804, 0.2509804, 0.2509804, 1)
 shadow_enabled = true
 texture = ExtResource("5_47a61")
 
@@ -251,3 +252,5 @@ theme_override_styles/background = SubResource("StyleBoxEmpty_5xsi5")
 theme_override_styles/fill = SubResource("StyleBoxLine_47a61")
 max_value = 1.0
 show_percentage = false
+
+[node name="ItemLightSource" type="Node" parent="."]

@@ -1,10 +1,10 @@
-[gd_resource type="TileSet" load_steps=63 format=3 uid="uid://crffpbfvta0hh"]
+[gd_resource type="TileSet" load_steps=63 format=3 uid="uid://bnx45rbbsfeci"]
 
-[ext_resource type="Texture2D" uid="uid://dqjadwadqkpha" path="res://assets/tileset2.png" id="1_g61rj"]
-[ext_resource type="Texture2D" uid="uid://drnnehb1ypgg4" path="res://assets/tileset3.png" id="2_la6bk"]
+[ext_resource type="Texture2D" uid="uid://dqjadwadqkpha" path="res://assets/tileset2.png" id="1_o7vfh"]
+[ext_resource type="Texture2D" uid="uid://drnnehb1ypgg4" path="res://assets/tileset3.png" id="2_bw0fa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gsb4j"]
-texture = ExtResource("1_g61rj")
+texture = ExtResource("1_o7vfh")
 margins = Vector2i(1, 1)
 separation = Vector2i(1, 1)
 texture_region_size = Vector2i(32, 32)
@@ -1659,13 +1659,14 @@ polygon = PackedVector2Array(-8, 24, -16, 24, -16, 32, -8, 32)
 polygon = PackedVector2Array(-32, 24, -40, 24, -40, 32, -32, 32, -32, 24)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_isiae"]
-texture = ExtResource("2_la6bk")
+texture = ExtResource("2_bw0fa")
 margins = Vector2i(1, 1)
 separation = Vector2i(1, 1)
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_g61rj")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, 8, 64, 10, 54, 20, 50, 32, 54, 38, 52, 38, 42, 46, 42, 46, 36, 50, 34, 56, 22, 56, -24, 52, -26, 52, -32, 48, -40, 40, -42, 38, -50, 24, -56, -4, -52, -6, -44, -12, -44, -12, -50, -22, -54, -38, -56, -42, -52, -42, -44, -50, -42, -56, -34.053253, -56, -18, -52, 0, -54.250313, 8.738358, -54, 18, -50, 22, -50, 26, -54, 32, -54, 40, -42, 54, -36, 48, -30, 46, -26, 48, -24, 58, -12, 58, -12, 64, -64, 64)
+0:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(0, -12, 20, -10, 30, -4, 34, 4, 30, 12, 20, 18, 0, 20, -18, 18, -28, 12, -32, 4, -28, -4, -18, -10)
 1:0/next_alternative_id = 3
 1:0/0 = 0
 1:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ffkmv")
@@ -1805,6 +1806,8 @@ texture_region_size = Vector2i(128, 128)
 tile_size = Vector2i(128, 128)
 occlusion_layer_0/light_mask = 1
 physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 2
+physics_layer_1/collision_mask = 2
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Floor"
 terrain_set_0/terrain_0/color = Color(0.73, 0.73, 0.73, 1)

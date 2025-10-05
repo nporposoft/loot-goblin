@@ -1,10 +1,10 @@
-[gd_scene load_steps=42 format=3 uid="uid://r0rlptslyw58"]
+[gd_scene load_steps=45 format=3 uid="uid://r0rlptslyw58"]
 
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="1_nsxo0"]
 [ext_resource type="Script" uid="uid://5i4gw4mikjjm" path="res://src/navmesh.gd" id="2_0ak11"]
-[ext_resource type="TileSet" uid="uid://crffpbfvta0hh" path="res://assets/terrain_tileset.tres" id="2_isiae"]
 [ext_resource type="Script" uid="uid://cyjt8uhdv01dp" path="res://src/player/follow_camera.gd" id="2_ure5g"]
 [ext_resource type="PackedScene" uid="uid://cmubnd2oc4lex" path="res://characters/Goblin.tscn" id="3_d8tm3"]
+[ext_resource type="TileSet" uid="uid://bnx45rbbsfeci" path="res://assets/catacombs_tileset.tres" id="4_6qv62"]
 [ext_resource type="Script" uid="uid://patkktgw1bbd" path="res://terrain.gd" id="4_cnrih"]
 [ext_resource type="PackedScene" uid="uid://ykf6nsdak0fj" path="res://items/Diamond.tscn" id="4_d8tm3"]
 [ext_resource type="Script" uid="uid://ctqjnf2yg1uvt" path="res://src/items/item_data.gd" id="6_cnrih"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://bk6cmdekysf0j" path="res://items/containers/Chest.tscn" id="21_6qv62"]
 [ext_resource type="PackedScene" uid="uid://7mdy3xr0foye" path="res://items/containers/ChestUI.tscn" id="21_xueig"]
 [ext_resource type="PackedScene" uid="uid://c5pl2h1wbdqbr" path="res://characters/Knight.tscn" id="22_6qv62"]
+[ext_resource type="PackedScene" uid="uid://cirkhmxhfm3hn" path="res://items/Torch.tscn" id="23_xueig"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4qov3"]
 source_geometry_mode = 1
@@ -164,6 +165,20 @@ capacity = 16
 ui_scene = ExtResource("21_xueig")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh1pe"]
+atlas = ExtResource("21_5n4mp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="Resource" id="Resource_wni8n"]
+resource_local_to_scene = true
+script = ExtResource("6_cnrih")
+display_name = "Torch"
+shininess = 0.1
+description = "So bright"
+ui_sprite = SubResource("AtlasTexture_yh1pe")
+world_scene = ExtResource("23_xueig")
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
+
 [node name="TestDungeon" type="Node"]
 
 [node name="PlayerCharacterController" type="Node" parent="." node_paths=PackedStringArray("character")]
@@ -203,7 +218,7 @@ metadata/_custom_type_script = "uid://5i4gw4mikjjm"
 [node name="Terrain" type="TileMapLayer" parent="World" groups=["navmesh_sources"]]
 texture_filter = 1
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-tile_set = ExtResource("2_isiae")
+tile_set = ExtResource("4_6qv62")
 script = ExtResource("4_cnrih")
 WORLD_RADIUS = 20
 ROOM_DIM_RANGE = 5
@@ -212,7 +227,7 @@ ROOM_DIM_RANGE = 5
 color = Color(0.0672, 0.06826667, 0.08, 1)
 
 [node name="PlayerGoblin" parent="World" instance=ExtResource("3_d8tm3")]
-position = Vector2(64, 64)
+position = Vector2(64, 32)
 
 [node name="AIGoblin" parent="World" instance=ExtResource("3_d8tm3")]
 position = Vector2(176, 202)
@@ -264,11 +279,16 @@ item_data = SubResource("Resource_rk3es")
 
 [node name="Knight" parent="World" instance=ExtResource("22_6qv62")]
 position = Vector2(-46, 190)
+move_speed = 100.0
 
 [node name="AggressiveAI2" type="Node" parent="World/Knight" node_paths=PackedStringArray("map")]
 script = ExtResource("7_1v8wj")
 map = NodePath("../../Terrain")
 metadata/_custom_type_script = "uid://dmp2din0planr"
+
+[node name="Torch" parent="World" instance=ExtResource("23_xueig")]
+position = Vector2(34, 102)
+item_data = SubResource("Resource_wni8n")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

@@ -22,4 +22,3 @@ func _bake_nav_mesh() -> void:
 		Vector2(map_rect.position.x, map_rect.end.y) * tile_size
 	]))
 	bake_navigation_polygon()
-
