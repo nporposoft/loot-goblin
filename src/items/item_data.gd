@@ -4,6 +4,7 @@ extends Resource
 @export_group("Basic Item Properties")
 @export var display_name: String = "Item"
 @export var shininess: float = 0.0
+@export var shininess: int = 0
 @export_multiline var description: String = "A super cool item."
 @export var ui_sprite: Texture2D = null
 @export var world_scene: PackedScene = null
