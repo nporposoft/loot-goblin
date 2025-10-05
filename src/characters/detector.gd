@@ -37,4 +37,3 @@ func get_characters() -> Array[Character]:
 	for character in get_all():
 		if character is Character: characters_in_vision.append(character)
 	return characters_in_vision
-

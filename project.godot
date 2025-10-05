@@ -18,6 +18,7 @@ config/icon="uid://bu270ldqk1phy"
 [autoload]
 
 ItemSpawner="*res://src/items/item_spawner_utility.gd"
+ScoreKeeper="*res://src/world/score_keeper_utility.gd"
 
 [display]
 

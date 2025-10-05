@@ -42,3 +42,7 @@ func close_container() -> void:
 		_container_ui.queue_free()
 		_container_ui = null
 		_is_open = false
+
+
+func destroy() -> void:
+	queue_free()
