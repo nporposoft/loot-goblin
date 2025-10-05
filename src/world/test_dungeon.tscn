@@ -49,11 +49,7 @@ region = Rect2(17, 17, 15, 15)
 resource_local_to_scene = true
 script = ExtResource("9_gyr7j")
 display_name = "Diamond"
-<<<<<<< Updated upstream
 shininess = 100.0
-=======
-shininess = 100
->>>>>>> Stashed changes
 description = "So shiny!"
 ui_sprite = SubResource("AtlasTexture_ipdfa")
 world_scene = ExtResource("8_iyvki")
@@ -63,11 +59,7 @@ metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 resource_local_to_scene = true
 script = ExtResource("9_gyr7j")
 display_name = "Diamond"
-<<<<<<< Updated upstream
 shininess = 100.0
-=======
-shininess = 100
->>>>>>> Stashed changes
 description = "So shiny!"
 ui_sprite = SubResource("AtlasTexture_ipdfa")
 world_scene = ExtResource("8_iyvki")
@@ -77,11 +69,7 @@ metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 resource_local_to_scene = true
 script = ExtResource("9_gyr7j")
 display_name = "Diamond"
-<<<<<<< Updated upstream
 shininess = 100.0
-=======
-shininess = 100
->>>>>>> Stashed changes
 description = "So shiny!"
 ui_sprite = SubResource("AtlasTexture_ipdfa")
 world_scene = ExtResource("8_iyvki")
@@ -91,11 +79,7 @@ metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 resource_local_to_scene = true
 script = ExtResource("9_gyr7j")
 display_name = "Diamond"
-<<<<<<< Updated upstream
 shininess = 100.0
-=======
-shininess = 100
->>>>>>> Stashed changes
 description = "So shiny!"
 ui_sprite = SubResource("AtlasTexture_ipdfa")
 world_scene = ExtResource("8_iyvki")
