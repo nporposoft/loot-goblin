@@ -1,9 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://i08uo4dcy5dr"]
+[gd_scene load_steps=28 format=3 uid="uid://cmubnd2oc4lex"]
 
 [ext_resource type="Script" uid="uid://t6rnai4uey85" path="res://src/characters/character.gd" id="1_bjga1"]
 [ext_resource type="Texture2D" uid="uid://cc35tdwbren27" path="res://assets/goblinsheet1.png" id="2_bjga1"]
-[ext_resource type="Script" uid="uid://qsfrpdnrgtng" path="res://src/characters/reach.gd" id="3_7ybme"]
-[ext_resource type="Script" uid="uid://bok3t1i4s5p7d" path="res://src/characters/vision.gd" id="4_5xsi5"]
+[ext_resource type="Script" uid="uid://3vjtbq2kcl8g" path="res://src/characters/detector.gd" id="3_5xsi5"]
 [ext_resource type="Texture2D" uid="uid://ilgj2qhbrqb4" path="res://assets/white.png" id="5_47a61"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7ybme"]
@@ -199,8 +198,8 @@ collision_layer = 2
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_bjga1")
-reach = NodePath("ReachArea")
-vision = NodePath("VisionArea")
+reach = NodePath("")
+vision = NodePath("")
 nav_agent = NodePath("NavigationAgent2D")
 metadata/_custom_type_script = "uid://t6rnai4uey85"
 
@@ -216,8 +215,8 @@ shape = SubResource("CircleShape2D_bjga1")
 [node name="ReachArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 15
-script = ExtResource("3_7ybme")
-metadata/_custom_type_script = "uid://qsfrpdnrgtng"
+script = ExtResource("3_5xsi5")
+metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ReachArea"]
 shape = SubResource("CircleShape2D_7ybme")
@@ -227,8 +226,8 @@ shape = SubResource("CircleShape2D_7ybme")
 [node name="VisionArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 15
-script = ExtResource("4_5xsi5")
-metadata/_custom_type_script = "uid://bok3t1i4s5p7d"
+script = ExtResource("3_5xsi5")
+metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea"]
 shape = SubResource("CircleShape2D_47a61")
