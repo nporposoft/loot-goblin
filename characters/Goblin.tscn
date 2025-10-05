@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cmubnd2oc4lex"]
+[gd_scene load_steps=31 format=3 uid="uid://cmubnd2oc4lex"]
 
 [ext_resource type="Script" uid="uid://t6rnai4uey85" path="res://src/characters/character.gd" id="1_bjga1"]
 [ext_resource type="Texture2D" uid="uid://cc35tdwbren27" path="res://assets/goblinsheet1.png" id="2_bjga1"]
@@ -193,6 +193,9 @@ radius = 32.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_47a61"]
 radius = 150.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_5xsi5"]
+radius = 100.0
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5xsi5"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_47a61"]
@@ -225,14 +228,23 @@ shape = SubResource("CircleShape2D_7ybme")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
-[node name="VisionArea" type="Area2D" parent="."]
+[node name="FarVisionArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 15
 script = ExtResource("3_5xsi5")
 metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FarVisionArea"]
 shape = SubResource("CircleShape2D_47a61")
+
+[node name="NearVisionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 15
+script = ExtResource("3_5xsi5")
+metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NearVisionArea"]
+shape = SubResource("CircleShape2D_5xsi5")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(0.2509804, 0.2509804, 0.2509804, 1)

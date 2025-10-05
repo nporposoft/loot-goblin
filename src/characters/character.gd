@@ -18,7 +18,8 @@ var _held_item_sprite: Sprite2D = null
 @onready var _attack_cooldown_timer: Timer = _create_timer(attack_cooldown)
 @onready var nav_agent := $NavigationAgent2D
 @onready var reach := $ReachArea
-@onready var vision := $VisionArea
+@onready var far_vision := $FarVisionArea
+@onready var near_vision := $NearVisionArea
 
 
 # Action is used by controllers to interact with characters.

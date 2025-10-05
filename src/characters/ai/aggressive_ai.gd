@@ -58,13 +58,13 @@ func _process(_delta: float):
 	match state:
 		State.IDLING:
 			var target: Character = _pick_target()
-			if target != null:
+			if target != null and _want_to_attack(target):
 				_start_suspicious(target)
 			else:
 				if _state_timer.is_stopped(): _start_wandering()
 		State.WANDERING:
 			var target: Character = _pick_target()
-			if target != null:
+			if target != null and _want_to_attack(target):
 				_start_suspicious(target)
 			else:
 				if character.nav_agent.is_navigation_finished():
@@ -74,7 +74,7 @@ func _process(_delta: float):
 					action.aim_direction = action.move_input
 		State.SUSPICIOUS:
 			action.aim_direction = last_known_target_position - character.global_position
-			if _can_reach(current_target):
+			if character.near_vision.get_characters().has(current_target) and _want_to_attack(current_target):
 				_start_attacking(current_target)
 			else:
 				if _state_timer.is_stopped():
@@ -99,7 +99,7 @@ func _process(_delta: float):
 					action.aim_direction = action.move_input
 		State.LOOKING:
 			var target: Character = _pick_target()
-			if target != null:
+			if target != null and _want_to_attack(target):
 				_start_attacking(target)
 			else:
 				if _search_timer.is_stopped():
@@ -111,7 +111,7 @@ func _process(_delta: float):
 					pass
 		State.SEARCHING:
 			var target: Character = _pick_target()
-			if target != null:
+			if target != null and _want_to_attack(target):
 				_start_attacking(target)
 			else:
 				if _search_timer.is_stopped():
@@ -128,7 +128,7 @@ func _process(_delta: float):
 func _physics_process(_delta: float) -> void:
 	var space_state = character.get_world_2d().direct_space_state
 	visible_characters.clear()
-	for target in character.vision.get_characters():
+	for target in character.far_vision.get_characters():
 		var query = PhysicsRayQueryParameters2D.create(character.global_position, target.global_position, 1 << 0 | 1 << 1, [character])
 		var result = space_state.intersect_ray(query)
 		if result.has("collider") and result["collider"] == target:
