@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://r0rlptslyw58"]
+[gd_scene load_steps=17 format=3 uid="uid://r0rlptslyw58"]
 
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="1_nsxo0"]
 [ext_resource type="Script" uid="uid://5i4gw4mikjjm" path="res://src/navmesh.gd" id="2_0ak11"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://h2fitiuextwe" path="res://icon.svg" id="7_gsb4j"]
 [ext_resource type="PackedScene" uid="uid://d3u6nyytl22wp" path="res://items/Bucket.tscn" id="8_isiae"]
 [ext_resource type="PackedScene" uid="uid://c1ejvgyrv6nmb" path="res://items/BucketUI.tscn" id="9_isiae"]
+[ext_resource type="Script" uid="uid://nrm5flnhsfxu" path="res://src/debug/character_click_controller.gd" id="12_ure5g"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4qov3"]
 source_geometry_mode = 1
@@ -86,6 +87,14 @@ ROOM_DIM_RANGE = 5
 
 [node name="PlayerGoblin" parent="World" instance=ExtResource("3_d8tm3")]
 position = Vector2(64, 64)
+
+[node name="ClickToMoveGoblin" parent="World" instance=ExtResource("3_d8tm3")]
+position = Vector2(36, 204)
+
+[node name="CharacterClickController" type="Node" parent="World/ClickToMoveGoblin" node_paths=PackedStringArray("character")]
+script = ExtResource("12_ure5g")
+character = NodePath("..")
+metadata/_custom_type_script = "uid://nrm5flnhsfxu"
 
 [node name="Diamond" parent="World" instance=ExtResource("4_d8tm3")]
 position = Vector2(23.999989, 174)
