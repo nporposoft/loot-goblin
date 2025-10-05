@@ -71,8 +71,9 @@ func _process(_delta: float):
 					_start_idling()
 				else:
 					action.move_input = character.nav_agent.get_next_path_position() - character.global_position
+					action.aim_direction = action.move_input
 		State.SUSPICIOUS:
-			action.aim_direction = (last_known_target_position - character.global_position).normalized()
+			action.aim_direction = last_known_target_position - character.global_position
 			if _can_reach(current_target):
 				_start_attacking(current_target)
 			else:
@@ -90,11 +91,12 @@ func _process(_delta: float):
 				_start_searching()
 			else:
 				if _can_reach(current_target):
-					action.aim_direction = (current_target.global_position - character.global_position).normalized()
+					action.aim_direction = current_target.global_position - character.global_position
 					action.attack = true
 				else:
 					character.nav_agent.set_target_position(last_known_target_position)
 					action.move_input = character.nav_agent.get_next_path_position() - character.global_position
+					action.aim_direction = action.move_input
 		State.LOOKING:
 			var target: Character = _pick_target()
 			if target != null:
@@ -118,6 +120,7 @@ func _process(_delta: float):
 					_start_looking()
 				else:
 					action.move_input = character.nav_agent.get_next_path_position() - character.global_position
+					action.aim_direction = action.move_input
 
 	character.act(action)
 
