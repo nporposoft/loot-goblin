@@ -22,6 +22,7 @@ const floorAtlas: Vector2i = Vector2i(3, 2)
 const fancyFloorAtlas: Vector2i = Vector2i(0, 0)
 # Catacomb rooms atlas coordinates:
 const emptyAtlas: Vector2i = Vector2i(-1, -1)
+const startRoomAtlas: Vector2i = Vector2i(0, 1)
 const crossAtlas: Vector2i = Vector2i(0, 2)
 const cross_Block_Atlas: Vector2i = Vector2i(0, 3)
 const deadEnd_S_Atlas: Vector2i = Vector2i(1, 0)
@@ -58,6 +59,8 @@ func generate_catacombs() -> void:
 	
 	while roomsToGen.size() > 0 and roomsLeft > 0:
 		var currentRoom: Vector2i = roomsToGen.pop_front()
+		if get_cell_tile_data(currentRoom):
+			continue
 		var currentPaths: Array = findPaths(currentRoom)
 		validAtlasCoords = [crossAtlas, cross_Block_Atlas, deadEnd_S_Atlas, deadEnd_W_Atlas,
 			deadEnd_N_Atlas, deadEnd_E_Atlas, corner_NE_Atlas, corner_SE_Atlas,
@@ -77,6 +80,7 @@ func generate_catacombs() -> void:
 				validAtlasCoords.erase(tee_NES_Atlas)
 				validAtlasCoords.erase(tee_ESW_Atlas)
 				validAtlasCoords.erase(hall_EW_Atlas)
+				print_debug("E is closed off:", get_cell_atlas_coords(Vector2i(currentRoom.x+1, currentRoom.y)))
 			else:								# W door exists in E neighbor: remove all w/o E doors
 				validAtlasCoords.erase(deadEnd_S_Atlas)
 				validAtlasCoords.erase(deadEnd_W_Atlas)
@@ -87,6 +91,9 @@ func generate_catacombs() -> void:
 				validAtlasCoords.erase(hall_NS_Atlas)
 				validAtlasCoords.erase(deadEnd_BlockS_Atlas)
 				validAtlasCoords.erase(deadEnd_BlockN_Atlas)
+				print_debug("E is open:", get_cell_atlas_coords(Vector2i(currentRoom.x+1, currentRoom.y)))
+		else:
+			print_debug("E is empty:", get_cell_atlas_coords(Vector2i(currentRoom.x+1, currentRoom.y)))
 		# Check Northern neighbor:
 		if currentPaths[1] != Path.ANY:			# Empty: no rooms eliminated
 			if currentPaths[1] == Path.CLOSED:	# No S door in N neighbor: remove all w/ N doors
@@ -100,6 +107,7 @@ func generate_catacombs() -> void:
 				validAtlasCoords.erase(tee_NES_Atlas)
 				validAtlasCoords.erase(hall_NS_Atlas)
 				validAtlasCoords.erase(deadEnd_BlockN_Atlas)
+				print_debug("N is closed off:", get_cell_atlas_coords(Vector2i(currentRoom.x, currentRoom.y-1)))
 			else:								# S door exists in N neighbor: remove all w/o N doors
 				validAtlasCoords.erase(deadEnd_S_Atlas)
 				validAtlasCoords.erase(deadEnd_W_Atlas)
@@ -109,6 +117,9 @@ func generate_catacombs() -> void:
 				validAtlasCoords.erase(tee_ESW_Atlas)
 				validAtlasCoords.erase(hall_EW_Atlas)
 				validAtlasCoords.erase(deadEnd_BlockS_Atlas)
+				print_debug("N is open:", get_cell_atlas_coords(Vector2i(currentRoom.x, currentRoom.y-1)))
+		else:
+			print_debug("N is empty:", get_cell_atlas_coords(Vector2i(currentRoom.x, currentRoom.y-1)))
 		# Check Western neighbor:
 		if currentPaths[2] != Path.ANY:			# Empty: no rooms eliminated
 			if currentPaths[2] == Path.CLOSED:	# No E door in W neighbor: remove all w/ W doors
@@ -121,6 +132,7 @@ func generate_catacombs() -> void:
 				validAtlasCoords.erase(tee_NWE_Atlas)
 				validAtlasCoords.erase(tee_ESW_Atlas)
 				validAtlasCoords.erase(hall_EW_Atlas)
+				print_debug("W is closed off:", get_cell_atlas_coords(Vector2i(currentRoom.x-1, currentRoom.y)))
 			else:								# E door exists in W neighbor: remove all w/o W doors
 				validAtlasCoords.erase(deadEnd_S_Atlas)
 				validAtlasCoords.erase(deadEnd_N_Atlas)
@@ -131,6 +143,9 @@ func generate_catacombs() -> void:
 				validAtlasCoords.erase(hall_NS_Atlas)
 				validAtlasCoords.erase(deadEnd_BlockS_Atlas)
 				validAtlasCoords.erase(deadEnd_BlockN_Atlas)
+				print_debug("W is open:", get_cell_atlas_coords(Vector2i(currentRoom.x-1, currentRoom.y)))
+		else:
+			print_debug("W is empty:", get_cell_atlas_coords(Vector2i(currentRoom.x-1, currentRoom.y)))
 		# Check Southern neighbor:
 		if currentPaths[3] != Path.ANY:			# Empty: no rooms eliminated
 			if currentPaths[3] == Path.CLOSED:	# No N door in S neighbor: remove all w/ S doors
@@ -144,6 +159,7 @@ func generate_catacombs() -> void:
 				validAtlasCoords.erase(tee_ESW_Atlas)
 				validAtlasCoords.erase(hall_NS_Atlas)
 				validAtlasCoords.erase(deadEnd_BlockS_Atlas)
+				print_debug("S is closed off:", get_cell_atlas_coords(Vector2i(currentRoom.x, currentRoom.y+1)))
 			else:								# N door exists in S neighbor: remove all w/o S doors
 				validAtlasCoords.erase(deadEnd_W_Atlas)
 				validAtlasCoords.erase(deadEnd_N_Atlas)
@@ -153,6 +169,9 @@ func generate_catacombs() -> void:
 				validAtlasCoords.erase(tee_NWE_Atlas)
 				validAtlasCoords.erase(hall_EW_Atlas)
 				validAtlasCoords.erase(deadEnd_BlockN_Atlas)
+				print_debug("S is open:", get_cell_atlas_coords(Vector2i(currentRoom.x, currentRoom.y+1)))
+		else:
+			print_debug("S is empty:", get_cell_atlas_coords(Vector2i(currentRoom.x, currentRoom.y+1)))
 				
 				# ALL POSSIBLE ROOMS:
 				#validAtlasCoords.erase(crossAtlas)
@@ -218,10 +237,10 @@ func findPaths(room: Vector2i) -> Array:
 	if get_cell_atlas_coords(currentNeighbor) == emptyAtlas:
 		outputArray.push_back(Path.ANY)
 	else:
-		openNeighbors = [crossAtlas, cross_Block_Atlas, deadEnd_W_Atlas, corner_SW_Atlas,
+		openNeighbors = [startRoomAtlas, crossAtlas, cross_Block_Atlas, deadEnd_W_Atlas, corner_SW_Atlas,
 			corner_NW_Atlas, tee_NSW_Atlas, tee_NWE_Atlas, tee_ESW_Atlas,
 			hall_EW_Atlas] # atlas coords with W facing doors
-		if openNeighbors.has(currentNeighbor):
+		if openNeighbors.has(get_cell_atlas_coords(currentNeighbor)):
 			outputArray.push_back(Path.OPEN)
 		else:
 			outputArray.push_back(Path.CLOSED)
@@ -231,10 +250,10 @@ func findPaths(room: Vector2i) -> Array:
 	if get_cell_atlas_coords(currentNeighbor) == emptyAtlas:
 		outputArray.push_back(Path.ANY)
 	else:
-		openNeighbors = [crossAtlas, cross_Block_Atlas, deadEnd_S_Atlas, corner_SE_Atlas,
+		openNeighbors = [startRoomAtlas, crossAtlas, cross_Block_Atlas, deadEnd_S_Atlas, corner_SE_Atlas,
 			corner_SW_Atlas, tee_NSW_Atlas, tee_NES_Atlas, tee_ESW_Atlas,
 			hall_NS_Atlas, deadEnd_BlockS_Atlas] # atlas coords with S facing doors
-		if openNeighbors.has(currentNeighbor):
+		if openNeighbors.has(get_cell_atlas_coords(currentNeighbor)):
 			outputArray.push_back(Path.OPEN)
 		else:
 			outputArray.push_back(Path.CLOSED)
@@ -244,10 +263,10 @@ func findPaths(room: Vector2i) -> Array:
 	if get_cell_atlas_coords(currentNeighbor) == emptyAtlas:
 		outputArray.push_back(Path.ANY)
 	else:
-		openNeighbors = [crossAtlas, cross_Block_Atlas, deadEnd_E_Atlas, corner_NE_Atlas,
+		openNeighbors = [startRoomAtlas, crossAtlas, cross_Block_Atlas, deadEnd_E_Atlas, corner_NE_Atlas,
 			corner_SE_Atlas, tee_NWE_Atlas, tee_NES_Atlas, tee_ESW_Atlas,
 			hall_EW_Atlas] # atlas coords with E facing doors
-		if openNeighbors.has(currentNeighbor):
+		if openNeighbors.has(get_cell_atlas_coords(currentNeighbor)):
 			outputArray.push_back(Path.OPEN)
 		else:
 			outputArray.push_back(Path.CLOSED)
@@ -260,7 +279,7 @@ func findPaths(room: Vector2i) -> Array:
 		openNeighbors = [crossAtlas, cross_Block_Atlas, deadEnd_N_Atlas, corner_NE_Atlas,
 			corner_NW_Atlas, tee_NSW_Atlas, tee_NWE_Atlas, tee_NES_Atlas,
 			hall_NS_Atlas, deadEnd_BlockN_Atlas] # atlas coords with N facing doors
-		if openNeighbors.has(currentNeighbor):
+		if openNeighbors.has(get_cell_atlas_coords(currentNeighbor)):
 			outputArray.push_back(Path.OPEN)
 		else:
 			outputArray.push_back(Path.CLOSED)
