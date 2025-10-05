@@ -53,6 +53,15 @@ func is_holding() -> bool:
 	return held_item != null
 
 
+func all_items() -> Array[ItemData]:
+	var items = []
+	if held_item != null:
+		items.append(held_item)
+	if held_item != null and held_item.is_container:
+		items.append_array(held_item.items)
+	return items
+
+
 func hold_item(item: ItemData) -> void:
 	held_item = item
 	_create_held_item_sprite()
