@@ -5,7 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://dkrq5othh4xcw" path="res://assets/containers.png" id="3_f88oy"]
 [ext_resource type="PackedScene" uid="uid://d3u6nyytl22wp" path="res://items/containers/Bucket.tscn" id="4_l2qbg"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_l2qbg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlibg"]
+resource_local_to_scene = true
 atlas = ExtResource("3_f88oy")
 region = Rect2(0, 0, 16, 16)
 
@@ -13,9 +14,11 @@ region = Rect2(0, 0, 16, 16)
 resource_local_to_scene = true
 script = ExtResource("1_7kful")
 display_name = "Bucket"
+shininess = 1.0
 description = "What a nice bucket"
-ui_sprite = SubResource("AtlasTexture_l2qbg")
+ui_sprite = SubResource("AtlasTexture_tlibg")
 world_scene = ExtResource("4_l2qbg")
 is_container = true
+capacity = 4
 ui_scene = ExtResource("2_f88oy")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"

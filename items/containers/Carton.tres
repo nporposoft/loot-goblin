@@ -13,6 +13,7 @@ region = Rect2(17, 0, 16, 16)
 resource_local_to_scene = true
 script = ExtResource("1_blaox")
 display_name = "Carton"
+shininess = 1.0
 description = "What a nice carton"
 ui_sprite = SubResource("AtlasTexture_cwmej")
 world_scene = ExtResource("2_uwlvg")

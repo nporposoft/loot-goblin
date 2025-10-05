@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://dpuk2ctpkbrij"]
+
+[ext_resource type="Script" uid="uid://dj61bulh8wvlg" path="res://src/items/item.gd" id="1_nwhk7"]
+[ext_resource type="Texture2D" uid="uid://dkrq5othh4xcw" path="res://assets/containers.png" id="2_om8mp"]
+[ext_resource type="Script" uid="uid://4x62ah40g3dn" path="res://src/player/interactable.gd" id="3_cvryp"]
+[ext_resource type="Texture2D" uid="uid://ilgj2qhbrqb4" path="res://assets/white.png" id="4_0m8gf"]
+[ext_resource type="Texture2D" uid="uid://c04ea6xyqn8hq" path="res://assets/blub.png" id="5_gcxve"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_udecq"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nx8on"]
+atlas = ExtResource("2_om8mp")
+region = Rect2(34, 34, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2okec"]
+radius = 26.019224
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8ngoy"]
+lifetime_randomness = 0.25
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -4, 0)
+emission_shape = 3
+emission_box_extents = Vector3(5, 1, 1)
+direction = Vector3(0, -1, 0)
+spread = 3.0
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+damping_min = 1.2
+damping_max = 1.3000001
+scale_min = 0.049999997
+scale_max = 0.099999994
+color = Color(0.41000006, 0, 0.6, 0.3019608)
+hue_variation_min = -0.050000023
+hue_variation_max = 0.049999975
+
+[node name="MagicBag" type="RigidBody2D"]
+collision_layer = 4
+mass = 25.0
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 4.0
+script = ExtResource("1_nwhk7")
+metadata/_custom_type_script = "uid://dj61bulh8wvlg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+texture_filter = 1
+shape = SubResource("RectangleShape2D_udecq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_nx8on")
+
+[node name="Interactable" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("3_cvryp")
+metadata/_custom_type_script = "uid://4x62ah40g3dn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("CircleShape2D_2okec")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(1, -4)
+color = Color(1, 0, 1, 1)
+energy = 0.5
+texture = ExtResource("4_0m8gf")
+texture_scale = 0.05
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 10
+amount_ratio = 0.2
+texture = ExtResource("5_gcxve")
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_8ngoy")
+
+[connection signal="on_interact" from="Interactable" to="." method="interact"]

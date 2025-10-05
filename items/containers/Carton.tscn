@@ -11,6 +11,7 @@ size = Vector2(12, 9)
 radius = 26.019224
 
 [node name="Carton" type="RigidBody2D"]
+texture_filter = 1
 collision_layer = 4
 gravity_scale = 0.0
 lock_rotation = true

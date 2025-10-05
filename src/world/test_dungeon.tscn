@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://r0rlptslyw58"]
+[gd_scene load_steps=60 format=3 uid="uid://r0rlptslyw58"]
 
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="1_gpxik"]
 [ext_resource type="Script" uid="uid://cyjt8uhdv01dp" path="res://src/player/follow_camera.gd" id="2_t1fax"]
@@ -6,25 +6,28 @@
 [ext_resource type="TileSet" uid="uid://bnx45rbbsfeci" path="res://assets/catacombs_tileset.tres" id="4_4secf"]
 [ext_resource type="Script" uid="uid://patkktgw1bbd" path="res://src/world/terrain.gd" id="5_bjdcx"]
 [ext_resource type="PackedScene" uid="uid://cmubnd2oc4lex" path="res://characters/Goblin.tscn" id="6_b81q1"]
-[ext_resource type="PackedScene" path="res://src/world/Goal.tscn" id="6_t1fax"]
+[ext_resource type="PackedScene" uid="uid://cbyjpejpvcygo" path="res://src/world/Goal.tscn" id="6_t1fax"]
 [ext_resource type="Script" uid="uid://dmp2din0planr" path="res://src/characters/ai/aggressive_ai.gd" id="7_adatu"]
 [ext_resource type="PackedScene" uid="uid://ykf6nsdak0fj" path="res://items/Diamond.tscn" id="8_iyvki"]
 [ext_resource type="Script" uid="uid://ctqjnf2yg1uvt" path="res://src/items/item_data.gd" id="9_gyr7j"]
 [ext_resource type="Texture2D" uid="uid://b656w8clmgsyk" path="res://assets/items.png" id="10_b5l0l"]
 [ext_resource type="PackedScene" uid="uid://d3u6nyytl22wp" path="res://items/containers/Bucket.tscn" id="11_3kbks"]
-[ext_resource type="PackedScene" uid="uid://c1ejvgyrv6nmb" path="res://items/containers/BucketUI.tscn" id="12_5eo57"]
 [ext_resource type="Texture2D" uid="uid://dkrq5othh4xcw" path="res://assets/containers.png" id="13_frt76"]
 [ext_resource type="PackedScene" uid="uid://dvwyd2tet2qr5" path="res://items/containers/Carton.tscn" id="14_vyb7s"]
 [ext_resource type="Script" uid="uid://d4mgxpys1m80c" path="res://src/player/container_ui.gd" id="15_lr2a3"]
 [ext_resource type="Texture2D" uid="uid://cdlafytbjx7lg" path="res://assets/bag slot.png" id="16_2h4ap"]
+[ext_resource type="Script" uid="uid://dj61bulh8wvlg" path="res://src/items/item.gd" id="17_bjdcx"]
 [ext_resource type="Script" uid="uid://bqtvaidnp5b3q" path="res://src/player/container_ui_slot.gd" id="17_o647s"]
+[ext_resource type="Script" uid="uid://4x62ah40g3dn" path="res://src/player/interactable.gd" id="18_b81q1"]
 [ext_resource type="PackedScene" uid="uid://cpyhtok5on2tr" path="res://items/containers/Backpack.tscn" id="18_klvdy"]
 [ext_resource type="PackedScene" uid="uid://cxr24qd1d0l3m" path="res://items/containers/BackpackUI.tscn" id="19_k336w"]
 [ext_resource type="PackedScene" uid="uid://bk6cmdekysf0j" path="res://items/containers/Chest.tscn" id="20_m4m5b"]
 [ext_resource type="PackedScene" uid="uid://7mdy3xr0foye" path="res://items/containers/ChestUI.tscn" id="21_u4si2"]
 [ext_resource type="PackedScene" uid="uid://ch0vybwm8dojh" path="res://characters/Knight.tscn" id="22_tnk0v"]
-[ext_resource type="PackedScene" path="res://items/Torch.tscn" id="23_21iln"]
-[ext_resource type="Script" path="res://src/world/debug_score_test.gd" id="25_3cviu"]
+[ext_resource type="PackedScene" uid="uid://cirkhmxhfm3hn" path="res://items/Torch.tscn" id="23_21iln"]
+[ext_resource type="Script" uid="uid://bor4p2l5i5yeu" path="res://src/world/debug_score_test.gd" id="25_3cviu"]
+[ext_resource type="PackedScene" uid="uid://dpuk2ctpkbrij" path="res://items/containers/MagicBag.tscn" id="27_adatu"]
+[ext_resource type="PackedScene" uid="uid://cv0ddx1nj18nt" path="res://items/containers/MagicBagUI.tscn" id="27_b81q1"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4qov3"]
 source_geometry_mode = 1
@@ -45,60 +48,44 @@ agent_radius = 32.0
 atlas = ExtResource("10_b5l0l")
 region = Rect2(17, 17, 15, 15)
 
-[sub_resource type="Resource" id="Resource_3cviu"]
-resource_local_to_scene = true
-script = ExtResource("9_gyr7j")
-display_name = "Diamond"
-shininess = 100.0
-description = "So shiny!"
-ui_sprite = SubResource("AtlasTexture_ipdfa")
-world_scene = ExtResource("8_iyvki")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="Resource" id="Resource_4secf"]
-resource_local_to_scene = true
-script = ExtResource("9_gyr7j")
-display_name = "Diamond"
-shininess = 100.0
-description = "So shiny!"
-ui_sprite = SubResource("AtlasTexture_ipdfa")
-world_scene = ExtResource("8_iyvki")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="Resource" id="Resource_bjdcx"]
-resource_local_to_scene = true
-script = ExtResource("9_gyr7j")
-display_name = "Diamond"
-shininess = 100.0
-description = "So shiny!"
-ui_sprite = SubResource("AtlasTexture_ipdfa")
-world_scene = ExtResource("8_iyvki")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="Resource" id="Resource_b81q1"]
-resource_local_to_scene = true
-script = ExtResource("9_gyr7j")
-display_name = "Diamond"
-shininess = 100.0
-description = "So shiny!"
-ui_sprite = SubResource("AtlasTexture_ipdfa")
-world_scene = ExtResource("8_iyvki")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l2qbg"]
-atlas = ExtResource("13_frt76")
-region = Rect2(0, 0, 16, 16)
-
 [sub_resource type="Resource" id="Resource_adatu"]
 resource_local_to_scene = true
 script = ExtResource("9_gyr7j")
-display_name = "Bucket"
-shininess = 1
-description = "What a nice bucket"
-ui_sprite = SubResource("AtlasTexture_l2qbg")
-world_scene = ExtResource("11_3kbks")
-is_container = true
-ui_scene = ExtResource("12_5eo57")
+display_name = "Diamond"
+shininess = 100.0
+description = "So shiny!"
+ui_sprite = SubResource("AtlasTexture_ipdfa")
+world_scene = ExtResource("8_iyvki")
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
+
+[sub_resource type="Resource" id="Resource_iyvki"]
+resource_local_to_scene = true
+script = ExtResource("9_gyr7j")
+display_name = "Diamond"
+shininess = 100.0
+description = "So shiny!"
+ui_sprite = SubResource("AtlasTexture_ipdfa")
+world_scene = ExtResource("8_iyvki")
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
+
+[sub_resource type="Resource" id="Resource_gyr7j"]
+resource_local_to_scene = true
+script = ExtResource("9_gyr7j")
+display_name = "Diamond"
+shininess = 100.0
+description = "So shiny!"
+ui_sprite = SubResource("AtlasTexture_ipdfa")
+world_scene = ExtResource("8_iyvki")
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
+
+[sub_resource type="Resource" id="Resource_b5l0l"]
+resource_local_to_scene = true
+script = ExtResource("9_gyr7j")
+display_name = "Diamond"
+shininess = 100.0
+description = "So shiny!"
+ui_sprite = SubResource("AtlasTexture_ipdfa")
+world_scene = ExtResource("8_iyvki")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4yo1c"]
@@ -106,6 +93,64 @@ atlas = ExtResource("16_2h4ap")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rkvuq"]
+atlas = ExtResource("16_2h4ap")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="PackedScene" id="PackedScene_3kbks"]
+resource_local_to_scene = true
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("BucketUI", "Control", "texture_filter", "layout_mode", "anchors_preset", "anchor_right", "anchor_bottom", "offset_right", "offset_bottom", "grow_horizontal", "grow_vertical", "script", "Slot 1", "TextureButton", "layout_mode", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 2", "TextureButton", "layout_mode", "offset_left", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 3", "TextureButton", "layout_mode", "offset_top", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 4", "TextureButton", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode"),
+"node_count": 9,
+"node_paths": [NodePath("."), NodePath("./Slot 1"), NodePath("."), NodePath("./Slot 2"), NodePath("."), NodePath("./Slot 3"), NodePath("."), NodePath("./Slot 4")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 10, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 10, 8, 11, 9, 0, 1073741824, 0, 13, 12, -1, 7, 14, 10, 15, 11, 16, 12, 17, 13, 18, 14, 19, 15, 20, 16, 0, 1073741825, 0, 22, 21, -1, 7, 23, 17, 24, 18, 25, 19, 26, 20, 27, 21, 28, 22, 29, 23, 0, 1073741826, 0, 31, 30, -1, 8, 32, 24, 33, 25, 34, 26, 35, 27, 36, 28, 37, 29, 38, 30, 39, 31, 0, 1073741827, 0, 41, 40, -1, 7, 42, 32, 43, 33, 44, 34, 45, 35, 46, 36, 47, 37, 48, 38, 0, 1073741828, 0, 50, 49, -1, 8, 51, 39, 52, 40, 53, 41, 54, 42, 55, 43, 56, 44, 57, 45, 58, 46, 0, 1073741829, 0, 60, 59, -1, 7, 61, 47, 62, 48, 63, 49, 64, 50, 65, 51, 66, 52, 67, 53, 0, 1073741830, 0, 69, 68, -1, 9, 70, 54, 71, 55, 72, 56, 73, 57, 74, 58, 75, 59, 76, 60, 77, 61, 78, 62, 0, 1073741831, 0, 80, 79, -1, 7, 81, 63, 82, 64, 83, 65, 84, 66, 85, 67, 86, 68, 87, 69, 0),
+"variants": [1, 3, 15, 1.0, 1.0, -1553.0, -790.0, 2, 2, ExtResource("15_lr2a3"), 0, 32.0, 32.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("17_o647s"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 32.0, 64.0, 32.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("17_o647s"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 32.0, 32.0, 64.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("17_o647s"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 32.0, 32.0, 64.0, 64.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("17_o647s"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5],
+"version": 3
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2qbg"]
+atlas = ExtResource("13_frt76")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_udecq"]
+size = Vector2(14, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2okec"]
+radius = 26.019224
+
+[sub_resource type="PackedScene" id="PackedScene_5eo57"]
+resource_local_to_scene = true
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(3, 0, 20, 19, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("Bucket", "texture_filter", "collision_layer", "gravity_scale", "lock_rotation", "linear_damp", "script", "metadata/_custom_type_script", "RigidBody2D", "CollisionShape2D", "position", "shape", "Sprite2D", "texture", "region_enabled", "region_rect", "Interactable", "collision_mask", "Area2D", "interact", "on_interact"),
+"node_count": 5,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 8, 0, -1, 7, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 7, 6, 0, 0, 0, 9, 9, -1, 2, 10, 7, 11, 8, 0, 0, 0, 12, 12, -1, 4, 1, 0, 13, 9, 14, 3, 15, 10, 0, 0, 0, 18, 16, -1, 4, 2, 11, 17, 12, 6, 13, 7, 14, 0, 3, 0, 9, 9, -1, 1, 11, 15, 0),
+"variants": [1, 4, 0.0, true, 2.0, ExtResource("17_bjdcx"), "uid://dj61bulh8wvlg", Vector2(0, 1), SubResource("RectangleShape2D_udecq"), ExtResource("13_frt76"), Rect2(0, 0, 16, 16), 8, 0, ExtResource("18_b81q1"), "uid://4x62ah40g3dn", SubResource("CircleShape2D_2okec")],
+"version": 3
+}
+
+[sub_resource type="Resource" id="Resource_frt76"]
+resource_local_to_scene = true
+script = ExtResource("9_gyr7j")
+display_name = "Bucket"
+shininess = 1
+description = "What a nice bucket"
+ui_sprite = SubResource("AtlasTexture_l2qbg")
+world_scene = SubResource("PackedScene_5eo57")
+is_container = true
+ui_scene = SubResource("PackedScene_3kbks")
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lr2a3"]
+atlas = ExtResource("16_2h4ap")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2h4ap"]
 atlas = ExtResource("16_2h4ap")
 region = Rect2(32, 0, 32, 32)
 
@@ -118,7 +163,7 @@ _bundled = {
 "node_count": 9,
 "node_paths": [NodePath("."), NodePath("./Slot 1"), NodePath("."), NodePath("./Slot 2"), NodePath("."), NodePath("./Slot 3"), NodePath("."), NodePath("./Slot 4")],
 "nodes": PackedInt32Array(-1, -1, 1, 0, -1, 10, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 10, 8, 11, 9, 0, 1073741824, 0, 13, 12, -1, 7, 14, 10, 15, 11, 16, 12, 17, 13, 18, 14, 19, 15, 20, 16, 0, 1073741825, 0, 22, 21, -1, 7, 23, 17, 24, 18, 25, 19, 26, 20, 27, 21, 28, 22, 29, 23, 0, 1073741826, 0, 31, 30, -1, 8, 32, 24, 33, 25, 34, 26, 35, 27, 36, 28, 37, 29, 38, 30, 39, 31, 0, 1073741827, 0, 41, 40, -1, 7, 42, 32, 43, 33, 44, 34, 45, 35, 46, 36, 47, 37, 48, 38, 0, 1073741828, 0, 50, 49, -1, 8, 51, 39, 52, 40, 53, 41, 54, 42, 55, 43, 56, 44, 57, 45, 58, 46, 0, 1073741829, 0, 60, 59, -1, 7, 61, 47, 62, 48, 63, 49, 64, 50, 65, 51, 66, 52, 67, 53, 0, 1073741830, 0, 69, 68, -1, 9, 70, 54, 71, 55, 72, 56, 73, 57, 74, 58, 75, 59, 76, 60, 77, 61, 78, 62, 0, 1073741831, 0, 80, 79, -1, 7, 81, 63, 82, 64, 83, 65, 84, 66, 85, 67, 86, 68, 87, 69, 0),
-"variants": [1, 3, 15, 1.0, 1.0, -1553.0, -790.0, 2, 2, ExtResource("15_lr2a3"), 0, 32.0, 32.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("17_o647s"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 32.0, 64.0, 32.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("17_o647s"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 32.0, 32.0, 64.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("17_o647s"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 32.0, 32.0, 64.0, 64.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("17_o647s"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5],
+"variants": [1, 3, 15, 1.0, 1.0, -1553.0, -790.0, 2, 2, ExtResource("15_lr2a3"), 0, 32.0, 32.0, SubResource("AtlasTexture_lr2a3"), SubResource("AtlasTexture_2h4ap"), ExtResource("17_o647s"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 32.0, 64.0, 32.0, SubResource("AtlasTexture_lr2a3"), SubResource("AtlasTexture_2h4ap"), ExtResource("17_o647s"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 32.0, 32.0, 64.0, SubResource("AtlasTexture_lr2a3"), SubResource("AtlasTexture_2h4ap"), ExtResource("17_o647s"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 32.0, 32.0, 64.0, 64.0, SubResource("AtlasTexture_lr2a3"), SubResource("AtlasTexture_2h4ap"), ExtResource("17_o647s"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5],
 "version": 3
 }
 
@@ -126,7 +171,7 @@ _bundled = {
 atlas = ExtResource("13_frt76")
 region = Rect2(17, 0, 16, 16)
 
-[sub_resource type="Resource" id="Resource_iyvki"]
+[sub_resource type="Resource" id="Resource_vyb7s"]
 resource_local_to_scene = true
 script = ExtResource("9_gyr7j")
 display_name = "Carton"
@@ -138,36 +183,36 @@ is_container = true
 ui_scene = SubResource("PackedScene_gxenx")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gyr7j"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_o647s"]
 resource_local_to_scene = true
 atlas = ExtResource("13_frt76")
 region = Rect2(0, 17, 16, 16)
 
-[sub_resource type="Resource" id="Resource_b5l0l"]
+[sub_resource type="Resource" id="Resource_klvdy"]
 resource_local_to_scene = true
 script = ExtResource("9_gyr7j")
 display_name = "Bucket"
 shininess = 20
 description = "What a nice bucket"
-ui_sprite = SubResource("AtlasTexture_gyr7j")
+ui_sprite = SubResource("AtlasTexture_o647s")
 world_scene = ExtResource("18_klvdy")
 is_container = true
 capacity = 9
 ui_scene = ExtResource("19_k336w")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3kbks"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_k336w"]
 resource_local_to_scene = true
 atlas = ExtResource("13_frt76")
 region = Rect2(0, 34, 16, 16)
 
-[sub_resource type="Resource" id="Resource_5eo57"]
+[sub_resource type="Resource" id="Resource_m4m5b"]
 resource_local_to_scene = true
 script = ExtResource("9_gyr7j")
 display_name = "Chest"
 shininess = 250
 description = "Look at that chest!"
-ui_sprite = SubResource("AtlasTexture_3kbks")
+ui_sprite = SubResource("AtlasTexture_k336w")
 world_scene = ExtResource("20_m4m5b")
 is_container = true
 capacity = 16
@@ -178,7 +223,7 @@ metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 atlas = ExtResource("10_b5l0l")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="Resource" id="Resource_frt76"]
+[sub_resource type="Resource" id="Resource_u4si2"]
 resource_local_to_scene = true
 script = ExtResource("9_gyr7j")
 display_name = "Torch"
@@ -186,6 +231,24 @@ shininess = 2
 description = "So bright"
 ui_sprite = SubResource("AtlasTexture_yh1pe")
 world_scene = ExtResource("23_21iln")
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnk0v"]
+resource_local_to_scene = true
+atlas = ExtResource("13_frt76")
+region = Rect2(34, 34, 16, 16)
+
+[sub_resource type="Resource" id="Resource_21iln"]
+resource_local_to_scene = true
+script = ExtResource("9_gyr7j")
+display_name = "Magic Bag"
+shininess = 850.0
+description = "There's a ton of space in here!"
+ui_sprite = SubResource("AtlasTexture_tnk0v")
+world_scene = ExtResource("27_adatu")
+is_container = true
+capacity = 25
+ui_scene = ExtResource("27_b81q1")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
 [sub_resource type="SystemFont" id="SystemFont_frt76"]
@@ -260,41 +323,40 @@ metadata/_custom_type_script = "uid://dmp2din0planr"
 [node name="Diamond" parent="World" instance=ExtResource("8_iyvki")]
 position = Vector2(23.999989, 174)
 rotation = 0.41302407
-item_data = SubResource("Resource_3cviu")
+item_data = SubResource("Resource_adatu")
 
 [node name="Diamond2" parent="World" instance=ExtResource("8_iyvki")]
 position = Vector2(98, 157.00002)
 rotation = 0.41302407
-item_data = SubResource("Resource_4secf")
+item_data = SubResource("Resource_iyvki")
 
 [node name="Diamond3" parent="World" instance=ExtResource("8_iyvki")]
 position = Vector2(25.999998, 232.00003)
 rotation = 0.41302407
-item_data = SubResource("Resource_bjdcx")
+item_data = SubResource("Resource_gyr7j")
 
 [node name="Diamond4" parent="World" instance=ExtResource("8_iyvki")]
 position = Vector2(46, 154.00002)
 rotation = 0.41302407
-item_data = SubResource("Resource_b81q1")
+item_data = SubResource("Resource_b5l0l")
 
 [node name="Bucket" parent="World" instance=ExtResource("11_3kbks")]
-texture_filter = 1
 position = Vector2(95.99988, 217.99988)
 rotation = -0.38087726
-item_data = SubResource("Resource_adatu")
+item_data = SubResource("Resource_frt76")
 
 [node name="Carton" parent="World" instance=ExtResource("14_vyb7s")]
 position = Vector2(55, 229)
-item_data = SubResource("Resource_iyvki")
+item_data = SubResource("Resource_vyb7s")
 
 [node name="Backpack" parent="World" instance=ExtResource("18_klvdy")]
 position = Vector2(-47, 233)
-item_data = SubResource("Resource_b5l0l")
+item_data = SubResource("Resource_klvdy")
 
 [node name="Chest" parent="World" instance=ExtResource("20_m4m5b")]
 position = Vector2(64, 128)
 linear_damp = 60.0
-item_data = SubResource("Resource_5eo57")
+item_data = SubResource("Resource_m4m5b")
 
 [node name="Knight" parent="World" instance=ExtResource("22_tnk0v")]
 position = Vector2(-46, 190)
@@ -307,7 +369,11 @@ metadata/_custom_type_script = "uid://dmp2din0planr"
 
 [node name="Torch" parent="World" instance=ExtResource("23_21iln")]
 position = Vector2(34, 102)
-item_data = SubResource("Resource_frt76")
+item_data = SubResource("Resource_u4si2")
+
+[node name="MagicBag" parent="World" instance=ExtResource("27_adatu")]
+position = Vector2(56, 333)
+item_data = SubResource("Resource_21iln")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
