@@ -114,6 +114,7 @@ func _process_trigger(action: Action) -> void:
 
 
 func _process_attack(_action: Action) -> void:
+	print("hiyah")
 	pass
 
 
