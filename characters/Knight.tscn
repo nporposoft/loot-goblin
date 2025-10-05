@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c5pl2h1wbdqbr"]
+[gd_scene load_steps=16 format=3 uid="uid://ch0vybwm8dojh"]
 
 [ext_resource type="Script" uid="uid://t6rnai4uey85" path="res://src/characters/character.gd" id="1_adxal"]
 [ext_resource type="Texture2D" uid="uid://w7kqmfmqji3i" path="res://assets/Knight.png" id="2_oo2ix"]
@@ -111,6 +111,7 @@ metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
 shape = SubResource("CircleShape2D_7ybme")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+navigation_layers = 2
 
 [node name="VisionArea" type="Area2D" parent="."]
 collision_layer = 0
