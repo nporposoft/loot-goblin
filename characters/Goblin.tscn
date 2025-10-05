@@ -198,14 +198,11 @@ radius = 150.0
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_47a61"]
 color = Color(0, 1, 0, 1)
 
-[node name="Goblin" type="CharacterBody2D" node_paths=PackedStringArray("reach", "vision", "nav_agent")]
+[node name="Goblin" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_bjga1")
-reach = NodePath("ReachArea")
-vision = NodePath("VisionArea")
-nav_agent = NodePath("NavigationAgent2D")
 metadata/_custom_type_script = "uid://t6rnai4uey85"
 
 [node name="Spritesheet" type="AnimatedSprite2D" parent="."]

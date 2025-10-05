@@ -5,20 +5,21 @@ extends CharacterBody2D
 @export var move_speed: float = 200.0
 @export var max_health: int = 100
 @export var current_health: int = max_health
+@export var attack_damage: int = 10
+@export var attack_cooldown: float = 1.0
 
 @export_group("State")
 @export var held_item: ItemData = null
 
-@export_group("Components")
-@export var reach: Detector = null
-@export var vision: Detector = null
-@export var nav_agent: NavigationAgent2D = null
-
-var aim_direction: Vector2 = Vector2.ZERO
-
+var _aim_direction: Vector2 = Vector2.ZERO
 var _held_item_sprite: Sprite2D = null
 
 @onready var _spritesheet: AnimatedSprite2D = $Spritesheet
+@onready var _attack_cooldown_timer: Timer = _create_timer(attack_cooldown)
+@onready var nav_agent := $NavigationAgent2D
+@onready var reach := $ReachArea
+@onready var vision := $VisionArea
+
 
 # Action is used by controllers to interact with characters.
 # Specifically -- player controller can pass to the player character,
@@ -89,7 +90,7 @@ func _physics_process(_delta: float) -> void:
 func _process_movement(action: Action) -> void:
 	velocity = action.move_input.normalized() * move_speed
 	if velocity.is_zero_approx():
-		_spritesheet.set_flip_h(aim_direction.x < 0)
+		_spritesheet.set_flip_h(_aim_direction.x < 0)
 		if is_holding():
 			_spritesheet.play("idle_carry")
 		else:
@@ -107,7 +108,7 @@ func _process_movement(action: Action) -> void:
 
 
 func _process_aiming(action: Action) -> void:
-	aim_direction = action.aim_direction.normalized()
+	_aim_direction = action.aim_direction.normalized()
 
 
 func _process_pickup_and_drop(action: Action) -> void:
@@ -116,7 +117,7 @@ func _process_pickup_and_drop(action: Action) -> void:
 		#if action.pickup_item in items_in_reach:
 			#held_item.add_item(action.pickup_item.pickup())
 	if is_holding() and action.throw:
-		toss_item(aim_direction * action.throw_force)
+		toss_item(_aim_direction * action.throw_force)
 	elif not is_holding() and action.pickup_item != null:
 		var items_in_reach = reach.get_items()
 		if action.pickup_item in items_in_reach:
@@ -129,8 +130,9 @@ func _process_trigger(action: Action) -> void:
 
 
 func _process_attack(action: Action) -> void:
-	if action.attack:
+	if action.attack and _attack_cooldown_timer.is_stopped():
 		print("hiyah")
+		_attack_cooldown_timer.start()
 
 
 func _create_held_item_sprite() -> void:
@@ -149,3 +151,11 @@ func _remove_held_item_sprite() -> void:
 
 	_held_item_sprite.queue_free()
 	_held_item_sprite = null
+
+
+func _create_timer(wait_time: float) -> Timer:
+	var timer = Timer.new()
+	timer.one_shot = true
+	timer.wait_time = wait_time
+	add_child(timer)
+	return timer

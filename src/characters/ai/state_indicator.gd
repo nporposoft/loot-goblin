@@ -12,15 +12,19 @@ func _ready():
 
 
 func _handle_state_change(new_state: AggressiveAI.State) -> void:
-	print("State changed to: %s" % str(new_state))
+	print("State changed to: %s" % AggressiveAI.State.keys()[new_state])
 	match new_state:
 		AggressiveAI.State.SUSPICIOUS:
 			text = "?"
 			self.modulate = SUSPICIOUS_COLOR
 			visible = true
-		AggressiveAI.State.ALERTING:
+		AggressiveAI.State.ATTACKING:
 			text = "!"
-			self.modulate = SUSPICIOUS_COLOR
+			self.modulate = ALERT_COLOR
+			visible = true
+		AggressiveAI.State.LOOKING:
+			text = "?"
+			self.modulate = ALERT_COLOR
 			visible = true
 		AggressiveAI.State.SEARCHING:
 			text = "?"
