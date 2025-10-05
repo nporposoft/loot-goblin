@@ -113,9 +113,9 @@ func _process_trigger(action: Action) -> void:
 		action.trigger.trigger()
 
 
-func _process_attack(_action: Action) -> void:
-	print("hiyah")
-	pass
+func _process_attack(action: Action) -> void:
+	if action.attack:
+		print("hiyah")
 
 
 func _create_held_item_sprite() -> void:
