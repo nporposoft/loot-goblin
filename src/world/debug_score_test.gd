@@ -2,4 +2,4 @@ extends Label
 
 
 func _process(delta: float) -> void:
-	text = str(int(ScoreKeeper.DisplayedScore))
+	text = str(int(ceil(ScoreKeeper.DisplayedScore)))
