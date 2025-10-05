@@ -88,7 +88,8 @@ func _physics_process(_delta: float) -> void:
 
 func _process_movement(action: Action) -> void:
 	velocity = action.move_input.normalized() * move_speed
-	if is_zero_approx(velocity.length()):
+	if velocity.is_zero_approx():
+		_spritesheet.set_flip_h(aim_direction.x < 0)
 		if is_holding():
 			_spritesheet.play("idle_carry")
 		else:
@@ -96,8 +97,9 @@ func _process_movement(action: Action) -> void:
 	else:
 		if velocity.x < 0:
 			_spritesheet.set_flip_h(true)
-		if velocity.x > 0:
+		elif velocity.x > 0:
 			_spritesheet.set_flip_h(false)
+
 		if is_holding():
 			_spritesheet.play("run_carry")
 		else:
