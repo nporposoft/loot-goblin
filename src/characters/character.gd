@@ -1,16 +1,19 @@
 class_name Character
 extends CharacterBody2D
 
+@export_group("Stats")
 @export var move_speed: float = 200.0
+@export_group("State")
 @export var held_item: ItemData = null
+@export_group("Components")
+@export var reach: Reach = null
+@export var nav_agent: NavigationAgent2D = null
 
 var aim_direction: Vector2 = Vector2.ZERO
 
 var _held_item_sprite: Sprite2D = null
 
 @onready var _spritesheet: AnimatedSprite2D = $Spritesheet
-@onready var reach: Reach = $InteractArea
-@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
 # Action is used by controllers to interact with characters.
 # Specifically -- player controller can pass to the player character,
