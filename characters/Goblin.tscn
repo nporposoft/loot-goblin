@@ -131,9 +131,6 @@ metadata/_custom_type_script = "uid://qsfrpdnrgtng"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ReachArea"]
 shape = SubResource("CircleShape2D_7ybme")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
-
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="VisionArea" type="Area2D" parent="."]
