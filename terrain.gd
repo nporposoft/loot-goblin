@@ -64,18 +64,26 @@ func generate_catacombs() -> void:
 			deadEnd_BlockS_Atlas, deadEnd_BlockN_Atlas]
 		if currentPaths[0] != Path.ANY:
 			if currentPaths[0] == Path.CLOSED: # if no W door in E neighbor
-				validAtlasCoords.erase(deadEnd_S_Atlas)
-				validAtlasCoords.erase(deadEnd_N_Atlas)
-				validAtlasCoords.erase(deadEnd_E_Atlas)
-				validAtlasCoords.erase(deadEnd_S_Atlas)
-				validAtlasCoords.erase(deadEnd_S_Atlas)
-				validAtlasCoords.erase(deadEnd_S_Atlas)
-				validAtlasCoords.erase(deadEnd_S_Atlas)
-				validAtlasCoords.erase(deadEnd_S_Atlas)
-				validAtlasCoords.erase(deadEnd_S_Atlas)
-				validAtlasCoords.erase(deadEnd_S_Atlas)
-				validAtlasCoords.erase(deadEnd_S_Atlas)
-				validAtlasCoords.erase(deadEnd_S_Atlas)
+				validAtlasCoords.erase(crossAtlas)
+				validAtlasCoords.erase(cross_Block_Atlas)
+				validAtlasCoords.erase(deadEnd_W_Atlas)
+				validAtlasCoords.erase(corner_SW_Atlas)
+				validAtlasCoords.erase(corner_NW_Atlas)
+				validAtlasCoords.erase(tee_NSW_Atlas)
+				validAtlasCoords.erase(tee_NWE_Atlas)
+				validAtlasCoords.erase(tee_ESW_Atlas)
+				validAtlasCoords.erase(hall_EW_Atlas)
+			else:								# W door already exists in E neighbor 
+				validAtlasCoords.erase(crossAtlas)
+				validAtlasCoords.erase(cross_Block_Atlas)
+				validAtlasCoords.erase(deadEnd_W_Atlas)
+				validAtlasCoords.erase(corner_SW_Atlas)
+				validAtlasCoords.erase(corner_NW_Atlas)
+				validAtlasCoords.erase(tee_NSW_Atlas)
+				validAtlasCoords.erase(tee_NWE_Atlas)
+				validAtlasCoords.erase(tee_ESW_Atlas)
+				validAtlasCoords.erase(hall_EW_Atlas)
+				
 
 func findPaths(room: Vector2i) -> Array:
 	var outputArray: Array

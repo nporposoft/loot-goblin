@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://d3u6nyytl22wp" path="res://items/Bucket.tscn" id="8_isiae"]
 [ext_resource type="PackedScene" uid="uid://c1ejvgyrv6nmb" path="res://items/BucketUI.tscn" id="9_isiae"]
 
-[sub_resource type="Resource" id="Resource_4qov3"]
+[sub_resource type="Resource" id="Resource_isiae"]
 resource_local_to_scene = true
 script = ExtResource("6_cnrih")
 display_name = "Diamond"
@@ -19,7 +19,7 @@ ui_sprite = ExtResource("7_gsb4j")
 world_scene = ExtResource("4_d8tm3")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_y6jnv"]
+[sub_resource type="Resource" id="Resource_4qov3"]
 resource_local_to_scene = true
 script = ExtResource("6_cnrih")
 display_name = "Bucket"
@@ -45,13 +45,8 @@ texture_filter = 1
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 tile_set = ExtResource("2_isiae")
 script = ExtResource("4_cnrih")
-RAND_FLOOR_FRACTION = null
-ROOM_QTY_MIN = null
-ROOM_QTY_RANGE = null
 WORLD_RADIUS = 20
-ROOM_DIM_MIN = null
 ROOM_DIM_RANGE = 5
-BOX_ROOMS_QTY = null
 
 [node name="PlayerGoblin" parent="World" instance=ExtResource("3_d8tm3")]
 position = Vector2(64, 64)
@@ -59,12 +54,12 @@ position = Vector2(64, 64)
 [node name="Diamond" parent="World" instance=ExtResource("4_d8tm3")]
 position = Vector2(881.0001, 497.00003)
 rotation = 0.41302407
-item_data = SubResource("Resource_4qov3")
+item_data = SubResource("Resource_isiae")
 
 [node name="Bucket" parent="World" instance=ExtResource("8_isiae")]
 position = Vector2(949, 525.99994)
 rotation = -0.38087726
-item_data = SubResource("Resource_y6jnv")
+item_data = SubResource("Resource_4qov3")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
