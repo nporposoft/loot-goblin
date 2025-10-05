@@ -245,11 +245,11 @@ func tunnel(startPoint: Vector2i, destination: Rect2) -> Vector2i:
 	var xDistance: int = get_x_dist(startPoint, destination)
 	var yDistance: int = get_y_dist(startPoint, destination)
 	if abs(xDistance) <= abs(yDistance):
-		primaryDirection = Vector2i(float(xDistance), 0.0).normalized()
-		secondaryDirection = Vector2i(0.0, float(yDistance)).normalized()
+		primaryDirection = Vector2i(float(xDistance), 0.0)
+		secondaryDirection = Vector2i(0.0, float(yDistance))
 	else:
-		primaryDirection = Vector2i(0.0, float(yDistance)).normalized()
-		secondaryDirection = Vector2i(float(xDistance), 0.0).normalized()
+		primaryDirection = Vector2i(0.0, float(yDistance))
+		secondaryDirection = Vector2i(float(xDistance), 0.0)
 	
 	var currentTile: Vector2i = startPoint
 	var nextTile: Vector2i
