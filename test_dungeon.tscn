@@ -88,12 +88,27 @@ ROOM_DIM_RANGE = 5
 position = Vector2(64, 64)
 
 [node name="Diamond" parent="World" instance=ExtResource("4_d8tm3")]
-position = Vector2(881.0001, 497.00003)
+position = Vector2(23.999989, 174)
+rotation = 0.41302407
+item_data = SubResource("Resource_isiae")
+
+[node name="Diamond2" parent="World" instance=ExtResource("4_d8tm3")]
+position = Vector2(98, 157.00002)
+rotation = 0.41302407
+item_data = SubResource("Resource_isiae")
+
+[node name="Diamond3" parent="World" instance=ExtResource("4_d8tm3")]
+position = Vector2(25.999998, 232.00003)
+rotation = 0.41302407
+item_data = SubResource("Resource_isiae")
+
+[node name="Diamond4" parent="World" instance=ExtResource("4_d8tm3")]
+position = Vector2(46, 154.00002)
 rotation = 0.41302407
 item_data = SubResource("Resource_isiae")
 
 [node name="Bucket" parent="World" instance=ExtResource("8_isiae")]
-position = Vector2(949, 525.99994)
+position = Vector2(95.99988, 217.99988)
 rotation = -0.38087726
 item_data = SubResource("Resource_4qov3")
 
