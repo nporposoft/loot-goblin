@@ -1,9 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://i08uo4dcy5dr"]
+[gd_scene load_steps=29 format=3 uid="uid://i08uo4dcy5dr"]
 
 [ext_resource type="Script" uid="uid://t6rnai4uey85" path="res://src/characters/character.gd" id="1_bjga1"]
 [ext_resource type="Texture2D" uid="uid://cc35tdwbren27" path="res://assets/goblinsheet1.png" id="2_bjga1"]
 [ext_resource type="Script" uid="uid://qsfrpdnrgtng" path="res://src/characters/reach.gd" id="3_7ybme"]
 [ext_resource type="Script" uid="uid://bok3t1i4s5p7d" path="res://src/characters/vision.gd" id="4_5xsi5"]
+[ext_resource type="Texture2D" uid="uid://ilgj2qhbrqb4" path="res://assets/white.png" id="5_47a61"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7ybme"]
 atlas = ExtResource("2_bjga1")
@@ -231,3 +232,7 @@ metadata/_custom_type_script = "uid://bok3t1i4s5p7d"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea"]
 shape = SubResource("CircleShape2D_47a61")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+shadow_enabled = true
+texture = ExtResource("5_47a61")

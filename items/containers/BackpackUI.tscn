@@ -1,0 +1,199 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxr24qd1d0l3m"]
+
+[ext_resource type="Script" uid="uid://d4mgxpys1m80c" path="res://src/player/container_ui.gd" id="1_m0sck"]
+[ext_resource type="Texture2D" uid="uid://cdlafytbjx7lg" path="res://assets/bag slot.png" id="2_f5sv3"]
+[ext_resource type="Script" uid="uid://bqtvaidnp5b3q" path="res://src/player/container_ui_slot.gd" id="3_vn2xf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4yo1c"]
+atlas = ExtResource("2_f5sv3")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkvuq"]
+atlas = ExtResource("2_f5sv3")
+region = Rect2(32, 0, 32, 32)
+
+[node name="BackpackUI" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1553.0
+offset_bottom = -790.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m0sck")
+
+[node name="Slot 1" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture_normal = SubResource("AtlasTexture_4yo1c")
+texture_hover = SubResource("AtlasTexture_rkvuq")
+script = ExtResource("3_vn2xf")
+metadata/_custom_type_script = "uid://bqtvaidnp5b3q"
+
+[node name="Item" type="TextureRect" parent="Slot 1"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 24.0
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Slot 2" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_right = 64.0
+offset_bottom = 32.0
+texture_normal = SubResource("AtlasTexture_4yo1c")
+texture_hover = SubResource("AtlasTexture_rkvuq")
+script = ExtResource("3_vn2xf")
+metadata/_custom_type_script = "uid://bqtvaidnp5b3q"
+
+[node name="Item" type="TextureRect" parent="Slot 2"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 24.0
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Slot 3" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 96.0
+offset_bottom = 32.0
+texture_normal = SubResource("AtlasTexture_4yo1c")
+texture_hover = SubResource("AtlasTexture_rkvuq")
+script = ExtResource("3_vn2xf")
+metadata/_custom_type_script = "uid://bqtvaidnp5b3q"
+
+[node name="Item" type="TextureRect" parent="Slot 3"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 24.0
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Slot 4" type="TextureButton" parent="."]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 32.0
+offset_bottom = 64.0
+texture_normal = SubResource("AtlasTexture_4yo1c")
+texture_hover = SubResource("AtlasTexture_rkvuq")
+script = ExtResource("3_vn2xf")
+metadata/_custom_type_script = "uid://bqtvaidnp5b3q"
+
+[node name="Item" type="TextureRect" parent="Slot 4"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 24.0
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Slot 5" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 64.0
+offset_bottom = 64.0
+texture_normal = SubResource("AtlasTexture_4yo1c")
+texture_hover = SubResource("AtlasTexture_rkvuq")
+script = ExtResource("3_vn2xf")
+metadata/_custom_type_script = "uid://bqtvaidnp5b3q"
+
+[node name="Item" type="TextureRect" parent="Slot 5"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 24.0
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Slot 6" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 32.0
+offset_right = 96.0
+offset_bottom = 64.0
+texture_normal = SubResource("AtlasTexture_4yo1c")
+texture_hover = SubResource("AtlasTexture_rkvuq")
+script = ExtResource("3_vn2xf")
+metadata/_custom_type_script = "uid://bqtvaidnp5b3q"
+
+[node name="Item" type="TextureRect" parent="Slot 6"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 24.0
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Slot 7" type="TextureButton" parent="."]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 32.0
+offset_bottom = 96.0
+texture_normal = SubResource("AtlasTexture_4yo1c")
+texture_hover = SubResource("AtlasTexture_rkvuq")
+script = ExtResource("3_vn2xf")
+metadata/_custom_type_script = "uid://bqtvaidnp5b3q"
+
+[node name="Item" type="TextureRect" parent="Slot 7"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 24.0
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Slot 8" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 64.0
+offset_right = 64.0
+offset_bottom = 96.0
+texture_normal = SubResource("AtlasTexture_4yo1c")
+texture_hover = SubResource("AtlasTexture_rkvuq")
+script = ExtResource("3_vn2xf")
+metadata/_custom_type_script = "uid://bqtvaidnp5b3q"
+
+[node name="Item" type="TextureRect" parent="Slot 8"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 24.0
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Slot 9" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 96.0
+offset_bottom = 96.0
+texture_normal = SubResource("AtlasTexture_4yo1c")
+texture_hover = SubResource("AtlasTexture_rkvuq")
+script = ExtResource("3_vn2xf")
+metadata/_custom_type_script = "uid://bqtvaidnp5b3q"
+
+[node name="Item" type="TextureRect" parent="Slot 9"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 24.0
+expand_mode = 3
+stretch_mode = 5

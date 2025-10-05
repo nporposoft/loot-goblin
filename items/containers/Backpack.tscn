@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://cpyhtok5on2tr"]
+
+[ext_resource type="Script" uid="uid://dj61bulh8wvlg" path="res://src/items/item.gd" id="1_aog7k"]
+[ext_resource type="Texture2D" uid="uid://dkrq5othh4xcw" path="res://assets/containers.png" id="2_re6f8"]
+[ext_resource type="Script" uid="uid://4x62ah40g3dn" path="res://src/player/interactable.gd" id="3_7jdh0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_udecq"]
+size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2okec"]
+radius = 26.019224
+
+[node name="Backpack" type="RigidBody2D"]
+collision_layer = 4
+mass = 2.0
+gravity_scale = 0.0
+linear_damp = 2.0
+script = ExtResource("1_aog7k")
+metadata/_custom_type_script = "uid://dj61bulh8wvlg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_udecq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_re6f8")
+region_enabled = true
+region_rect = Rect2(0, 17, 16, 16)
+
+[node name="Interactable" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("3_7jdh0")
+metadata/_custom_type_script = "uid://4x62ah40g3dn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("CircleShape2D_2okec")
+
+[connection signal="on_interact" from="Interactable" to="." method="interact"]

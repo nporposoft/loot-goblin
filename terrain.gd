@@ -14,7 +14,7 @@ var height: int = 32
 @export var ROOM_DIM_MIN: int = 5
 @export var ROOM_DIM_RANGE: int = 10
 @export var BOX_ROOMS_QTY: int = 60
-@export var MAX_CATACOMBS_ROOMS: int = 250
+@export var MAX_CATACOMBS_ROOMS: int = 500
 
 # Small tiles atlas coordinates: 
 const wallAtlas: Vector2i = Vector2i(3, 0)
