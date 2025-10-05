@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://bparvikf7wf4g"]
+
+[ext_resource type="Script" uid="uid://ctqjnf2yg1uvt" path="res://src/items/item_data.gd" id="1_hiv1q"]
+[ext_resource type="PackedScene" uid="uid://7mdy3xr0foye" path="res://items/containers/ChestUI.tscn" id="2_7mxhg"]
+[ext_resource type="Texture2D" uid="uid://dkrq5othh4xcw" path="res://assets/containers.png" id="3_st6a4"]
+[ext_resource type="PackedScene" uid="uid://bk6cmdekysf0j" path="res://items/containers/Chest.tscn" id="4_xgw2a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2qbg"]
+resource_local_to_scene = true
+atlas = ExtResource("3_st6a4")
+region = Rect2(0, 34, 16, 16)
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_hiv1q")
+display_name = "Chest"
+shininess = 50.0
+description = "Look at that chest!"
+ui_sprite = SubResource("AtlasTexture_l2qbg")
+world_scene = ExtResource("4_xgw2a")
+is_container = true
+capacity = 16
+ui_scene = ExtResource("2_7mxhg")
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"

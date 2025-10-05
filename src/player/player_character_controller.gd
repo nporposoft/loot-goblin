@@ -60,10 +60,9 @@ func _process(_delta: float) -> void:
 		if Input.is_action_just_pressed("pickup") and !character.is_holding():
 			action.pickup_item = _get_item_target()
 			_picking_up = true
-		elif Input.is_action_just_pressed("pickup") and character.is_holding() and character.held_item.is_container: #and character.held_item.size < character.held_item.capacity:
-			var items_in_reach = character.reach.get_items()
-			if character.action.pickup_item in items_in_reach:
-				character.held_item.add_item(action.pickup_item.pickup())
+		#elif Input.is_action_just_pressed("pickup") and character.is_holding() and character.held_item.is_container: #and character.held_item.size < character.held_item.capacity:
+			#var items_in_reach = character.reach.get_items().filter(func(item:Item): return not item.item_data.is_container)
+			#if character.action.pickup_item in items_in_reach:
 		elif Input.is_action_just_pressed("pickup") and character.is_holding():
 				_charging_throw = true
 		elif Input.is_action_just_released("pickup") and character.is_holding():

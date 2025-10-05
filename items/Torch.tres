@@ -12,6 +12,7 @@ region = Rect2(0, 0, 16, 16)
 resource_local_to_scene = true
 script = ExtResource("1_7kful")
 display_name = "Torch"
+shininess = 0.1
 description = "So bright"
 ui_sprite = SubResource("AtlasTexture_yh1pe")
 world_scene = ExtResource("3_rait5")
