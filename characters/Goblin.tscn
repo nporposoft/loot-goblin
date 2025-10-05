@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cmubnd2oc4lex"]
+[gd_scene load_steps=30 format=3 uid="uid://cmubnd2oc4lex"]
 
 [ext_resource type="Script" uid="uid://t6rnai4uey85" path="res://src/characters/character.gd" id="1_bjga1"]
 [ext_resource type="Texture2D" uid="uid://cc35tdwbren27" path="res://assets/goblinsheet1.png" id="2_bjga1"]
@@ -193,6 +193,11 @@ radius = 32.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_47a61"]
 radius = 150.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5xsi5"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_47a61"]
+color = Color(0, 1, 0, 1)
+
 [node name="Goblin" type="CharacterBody2D" node_paths=PackedStringArray("reach", "vision", "nav_agent")]
 collision_layer = 2
 collision_mask = 3
@@ -235,3 +240,14 @@ shape = SubResource("CircleShape2D_47a61")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 shadow_enabled = true
 texture = ExtResource("5_47a61")
+
+[node name="ThrowMeter" type="ProgressBar" parent="."]
+offset_left = -8.0
+offset_top = 12.0
+offset_right = 152.0
+offset_bottom = 14.0
+scale = Vector2(0.1, 1)
+theme_override_styles/background = SubResource("StyleBoxEmpty_5xsi5")
+theme_override_styles/fill = SubResource("StyleBoxLine_47a61")
+max_value = 1.0
+show_percentage = false

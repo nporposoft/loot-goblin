@@ -1,15 +1,20 @@
 class_name PlayerCharacterController
 extends Node
 
+@onready var throwBar: ProgressBar
+
 @export var character: Character = null
-@export var max_throw_charge_time: float = 2.0
+@export var max_throw_charge_time: float = 2.5
 # TODO: force multiplier should be based on character stats
-@export var throw_force_multiplier: float = 300.0
+@export var throw_force_multiplier: float = 100
 
 var _throw_charge_time: float = 0.0
 var _interact_target: Interactable = null
 var _picking_up: bool = false
 var _charging_throw: bool = false
+
+func _ready():
+	throwBar = character.find_child("ThrowMeter", true)
 
 func _process(_delta: float) -> void:
 	if not _has_character():
@@ -45,13 +50,22 @@ func _process(_delta: float) -> void:
 
 	# Only process pickup/throw if we're not interacting with something
 	if _interact_target == null:
-		if _charging_throw: _throw_charge_time += _delta
+		if _charging_throw:
+			_throw_charge_time += _delta
+			var charge_percent = _throw_charge_time / max_throw_charge_time
+			throwBar.value = charge_percent
+			# Smoothly blend RGB values from green->yellow->red by throw charge:
+			throwBar.get_theme_stylebox("fill").set_color(Color(clamp(2.0 * charge_percent, 0.0, 1.0), clamp(2.0 - 2.0 * charge_percent, 0.0, 1.0), 0.0))
 
 		if Input.is_action_just_pressed("pickup") and !character.is_holding():
 			action.pickup_item = _get_item_target()
 			_picking_up = true
+		elif Input.is_action_just_pressed("pickup") and character.is_holding() and character.held_item.is_container: #and character.held_item.size < character.held_item.capacity:
+			var items_in_reach = character.reach.get_items()
+			if character.action.pickup_item in items_in_reach:
+				character.held_item.add_item(action.pickup_item.pickup())
 		elif Input.is_action_just_pressed("pickup") and character.is_holding():
-			_charging_throw = true
+				_charging_throw = true
 		elif Input.is_action_just_released("pickup") and character.is_holding():
 			if _picking_up:
 				# don't throw immediately after picking up
@@ -61,7 +75,10 @@ func _process(_delta: float) -> void:
 				_charging_throw = false
 				_throw_charge_time = clamp(_throw_charge_time, 0.0, max_throw_charge_time)
 				action.throw_force = _throw_charge_time**2 * throw_force_multiplier
+				#action.throw_force = ((0.67 * _throw_charge_time**4 - _throw_charge_time**3 + _throw_charge_time) / 2.0) * throw_force_multiplier
 				_throw_charge_time = 0.0
+				throwBar.value = _throw_charge_time
+				
 
 	character.act(action)
 

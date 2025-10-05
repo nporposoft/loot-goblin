@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://ykf6nsdak0fj"]
+[gd_scene load_steps=5 format=3 uid="uid://ykf6nsdak0fj"]
 
 [ext_resource type="Script" uid="uid://dj61bulh8wvlg" path="res://src/items/item.gd" id="1_trtk7"]
-[ext_resource type="Texture2D" uid="uid://h2fitiuextwe" path="res://icon.svg" id="3_wnkql"]
+[ext_resource type="Texture2D" uid="uid://b656w8clmgsyk" path="res://assets/items.png" id="2_2okec"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2okec"]
-radius = 10.049875
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2okec"]
+size = Vector2(16, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnkql"]
+atlas = ExtResource("2_2okec")
+region = Rect2(17, 17, 15, 15)
 
 [node name="Diamond" type="RigidBody2D"]
 collision_layer = 4
@@ -14,8 +18,8 @@ script = ExtResource("1_trtk7")
 metadata/_custom_type_script = "uid://dj61bulh8wvlg"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_2okec")
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_2okec")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.125, 0.125)
-texture = ExtResource("3_wnkql")
+texture = SubResource("AtlasTexture_wnkql")

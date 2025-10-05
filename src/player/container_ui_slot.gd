@@ -44,4 +44,3 @@ func _update_icon() -> void:
 	else:
 		_item_icon.texture = _item.ui_sprite
 		_item_icon.visible = true
-

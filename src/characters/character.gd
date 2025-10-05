@@ -100,7 +100,11 @@ func _process_aiming(action: Action) -> void:
 
 
 func _process_pickup_and_drop(action: Action) -> void:
-	if is_holding() and action.throw:
+	if is_holding() and held_item.is_container and action.pickup_item != null and not action.pickup_item.is_container: # TODO: scoop items into container
+		var items_in_reach = reach.get_items()
+		if action.pickup_item in items_in_reach:
+			held_item.add_item(action.pickup_item.pickup())
+	elif is_holding() and action.throw:
 		toss_item(aim_direction * action.throw_force)
 	elif not is_holding() and action.pickup_item != null:
 		var items_in_reach = reach.get_items()

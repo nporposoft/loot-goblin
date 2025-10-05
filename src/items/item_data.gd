@@ -36,4 +36,3 @@ func remove_item(item: ItemData) -> bool:
 
 	items.erase(item)
 	return true
-
