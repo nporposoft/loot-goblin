@@ -10,6 +10,7 @@ var _held_item_sprite: Sprite2D = null
 
 @onready var _spritesheet: AnimatedSprite2D = $Spritesheet
 @onready var reach: Reach = $InteractArea
+@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
 # Action is used by controllers to interact with characters.
 # Specifically -- player controller can pass to the player character,
@@ -20,6 +21,10 @@ class Action extends Object:
 	var trigger: Trigger = null
 	var pickup_item: Item = null
 	var throw_force: float = 0.0
+
+
+func _ready() -> void:
+	_create_held_item_sprite()
 
 
 func act(action: Action) -> void:

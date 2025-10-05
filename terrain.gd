@@ -1,4 +1,7 @@
+class_name Terrain
 extends TileMapLayer
+
+signal on_finished_generating
 
 var source_id: int = 0
 var width: int = 58
@@ -44,7 +47,7 @@ func _ready():
 	#generate_dungeon_world()	# works worse
 	#generate_box_world()		# kinda works, but still sucks
 	generate_catacombs()
-	_generate_nav_mesh()
+	on_finished_generating.emit()
 
 
 func generate_catacombs() -> void:
@@ -339,17 +342,3 @@ func build_walls() -> void:
 				if E or N or W or S:
 					set_cell(Vector2i(i, j), 0, wallAtlas)
 
-
-func _generate_nav_mesh() -> void:
-	var tile_size := tile_set.tile_size.x
-	var navigation_region := NavigationRegion2D.new()
-	var navigation_polygon := NavigationPolygon.new()
-	navigation_polygon.add_outline(PackedVector2iArray([
-		Vector2i(0, 0),
-		Vector2i(width * tile_size, 0),
-		Vector2i(width * tile_size, height * tile_size),
-		Vector2i(0, height * tile_size)
-	]))
-	navigation_region.navigation_polygon = navigation_polygon
-	navigation_region.bake_navigation_polygon()
-	add_child(navigation_region)

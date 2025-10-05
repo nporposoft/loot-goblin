@@ -25,6 +25,10 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="viewport"
 
+[global_group]
+
+navmesh_sources="Trees containing colliders that should be used for navmesh baking"
+
 [input]
 
 move_left={
@@ -76,8 +80,11 @@ interact={
 [layer_names]
 
 2d_physics/layer_1="World"
+2d_navigation/layer_1="Small"
 2d_physics/layer_2="Characters"
+2d_navigation/layer_2="Medium"
 2d_physics/layer_3="Items"
+2d_navigation/layer_3="Large"
 2d_physics/layer_4="Interactables"
 
 [rendering]
