@@ -79,7 +79,7 @@ func generate_catacombs() -> void:
 				validAtlasCoords.erase(tee_NES_Atlas)
 				validAtlasCoords.erase(tee_ESW_Atlas)
 				validAtlasCoords.erase(hall_EW_Atlas)
-				print_debug("E is closed off:", get_cell_atlas_coords(Vector2i(currentRoom.x+1, currentRoom.y)))
+				#print_debug("E is closed off:", get_cell_atlas_coords(Vector2i(currentRoom.x+1, currentRoom.y)))
 			else:								# W door exists in E neighbor: remove all w/o E doors
 				validAtlasCoords.erase(deadEnd_S_Atlas)
 				validAtlasCoords.erase(deadEnd_W_Atlas)
@@ -89,9 +89,10 @@ func generate_catacombs() -> void:
 				validAtlasCoords.erase(tee_NSW_Atlas)
 				validAtlasCoords.erase(hall_NS_Atlas)
 				validAtlasCoords.erase(hallBlock_NS_Atlas)
-				print_debug("E is open:", get_cell_atlas_coords(Vector2i(currentRoom.x+1, currentRoom.y)))
+				#print_debug("E is open:", get_cell_atlas_coords(Vector2i(currentRoom.x+1, currentRoom.y)))
 		else:
-			print_debug("E is empty:", get_cell_atlas_coords(Vector2i(currentRoom.x+1, currentRoom.y)))
+			pass
+			#print_debug("E is empty:", get_cell_atlas_coords(Vector2i(currentRoom.x+1, currentRoom.y)))
 		# Check Northern neighbor:
 		if currentPaths[1] != Path.ANY:			# Empty: no rooms eliminated
 			if currentPaths[1] == Path.CLOSED:	# No S door in N neighbor: remove all w/ N doors
@@ -104,7 +105,7 @@ func generate_catacombs() -> void:
 				validAtlasCoords.erase(tee_NES_Atlas)
 				validAtlasCoords.erase(hall_NS_Atlas)
 				validAtlasCoords.erase(hallBlock_NS_Atlas)
-				print_debug("N is closed off:", get_cell_atlas_coords(Vector2i(currentRoom.x, currentRoom.y-1)))
+				#print_debug("N is closed off:", get_cell_atlas_coords(Vector2i(currentRoom.x, currentRoom.y-1)))
 			else:								# S door exists in N neighbor: remove all w/o N doors
 				validAtlasCoords.erase(deadEnd_S_Atlas)
 				validAtlasCoords.erase(deadEnd_W_Atlas)
@@ -114,9 +115,10 @@ func generate_catacombs() -> void:
 				validAtlasCoords.erase(tee_ESW_Atlas)
 				validAtlasCoords.erase(hall_EW_Atlas)
 				validAtlasCoords.erase(hallBlock_EW_Atlas)
-				print_debug("N is open:", get_cell_atlas_coords(Vector2i(currentRoom.x, currentRoom.y-1)))
+				#print_debug("N is open:", get_cell_atlas_coords(Vector2i(currentRoom.x, currentRoom.y-1)))
 		else:
-			print_debug("N is empty:", get_cell_atlas_coords(Vector2i(currentRoom.x, currentRoom.y-1)))
+			pass
+			#print_debug("N is empty:", get_cell_atlas_coords(Vector2i(currentRoom.x, currentRoom.y-1)))
 		# Check Western neighbor:
 		if currentPaths[2] != Path.ANY:			# Empty: no rooms eliminated
 			if currentPaths[2] == Path.CLOSED:	# No E door in W neighbor: remove all w/ W doors
@@ -129,7 +131,7 @@ func generate_catacombs() -> void:
 				validAtlasCoords.erase(tee_ESW_Atlas)
 				validAtlasCoords.erase(hall_EW_Atlas)
 				validAtlasCoords.erase(hallBlock_EW_Atlas)
-				print_debug("W is closed off:", get_cell_atlas_coords(Vector2i(currentRoom.x-1, currentRoom.y)))
+				#print_debug("W is closed off:", get_cell_atlas_coords(Vector2i(currentRoom.x-1, currentRoom.y)))
 			else:								# E door exists in W neighbor: remove all w/o W doors
 				validAtlasCoords.erase(deadEnd_S_Atlas)
 				validAtlasCoords.erase(deadEnd_N_Atlas)
@@ -139,9 +141,10 @@ func generate_catacombs() -> void:
 				validAtlasCoords.erase(tee_NES_Atlas)
 				validAtlasCoords.erase(hall_NS_Atlas)
 				validAtlasCoords.erase(hallBlock_NS_Atlas)
-				print_debug("W is open:", get_cell_atlas_coords(Vector2i(currentRoom.x-1, currentRoom.y)))
+				#print_debug("W is open:", get_cell_atlas_coords(Vector2i(currentRoom.x-1, currentRoom.y)))
 		else:
-			print_debug("W is empty:", get_cell_atlas_coords(Vector2i(currentRoom.x-1, currentRoom.y)))
+			pass
+			#print_debug("W is empty:", get_cell_atlas_coords(Vector2i(currentRoom.x-1, currentRoom.y)))
 		# Check Southern neighbor:
 		if currentPaths[3] != Path.ANY:			# Empty: no rooms eliminated
 			if currentPaths[3] == Path.CLOSED:	# No N door in S neighbor: remove all w/ S doors
@@ -154,7 +157,7 @@ func generate_catacombs() -> void:
 				validAtlasCoords.erase(tee_ESW_Atlas)
 				validAtlasCoords.erase(hall_NS_Atlas)
 				validAtlasCoords.erase(hallBlock_NS_Atlas)
-				print_debug("S is closed off:", get_cell_atlas_coords(Vector2i(currentRoom.x, currentRoom.y+1)))
+				#print_debug("S is closed off:", get_cell_atlas_coords(Vector2i(currentRoom.x, currentRoom.y+1)))
 			else:								# N door exists in S neighbor: remove all w/o S doors
 				validAtlasCoords.erase(deadEnd_W_Atlas)
 				validAtlasCoords.erase(deadEnd_N_Atlas)
@@ -164,9 +167,10 @@ func generate_catacombs() -> void:
 				validAtlasCoords.erase(tee_NWE_Atlas)
 				validAtlasCoords.erase(hall_EW_Atlas)
 				validAtlasCoords.erase(hallBlock_EW_Atlas)
-				print_debug("S is open:", get_cell_atlas_coords(Vector2i(currentRoom.x, currentRoom.y+1)))
+				#print_debug("S is open:", get_cell_atlas_coords(Vector2i(currentRoom.x, currentRoom.y+1)))
 		else:
-			print_debug("S is empty:", get_cell_atlas_coords(Vector2i(currentRoom.x, currentRoom.y+1)))
+			pass
+			#print_debug("S is empty:", get_cell_atlas_coords(Vector2i(currentRoom.x, currentRoom.y+1)))
 				
 				# ALL POSSIBLE ROOMS:
 				#validAtlasCoords.erase(crossAtlas)
