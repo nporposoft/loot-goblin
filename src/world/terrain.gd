@@ -34,6 +34,7 @@ var height: int = 32
 #  - loot_shininess_distance_multiplier is multiplied by the distance from the starting room to
 #    determine total shininess value of loot in a room
 @export var loot_shininess_distance_multiplier: float = 0.1
+@export var max_loot_per_room: int = 20
 
 # Small tiles atlas coordinates: 
 const wallAtlas: Vector2i = Vector2i(3, 0)
@@ -264,7 +265,12 @@ func generate_catacombs() -> void:
 			var remaining_room_value: float = total_room_value
 			var exclusive_items_in_room: Array[ItemData] = []
 			var room_has_container: bool = false
+			var remaining_attempts: int = max_loot_per_room
 			while remaining_room_value > 0.0:
+				remaining_attempts -= 1
+				if remaining_attempts <= 0:
+					break
+
 				# decide if next item is a container or treasure
 				var is_container: bool = false
 				# but only allow one container per room
