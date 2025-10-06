@@ -58,7 +58,6 @@ func _process(delta: float):
 			for target in character.sleep_area.get_characters():
 				# HACK: AI wakes up to _any_ goblin, not just the player
 				if target.faction == Character.Faction.GOBLIN:
-					print("%s sees %s in sleep area" % [character.name, target.name])
 					_start_idling()
 			pass
 		State.IDLING:

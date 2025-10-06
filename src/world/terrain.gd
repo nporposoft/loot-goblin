@@ -7,6 +7,7 @@ var source_id: int = 0
 var width: int = 58
 var height: int = 32
 
+@export_group("World generation parameters")
 @export var RAND_FLOOR_FRACTION: float = 2.0/3.0
 @export var ROOM_QTY_MIN: int = 8
 @export var ROOM_QTY_RANGE: int = 10
@@ -16,12 +17,23 @@ var height: int = 32
 @export var BOX_ROOMS_QTY: int = 60
 @export var MAX_CATACOMBS_ROOMS: int = 1000
 
+@export_group("Character spawn parameters")
 @export var adventurer_scenes: Array[PackedScene]
 @export var adventurer_spawn_chance: float = 0.1
 @export var monster_scenes: Array[PackedScene]
 @export var monster_spawn_chance: float = 0.1
-@export var treasure_scenes: Array[PackedScene]
-@export var treasure_spawn_chance: float = 0.7
+
+@export_group("Loot spawn parameters")
+@export var treasures: Array[ItemData] = []
+@export var containers: Array[ItemData] = []
+# these parameters work in tandem to determine what loot is placed in each room:
+#  - loot_spawn_chance is the chance that a room will contain loot
+@export var loot_spawn_chance: float = 0.2
+#  - container_spawn_chance is the chance that a given item will be a container
+@export var container_spawn_chance: float = 0.1
+#  - loot_shininess_distance_multiplier is multiplied by the distance from the starting room to
+#    determine total shininess value of loot in a room
+@export var loot_shininess_distance_multiplier: float = 0.1
 
 # Small tiles atlas coordinates: 
 const wallAtlas: Vector2i = Vector2i(3, 0)
@@ -54,7 +66,9 @@ enum Path {CLOSED, ANY, OPEN}
 @onready var tile_size = tile_set.tile_size.x
 
 func _ready():
-	print("tile_size=", tile_size)
+	treasures.sort_custom(func(a, b): return b.shininess - a.shininess)
+	containers.sort_custom(func(a, b): return b.shininess - a.shininess)
+
 	#generate_random_world()		# works bad
 	#generate_dungeon_world()	# works worse
 	#generate_box_world()		# kinda works, but still sucks
@@ -63,12 +77,16 @@ func _ready():
 
 
 func generate_catacombs() -> void:
+	var starting_room := Vector2i(0, 0)
+	var starting_room_world_position := Vector2(
+		starting_room.x * tile_size + float(tile_size) / 2, 
+		starting_room.y * tile_size + float(tile_size) / 2)
 	var roomsToGen: Array = [Vector2i(1, 1), Vector2i(0, 2), Vector2i(-1, 1)]
 	var validAtlasCoords: Array
 	var roomsLeft:int = MAX_CATACOMBS_ROOMS
 	
 	var debug_DeadEndRerolls: int = 0
-	var debug_HallRerolls: int = 0
+	# var debug_HallRerolls: int = 0
 	var debug_4WayRerolls: int = 0
 	var debug_TeeRerolls: int = 0
 	
@@ -211,7 +229,7 @@ func generate_catacombs() -> void:
 		else:
 			roomChoice = crossAtlas
 		
-		var stackSize: int = roomsToGen.size()
+		# var stackSize: int = roomsToGen.size()
 		
 		# Chance to force re-roll if dead-end room is picked, especially early in dungeon generation
 		#if stackSize <= 15 and [deadEnd_S_Atlas, deadEnd_W_Atlas, deadEnd_N_Atlas, deadEnd_E_Atlas].has(roomChoice) and randf() < 1.0 * float(roomsLeft) / float(MAX_CATACOMBS_ROOMS):
@@ -224,27 +242,42 @@ func generate_catacombs() -> void:
 		
 		set_cell(currentRoom, 1, roomChoice)
 		var room_world_position: Vector2 = currentRoom * tile_size
+		var center_of_room: Vector2 = room_world_position + Vector2(float(tile_size) / 2, float(tile_size) / 2)
 		if randf() < adventurer_spawn_chance:
 			var adventurer_scene: PackedScene = adventurer_scenes[randi() % adventurer_scenes.size()]
 			var adventurer = adventurer_scene.instantiate()
-			adventurer.position = Vector2(room_world_position.x + float(tile_size) / 2, room_world_position.y + float(tile_size) / 2)
+			adventurer.position = center_of_room
 			get_parent().call_deferred("add_child", adventurer)
 			var ai = AggressiveAI.new()
 			adventurer.call_deferred("add_child", ai)
 		elif randf() < monster_spawn_chance:
 			var monster_scene: PackedScene = monster_scenes[randi() % monster_scenes.size()]
 			var monster = monster_scene.instantiate()
-			monster.position = Vector2(room_world_position.x + float(tile_size) / 2, room_world_position.y + float(tile_size) / 2)
+			monster.position = center_of_room
 			get_parent().call_deferred("add_child", monster)
 			var ai = AggressiveAI.new()
 			monster.call_deferred("add_child", ai)
-		# TODO:
-		# elif randf() < treasure_spawn_chance:
-		# 	var treasure_scene: PackedScene = treasure_scenes[randi() % treasure_scenes.size()]
-		# 	var treasure = treasure_scene.instantiate()
-		# 	treasure.position = room_world_position + tile_size / 2
-		# 	get_parent().add_child(treasure)
-		#   # TODO: need to add the resource file for the treasure item
+
+		if randf() < loot_spawn_chance:
+			var distance_from_start: float = (room_world_position - starting_room_world_position).length()
+			var total_room_value: float = distance_from_start * loot_shininess_distance_multiplier
+			var remaining_room_value: float = total_room_value
+			while remaining_room_value > 0.0:
+				var is_container: bool = randf() < container_spawn_chance
+				var list := containers if is_container else treasures
+				var possible_items := list.filter(func(i): return i.shininess <= total_room_value)
+				if possible_items.size() == 0:
+					break
+				var item_data: ItemData = possible_items[randi() % possible_items.size()]
+				var item_scene := item_data.world_scene
+				var item := item_scene.instantiate()
+				item.position = center_of_room + Vector2(
+					(randf() - 0.5) * float(tile_size) * 0.5,
+					(randf() - 0.5) * float(tile_size) * 0.5)
+				item.item_data = item_data
+				get_parent().call_deferred("add_child", item)
+				remaining_room_value -= item_data.shininess
+
 		
 		var roomsToStack: Array = get_rooms_to_stack(currentRoom)
 		for r in roomsToStack:
