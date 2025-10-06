@@ -16,4 +16,5 @@ shininess = 2.0
 description = "So bright"
 ui_sprite = SubResource("AtlasTexture_yh1pe")
 world_scene = ExtResource("3_rait5")
+exclusive_spawn = true
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"

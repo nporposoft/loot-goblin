@@ -18,6 +18,7 @@ shininess = 850.0
 description = "There's a ton of space in here!"
 ui_sprite = SubResource("AtlasTexture_l2qbg")
 world_scene = ExtResource("4_jjfeu")
+exclusive_spawn = true
 is_container = true
 capacity = 25
 ui_scene = ExtResource("2_xhbgq")
