@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://i8urtoqn2bxc"]
+[gd_scene load_steps=22 format=3 uid="uid://bpwkmmuxig2d7"]
 
 [ext_resource type="Script" uid="uid://t6rnai4uey85" path="res://src/characters/character.gd" id="1_seyq0"]
 [ext_resource type="Texture2D" uid="uid://0tlghsq0pfgq" path="res://assets/Slime.png" id="2_seyq0"]
@@ -125,10 +125,10 @@ radius = 150.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_oo2ix"]
 radius = 100.0
 
-[node name="Slime" type="CharacterBody2D"]
+[node name="Slime" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 3
-motion_mode = 1
+mass = 150.0
 script = ExtResource("1_seyq0")
 metadata/_custom_type_script = "uid://t6rnai4uey85"
 
