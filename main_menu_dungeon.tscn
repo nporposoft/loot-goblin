@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://cjufcr2toyf7t"]
+[gd_scene load_steps=29 format=4 uid="uid://cjufcr2toyf7t"]
 
 [ext_resource type="TileSet" uid="uid://bnx45rbbsfeci" path="res://assets/catacombs_tileset.tres" id="1_2hkqh"]
 [ext_resource type="Script" uid="uid://patkktgw1bbd" path="res://src/world/terrain.gd" id="2_iyt7o"]
@@ -6,9 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://bk6cmdekysf0j" path="res://world/items/containers/Chest.tscn" id="4_frud3"]
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="4_onm6l"]
 [ext_resource type="Script" uid="uid://cyjt8uhdv01dp" path="res://src/player/follow_camera.gd" id="5_frud3"]
-[ext_resource type="Resource" uid="uid://bparvikf7wf4g" path="res://world/items/containers/Chest.tres" id="7_bxh6g"]
+[ext_resource type="Script" uid="uid://ctqjnf2yg1uvt" path="res://src/items/item_data.gd" id="7_85iv0"]
 [ext_resource type="Script" uid="uid://3vjtbq2kcl8g" path="res://src/characters/detector.gd" id="8_w5suy"]
+[ext_resource type="Texture2D" uid="uid://b656w8clmgsyk" path="res://assets/items.png" id="8_xdg1s"]
+[ext_resource type="PackedScene" uid="uid://dehu0venmupva" path="res://world/items/Coin.tscn" id="9_45x0d"]
 [ext_resource type="PackedScene" uid="uid://cirkhmxhfm3hn" path="res://world/items/Torch.tscn" id="9_w5suy"]
+[ext_resource type="PackedScene" uid="uid://ykf6nsdak0fj" path="res://world/items/Diamond.tscn" id="10_qkoud"]
+[ext_resource type="PackedScene" uid="uid://7mdy3xr0foye" path="res://world/items/containers/ChestUI.tscn" id="11_q2kkg"]
+[ext_resource type="Texture2D" uid="uid://dkrq5othh4xcw" path="res://assets/containers.png" id="12_qdy20"]
 
 [sub_resource type="SystemFont" id="SystemFont_srrxd"]
 font_names = PackedStringArray("Fantasy")
@@ -19,8 +24,94 @@ allow_system_fallback = false
 font = SubResource("SystemFont_srrxd")
 font_size = 50
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwlm4"]
+atlas = ExtResource("8_xdg1s")
+region = Rect2(34, 17, 16, 16)
+
+[sub_resource type="Resource" id="Resource_85iv0"]
+resource_local_to_scene = true
+script = ExtResource("7_85iv0")
+display_name = "Coin"
+shininess = 10.0
+description = "Lucky!"
+ui_sprite = SubResource("AtlasTexture_nwlm4")
+world_scene = ExtResource("9_45x0d")
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipdfa"]
+atlas = ExtResource("8_xdg1s")
+region = Rect2(17, 17, 15, 15)
+
+[sub_resource type="Resource" id="Resource_xdg1s"]
+resource_local_to_scene = true
+script = ExtResource("7_85iv0")
+display_name = "Diamond"
+shininess = 100.0
+description = "So shiny!"
+ui_sprite = SubResource("AtlasTexture_ipdfa")
+world_scene = ExtResource("10_qkoud")
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45x0d"]
+resource_local_to_scene = true
+atlas = ExtResource("12_qdy20")
+region = Rect2(0, 34, 16, 16)
+
+[sub_resource type="Resource" id="Resource_qkoud"]
+resource_local_to_scene = true
+script = ExtResource("7_85iv0")
+display_name = "Chest"
+shininess = 60.0
+description = "Look at that chest!"
+ui_sprite = SubResource("AtlasTexture_45x0d")
+world_scene = ExtResource("4_frud3")
+is_container = true
+capacity = 16
+ui_scene = ExtResource("11_q2kkg")
+items = Array[ExtResource("7_85iv0")]([SubResource("Resource_85iv0"), SubResource("Resource_85iv0"), SubResource("Resource_xdg1s"), SubResource("Resource_85iv0")])
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_oh7y7"]
 radius = 48.0
+
+[sub_resource type="Resource" id="Resource_q2kkg"]
+resource_local_to_scene = true
+script = ExtResource("7_85iv0")
+display_name = "Coin"
+shininess = 10.0
+description = "Lucky!"
+ui_sprite = SubResource("AtlasTexture_nwlm4")
+world_scene = ExtResource("9_45x0d")
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
+
+[sub_resource type="Resource" id="Resource_qdy20"]
+resource_local_to_scene = true
+script = ExtResource("7_85iv0")
+display_name = "Diamond"
+shininess = 100.0
+description = "So shiny!"
+ui_sprite = SubResource("AtlasTexture_ipdfa")
+world_scene = ExtResource("10_qkoud")
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rd0ix"]
+resource_local_to_scene = true
+atlas = ExtResource("12_qdy20")
+region = Rect2(0, 34, 16, 16)
+
+[sub_resource type="Resource" id="Resource_n1bwx"]
+resource_local_to_scene = true
+script = ExtResource("7_85iv0")
+display_name = "Chest"
+shininess = 60.0
+description = "Look at that chest!"
+ui_sprite = SubResource("AtlasTexture_rd0ix")
+world_scene = ExtResource("4_frud3")
+is_container = true
+capacity = 16
+ui_scene = ExtResource("11_q2kkg")
+items = Array[ExtResource("7_85iv0")]([SubResource("Resource_q2kkg"), SubResource("Resource_q2kkg"), SubResource("Resource_qdy20"), SubResource("Resource_q2kkg")])
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cn1ij"]
 radius = 48.0
@@ -90,7 +181,7 @@ metadata/_custom_type_script = "uid://kygkbg3kqosp"
 
 [node name="TUTORIAL" parent="World" instance=ExtResource("4_frud3")]
 position = Vector2(64, 192)
-item_data = ExtResource("7_bxh6g")
+item_data = SubResource("Resource_qkoud")
 
 [node name="Start_Tutorial" type="Area2D" parent="World/TUTORIAL"]
 script = ExtResource("8_w5suy")
@@ -101,7 +192,7 @@ shape = SubResource("CircleShape2D_oh7y7")
 
 [node name="START GAME" parent="World" instance=ExtResource("4_frud3")]
 position = Vector2(320, 192)
-item_data = ExtResource("7_bxh6g")
+item_data = SubResource("Resource_n1bwx")
 
 [node name="Start_Game" type="Area2D" parent="World/START GAME"]
 script = ExtResource("8_w5suy")

@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://dvwyd2tet2qr5" path="res://world/items/containers/Carton.tscn" id="16_v617q"]
 [ext_resource type="PackedScene" uid="uid://c5xfwj86lxpwo" path="res://world/items/containers/CartonUI.tscn" id="17_kt4iy"]
 [ext_resource type="Script" uid="uid://dmp2din0planr" path="res://src/characters/ai/aggressive_ai.gd" id="19_12nxt"]
-[ext_resource type="Script" uid="uid://dn8dhqtw4npht" path="res://src/world/goal.gd" id="23_syjho"]
+[ext_resource type="Script" path="res://src/world/goal.gd" id="23_syjho"]
 [ext_resource type="Script" uid="uid://3vjtbq2kcl8g" path="res://src/characters/detector.gd" id="24_5fpyr"]
 [ext_resource type="Script" uid="uid://bm3phcc6udi2n" path="res://src/world/tutorial_end_area.gd" id="25_8jt1m"]
 [ext_resource type="Script" uid="uid://d4mgxpys1m80c" path="res://src/player/container_ui.gd" id="25_36hq2"]
@@ -30,7 +30,7 @@
 [ext_resource type="Script" uid="uid://bqtvaidnp5b3q" path="res://src/player/container_ui_slot.gd" id="27_4e5o0"]
 [ext_resource type="Script" uid="uid://dj61bulh8wvlg" path="res://src/items/item.gd" id="28_583nj"]
 [ext_resource type="Script" uid="uid://4x62ah40g3dn" path="res://src/player/interactable.gd" id="29_dqtmb"]
-[ext_resource type="Script" uid="uid://bvkkn10qp03c0" path="res://src/world/score_ui.gd" id="33_syjho"]
+[ext_resource type="Script" path="res://src/world/score_ui.gd" id="33_syjho"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5fpyr"]
 source_geometry_mode = 1
@@ -54,7 +54,7 @@ font_color = Color(0, 0, 0, 1)
 atlas = ExtResource("8_k4d2j")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="Resource" id="Resource_5fpyr"]
+[sub_resource type="Resource" id="Resource_vlco8"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Torch"
@@ -68,7 +68,7 @@ metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 atlas = ExtResource("8_k4d2j")
 region = Rect2(34, 17, 16, 16)
 
-[sub_resource type="Resource" id="Resource_8jt1m"]
+[sub_resource type="Resource" id="Resource_3rvtv"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Coin"
@@ -82,7 +82,7 @@ metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 atlas = ExtResource("8_k4d2j")
 region = Rect2(34, 17, 16, 16)
 
-[sub_resource type="Resource" id="Resource_syjho"]
+[sub_resource type="Resource" id="Resource_uw5y7"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Coin"
@@ -92,18 +92,18 @@ ui_sprite = SubResource("AtlasTexture_12nxt")
 world_scene = ExtResource("8_13fke")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kb84w"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jouus"]
 resource_local_to_scene = true
 atlas = ExtResource("12_0x6fr")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="Resource" id="Resource_36hq2"]
+[sub_resource type="Resource" id="Resource_c4r58"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Bucket"
 shininess = 1.0
 description = "What a nice bucket"
-ui_sprite = SubResource("AtlasTexture_kb84w")
+ui_sprite = SubResource("AtlasTexture_jouus")
 world_scene = ExtResource("9_3h324")
 is_container = true
 capacity = 4
@@ -114,7 +114,7 @@ metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 atlas = ExtResource("8_k4d2j")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="Resource" id="Resource_0igj0"]
+[sub_resource type="Resource" id="Resource_loi7q"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Torch"
@@ -124,7 +124,7 @@ ui_sprite = SubResource("AtlasTexture_fd6tg")
 world_scene = ExtResource("6_blpox")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_4e5o0"]
+[sub_resource type="Resource" id="Resource_rki5h"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Torch"
@@ -134,7 +134,7 @@ ui_sprite = SubResource("AtlasTexture_fd6tg")
 world_scene = ExtResource("6_blpox")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_583nj"]
+[sub_resource type="Resource" id="Resource_f46f4"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Torch"
@@ -144,7 +144,7 @@ ui_sprite = SubResource("AtlasTexture_fd6tg")
 world_scene = ExtResource("6_blpox")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_dqtmb"]
+[sub_resource type="Resource" id="Resource_nik0s"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Torch"
@@ -158,7 +158,7 @@ metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 atlas = ExtResource("8_k4d2j")
 region = Rect2(34, 17, 16, 16)
 
-[sub_resource type="Resource" id="Resource_tykqu"]
+[sub_resource type="Resource" id="Resource_mv2un"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Coin"
@@ -168,7 +168,7 @@ ui_sprite = SubResource("AtlasTexture_dqtmb")
 world_scene = ExtResource("8_13fke")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_cn2lq"]
+[sub_resource type="Resource" id="Resource_y65ns"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Coin"
@@ -178,7 +178,7 @@ ui_sprite = SubResource("AtlasTexture_dqtmb")
 world_scene = ExtResource("8_13fke")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_x57im"]
+[sub_resource type="Resource" id="Resource_37jp0"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Coin"
@@ -188,7 +188,7 @@ ui_sprite = SubResource("AtlasTexture_dqtmb")
 world_scene = ExtResource("8_13fke")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_w2fid"]
+[sub_resource type="Resource" id="Resource_ixn72"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Coin"
@@ -202,7 +202,7 @@ metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 atlas = ExtResource("8_k4d2j")
 region = Rect2(17, 17, 15, 15)
 
-[sub_resource type="Resource" id="Resource_fd6tg"]
+[sub_resource type="Resource" id="Resource_ts4aa"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Diamond"
@@ -212,7 +212,7 @@ ui_sprite = SubResource("AtlasTexture_ipdfa")
 world_scene = ExtResource("14_tq2v2")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_exjd2"]
+[sub_resource type="Resource" id="Resource_qlg1m"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Diamond"
@@ -222,7 +222,7 @@ ui_sprite = SubResource("AtlasTexture_ipdfa")
 world_scene = ExtResource("14_tq2v2")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_ai088"]
+[sub_resource type="Resource" id="Resource_m8wc5"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Diamond"
@@ -232,7 +232,7 @@ ui_sprite = SubResource("AtlasTexture_ipdfa")
 world_scene = ExtResource("14_tq2v2")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_g04al"]
+[sub_resource type="Resource" id="Resource_d7sxp"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Diamond"
@@ -242,18 +242,18 @@ ui_sprite = SubResource("AtlasTexture_ipdfa")
 world_scene = ExtResource("14_tq2v2")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m0wnf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_imfu1"]
 resource_local_to_scene = true
 atlas = ExtResource("12_0x6fr")
 region = Rect2(0, 17, 16, 16)
 
-[sub_resource type="Resource" id="Resource_2x3xs"]
+[sub_resource type="Resource" id="Resource_4gmeu"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Backpack"
 shininess = 20.0
 description = "Trendy backpack!"
-ui_sprite = SubResource("AtlasTexture_m0wnf")
+ui_sprite = SubResource("AtlasTexture_imfu1")
 world_scene = ExtResource("15_fc2j6")
 is_container = true
 capacity = 9
@@ -264,7 +264,7 @@ metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 atlas = ExtResource("12_0x6fr")
 region = Rect2(17, 0, 16, 16)
 
-[sub_resource type="Resource" id="Resource_s7612"]
+[sub_resource type="Resource" id="Resource_dim76"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Carton"
@@ -288,7 +288,7 @@ size = Vector2(256, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g5lct"]
 size = Vector2(384, 320)
 
-[sub_resource type="Resource" id="Resource_6tpep"]
+[sub_resource type="Resource" id="Resource_otryk"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Coin"
@@ -298,7 +298,7 @@ ui_sprite = SubResource("AtlasTexture_dqtmb")
 world_scene = ExtResource("8_13fke")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_w7xxv"]
+[sub_resource type="Resource" id="Resource_fy4or"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Diamond"
@@ -332,7 +332,7 @@ _bundled = {
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_a77f3"]
 load_path = "res://.godot/imported/containers.png-b8c37b60a0b833cc1f8632a5d8db063c.ctex"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5t88y"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_l443q"]
 resource_local_to_scene = true
 atlas = SubResource("CompressedTexture2D_a77f3")
 region = Rect2(0, 34, 16, 16)
@@ -356,25 +356,25 @@ _bundled = {
 "version": 3
 }
 
-[sub_resource type="Resource" id="Resource_a77f3"]
+[sub_resource type="Resource" id="Resource_as51s"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Chest"
 shininess = 60.0
 description = "Look at that chest!"
-ui_sprite = SubResource("AtlasTexture_5t88y")
+ui_sprite = SubResource("AtlasTexture_l443q")
 world_scene = SubResource("PackedScene_y3u8e")
 is_container = true
 capacity = 16
 ui_scene = SubResource("PackedScene_5t88y")
-items = Array[ExtResource("7_l5prm")]([SubResource("Resource_6tpep"), SubResource("Resource_6tpep"), SubResource("Resource_w7xxv"), SubResource("Resource_6tpep")])
+items = Array[ExtResource("7_l5prm")]([SubResource("Resource_otryk"), SubResource("Resource_otryk"), SubResource("Resource_fy4or"), SubResource("Resource_otryk")])
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g5lct"]
 atlas = ExtResource("8_k4d2j")
 region = Rect2(17, 17, 15, 15)
 
-[sub_resource type="Resource" id="Resource_54i3i"]
+[sub_resource type="Resource" id="Resource_8betw"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Diamond"
@@ -384,7 +384,7 @@ ui_sprite = SubResource("AtlasTexture_g5lct")
 world_scene = ExtResource("14_tq2v2")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_y3u8e"]
+[sub_resource type="Resource" id="Resource_tx3e1"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Diamond"
@@ -394,7 +394,7 @@ ui_sprite = SubResource("AtlasTexture_g5lct")
 world_scene = ExtResource("14_tq2v2")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_u7bpg"]
+[sub_resource type="Resource" id="Resource_xmi2t"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Diamond"
@@ -404,7 +404,7 @@ ui_sprite = SubResource("AtlasTexture_g5lct")
 world_scene = ExtResource("14_tq2v2")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_ln6th"]
+[sub_resource type="Resource" id="Resource_efjvc"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Diamond"
@@ -414,7 +414,7 @@ ui_sprite = SubResource("AtlasTexture_g5lct")
 world_scene = ExtResource("14_tq2v2")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_m3wjy"]
+[sub_resource type="Resource" id="Resource_3w5eq"]
 resource_local_to_scene = true
 script = ExtResource("7_l5prm")
 display_name = "Diamond"
@@ -842,75 +842,75 @@ metadata/_custom_type_script = "uid://dmp2din0planr"
 
 [node name="Torch" parent="World" instance=ExtResource("6_blpox")]
 position = Vector2(232, 616)
-item_data = SubResource("Resource_5fpyr")
+item_data = SubResource("Resource_vlco8")
 
 [node name="Coin" parent="World" instance=ExtResource("8_13fke")]
 position = Vector2(576, 320)
-item_data = SubResource("Resource_8jt1m")
+item_data = SubResource("Resource_3rvtv")
 
 [node name="Coin1" parent="World" instance=ExtResource("8_13fke")]
 position = Vector2(832, 464)
-item_data = SubResource("Resource_syjho")
+item_data = SubResource("Resource_uw5y7")
 
 [node name="Bucket" parent="World" instance=ExtResource("9_3h324")]
 position = Vector2(704, 332)
-item_data = SubResource("Resource_36hq2")
+item_data = SubResource("Resource_c4r58")
 
 [node name="Torch1" parent="World" instance=ExtResource("6_blpox")]
 position = Vector2(1088, 400)
-item_data = SubResource("Resource_0igj0")
+item_data = SubResource("Resource_loi7q")
 
 [node name="Torch2" parent="World" instance=ExtResource("6_blpox")]
 position = Vector2(664, 960)
-item_data = SubResource("Resource_4e5o0")
+item_data = SubResource("Resource_rki5h")
 
 [node name="Torch3" parent="World" instance=ExtResource("6_blpox")]
 position = Vector2(1512, 960)
-item_data = SubResource("Resource_583nj")
+item_data = SubResource("Resource_f46f4")
 
 [node name="Torch4" parent="World" instance=ExtResource("6_blpox")]
 position = Vector2(486, 1438)
-item_data = SubResource("Resource_dqtmb")
+item_data = SubResource("Resource_nik0s")
 
 [node name="Coin2" parent="World" instance=ExtResource("8_13fke")]
 position = Vector2(832, 832)
-item_data = SubResource("Resource_tykqu")
+item_data = SubResource("Resource_mv2un")
 
 [node name="Coin3" parent="World" instance=ExtResource("8_13fke")]
 position = Vector2(960, 1088)
-item_data = SubResource("Resource_cn2lq")
+item_data = SubResource("Resource_y65ns")
 
 [node name="Coin4" parent="World" instance=ExtResource("8_13fke")]
 position = Vector2(960, 832)
-item_data = SubResource("Resource_x57im")
+item_data = SubResource("Resource_37jp0")
 
 [node name="Coin5" parent="World" instance=ExtResource("8_13fke")]
 position = Vector2(1472, 960)
-item_data = SubResource("Resource_w2fid")
+item_data = SubResource("Resource_ixn72")
 
 [node name="Diamond" parent="World" instance=ExtResource("14_tq2v2")]
 position = Vector2(1216, 832)
-item_data = SubResource("Resource_fd6tg")
+item_data = SubResource("Resource_ts4aa")
 
 [node name="Diamond2" parent="World" instance=ExtResource("14_tq2v2")]
 position = Vector2(1216, 1088)
-item_data = SubResource("Resource_exjd2")
+item_data = SubResource("Resource_qlg1m")
 
 [node name="Diamond3" parent="World" instance=ExtResource("14_tq2v2")]
 position = Vector2(832, 1088)
-item_data = SubResource("Resource_ai088")
+item_data = SubResource("Resource_m8wc5")
 
 [node name="Diamond4" parent="World" instance=ExtResource("14_tq2v2")]
 position = Vector2(1345, 1088)
-item_data = SubResource("Resource_g04al")
+item_data = SubResource("Resource_d7sxp")
 
 [node name="Backpack" parent="World" instance=ExtResource("15_fc2j6")]
 position = Vector2(1344, 832)
-item_data = SubResource("Resource_2x3xs")
+item_data = SubResource("Resource_4gmeu")
 
 [node name="Carton" parent="World" instance=ExtResource("16_v617q")]
 position = Vector2(704, 960)
-item_data = SubResource("Resource_s7612")
+item_data = SubResource("Resource_dim76")
 
 [node name="Slime" parent="World" instance=ExtResource("12_r2ti0")]
 position = Vector2(2048, 960)
@@ -988,27 +988,27 @@ shape = SubResource("RectangleShape2D_g5lct")
 
 [node name="Chest2" parent="World" instance=ExtResource("13_0x6fr")]
 position = Vector2(-702, 962)
-item_data = SubResource("Resource_a77f3")
+item_data = SubResource("Resource_as51s")
 
 [node name="Diamond5" parent="World" instance=ExtResource("14_tq2v2")]
 position = Vector2(-463, 949)
-item_data = SubResource("Resource_54i3i")
+item_data = SubResource("Resource_8betw")
 
 [node name="Diamond6" parent="World" instance=ExtResource("14_tq2v2")]
 position = Vector2(-456, 971)
-item_data = SubResource("Resource_y3u8e")
+item_data = SubResource("Resource_tx3e1")
 
 [node name="Diamond7" parent="World" instance=ExtResource("14_tq2v2")]
 position = Vector2(-443, 955)
-item_data = SubResource("Resource_u7bpg")
+item_data = SubResource("Resource_xmi2t")
 
 [node name="Coin6" parent="World" instance=ExtResource("8_13fke")]
 position = Vector2(-475, 987)
-item_data = SubResource("Resource_ln6th")
+item_data = SubResource("Resource_efjvc")
 
 [node name="Coin7" parent="World" instance=ExtResource("8_13fke")]
 position = Vector2(-429, 971)
-item_data = SubResource("Resource_m3wjy")
+item_data = SubResource("Resource_3w5eq")
 
 [node name="UI" type="CanvasLayer" parent="."]
 scale = Vector2(2, 2)
