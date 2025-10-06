@@ -1,0 +1,120 @@
+[gd_scene load_steps=14 format=4 uid="uid://cjufcr2toyf7t"]
+
+[ext_resource type="TileSet" uid="uid://bnx45rbbsfeci" path="res://assets/catacombs_tileset.tres" id="1_2hkqh"]
+[ext_resource type="Script" uid="uid://patkktgw1bbd" path="res://src/world/terrain.gd" id="2_iyt7o"]
+[ext_resource type="PackedScene" uid="uid://cmubnd2oc4lex" path="res://world/characters/Goblin.tscn" id="3_7eh4v"]
+[ext_resource type="PackedScene" uid="uid://bk6cmdekysf0j" path="res://world/items/containers/Chest.tscn" id="4_frud3"]
+[ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="4_onm6l"]
+[ext_resource type="Script" uid="uid://cyjt8uhdv01dp" path="res://src/player/follow_camera.gd" id="5_frud3"]
+[ext_resource type="Resource" uid="uid://bparvikf7wf4g" path="res://world/items/containers/Chest.tres" id="7_bxh6g"]
+[ext_resource type="Script" uid="uid://3vjtbq2kcl8g" path="res://src/characters/detector.gd" id="8_w5suy"]
+[ext_resource type="PackedScene" uid="uid://cirkhmxhfm3hn" path="res://world/items/Torch.tscn" id="9_w5suy"]
+
+[sub_resource type="SystemFont" id="SystemFont_srrxd"]
+font_names = PackedStringArray("Fantasy")
+font_weight = 999
+allow_system_fallback = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_x2hlg"]
+font = SubResource("SystemFont_srrxd")
+font_size = 50
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oh7y7"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cn1ij"]
+radius = 48.0
+
+[node name="MainMenuDungeon" type="Node"]
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Terrain" type="TileMapLayer" parent="World"]
+tile_map_data = PackedByteArray("AAD//wAAAQAAAAMAAAAAAAAAAQAAAAMAAAABAAAAAQAAAAMAAAACAAAAAQAAAAMAAAADAAAAAQAAAAMAAAAEAAAAAQAAAAMAAAAFAAAAAQAAAAMAAAAGAAAAAQAAAAMAAAAGAAIAAQAAAAMAAAAFAAIAAQAAAAMAAAAEAAIAAQAAAAMAAAADAAIAAQAAAAMAAAACAAIAAQAAAAMAAAABAAIAAQAAAAMAAAAAAAIAAQAAAAMAAAD//wIAAQAAAAMAAAD+/wIAAQAAAAMAAAD9/wIAAQAAAAMAAAD8/wIAAQAAAAMAAAD8//7/AQAAAAMAAAD9//7/AQAAAAMAAAD+//7/AQAAAAMAAAD///7/AQAAAAMAAAAAAP7/AQAAAAMAAAABAP7/AQAAAAMAAAACAP7/AQAAAAMAAAADAP7/AQAAAAMAAAADAP//AQAAAAMAAAAEAP//AQAAAAMAAAAFAP//AQAAAAMAAAAGAP//AQAAAAMAAAAGAP7/AQAAAAMAAAAFAP7/AQAAAAMAAAAEAP7/AQAAAAMAAAD8////AQAAAAMAAAD8/wAAAQAAAAMAAAD8/wEAAQAAAAMAAAD9/wEAAQAAAAMAAAD//wEAAQAAAAMAAAAAAAEAAQAGAAMAAAABAAEAAQAFAAMAAAACAP//AQAAAAMAAAABAP//AQAAAAMAAAAAAP//AQAAAAMAAAD/////AQAAAAMAAAD+////AQAAAAMAAAD9////AQAAAAMAAAD9/wAAAQAAAAMAAAD+/wEAAQAAAAMAAAD+/wAAAQAAAAMAAAACAAEAAQAGAAEAAAADAAEAAQAAAAMAAAAEAAEAAQAAAAMAAAAFAAEAAQAAAAMAAAAGAAEAAQAAAAMAAAD8//3/AQAAAAMAAAD9//3/AQAAAAMAAAD+//3/AQAAAAMAAAD///3/AQAAAAMAAAAAAP3/AQAAAAMAAAABAP3/AQAAAAMAAAACAP3/AQAAAAMAAAADAP3/AQAAAAMAAAAEAP3/AQAAAAMAAAAFAP3/AQAAAAMAAAAGAP3/AQAAAAMAAAD9/wMAAQAAAAMAAAD+/wMAAQAAAAMAAAD//wMAAQAAAAMAAAAAAAMAAQAAAAMAAAABAAMAAQAAAAMAAAACAAMAAQAAAAMAAAADAAMAAQAAAAMAAAAEAAMAAQAAAAMAAAAFAAMAAQAAAAMAAAD9/wQAAQAAAAMAAAD+/wQAAQAAAAMAAAD//wQAAQAAAAMAAAAAAAQAAQAAAAMAAAABAAQAAQAAAAMAAAACAAQAAQAAAAMAAAADAAQAAQAAAAMAAAAEAAQAAQAAAAMAAAAFAAQAAQAAAAMAAAD9/wUAAQAAAAMAAAD+/wUAAQAAAAMAAAD//wUAAQAAAAMAAAAAAAUAAQAAAAMAAAABAAUAAQAAAAMAAAACAAUAAQAAAAMAAAADAAUAAQAAAAMAAAAEAAUAAQAAAAMAAAAFAAUAAQAAAAMAAAD8/wMAAQAAAAMAAAD8/wQAAQAAAAMAAAD8/wUAAQAAAAMAAAAGAAMAAQAAAAMAAAAGAAQAAQAAAAMAAAAGAAUAAQAAAAMAAAA=")
+tile_set = ExtResource("1_2hkqh")
+script = ExtResource("2_iyt7o")
+metadata/_custom_type_script = "uid://patkktgw1bbd"
+
+[node name="Control" type="Control" parent="World"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 64.0
+offset_right = 320.0
+offset_bottom = 128.0
+
+[node name="Title" type="Label" parent="World/Control"]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 128.0
+text = "LOOT GOBLIN"
+label_settings = SubResource("LabelSettings_x2hlg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tutorial Start Label" type="Label" parent="World/Control"]
+layout_mode = 0
+offset_left = -64.0
+offset_top = 128.0
+offset_right = 64.0
+offset_bottom = 256.0
+text = "TUTORIAL
+"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Game Start Label" type="Label" parent="World/Control"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 128.0
+offset_right = 320.0
+offset_bottom = 256.0
+text = "START GAME
+"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="FollowCamera" type="Camera2D" parent="World" node_paths=PackedStringArray("target")]
+offset = Vector2(0, -64)
+zoom = Vector2(4, 4)
+script = ExtResource("5_frud3")
+target = NodePath("../Goblin")
+metadata/_custom_type_script = "uid://cyjt8uhdv01dp"
+
+[node name="Goblin" parent="World" instance=ExtResource("3_7eh4v")]
+position = Vector2(187, 193)
+
+[node name="PlayerCharacterController" type="Node" parent="World/Goblin" node_paths=PackedStringArray("character")]
+script = ExtResource("4_onm6l")
+character = NodePath("..")
+metadata/_custom_type_script = "uid://kygkbg3kqosp"
+
+[node name="TUTORIAL" parent="World" instance=ExtResource("4_frud3")]
+position = Vector2(64, 192)
+item_data = ExtResource("7_bxh6g")
+
+[node name="Start_Tutorial" type="Area2D" parent="World/TUTORIAL"]
+script = ExtResource("8_w5suy")
+metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/TUTORIAL/Start_Tutorial"]
+shape = SubResource("CircleShape2D_oh7y7")
+
+[node name="START GAME" parent="World" instance=ExtResource("4_frud3")]
+position = Vector2(320, 192)
+item_data = ExtResource("7_bxh6g")
+
+[node name="Start_Game" type="Area2D" parent="World/START GAME"]
+script = ExtResource("8_w5suy")
+metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/START GAME/Start_Game"]
+shape = SubResource("CircleShape2D_cn1ij")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="World"]
+color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+
+[node name="Torch" parent="World" instance=ExtResource("9_w5suy")]
+position = Vector2(24, 160)
+
+[node name="Torch2" parent="World" instance=ExtResource("9_w5suy")]
+position = Vector2(360, 160)

@@ -156,9 +156,14 @@ func die(force_direction: Vector2 = Vector2.ZERO) -> void:
 
 	# ragdoll sort of
 	lock_rotation = false
+	var spin_timer: Timer = _create_timer()
+	spin_timer.connect("timeout",_spin)
+	spin_timer.start(0.1)
+	
+	#self_modulate = Color(0.8, 0, 0) # TODO: modulate character's sprite
 	# TODO: this doesn't do anything
 	# I think the lock_rotation change doesn't apply until the next physics frame
-	apply_torque_impulse(randf_range(-5000.0, 5000.0))
+	#apply_torque_impulse(randf_range(-5000.0, 5000.0))
 	
 	var despawn_timer: Timer = _create_timer()
 	despawn_timer.connect("timeout",_destroy)
@@ -273,6 +278,13 @@ func _remove_held_item_sprite() -> void:
 
 func _get_faction() -> Faction:
 	return faction
+
+
+func _spin() -> void:
+	var deathForce: float = 0.0
+	if randi() % 2 == 0: deathForce = -5000.0
+	else: deathForce = 5000.0
+	apply_torque_impulse(deathForce)
 
 
 func _destroy() -> void:
