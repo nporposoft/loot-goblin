@@ -139,9 +139,12 @@ color = Color(0, 0.4862745, 0, 1)
 collision_layer = 2
 collision_mask = 3
 mass = 150.0
+linear_damp = 15.0
 script = ExtResource("1_seyq0")
 faction = 1
 enemies = Array[int]([2])
+move_speed = 150000.0
+attack_impulse_strength = 400000.0
 metadata/_custom_type_script = "uid://t6rnai4uey85"
 
 [node name="Spritesheet" type="AnimatedSprite2D" parent="."]

@@ -12,7 +12,10 @@ func _ready():
 
 
 func _handle_state_change(new_state: AggressiveAI.State) -> void:
-	# TODO: handle death
+	if ai_controller.character.is_dead:
+		visible = false
+		return
+
 	match new_state:
 		AggressiveAI.State.SUSPICIOUS:
 			text = "?"
