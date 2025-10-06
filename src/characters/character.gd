@@ -130,10 +130,10 @@ func _process_aiming(action: Action) -> void:
 
 
 func _process_pickup_and_drop(action: Action) -> void:
-	#if is_holding() and held_item.is_container and action.pickup_item != null and not action.pickup_item.is_container: # TODO: scoop items into container
-		#var items_in_reach = reach.get_items()
-		#if action.pickup_item in items_in_reach:
-			#held_item.add_item(action.pickup_item.pickup())
+	if is_holding() and held_item.is_container and action.pickup_item != null and not action.pickup_item.pickup().is_container: # TODO: scoop items into container
+		var items_in_reach = reach.get_items()
+		if action.pickup_item in items_in_reach:
+			held_item.add_item(action.pickup_item.pickup())
 	if is_holding() and action.throw:
 		toss_item(_aim_direction * action.throw_force)
 	elif not is_holding() and action.pickup_item != null:
@@ -189,6 +189,9 @@ func _create_held_item_sprite() -> void:
 	_held_item_sprite.texture = held_item.ui_sprite
 	_held_item_sprite.position = Vector2(0, -16)
 	add_child(_held_item_sprite)
+	
+	if held_item.world_scene.get_node("ItemLightSource"):
+		pass
 
 
 func _remove_held_item_sprite() -> void:
