@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://bhfgsuj1i8rld"]
 
-[ext_resource type="Script" uid="uid://ctqjnf2yg1uvt" path="res://src/items/item_data.gd" id="1_7kful"]
+[ext_resource type="Script" uid="uid://c0c8qdg6074bn" path="res://src/items/item_data.gd" id="1_7kful"]
 [ext_resource type="Texture2D" uid="uid://b656w8clmgsyk" path="res://assets/items.png" id="2_rait5"]
 [ext_resource type="PackedScene" uid="uid://cirkhmxhfm3hn" path="res://world/items/Torch.tscn" id="3_rait5"]
 

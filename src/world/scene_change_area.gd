@@ -1,8 +1,10 @@
 class_name SceneChangeArea
 extends Detector
 
-@export var next_scene: PackedScene
+@export_file var next_scene_path: String
 @export var transition_time: float = 0.0
+
+@onready var next_scene: PackedScene = load(next_scene_path)
 
 var transition_started: bool = false
 

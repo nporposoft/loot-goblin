@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="1_y6nrp"]
 [ext_resource type="Script" uid="uid://cyjt8uhdv01dp" path="res://src/player/follow_camera.gd" id="2_j2kls"]
-[ext_resource type="Script" uid="uid://5i4gw4mikjjm" path="res://src/world/navmesh.gd" id="3_r7b6d"]
+[ext_resource type="Script" uid="uid://chg7uwn1y5tmi" path="res://src/world/navmesh.gd" id="3_r7b6d"]
 [ext_resource type="TileSet" uid="uid://bnx45rbbsfeci" path="res://assets/catacombs_tileset.tres" id="4_7odh5"]
-[ext_resource type="Script" uid="uid://patkktgw1bbd" path="res://src/world/terrain.gd" id="5_57sj4"]
+[ext_resource type="Script" uid="uid://ps0hext23k73" path="res://src/world/terrain.gd" id="5_57sj4"]
 [ext_resource type="PackedScene" uid="uid://ch0vybwm8dojh" path="res://world/characters/Knight.tscn" id="6_us2dd"]
 [ext_resource type="PackedScene" uid="uid://bpwkmmuxig2d7" path="res://world/characters/Slime.tscn" id="7_3m7fy"]
-[ext_resource type="Script" uid="uid://ctqjnf2yg1uvt" path="res://src/items/item_data.gd" id="8_3josa"]
+[ext_resource type="Script" uid="uid://c0c8qdg6074bn" path="res://src/items/item_data.gd" id="8_3josa"]
 [ext_resource type="Resource" uid="uid://be2tyr1vni4fl" path="res://world/items/Coin.tres" id="9_qptnr"]
 [ext_resource type="Resource" uid="uid://bhfxa754v7msh" path="res://world/items/Diamond.tres" id="10_1p5v2"]
 [ext_resource type="Resource" uid="uid://bhfgsuj1i8rld" path="res://world/items/Torch.tres" id="11_mimim"]
@@ -24,7 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://cmubnd2oc4lex" path="res://world/characters/Goblin.tscn" id="23_86tn1"]
 [ext_resource type="PackedScene" uid="uid://beq3cau0h8ycr" path="res://world/player/health_ui.tscn" id="24_ssx3i"]
 [ext_resource type="Script" uid="uid://c85wlydpy0us0" path="res://src/player/health_ui.gd" id="25_gh7h4"]
-[ext_resource type="Script" path="res://src/world/score_ui.gd" id="25_y6nrp"]
+[ext_resource type="Script" uid="uid://bwgshxllt467x" path="res://src/world/score_ui.gd" id="25_y6nrp"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_y6jnv"]
 source_geometry_mode = 1
@@ -35,7 +35,7 @@ agent_radius = 22.0
 atlas = ExtResource("19_66wol")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="Resource" id="Resource_j2kls"]
+[sub_resource type="Resource" id="Resource_y6nrp"]
 resource_local_to_scene = true
 script = ExtResource("8_3josa")
 display_name = "Torch"
@@ -50,6 +50,7 @@ size = Vector2(129, 126)
 [sub_resource type="SystemFont" id="SystemFont_5fpyr"]
 font_names = PackedStringArray("Sans-Serif")
 font_weight = 600
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_f1q7j"]
 font = SubResource("SystemFont_5fpyr")
@@ -77,7 +78,6 @@ navigation_polygon = SubResource("NavigationPolygon_y6jnv")
 navigation_layers = 2
 script = ExtResource("3_r7b6d")
 map = NodePath("../Terrain")
-metadata/_custom_type_script = "uid://5i4gw4mikjjm"
 
 [node name="Terrain" type="TileMapLayer" parent="World" groups=["navmesh_sources"]]
 texture_filter = 1
@@ -99,7 +99,7 @@ color = Color(0.0672, 0.06826667, 0.08, 1)
 
 [node name="Torch" parent="World" instance=ExtResource("18_0vrax")]
 position = Vector2(34, 102)
-item_data = SubResource("Resource_j2kls")
+item_data = SubResource("Resource_y6nrp")
 
 [node name="SafeSpace" type="Area2D" parent="World"]
 collision_layer = 0
