@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://bpwkmmuxig2d7"]
+[gd_scene load_steps=24 format=3 uid="uid://bpwkmmuxig2d7"]
 
 [ext_resource type="Script" uid="uid://t6rnai4uey85" path="res://src/characters/character.gd" id="1_seyq0"]
 [ext_resource type="Texture2D" uid="uid://0tlghsq0pfgq" path="res://assets/Slime.png" id="2_seyq0"]
 [ext_resource type="Script" uid="uid://3vjtbq2kcl8g" path="res://src/characters/detector.gd" id="3_k655p"]
+[ext_resource type="PackedScene" uid="uid://bhwyakrca4pgo" path="res://characters/blood_particles.tscn" id="4_wflep"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0brmi"]
 atlas = ExtResource("2_seyq0")
@@ -125,6 +126,15 @@ radius = 150.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_oo2ix"]
 radius = 100.0
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wflep"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 15.857
+initial_velocity_min = 19.779999
+initial_velocity_max = 98.909996
+scale_max = 2.0
+color = Color(0, 0.4862745, 0, 1)
+
 [node name="Slime" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 3
@@ -177,3 +187,6 @@ metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NearVisionArea"]
 visible = false
 shape = SubResource("CircleShape2D_oo2ix")
+
+[node name="BloodParticles" parent="." instance=ExtResource("4_wflep")]
+process_material = SubResource("ParticleProcessMaterial_wflep")

@@ -31,6 +31,7 @@ var _last_action: Action = null
 @onready var reach := $ReachArea
 @onready var far_vision := $FarVisionArea
 @onready var near_vision := $NearVisionArea
+@onready var blood_particles := $BloodParticles
 @onready var attack_timer: Timer = _create_timer()
 @onready var current_health: int = max_health
 
@@ -104,7 +105,12 @@ func remove_item() -> ItemData:
 
 func take_damage(amount: int, force: Vector2 = Vector2.ZERO) -> void:
 	current_health -= amount
+
 	print("Ouch! %s took %d damage, current health: %d" % [name, amount, current_health])
+
+	blood_particles.emitting = true
+	blood_particles.rotation = force.angle()
+
 	if current_health <= 0:
 		die(force)
 	if not force.is_zero_approx():
@@ -122,8 +128,10 @@ func die(force: Vector2 = Vector2.ZERO) -> void:
 
 	# ragdoll sort of
 	lock_rotation = false
-	apply_torque_impulse(randf_range(-5000.0, 5000.0))
 	apply_central_impulse(force * 10)
+	# TODO: this doesn't do anything
+	# I think the lock_rotation change doesn't apply until the next physics frame
+	apply_torque_impulse(randf_range(-5000.0, 5000.0))
 
 
 func toss_item(throw_vector: Vector2) -> void:
@@ -194,6 +202,8 @@ func _handle_collision(body: Node) -> void:
 			var force = (global_position - other.global_position).normalized() * other.linear_velocity.length()
 			# defer this call so it doesn't happen during collision processing
 			call_deferred("take_damage", other.attack_damage, force)
+	elif is_dead:
+		blood_particles.emitting = true
 
 
 func _can_move() -> bool:
