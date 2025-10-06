@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://ch0vybwm8dojh"]
+[gd_scene load_steps=22 format=3 uid="uid://ch0vybwm8dojh"]
 
 [ext_resource type="Script" uid="uid://t6rnai4uey85" path="res://src/characters/character.gd" id="1_adxal"]
 [ext_resource type="Texture2D" uid="uid://w7kqmfmqji3i" path="res://assets/Knight.png" id="2_oo2ix"]
 [ext_resource type="Script" uid="uid://bwtojbye1rncn" path="res://src/characters/character_sprite.gd" id="3_adxal"]
 [ext_resource type="Script" uid="uid://3vjtbq2kcl8g" path="res://src/characters/detector.gd" id="3_imyk4"]
+[ext_resource type="PackedScene" uid="uid://bhwyakrca4pgo" path="res://characters/blood_particles.tscn" id="5_vp52c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ab3xg"]
 atlas = ExtResource("2_oo2ix")
@@ -132,6 +133,8 @@ contact_monitor = true
 max_contacts_reported = 10
 linear_damp = 15.0
 script = ExtResource("1_adxal")
+faction = 2
+enemies = Array[int]([1, 0])
 move_speed = 150000.0
 attack_range = 80.0
 attack_impulse_strength = 400000.0
@@ -179,3 +182,5 @@ metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
 shape = SubResource("CircleShape2D_oo2ix")
 
 [node name="HeldLightSource" type="PointLight2D" parent="."]
+
+[node name="BloodParticles" parent="." instance=ExtResource("5_vp52c")]

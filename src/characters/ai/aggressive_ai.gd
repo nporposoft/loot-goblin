@@ -64,7 +64,7 @@ func _process(delta: float):
 				if _state_timer.is_stopped(): _start_wandering()
 		State.WANDERING:
 			var target: Character = _pick_target()
-			if target != null and _want_to_attack(target):
+			if target != null:
 				_start_suspicious(target)
 			else:
 				if character.nav_agent.is_navigation_finished():
@@ -87,9 +87,13 @@ func _process(delta: float):
 					pass
 			pass
 		State.ATTACKING:
+			var target: Character = _pick_target()
+			if target != null:
+				current_target = target
+
 			if current_target.is_dead:
 				_start_idling()
-			if !_can_see(current_target):
+			elif !_can_see(current_target):
 				_start_searching()
 			else:
 				if _in_attack_range(current_target):
@@ -101,7 +105,7 @@ func _process(delta: float):
 					action.aim_direction = action.move_input
 		State.LOOKING:
 			var target: Character = _pick_target()
-			if target != null and _want_to_attack(target):
+			if target != null:
 				_start_attacking(target)
 			else:
 				if _search_timer.is_stopped():
@@ -113,7 +117,7 @@ func _process(delta: float):
 					pass
 		State.SEARCHING:
 			var target: Character = _pick_target()
-			if target != null and _want_to_attack(target):
+			if target != null:
 				_start_attacking(target)
 			else:
 				if _search_timer.is_stopped():
@@ -182,23 +186,30 @@ func _start_searching() -> void:
 
 
 func _pick_target() -> Character:
-	var nearest_target: Character = null
-	var nearest_distance: float = INF
-
-	for target in visible_characters:
-		if !_want_to_attack(target):
-			continue
-
-		var distance: float = character.global_position.distance_to(target.global_position)
-		if distance < nearest_distance:
-			nearest_distance = distance
-			nearest_target = target
-
-	return nearest_target
+	return _most_hated_target(visible_characters)
 
 
 func _want_to_attack(_target: Character) -> bool:
-	return _target and !_target.is_dead
+	return (
+		_target and 
+		!_target.is_dead and 
+		character.enemies.has(_target.faction)
+	)
+
+
+func _most_hated_target(targets: Array[Character]) -> Character:
+	var most_hated: Character = null
+	# lowest hate value is most hated, so start arbitrarily high
+	var most_hate: int = 1000
+	for target in targets:
+		if !_want_to_attack(target):
+			continue
+
+		var hate: int = character.enemies.find(target.faction)
+		if hate < most_hate:
+			most_hate = hate
+			most_hated = target
+	return most_hated
 
 
 func _in_attack_range(target: Character) -> bool:

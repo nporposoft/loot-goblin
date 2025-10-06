@@ -5,10 +5,18 @@ enum AttackState {
 	READY,
 	CHARGE,
 	SWING,
-	RECOVER
+	RECOVER,
+}
+
+enum Faction {
+	GOBLIN,
+	MONSTER,
+	ADVENTURER,
 }
 
 @export_group("Stats")
+@export var faction: Faction = Faction.GOBLIN
+@export var enemies: Array[Faction] = []
 @export var move_speed: float = 30000.0
 @export var max_health: int = 4
 @export var attack_damage: int = 1
@@ -31,6 +39,7 @@ var _last_action: Action = null
 @onready var reach := $ReachArea
 @onready var far_vision := $FarVisionArea
 @onready var near_vision := $NearVisionArea
+@onready var blood_particles := $BloodParticles
 @onready var attack_timer: Timer = _create_timer()
 @onready var current_health: int = max_health
 
@@ -63,6 +72,7 @@ func _ready() -> void:
 	gravity_scale = 0.0
 	lock_rotation = true
 	linear_damp = 15.0
+	contact_monitor = true
 
 
 func act(action: Action, _delta: float) -> void:
@@ -102,28 +112,41 @@ func remove_item() -> ItemData:
 	return null
 
 
-func take_damage(amount: int, force: Vector2 = Vector2.ZERO) -> void:
+func take_damage(amount: int, force_direction: Vector2 = Vector2.ZERO) -> void:
+	force_direction = force_direction.normalized()
 	current_health -= amount
+
 	print("Ouch! %s took %d damage, current health: %d" % [name, amount, current_health])
+
+	blood_particles.emitting = true
+	blood_particles.rotation = force_direction.angle()
+	apply_central_impulse(force_direction * 10)
+
 	if current_health <= 0:
-		die(force)
-	if not force.is_zero_approx():
-		apply_central_impulse(force * 10)
+		die(force_direction)
 
 
-func die(force: Vector2 = Vector2.ZERO) -> void:
+func die(force_direction: Vector2 = Vector2.ZERO) -> void:
 	is_dead = true
 
-	# clear last action so no move movement is applied
-	_last_action = null
+	# stop attacking when you're dead
+	_attack_state = AttackState.READY
 
 	# drop held item
-	if is_holding(): toss_item(force)
+	var toss_direction = force_direction
+	if force_direction.is_zero_approx():
+		toss_direction = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)).normalized()
+	if is_holding(): toss_item(toss_direction * 50)
+
+	# disable collision with other characters
+	set_collision_layer_value(2, false)
+	set_collision_mask_value(2, false)
 
 	# ragdoll sort of
 	lock_rotation = false
+	# TODO: this doesn't do anything
+	# I think the lock_rotation change doesn't apply until the next physics frame
 	apply_torque_impulse(randf_range(-5000.0, 5000.0))
-	apply_central_impulse(force * 10)
 
 
 func toss_item(throw_vector: Vector2) -> void:
@@ -177,6 +200,11 @@ func _process_attack(action: Action) -> void:
 				_attack_state = AttackState.SWING
 				attack_timer.start(attack_swing_time)
 				apply_central_impulse(_aim_direction * attack_impulse_strength)
+				# HACK: immediately damage enemies in reach
+				# because if they are already touching, there's no collision event to catch
+				for nearby_character in reach.get_characters():
+					if nearby_character == self: continue
+					nearby_character.take_damage(attack_damage, nearby_character.global_position - global_position)
 		AttackState.SWING:
 			# TODO: damage enemies in reach but only once
 			if attack_timer.is_stopped():
@@ -189,11 +217,15 @@ func _process_attack(action: Action) -> void:
 
 func _handle_collision(body: Node) -> void:
 	if body is Character:
+		print("%s collided with %s" % [name, body.name])
 		var other: Character = body
-		if other._attack_state == AttackState.SWING and _attack_state != AttackState.SWING:
-			var force = (global_position - other.global_position).normalized() * other.linear_velocity.length()
+		if other._attack_state == AttackState.SWING:
+			var force_direction = (global_position - other.global_position)
 			# defer this call so it doesn't happen during collision processing
-			call_deferred("take_damage", other.attack_damage, force)
+			call_deferred("take_damage", other.attack_damage, force_direction)
+	elif is_dead:
+		# emit blood when body hits something
+		blood_particles.emitting = true
 
 
 func _can_move() -> bool:

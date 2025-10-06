@@ -1,10 +1,11 @@
-[gd_scene load_steps=32 format=3 uid="uid://cmubnd2oc4lex"]
+[gd_scene load_steps=33 format=3 uid="uid://cmubnd2oc4lex"]
 
 [ext_resource type="Script" uid="uid://t6rnai4uey85" path="res://src/characters/character.gd" id="1_bjga1"]
 [ext_resource type="Texture2D" uid="uid://cc35tdwbren27" path="res://assets/goblinsheet1.png" id="2_bjga1"]
 [ext_resource type="Script" uid="uid://3vjtbq2kcl8g" path="res://src/characters/detector.gd" id="3_5xsi5"]
 [ext_resource type="Script" uid="uid://bwtojbye1rncn" path="res://src/characters/character_sprite.gd" id="3_47a61"]
 [ext_resource type="Texture2D" uid="uid://ilgj2qhbrqb4" path="res://assets/white.png" id="5_47a61"]
+[ext_resource type="PackedScene" uid="uid://bhwyakrca4pgo" path="res://characters/blood_particles.tscn" id="6_welhl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7ybme"]
 atlas = ExtResource("2_bjga1")
@@ -272,3 +273,5 @@ max_value = 1.0
 show_percentage = false
 
 [node name="HeldLightSource" type="PointLight2D" parent="."]
+
+[node name="BloodParticles" parent="." instance=ExtResource("6_welhl")]
