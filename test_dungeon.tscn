@@ -9,10 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://cbyjpejpvcygo" path="res://world/Goal.tscn" id="6_wni8n"]
 [ext_resource type="PackedScene" uid="uid://cirkhmxhfm3hn" path="res://world/items/Torch.tscn" id="7_3s1lh"]
 [ext_resource type="PackedScene" uid="uid://cmubnd2oc4lex" path="res://world/characters/Goblin.tscn" id="10_bbt2j"]
-[ext_resource type="PackedScene" uid="uid://bpt6oiwfdahj5" path="res://world/healing_zone.tscn" id="10_rk3es"]
 [ext_resource type="PackedScene" uid="uid://ykf6nsdak0fj" path="res://world/items/Diamond.tscn" id="11_vjn46"]
 [ext_resource type="Script" uid="uid://cvfwxlg4h84qg" path="res://src/world/healing_zone.gd" id="11_wni8n"]
 [ext_resource type="PackedScene" uid="uid://d3u6nyytl22wp" path="res://world/items/containers/Bucket.tscn" id="12_j7t5g"]
+[ext_resource type="Script" uid="uid://dfv4337oq2ve7" path="res://src/world/safe_space.gd" id="12_wni8n"]
 [ext_resource type="Texture2D" uid="uid://dkrq5othh4xcw" path="res://assets/containers.png" id="13_0ak11"]
 [ext_resource type="Script" uid="uid://d4mgxpys1m80c" path="res://src/player/container_ui.gd" id="15_w2phg"]
 [ext_resource type="Texture2D" uid="uid://cdlafytbjx7lg" path="res://assets/bag slot.png" id="16_cx5mk"]
@@ -298,7 +298,18 @@ color = Color(0.0672, 0.06826667, 0.08, 1)
 position = Vector2(34, 102)
 item_data = SubResource("Resource_rk3es")
 
-[node name="HealingZone" parent="World" instance=ExtResource("10_rk3es")]
+[node name="SafeSpace" type="Area2D" parent="World"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("12_wni8n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/SafeSpace"]
+position = Vector2(63.5, 64)
+shape = SubResource("RectangleShape2D_wni8n")
+
+[node name="HealingZone" type="Area2D" parent="World"]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("11_wni8n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/HealingZone"]

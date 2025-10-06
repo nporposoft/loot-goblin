@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://bpt6oiwfdahj5"]
-
-[node name="HealingZone" type="Area2D"]
-collision_layer = 0
-collision_mask = 2

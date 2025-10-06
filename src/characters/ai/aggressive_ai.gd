@@ -140,6 +140,9 @@ func _physics_process(_delta: float) -> void:
 	var space_state = character.get_world_2d().direct_space_state
 	visible_characters.clear()
 	for target in character.far_vision.get_characters():
+		if target.is_dead or target.is_invisible:
+			continue
+
 		var query = PhysicsRayQueryParameters2D.create(character.global_position, target.global_position, 1 << 0 | 1 << 1, [character])
 		var result = space_state.intersect_ray(query)
 		if result.has("collider") and result["collider"] == target:
