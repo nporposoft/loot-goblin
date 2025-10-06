@@ -4,6 +4,8 @@ extends Node
 signal state_changed(new_state: State)
 
 enum State {
+	ASLEEP,
+
 	IDLING,
 	WANDERING,
 
@@ -30,7 +32,7 @@ enum State {
 @export var display_state_indicator: bool = true
 
 @export_group("State")
-@export var state: State = State.IDLING
+@export var state: State = State.ASLEEP
 @export var current_target: Character = null
 @export var last_known_target_position: Vector2 = Vector2.ZERO
 @export var visible_characters: Array[Character] = []
@@ -43,8 +45,7 @@ enum State {
 
 func _ready() -> void:
 	_create_state_indicator()
-	_start_idling()
-
+	character.is_invisible = true
 
 func _process(delta: float):
 	var action := Character.Action.new()
@@ -53,6 +54,13 @@ func _process(delta: float):
 		last_known_target_position = current_target.global_position
 		
 	match state:
+		State.ASLEEP:
+			for target in character.sleep_area.get_characters():
+				# HACK: AI wakes up to _any_ goblin, not just the player
+				if target.faction == Character.Faction.GOBLIN:
+					print("%s sees %s in sleep area" % [character.name, target.name])
+					_start_idling()
+			pass
 		State.IDLING:
 			var target: Character = _pick_target()
 			if target != null and _want_to_attack(target):
@@ -140,6 +148,7 @@ func _physics_process(_delta: float) -> void:
 
 func _start_idling() -> void:
 	_set_state(State.IDLING)
+	character.is_invisible = false
 	_state_timer.wait_time = randf_range(min_idle_time, max_idle_time)
 	_state_timer.start()
 
@@ -190,6 +199,7 @@ func _want_to_attack(_target: Character) -> bool:
 	return (
 		_target and 
 		!_target.is_dead and 
+		!_target.is_invisible and
 		character.enemies.has(_target.faction)
 	)
 

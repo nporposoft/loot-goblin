@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cmubnd2oc4lex"]
+[gd_scene load_steps=34 format=3 uid="uid://cmubnd2oc4lex"]
 
 [ext_resource type="Script" uid="uid://t6rnai4uey85" path="res://src/characters/character.gd" id="1_bjga1"]
 [ext_resource type="Texture2D" uid="uid://cc35tdwbren27" path="res://assets/goblinsheet1.png" id="2_bjga1"]
@@ -203,6 +203,9 @@ radius = 100.0
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_47a61"]
 color = Color(0, 1, 0, 1)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_owhfw"]
+radius = 500.0
+
 [node name="Goblin" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 3
@@ -275,3 +278,12 @@ show_percentage = false
 [node name="HeldLightSource" type="PointLight2D" parent="."]
 
 [node name="BloodParticles" parent="." instance=ExtResource("6_welhl")]
+
+[node name="SleepArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_5xsi5")
+metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SleepArea"]
+shape = SubResource("CircleShape2D_owhfw")
