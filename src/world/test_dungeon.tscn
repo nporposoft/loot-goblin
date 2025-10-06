@@ -26,8 +26,8 @@
 [ext_resource type="PackedScene" uid="uid://ch0vybwm8dojh" path="res://characters/Knight.tscn" id="22_tnk0v"]
 [ext_resource type="PackedScene" path="res://items/Torch.tscn" id="23_21iln"]
 [ext_resource type="Script" uid="uid://bor4p2l5i5yeu" path="res://src/world/debug_score_test.gd" id="25_3cviu"]
-[ext_resource type="PackedScene" path="res://items/containers/MagicBag.tscn" id="27_adatu"]
-[ext_resource type="PackedScene" path="res://items/containers/MagicBagUI.tscn" id="27_b81q1"]
+[ext_resource type="PackedScene" uid="uid://dpuk2ctpkbrij" path="res://items/containers/MagicBag.tscn" id="27_adatu"]
+[ext_resource type="PackedScene" uid="uid://cv0ddx1nj18nt" path="res://items/containers/MagicBagUI.tscn" id="27_b81q1"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4qov3"]
 source_geometry_mode = 1
@@ -37,7 +37,7 @@ agent_radius = 8.0
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_y6jnv"]
 source_geometry_mode = 1
 source_geometry_group_name = &"navmesh_sources"
-agent_radius = 16.0
+agent_radius = 22.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ure5g"]
 source_geometry_mode = 1
@@ -351,7 +351,6 @@ item_data = SubResource("Resource_klvdy")
 
 [node name="Knight" parent="World" instance=ExtResource("22_tnk0v")]
 position = Vector2(-46, 190)
-move_speed = 100.0
 
 [node name="AggressiveAI" type="Node" parent="World/Knight" node_paths=PackedStringArray("map")]
 script = ExtResource("7_adatu")

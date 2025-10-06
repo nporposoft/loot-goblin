@@ -1,8 +1,9 @@
-[gd_scene load_steps=31 format=3 uid="uid://cmubnd2oc4lex"]
+[gd_scene load_steps=32 format=3 uid="uid://cmubnd2oc4lex"]
 
 [ext_resource type="Script" uid="uid://t6rnai4uey85" path="res://src/characters/character.gd" id="1_bjga1"]
 [ext_resource type="Texture2D" uid="uid://cc35tdwbren27" path="res://assets/goblinsheet1.png" id="2_bjga1"]
 [ext_resource type="Script" uid="uid://3vjtbq2kcl8g" path="res://src/characters/detector.gd" id="3_5xsi5"]
+[ext_resource type="Script" uid="uid://bwtojbye1rncn" path="res://src/characters/character_sprite.gd" id="3_47a61"]
 [ext_resource type="Texture2D" uid="uid://ilgj2qhbrqb4" path="res://assets/white.png" id="5_47a61"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7ybme"]
@@ -201,11 +202,15 @@ radius = 100.0
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_47a61"]
 color = Color(0, 1, 0, 1)
 
-[node name="Goblin" type="CharacterBody2D"]
+[node name="Goblin" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 3
-motion_mode = 1
+mass = 20.0
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 15.0
 script = ExtResource("1_bjga1")
+move_speed = 50000.0
 metadata/_custom_type_script = "uid://t6rnai4uey85"
 
 [node name="Spritesheet" type="AnimatedSprite2D" parent="."]
@@ -213,6 +218,8 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_7rm0i")
 animation = &"idle"
 autoplay = "idle"
+script = ExtResource("3_47a61")
+metadata/_custom_type_script = "uid://bwtojbye1rncn"
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_bjga1")

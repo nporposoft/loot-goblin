@@ -1,5 +1,5 @@
 class_name Character
-extends CharacterBody2D
+extends RigidBody2D
 
 enum AttackState {
 	READY,
@@ -9,14 +9,14 @@ enum AttackState {
 }
 
 @export_group("Stats")
-@export var move_speed: float = 200.0
+@export var move_speed: float = 30000.0
 @export var max_health: int = 100
 @export var current_health: int = max_health
 @export var attack_damage: int = 10
 @export var attack_range: float = 64.0
-@export var attack_impulse_strength: float = 2000.0
-@export var attack_charge_time: float = 0.2
-@export var attack_swing_time: float = 0.3
+@export var attack_impulse_strength: float = 100000.0
+@export var attack_charge_time: float = 0.5
+@export var attack_swing_time: float = 0.5
 @export var attack_recover_time: float = 1.0
 
 @export_group("State")
@@ -25,6 +25,7 @@ enum AttackState {
 var _aim_direction: Vector2 = Vector2.ZERO
 var _held_item_sprite: Sprite2D = null
 var _attack_state: AttackState = AttackState.READY
+var _last_action: Action = null
 
 @onready var spritesheet: AnimatedSprite2D = $Spritesheet
 @onready var nav_agent := $NavigationAgent2D
@@ -49,18 +50,24 @@ class Action extends Object:
 	var throw_force: float = 0.0
 
 	var attack: bool = false
+	var cancel_attack: bool = false
 
 
 func _ready() -> void:
 	_create_held_item_sprite()
 
+	# rigidbody settings
+	gravity_scale = 0.0
+	lock_rotation = true
+	linear_damp = 15.0
 
-func act(action: Action, delta: float) -> void:
-	_process_movement(action)
+
+func act(action: Action, _delta: float) -> void:
 	_process_aiming(action)
 	_process_pickup_and_drop(action)
 	_process_trigger(action)
-	_process_attack(action, delta)
+	_process_attack(action)
+	_last_action = action
 
 
 func is_holding() -> bool:
@@ -97,36 +104,17 @@ func toss_item(throw_vector: Vector2) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	move_and_slide()
-
-
-func _process_movement(action: Action) -> void:
+	if _last_action == null: return
 	if !_can_move(): return
 
-	velocity = action.move_input.normalized() * move_speed
-	# TODO: all this sprite management needs to move onto the sprite component
-	if velocity.is_zero_approx():
-		spritesheet.set_flip_h(_aim_direction.x < 0)
-		if is_holding():
-			spritesheet.play("idle_carry")
-		else:
-			spritesheet.play("idle")
-	else:
-		if velocity.x < 0:
-			spritesheet.set_flip_h(true)
-		elif velocity.x > 0:
-			spritesheet.set_flip_h(false)
-
-		if is_holding():
-			spritesheet.play("run_carry")
-		else:
-			spritesheet.play("run")
+	apply_central_force(_last_action.move_input.normalized() * move_speed)
 
 
 func _process_aiming(action: Action) -> void:
 	if !_can_change_direction(): return
 
-	_aim_direction = action.aim_direction.normalized()
+	if not action.aim_direction.is_zero_approx():
+		_aim_direction = action.aim_direction.normalized()
 
 
 func _process_pickup_and_drop(action: Action) -> void:
@@ -147,7 +135,7 @@ func _process_trigger(action: Action) -> void:
 		action.trigger.trigger()
 
 
-func _process_attack(action: Action, delta: float) -> void:
+func _process_attack(action: Action) -> void:
 	match _attack_state:
 		AttackState.READY:
 			if action.attack:
@@ -155,19 +143,20 @@ func _process_attack(action: Action, delta: float) -> void:
 				spritesheet.play("attack_charge")
 				attack_timer.start(attack_charge_time)
 		AttackState.CHARGE:
-			if attack_timer.is_stopped():
+			if action.cancel_attack:
+				_attack_state = AttackState.READY
+			elif attack_timer.is_stopped():
 				_attack_state = AttackState.SWING
 				spritesheet.play("attack_swing")
 				attack_timer.start(attack_swing_time)
+				apply_central_impulse(_aim_direction * attack_impulse_strength)
 		AttackState.SWING:
-			velocity += _aim_direction * attack_impulse_strength * delta
 			# TODO: damage enemies in reach but only once
 			if attack_timer.is_stopped():
 				spritesheet.play("attack_recover")
 				_attack_state = AttackState.RECOVER
 				attack_timer.start(attack_recover_time)
 		AttackState.RECOVER:
-			velocity = Vector2.ZERO
 			if attack_timer.is_stopped():
 				_attack_state = AttackState.READY
 
