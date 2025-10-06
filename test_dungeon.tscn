@@ -276,6 +276,7 @@ metadata/_custom_type_script = "uid://kygkbg3kqosp"
 texture_filter = 1
 
 [node name="FollowCamera" type="Camera2D" parent="World" node_paths=PackedStringArray("target")]
+zoom = Vector2(4, 4)
 script = ExtResource("2_ure5g")
 target = NodePath("../PlayerGoblin")
 metadata/_custom_type_script = "uid://cyjt8uhdv01dp"
@@ -314,7 +315,6 @@ monster_scenes = Array[PackedScene]([ExtResource("26_js6p4")])
 position = Vector2(65, 68)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="World"]
-visible = false
 color = Color(0.0672, 0.06826667, 0.08, 1)
 
 [node name="Torch" parent="World" instance=ExtResource("7_3s1lh")]
