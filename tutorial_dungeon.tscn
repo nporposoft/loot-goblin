@@ -24,31 +24,18 @@
 [ext_resource type="Script" uid="uid://dmp2din0planr" path="res://src/characters/ai/aggressive_ai.gd" id="19_12nxt"]
 [ext_resource type="Script" path="res://src/world/goal.gd" id="23_syjho"]
 [ext_resource type="Script" uid="uid://3vjtbq2kcl8g" path="res://src/characters/detector.gd" id="24_5fpyr"]
-[ext_resource type="Script" uid="uid://bm3phcc6udi2n" path="res://src/world/tutorial_end_area.gd" id="25_8jt1m"]
+[ext_resource type="Script" uid="uid://bm3phcc6udi2n" path="res://src/world/scene_change_area.gd" id="25_8jt1m"]
 [ext_resource type="Script" uid="uid://d4mgxpys1m80c" path="res://src/player/container_ui.gd" id="25_36hq2"]
 [ext_resource type="Texture2D" uid="uid://cdlafytbjx7lg" path="res://assets/bag slot.png" id="26_0igj0"]
 [ext_resource type="Script" uid="uid://bqtvaidnp5b3q" path="res://src/player/container_ui_slot.gd" id="27_4e5o0"]
 [ext_resource type="Script" uid="uid://dj61bulh8wvlg" path="res://src/items/item.gd" id="28_583nj"]
 [ext_resource type="Script" uid="uid://4x62ah40g3dn" path="res://src/player/interactable.gd" id="29_dqtmb"]
-[ext_resource type="Script" path="res://src/world/score_ui.gd" id="33_syjho"]
+[ext_resource type="Script" uid="uid://bvkkn10qp03c0" path="res://src/world/score_ui.gd" id="33_syjho"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5fpyr"]
 source_geometry_mode = 1
 source_geometry_group_name = &"navmesh_sources"
 agent_radius = 22.0
-
-[sub_resource type="SystemFont" id="SystemFont_4xu0r"]
-font_names = PackedStringArray("Sans-Serif")
-font_weight = 800
-subpixel_positioning = 0
-
-[sub_resource type="LabelSettings" id="LabelSettings_4xu0r"]
-font = SubResource("SystemFont_4xu0r")
-font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_kt4iy"]
-font = SubResource("SystemFont_4xu0r")
-font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yh1pe"]
 atlas = ExtResource("8_k4d2j")
@@ -273,6 +260,7 @@ description = "What a nice carton"
 ui_sprite = SubResource("AtlasTexture_cwmej")
 world_scene = ExtResource("16_v617q")
 is_container = true
+capacity = 4
 ui_scene = ExtResource("17_kt4iy")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
@@ -424,9 +412,23 @@ ui_sprite = SubResource("AtlasTexture_g5lct")
 world_scene = ExtResource("14_tq2v2")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
+[sub_resource type="SystemFont" id="SystemFont_4xu0r"]
+font_names = PackedStringArray("Sans-Serif")
+font_weight = 800
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_4xu0r"]
+font = SubResource("SystemFont_4xu0r")
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kt4iy"]
+font = SubResource("SystemFont_4xu0r")
+font_color = Color(0, 0, 0, 1)
+
 [sub_resource type="SystemFont" id="SystemFont_5fpyr"]
 font_names = PackedStringArray("Sans-Serif")
 font_weight = 600
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_8jt1m"]
 font = SubResource("SystemFont_5fpyr")
@@ -456,6 +458,200 @@ tile_set = ExtResource("3_ed8lf")
 script = ExtResource("4_3wc8f")
 metadata/_custom_type_script = "uid://patkktgw1bbd"
 
+[node name="Goblin" parent="World" instance=ExtResource("5_hbteb")]
+position = Vector2(64, 64)
+
+[node name="FollowCamera" type="Camera2D" parent="World" node_paths=PackedStringArray("target")]
+zoom = Vector2(4, 4)
+script = ExtResource("2_npv87")
+target = NodePath("../Goblin")
+metadata/_custom_type_script = "uid://cyjt8uhdv01dp"
+
+[node name="Knight" parent="World" instance=ExtResource("11_k4d2j")]
+position = Vector2(1728, 496)
+move_speed = 375000.0
+attack_damage = 0
+attack_impulse_strength = 350000.0
+attack_recover_time = 0.15
+
+[node name="AggressiveAI" type="Node" parent="World/Knight"]
+script = ExtResource("19_12nxt")
+min_wander_distance = 0.0
+max_wander_distance = 0.0
+state = 2
+metadata/_custom_type_script = "uid://dmp2din0planr"
+
+[node name="Torch" parent="World" instance=ExtResource("6_blpox")]
+position = Vector2(232, 616)
+item_data = SubResource("Resource_vlco8")
+
+[node name="Coin" parent="World" instance=ExtResource("8_13fke")]
+position = Vector2(576, 320)
+item_data = SubResource("Resource_3rvtv")
+
+[node name="Coin1" parent="World" instance=ExtResource("8_13fke")]
+position = Vector2(832, 464)
+item_data = SubResource("Resource_uw5y7")
+
+[node name="Bucket" parent="World" instance=ExtResource("9_3h324")]
+position = Vector2(704, 312)
+item_data = SubResource("Resource_c4r58")
+
+[node name="Torch1" parent="World" instance=ExtResource("6_blpox")]
+position = Vector2(1088, 400)
+item_data = SubResource("Resource_loi7q")
+
+[node name="Torch2" parent="World" instance=ExtResource("6_blpox")]
+position = Vector2(664, 960)
+item_data = SubResource("Resource_rki5h")
+
+[node name="Torch3" parent="World" instance=ExtResource("6_blpox")]
+position = Vector2(1512, 960)
+item_data = SubResource("Resource_f46f4")
+
+[node name="Torch4" parent="World" instance=ExtResource("6_blpox")]
+position = Vector2(486, 1438)
+item_data = SubResource("Resource_nik0s")
+
+[node name="Coin2" parent="World" instance=ExtResource("8_13fke")]
+position = Vector2(832, 832)
+item_data = SubResource("Resource_mv2un")
+
+[node name="Coin3" parent="World" instance=ExtResource("8_13fke")]
+position = Vector2(960, 1088)
+item_data = SubResource("Resource_y65ns")
+
+[node name="Coin4" parent="World" instance=ExtResource("8_13fke")]
+position = Vector2(960, 832)
+item_data = SubResource("Resource_37jp0")
+
+[node name="Coin5" parent="World" instance=ExtResource("8_13fke")]
+position = Vector2(1472, 960)
+item_data = SubResource("Resource_ixn72")
+
+[node name="Diamond" parent="World" instance=ExtResource("14_tq2v2")]
+position = Vector2(1216, 832)
+item_data = SubResource("Resource_ts4aa")
+
+[node name="Diamond2" parent="World" instance=ExtResource("14_tq2v2")]
+position = Vector2(1216, 1088)
+item_data = SubResource("Resource_qlg1m")
+
+[node name="Diamond3" parent="World" instance=ExtResource("14_tq2v2")]
+position = Vector2(832, 1088)
+item_data = SubResource("Resource_m8wc5")
+
+[node name="Diamond4" parent="World" instance=ExtResource("14_tq2v2")]
+position = Vector2(1345, 1088)
+item_data = SubResource("Resource_d7sxp")
+
+[node name="Backpack" parent="World" instance=ExtResource("15_fc2j6")]
+position = Vector2(1344, 832)
+item_data = SubResource("Resource_4gmeu")
+
+[node name="Carton" parent="World" instance=ExtResource("16_v617q")]
+position = Vector2(704, 960)
+item_data = SubResource("Resource_dim76")
+
+[node name="Slime" parent="World" instance=ExtResource("12_r2ti0")]
+position = Vector2(2048, 960)
+
+[node name="AggressiveAI" type="Node" parent="World/Slime"]
+script = ExtResource("19_12nxt")
+min_wander_distance = 0.0
+max_wander_distance = 0.0
+metadata/_custom_type_script = "uid://dmp2din0planr"
+
+[node name="Slime2" parent="World" instance=ExtResource("12_r2ti0")]
+position = Vector2(2176, 960)
+
+[node name="AggressiveAI" type="Node" parent="World/Slime2"]
+script = ExtResource("19_12nxt")
+min_wander_distance = 0.0
+max_wander_distance = 0.0
+metadata/_custom_type_script = "uid://dmp2din0planr"
+
+[node name="Slime3" parent="World" instance=ExtResource("12_r2ti0")]
+position = Vector2(2048, 1088)
+
+[node name="AggressiveAI" type="Node" parent="World/Slime3"]
+script = ExtResource("19_12nxt")
+min_wander_distance = 0.0
+max_wander_distance = 0.0
+metadata/_custom_type_script = "uid://dmp2din0planr"
+
+[node name="Slime4" parent="World" instance=ExtResource("12_r2ti0")]
+position = Vector2(2176, 1088)
+
+[node name="AggressiveAI" type="Node" parent="World/Slime4"]
+script = ExtResource("19_12nxt")
+min_wander_distance = 0.0
+max_wander_distance = 0.0
+metadata/_custom_type_script = "uid://dmp2din0planr"
+
+[node name="Goal" type="Area2D" parent="World"]
+position = Vector2(1088, 448)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("23_syjho")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Goal"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_s7612")
+
+[node name="Goal2" type="Area2D" parent="World"]
+position = Vector2(-576, 832)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("23_syjho")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Goal2"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_6tpep")
+
+[node name="SealPassageArea" type="Area2D" parent="World"]
+position = Vector2(1536, 576)
+script = ExtResource("24_5fpyr")
+metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/SealPassageArea"]
+shape = SubResource("RectangleShape2D_w7xxv")
+
+[node name="TutorialEndArea" type="Area2D" parent="World"]
+position = Vector2(-576, 927)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("25_8jt1m")
+transition_time = 10.0
+metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/TutorialEndArea"]
+shape = SubResource("RectangleShape2D_g5lct")
+
+[node name="Chest2" parent="World" instance=ExtResource("13_0x6fr")]
+position = Vector2(-702, 962)
+item_data = SubResource("Resource_as51s")
+
+[node name="Diamond5" parent="World" instance=ExtResource("14_tq2v2")]
+position = Vector2(-463, 949)
+item_data = SubResource("Resource_8betw")
+
+[node name="Diamond6" parent="World" instance=ExtResource("14_tq2v2")]
+position = Vector2(-456, 971)
+item_data = SubResource("Resource_tx3e1")
+
+[node name="Diamond7" parent="World" instance=ExtResource("14_tq2v2")]
+position = Vector2(-443, 955)
+item_data = SubResource("Resource_xmi2t")
+
+[node name="Coin6" parent="World" instance=ExtResource("8_13fke")]
+position = Vector2(-475, 987)
+item_data = SubResource("Resource_efjvc")
+
+[node name="Coin7" parent="World" instance=ExtResource("8_13fke")]
+position = Vector2(-429, 971)
+item_data = SubResource("Resource_3w5eq")
+
 [node name="TutorialMessages" type="Control" parent="World"]
 layout_mode = 3
 anchors_preset = 0
@@ -476,7 +672,9 @@ some loot?
 
 
 
+
 (Move using WASD)
+
 
 
 
@@ -622,10 +820,10 @@ horizontal_alignment = 1
 
 [node name="Score Hole" type="Label" parent="World/TutorialMessages"]
 layout_mode = 0
-offset_left = 1024.0
-offset_top = 380.0
-offset_right = 1279.9999
-offset_bottom = 891.99963
+offset_left = 1023.0
+offset_top = 344.0
+offset_right = 1278.9999
+offset_bottom = 855.99963
 scale = Vector2(0.5, 0.5)
 text = "
 
@@ -816,199 +1014,6 @@ text = "
 worth something too."
 label_settings = SubResource("LabelSettings_4xu0r")
 horizontal_alignment = 1
-
-[node name="Goblin" parent="World" instance=ExtResource("5_hbteb")]
-position = Vector2(64, 64)
-
-[node name="FollowCamera" type="Camera2D" parent="World" node_paths=PackedStringArray("target")]
-zoom = Vector2(4, 4)
-script = ExtResource("2_npv87")
-target = NodePath("../Goblin")
-metadata/_custom_type_script = "uid://cyjt8uhdv01dp"
-
-[node name="Knight" parent="World" instance=ExtResource("11_k4d2j")]
-position = Vector2(1728, 496)
-move_speed = 375000.0
-attack_damage = 0
-attack_impulse_strength = 350000.0
-attack_recover_time = 0.15
-
-[node name="AggressiveAI" type="Node" parent="World/Knight"]
-script = ExtResource("19_12nxt")
-min_wander_distance = 0.0
-max_wander_distance = 0.0
-state = 2
-metadata/_custom_type_script = "uid://dmp2din0planr"
-
-[node name="Torch" parent="World" instance=ExtResource("6_blpox")]
-position = Vector2(232, 616)
-item_data = SubResource("Resource_vlco8")
-
-[node name="Coin" parent="World" instance=ExtResource("8_13fke")]
-position = Vector2(576, 320)
-item_data = SubResource("Resource_3rvtv")
-
-[node name="Coin1" parent="World" instance=ExtResource("8_13fke")]
-position = Vector2(832, 464)
-item_data = SubResource("Resource_uw5y7")
-
-[node name="Bucket" parent="World" instance=ExtResource("9_3h324")]
-position = Vector2(704, 332)
-item_data = SubResource("Resource_c4r58")
-
-[node name="Torch1" parent="World" instance=ExtResource("6_blpox")]
-position = Vector2(1088, 400)
-item_data = SubResource("Resource_loi7q")
-
-[node name="Torch2" parent="World" instance=ExtResource("6_blpox")]
-position = Vector2(664, 960)
-item_data = SubResource("Resource_rki5h")
-
-[node name="Torch3" parent="World" instance=ExtResource("6_blpox")]
-position = Vector2(1512, 960)
-item_data = SubResource("Resource_f46f4")
-
-[node name="Torch4" parent="World" instance=ExtResource("6_blpox")]
-position = Vector2(486, 1438)
-item_data = SubResource("Resource_nik0s")
-
-[node name="Coin2" parent="World" instance=ExtResource("8_13fke")]
-position = Vector2(832, 832)
-item_data = SubResource("Resource_mv2un")
-
-[node name="Coin3" parent="World" instance=ExtResource("8_13fke")]
-position = Vector2(960, 1088)
-item_data = SubResource("Resource_y65ns")
-
-[node name="Coin4" parent="World" instance=ExtResource("8_13fke")]
-position = Vector2(960, 832)
-item_data = SubResource("Resource_37jp0")
-
-[node name="Coin5" parent="World" instance=ExtResource("8_13fke")]
-position = Vector2(1472, 960)
-item_data = SubResource("Resource_ixn72")
-
-[node name="Diamond" parent="World" instance=ExtResource("14_tq2v2")]
-position = Vector2(1216, 832)
-item_data = SubResource("Resource_ts4aa")
-
-[node name="Diamond2" parent="World" instance=ExtResource("14_tq2v2")]
-position = Vector2(1216, 1088)
-item_data = SubResource("Resource_qlg1m")
-
-[node name="Diamond3" parent="World" instance=ExtResource("14_tq2v2")]
-position = Vector2(832, 1088)
-item_data = SubResource("Resource_m8wc5")
-
-[node name="Diamond4" parent="World" instance=ExtResource("14_tq2v2")]
-position = Vector2(1345, 1088)
-item_data = SubResource("Resource_d7sxp")
-
-[node name="Backpack" parent="World" instance=ExtResource("15_fc2j6")]
-position = Vector2(1344, 832)
-item_data = SubResource("Resource_4gmeu")
-
-[node name="Carton" parent="World" instance=ExtResource("16_v617q")]
-position = Vector2(704, 960)
-item_data = SubResource("Resource_dim76")
-
-[node name="Slime" parent="World" instance=ExtResource("12_r2ti0")]
-position = Vector2(2048, 960)
-
-[node name="AggressiveAI" type="Node" parent="World/Slime"]
-script = ExtResource("19_12nxt")
-min_wander_distance = 0.0
-max_wander_distance = 0.0
-metadata/_custom_type_script = "uid://dmp2din0planr"
-
-[node name="Slime2" parent="World" instance=ExtResource("12_r2ti0")]
-position = Vector2(2176, 960)
-
-[node name="AggressiveAI" type="Node" parent="World/Slime2"]
-script = ExtResource("19_12nxt")
-min_wander_distance = 0.0
-max_wander_distance = 0.0
-metadata/_custom_type_script = "uid://dmp2din0planr"
-
-[node name="Slime3" parent="World" instance=ExtResource("12_r2ti0")]
-position = Vector2(2048, 1088)
-
-[node name="AggressiveAI" type="Node" parent="World/Slime3"]
-script = ExtResource("19_12nxt")
-min_wander_distance = 0.0
-max_wander_distance = 0.0
-metadata/_custom_type_script = "uid://dmp2din0planr"
-
-[node name="Slime4" parent="World" instance=ExtResource("12_r2ti0")]
-position = Vector2(2176, 1088)
-
-[node name="AggressiveAI" type="Node" parent="World/Slime4"]
-script = ExtResource("19_12nxt")
-min_wander_distance = 0.0
-max_wander_distance = 0.0
-metadata/_custom_type_script = "uid://dmp2din0planr"
-
-[node name="Goal" type="Area2D" parent="World"]
-position = Vector2(1088, 448)
-collision_layer = 4
-collision_mask = 4
-script = ExtResource("23_syjho")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Goal"]
-position = Vector2(0, 4)
-shape = SubResource("RectangleShape2D_s7612")
-
-[node name="Goal2" type="Area2D" parent="World"]
-position = Vector2(-576, 832)
-collision_layer = 4
-collision_mask = 4
-script = ExtResource("23_syjho")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Goal2"]
-position = Vector2(0, 4)
-shape = SubResource("RectangleShape2D_6tpep")
-
-[node name="SealPassageArea" type="Area2D" parent="World"]
-position = Vector2(1536, 576)
-script = ExtResource("24_5fpyr")
-metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/SealPassageArea"]
-shape = SubResource("RectangleShape2D_w7xxv")
-
-[node name="TutorialEndArea" type="Area2D" parent="World"]
-position = Vector2(-576, 927)
-collision_layer = 3
-collision_mask = 3
-script = ExtResource("25_8jt1m")
-metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/TutorialEndArea"]
-shape = SubResource("RectangleShape2D_g5lct")
-
-[node name="Chest2" parent="World" instance=ExtResource("13_0x6fr")]
-position = Vector2(-702, 962)
-item_data = SubResource("Resource_as51s")
-
-[node name="Diamond5" parent="World" instance=ExtResource("14_tq2v2")]
-position = Vector2(-463, 949)
-item_data = SubResource("Resource_8betw")
-
-[node name="Diamond6" parent="World" instance=ExtResource("14_tq2v2")]
-position = Vector2(-456, 971)
-item_data = SubResource("Resource_tx3e1")
-
-[node name="Diamond7" parent="World" instance=ExtResource("14_tq2v2")]
-position = Vector2(-443, 955)
-item_data = SubResource("Resource_xmi2t")
-
-[node name="Coin6" parent="World" instance=ExtResource("8_13fke")]
-position = Vector2(-475, 987)
-item_data = SubResource("Resource_efjvc")
-
-[node name="Coin7" parent="World" instance=ExtResource("8_13fke")]
-position = Vector2(-429, 971)
-item_data = SubResource("Resource_3w5eq")
 
 [node name="UI" type="CanvasLayer" parent="."]
 scale = Vector2(2, 2)

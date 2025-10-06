@@ -18,5 +18,6 @@ description = "What a nice carton"
 ui_sprite = SubResource("AtlasTexture_cwmej")
 world_scene = ExtResource("2_uwlvg")
 is_container = true
+capacity = 4
 ui_scene = ExtResource("4_blaox")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
