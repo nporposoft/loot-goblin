@@ -26,6 +26,7 @@ func _process(_delta: float) -> void:
 			play("idle_carry")
 		else:
 			play("idle")
+		set_flip_h(character.aim_direction.x < 0)
 	else:
 		if character.linear_velocity.x < 0:
 			set_flip_h(true)

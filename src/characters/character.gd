@@ -34,7 +34,8 @@ signal health_changed
 @export var is_dead: bool = false
 @export var is_invisible: bool = false
 
-var _aim_direction: Vector2 = Vector2.ZERO
+var aim_direction: Vector2 = Vector2.ZERO
+
 var _held_item_sprite: Sprite2D = null
 var _attack_state: AttackState = AttackState.READY
 var _last_action: Action = null
@@ -180,7 +181,7 @@ func _process_aiming(action: Action) -> void:
 	if !_can_change_direction(): return
 
 	if not action.aim_direction.is_zero_approx():
-		_aim_direction = action.aim_direction.normalized()
+		aim_direction = action.aim_direction.normalized()
 
 
 func _process_pickup_and_drop(action: Action) -> void:
@@ -189,7 +190,7 @@ func _process_pickup_and_drop(action: Action) -> void:
 		if action.pickup_item in items_in_reach:
 			held_item.add_item(action.pickup_item.pickup())
 	if is_holding() and action.throw:
-		toss_item(_aim_direction * action.throw_force)
+		toss_item(aim_direction * action.throw_force)
 	elif not is_holding() and action.pickup_item != null:
 		var items_in_reach = reach.get_items()
 		if action.pickup_item in items_in_reach:
@@ -213,7 +214,7 @@ func _process_attack(action: Action) -> void:
 			elif attack_timer.is_stopped():
 				_attack_state = AttackState.SWING
 				attack_timer.start(attack_swing_time)
-				apply_central_impulse(_aim_direction * attack_impulse_strength)
+				apply_central_impulse(aim_direction * attack_impulse_strength)
 				# HACK: immediately damage enemies in reach
 				# because if they are already touching, there's no collision event to catch
 				for nearby_character in reach.get_characters():
