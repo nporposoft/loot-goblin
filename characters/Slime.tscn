@@ -140,6 +140,8 @@ collision_layer = 2
 collision_mask = 3
 mass = 150.0
 script = ExtResource("1_seyq0")
+faction = 1
+enemies = Array[int]([2])
 metadata/_custom_type_script = "uid://t6rnai4uey85"
 
 [node name="Spritesheet" type="AnimatedSprite2D" parent="."]
@@ -150,7 +152,6 @@ autoplay = "idle"
 frame_progress = 0.059847258
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_bjga1")
 
 [node name="ReachArea" type="Area2D" parent="."]
@@ -160,32 +161,27 @@ script = ExtResource("3_k655p")
 metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ReachArea"]
-visible = false
 shape = SubResource("CircleShape2D_7ybme")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 navigation_layers = 2
 
 [node name="FarVisionArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 15
 script = ExtResource("3_k655p")
 metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FarVisionArea"]
-visible = false
 shape = SubResource("CircleShape2D_47a61")
 
 [node name="NearVisionArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 15
 script = ExtResource("3_k655p")
 metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NearVisionArea"]
-visible = false
 shape = SubResource("CircleShape2D_oo2ix")
 
 [node name="BloodParticles" parent="." instance=ExtResource("4_wflep")]

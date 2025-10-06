@@ -5,10 +5,18 @@ enum AttackState {
 	READY,
 	CHARGE,
 	SWING,
-	RECOVER
+	RECOVER,
+}
+
+enum Faction {
+	GOBLIN,
+	MONSTER,
+	ADVENTURER,
 }
 
 @export_group("Stats")
+@export var faction: Faction = Faction.GOBLIN
+@export var enemies: Array[Faction] = []
 @export var move_speed: float = 30000.0
 @export var max_health: int = 4
 @export var attack_damage: int = 1
