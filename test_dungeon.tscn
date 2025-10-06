@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://r0rlptslyw58"]
+[gd_scene load_steps=65 format=3 uid="uid://r0rlptslyw58"]
 
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="1_nsxo0"]
 [ext_resource type="Script" uid="uid://cyjt8uhdv01dp" path="res://src/player/follow_camera.gd" id="2_ure5g"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://patkktgw1bbd" path="res://src/world/terrain.gd" id="5_rk3es"]
 [ext_resource type="Script" uid="uid://ctqjnf2yg1uvt" path="res://src/items/item_data.gd" id="6_cnrih"]
 [ext_resource type="PackedScene" uid="uid://cbyjpejpvcygo" path="res://world/Goal.tscn" id="6_wni8n"]
-[ext_resource type="Script" uid="uid://dmp2din0planr" path="res://src/characters/ai/aggressive_ai.gd" id="7_1v8wj"]
 [ext_resource type="PackedScene" uid="uid://cirkhmxhfm3hn" path="res://world/items/Torch.tscn" id="7_3s1lh"]
 [ext_resource type="PackedScene" uid="uid://cmubnd2oc4lex" path="res://world/characters/Goblin.tscn" id="10_bbt2j"]
 [ext_resource type="PackedScene" uid="uid://bpt6oiwfdahj5" path="res://world/healing_zone.tscn" id="10_rk3es"]
@@ -65,6 +64,13 @@ metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wni8n"]
 size = Vector2(129, 126)
+
+[sub_resource type="SystemFont" id="SystemFont_frt76"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vyb7s"]
+font = SubResource("SystemFont_frt76")
+font_size = 10
+outline_size = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ipdfa"]
 atlas = ExtResource("21_5n4mp")
@@ -241,13 +247,6 @@ capacity = 16
 ui_scene = ExtResource("23_kof4o")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="SystemFont" id="SystemFont_frt76"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_vyb7s"]
-font = SubResource("SystemFont_frt76")
-font_size = 10
-outline_size = 1
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_js6p4"]
 resource_local_to_scene = true
 atlas = ExtResource("13_0ak11")
@@ -277,6 +276,7 @@ metadata/_custom_type_script = "uid://kygkbg3kqosp"
 texture_filter = 1
 
 [node name="FollowCamera" type="Camera2D" parent="World" node_paths=PackedStringArray("target")]
+zoom = Vector2(4, 4)
 script = ExtResource("2_ure5g")
 target = NodePath("../PlayerGoblin")
 metadata/_custom_type_script = "uid://cyjt8uhdv01dp"
@@ -308,12 +308,13 @@ tile_set = ExtResource("4_6qv62")
 script = ExtResource("5_rk3es")
 WORLD_RADIUS = 20
 ROOM_DIM_RANGE = 5
+adventurer_scenes = Array[PackedScene]([ExtResource("24_6avta")])
+monster_scenes = Array[PackedScene]([ExtResource("26_js6p4")])
 
 [node name="Goal" parent="World" instance=ExtResource("6_wni8n")]
 position = Vector2(65, 68)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="World"]
-visible = false
 color = Color(0.0672, 0.06826667, 0.08, 1)
 
 [node name="Torch" parent="World" instance=ExtResource("7_3s1lh")]
@@ -326,6 +327,18 @@ script = ExtResource("11_wni8n")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/HealingZone"]
 position = Vector2(63.5, 64)
 shape = SubResource("RectangleShape2D_wni8n")
+
+[node name="Score" type="Label" parent="World"]
+light_mask = 0
+texture_filter = 1
+offset_left = 45.0
+offset_top = 86.0
+offset_right = 85.0
+offset_bottom = 100.0
+text = "0"
+label_settings = SubResource("LabelSettings_vyb7s")
+horizontal_alignment = 1
+script = ExtResource("29_7ipd7")
 
 [node name="PlayerGoblin" parent="World" instance=ExtResource("10_bbt2j")]
 position = Vector2(64, 32)
@@ -367,32 +380,6 @@ item_data = SubResource("Resource_mq82q")
 position = Vector2(64, 128)
 linear_damp = 60.0
 item_data = SubResource("Resource_6avta")
-
-[node name="Knight" parent="World" instance=ExtResource("24_6avta")]
-position = Vector2(-214, 187)
-
-[node name="AggressiveAI" type="Node" parent="World/Knight"]
-script = ExtResource("7_1v8wj")
-metadata/_custom_type_script = "uid://dmp2din0planr"
-
-[node name="DebugScoreTest" type="Label" parent="World"]
-light_mask = 0
-texture_filter = 1
-offset_left = 45.0
-offset_top = 86.0
-offset_right = 85.0
-offset_bottom = 100.0
-text = "0"
-label_settings = SubResource("LabelSettings_vyb7s")
-horizontal_alignment = 1
-script = ExtResource("29_7ipd7")
-
-[node name="Slime" parent="World" instance=ExtResource("26_js6p4")]
-position = Vector2(211, 197)
-
-[node name="AggressiveAI" type="Node" parent="World/Slime"]
-script = ExtResource("7_1v8wj")
-metadata/_custom_type_script = "uid://dmp2din0planr"
 
 [node name="MagicBag" parent="World" instance=ExtResource("27_j26kr")]
 position = Vector2(56, 333)

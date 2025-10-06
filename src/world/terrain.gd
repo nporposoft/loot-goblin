@@ -16,6 +16,13 @@ var height: int = 32
 @export var BOX_ROOMS_QTY: int = 60
 @export var MAX_CATACOMBS_ROOMS: int = 1000
 
+@export var adventurer_scenes: Array[PackedScene]
+@export var adventurer_spawn_chance: float = 0.1
+@export var monster_scenes: Array[PackedScene]
+@export var monster_spawn_chance: float = 0.1
+@export var treasure_scenes: Array[PackedScene]
+@export var treasure_spawn_chance: float = 0.7
+
 # Small tiles atlas coordinates: 
 const wallAtlas: Vector2i = Vector2i(3, 0)
 const floorAtlas: Vector2i = Vector2i(3, 2)
@@ -44,7 +51,10 @@ const hallBars_EW_Atlas: Vector2i = Vector2i(4, 3)
 
 enum Path {CLOSED, ANY, OPEN}
 
+@onready var tile_size = tile_set.tile_size.x
+
 func _ready():
+	print("tile_size=", tile_size)
 	#generate_random_world()		# works bad
 	#generate_dungeon_world()	# works worse
 	#generate_box_world()		# kinda works, but still sucks
@@ -213,6 +223,28 @@ func generate_catacombs() -> void:
 			#continue
 		
 		set_cell(currentRoom, 1, roomChoice)
+		var room_world_position: Vector2 = currentRoom * tile_size
+		if randf() < adventurer_spawn_chance:
+			var adventurer_scene: PackedScene = adventurer_scenes[randi() % adventurer_scenes.size()]
+			var adventurer = adventurer_scene.instantiate()
+			adventurer.position = Vector2(room_world_position.x + float(tile_size) / 2, room_world_position.y + float(tile_size) / 2)
+			get_parent().call_deferred("add_child", adventurer)
+			var ai = AggressiveAI.new()
+			adventurer.call_deferred("add_child", ai)
+		elif randf() < monster_spawn_chance:
+			var monster_scene: PackedScene = monster_scenes[randi() % monster_scenes.size()]
+			var monster = monster_scene.instantiate()
+			monster.position = Vector2(room_world_position.x + float(tile_size) / 2, room_world_position.y + float(tile_size) / 2)
+			get_parent().call_deferred("add_child", monster)
+			var ai = AggressiveAI.new()
+			monster.call_deferred("add_child", ai)
+		# TODO:
+		# elif randf() < treasure_spawn_chance:
+		# 	var treasure_scene: PackedScene = treasure_scenes[randi() % treasure_scenes.size()]
+		# 	var treasure = treasure_scene.instantiate()
+		# 	treasure.position = room_world_position + tile_size / 2
+		# 	get_parent().add_child(treasure)
+		#   # TODO: need to add the resource file for the treasure item
 		
 		var roomsToStack: Array = get_rooms_to_stack(currentRoom)
 		for r in roomsToStack:
