@@ -87,6 +87,8 @@ func _process(delta: float):
 					pass
 			pass
 		State.ATTACKING:
+			if current_target.is_dead:
+				_start_idling()
 			if !_can_see(current_target):
 				_start_searching()
 			else:
@@ -196,8 +198,7 @@ func _pick_target() -> Character:
 
 
 func _want_to_attack(_target: Character) -> bool:
-	# TODO
-	return true
+	return _target and !_target.is_dead
 
 
 func _in_attack_range(target: Character) -> bool:

@@ -15,5 +15,5 @@ func spawn_item(item_data: ItemData, position: Vector2, velocity: Vector2 = Vect
 	item_instance.item_data = item_data
 	item_instance.position = position
 	item_instance.linear_velocity = velocity
-	get_tree().current_scene.add_child(item_instance)
+	get_tree().current_scene.call_deferred("add_child", item_instance)
 	return item_instance

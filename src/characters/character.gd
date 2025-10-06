@@ -10,9 +10,8 @@ enum AttackState {
 
 @export_group("Stats")
 @export var move_speed: float = 30000.0
-@export var max_health: int = 100
-@export var current_health: int = max_health
-@export var attack_damage: int = 10
+@export var max_health: int = 4
+@export var attack_damage: int = 1
 @export var attack_range: float = 64.0
 @export var attack_impulse_strength: float = 100000.0
 @export var attack_charge_time: float = 0.5
@@ -21,18 +20,19 @@ enum AttackState {
 
 @export_group("State")
 @export var held_item: ItemData = null
+@export var is_dead: bool = false
 
 var _aim_direction: Vector2 = Vector2.ZERO
 var _held_item_sprite: Sprite2D = null
 var _attack_state: AttackState = AttackState.READY
 var _last_action: Action = null
 
-@onready var spritesheet: AnimatedSprite2D = $Spritesheet
 @onready var nav_agent := $NavigationAgent2D
 @onready var reach := $ReachArea
 @onready var far_vision := $FarVisionArea
 @onready var near_vision := $NearVisionArea
 @onready var attack_timer: Timer = _create_timer()
+@onready var current_health: int = max_health
 
 
 # Action is used by controllers to interact with characters.
@@ -56,6 +56,9 @@ class Action extends Object:
 func _ready() -> void:
 	_create_held_item_sprite()
 
+	# handle collisions for taking damage
+	body_entered.connect(_handle_collision)
+
 	# rigidbody settings
 	gravity_scale = 0.0
 	lock_rotation = true
@@ -63,6 +66,8 @@ func _ready() -> void:
 
 
 func act(action: Action, _delta: float) -> void:
+	if is_dead: return
+
 	_process_aiming(action)
 	_process_pickup_and_drop(action)
 	_process_trigger(action)
@@ -95,6 +100,30 @@ func remove_item() -> ItemData:
 		held_item = null
 		return item
 	return null
+
+
+func take_damage(amount: int, force: Vector2 = Vector2.ZERO) -> void:
+	current_health -= amount
+	print("Ouch! %s took %d damage, current health: %d" % [name, amount, current_health])
+	if current_health <= 0:
+		die(force)
+	if not force.is_zero_approx():
+		apply_central_impulse(force * 10)
+
+
+func die(force: Vector2 = Vector2.ZERO) -> void:
+	is_dead = true
+
+	# clear last action so no move movement is applied
+	_last_action = null
+
+	# drop held item
+	if is_holding(): toss_item(force)
+
+	# ragdoll sort of
+	lock_rotation = false
+	apply_torque_impulse(randf_range(-5000.0, 5000.0))
+	apply_central_impulse(force * 10)
 
 
 func toss_item(throw_vector: Vector2) -> void:
@@ -140,25 +169,31 @@ func _process_attack(action: Action) -> void:
 		AttackState.READY:
 			if action.attack:
 				_attack_state = AttackState.CHARGE
-				spritesheet.play("attack_charge")
 				attack_timer.start(attack_charge_time)
 		AttackState.CHARGE:
 			if action.cancel_attack:
 				_attack_state = AttackState.READY
 			elif attack_timer.is_stopped():
 				_attack_state = AttackState.SWING
-				spritesheet.play("attack_swing")
 				attack_timer.start(attack_swing_time)
 				apply_central_impulse(_aim_direction * attack_impulse_strength)
 		AttackState.SWING:
 			# TODO: damage enemies in reach but only once
 			if attack_timer.is_stopped():
-				spritesheet.play("attack_recover")
 				_attack_state = AttackState.RECOVER
 				attack_timer.start(attack_recover_time)
 		AttackState.RECOVER:
 			if attack_timer.is_stopped():
 				_attack_state = AttackState.READY
+
+
+func _handle_collision(body: Node) -> void:
+	if body is Character:
+		var other: Character = body
+		if other._attack_state == AttackState.SWING and _attack_state != AttackState.SWING:
+			var force = (global_position - other.global_position).normalized() * other.linear_velocity.length()
+			# defer this call so it doesn't happen during collision processing
+			call_deferred("take_damage", other.attack_damage, force)
 
 
 func _can_move() -> bool:

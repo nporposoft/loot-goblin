@@ -12,6 +12,7 @@ func _ready():
 
 
 func _handle_state_change(new_state: AggressiveAI.State) -> void:
+	# TODO: handle death
 	match new_state:
 		AggressiveAI.State.SUSPICIOUS:
 			text = "?"
