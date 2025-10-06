@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ch0vybwm8dojh"]
+[gd_scene load_steps=24 format=3 uid="uid://ch0vybwm8dojh"]
 
 [ext_resource type="Script" uid="uid://t6rnai4uey85" path="res://src/characters/character.gd" id="1_adxal"]
 [ext_resource type="Texture2D" uid="uid://w7kqmfmqji3i" path="res://assets/Knight.png" id="2_oo2ix"]
@@ -17,6 +17,10 @@ region = Rect2(66, 66, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_m4mlw"]
 atlas = ExtResource("2_oo2ix")
 region = Rect2(33, 66, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xrha"]
+atlas = ExtResource("2_oo2ix")
+region = Rect2(99, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oo2ix"]
 atlas = ExtResource("2_oo2ix")
@@ -74,6 +78,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_swing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xrha")
+}],
+"loop": true,
+"name": &"dead",
 "speed": 5.0
 }, {
 "frames": [{
@@ -146,7 +158,7 @@ metadata/_custom_type_script = "uid://t6rnai4uey85"
 [node name="Spritesheet" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_ab3xg")
-animation = &"idle"
+animation = &"dead"
 autoplay = "idle"
 script = ExtResource("3_adxal")
 metadata/_custom_type_script = "uid://bwtojbye1rncn"

@@ -8,10 +8,7 @@ extends AnimatedSprite2D
 
 func _process(_delta: float) -> void:
 	if character.is_dead:
-		# TODO:
-		# play("dead")
-		play("idle")
-		stop()
+		play("dead")
 		return
 
 	if character._attack_state == Character.AttackState.CHARGE:
