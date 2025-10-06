@@ -21,8 +21,8 @@
 [ext_resource type="Resource" uid="uid://c7s5iuiotlyn1" path="res://world/items/containers/MagicBag.tres" id="15_6avta"]
 [ext_resource type="Texture2D" uid="uid://b656w8clmgsyk" path="res://assets/items.png" id="21_5n4mp"]
 [ext_resource type="PackedScene" uid="uid://ch0vybwm8dojh" path="res://world/characters/Knight.tscn" id="24_6avta"]
+[ext_resource type="Script" uid="uid://bvkkn10qp03c0" path="res://src/world/score_ui.gd" id="26_cwmej"]
 [ext_resource type="PackedScene" uid="uid://bpwkmmuxig2d7" path="res://world/characters/Slime.tscn" id="26_js6p4"]
-[ext_resource type="Script" uid="uid://bor4p2l5i5yeu" path="res://src/world/debug_score_test.gd" id="29_7ipd7"]
 [ext_resource type="PackedScene" uid="uid://beq3cau0h8ycr" path="res://world/player/health_ui.tscn" id="30_jmh8j"]
 [ext_resource type="Script" uid="uid://c85wlydpy0us0" path="res://src/player/health_ui.gd" id="31_rrqg2"]
 
@@ -35,7 +35,7 @@ agent_radius = 22.0
 atlas = ExtResource("21_5n4mp")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="Resource" id="Resource_cwmej"]
+[sub_resource type="Resource" id="Resource_2pp7j"]
 resource_local_to_scene = true
 script = ExtResource("6_cnrih")
 display_name = "Torch"
@@ -47,12 +47,14 @@ metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wni8n"]
 size = Vector2(129, 126)
 
-[sub_resource type="SystemFont" id="SystemFont_frt76"]
+[sub_resource type="SystemFont" id="SystemFont_5fpyr"]
+font_names = PackedStringArray("Sans-Serif")
+font_weight = 600
 
-[sub_resource type="LabelSettings" id="LabelSettings_vyb7s"]
-font = SubResource("SystemFont_frt76")
-font_size = 10
-outline_size = 1
+[sub_resource type="LabelSettings" id="LabelSettings_f1q7j"]
+font = SubResource("SystemFont_5fpyr")
+font_size = 72
+font_color = Color(1, 1, 0, 1)
 
 [node name="TestDungeon" type="Node"]
 
@@ -97,7 +99,7 @@ color = Color(0.0672, 0.06826667, 0.08, 1)
 
 [node name="Torch" parent="World" instance=ExtResource("7_3s1lh")]
 position = Vector2(34, 102)
-item_data = SubResource("Resource_cwmej")
+item_data = SubResource("Resource_2pp7j")
 
 [node name="SafeSpace" type="Area2D" parent="World"]
 collision_layer = 0
@@ -117,18 +119,6 @@ script = ExtResource("11_wni8n")
 position = Vector2(63.5, 64)
 shape = SubResource("RectangleShape2D_wni8n")
 
-[node name="Score" type="Label" parent="World"]
-light_mask = 0
-texture_filter = 1
-offset_left = 45.0
-offset_top = 86.0
-offset_right = 85.0
-offset_bottom = 100.0
-text = "0"
-label_settings = SubResource("LabelSettings_vyb7s")
-horizontal_alignment = 1
-script = ExtResource("29_7ipd7")
-
 [node name="PlayerGoblin" parent="World" instance=ExtResource("10_bbt2j")]
 position = Vector2(64, 32)
 
@@ -144,3 +134,13 @@ grow_horizontal = 1
 grow_vertical = 1
 script = ExtResource("31_rrqg2")
 character = NodePath("../../World/PlayerGoblin")
+
+[node name="ScoreUI" type="Label" parent="UI"]
+offset_top = 10.0
+offset_right = 3840.0
+offset_bottom = 92.0
+scale = Vector2(0.25, 0.25)
+text = "0"
+label_settings = SubResource("LabelSettings_f1q7j")
+horizontal_alignment = 1
+script = ExtResource("26_cwmej")

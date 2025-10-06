@@ -10,3 +10,7 @@ func _process(delta) -> void:
 
 func _add_score(addedScore: int) -> void:
 	Score = Score + addedScore
+
+func _reset_score() -> void:
+	Score = 0.0
+	DisplayedScore = Score

@@ -21,4 +21,5 @@ func begin_transition() -> void:
 
 
 func load_dungeon() -> void:
+	ScoreKeeper._reset_score()
 	get_tree().change_scene_to_packed(dungeon)
