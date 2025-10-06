@@ -9,11 +9,11 @@ var ai_controller: AggressiveAI = null
 
 func _ready():
 	ai_controller.state_changed.connect(_handle_state_change)
+	ai_controller.character.died.connect(_handle_character_death)
 
 
 func _handle_state_change(new_state: AggressiveAI.State) -> void:
 	if ai_controller.character.is_dead:
-		visible = false
 		return
 
 	match new_state:
@@ -35,3 +35,7 @@ func _handle_state_change(new_state: AggressiveAI.State) -> void:
 			visible = true
 		_:
 			visible = false
+
+
+func _handle_character_death() -> void:
+	visible = false

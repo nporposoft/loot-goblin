@@ -14,6 +14,9 @@ enum Faction {
 	ADVENTURER,
 }
 
+signal died
+signal health_changed
+
 @export_group("Stats")
 @export var faction: Faction = Faction.GOBLIN
 @export var enemies: Array[Faction] = []
@@ -112,6 +115,13 @@ func remove_item() -> ItemData:
 	return null
 
 
+func heal(amount: int) -> void:
+	if is_dead: return
+
+	current_health = min(current_health + amount, max_health)
+	health_changed.emit()
+
+
 func take_damage(amount: int, force_direction: Vector2 = Vector2.ZERO) -> void:
 	force_direction = force_direction.normalized()
 	current_health -= amount
@@ -121,6 +131,8 @@ func take_damage(amount: int, force_direction: Vector2 = Vector2.ZERO) -> void:
 	blood_particles.emitting = true
 	blood_particles.rotation = force_direction.angle()
 	apply_central_impulse(force_direction * 10)
+
+	health_changed.emit()
 
 	if current_health <= 0:
 		die(force_direction)
@@ -147,6 +159,8 @@ func die(force_direction: Vector2 = Vector2.ZERO) -> void:
 	# TODO: this doesn't do anything
 	# I think the lock_rotation change doesn't apply until the next physics frame
 	apply_torque_impulse(randf_range(-5000.0, 5000.0))
+
+	died.emit()
 
 
 func toss_item(throw_vector: Vector2) -> void:

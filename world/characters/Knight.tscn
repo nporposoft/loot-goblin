@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://w7kqmfmqji3i" path="res://assets/Knight.png" id="2_oo2ix"]
 [ext_resource type="Script" uid="uid://bwtojbye1rncn" path="res://src/characters/character_sprite.gd" id="3_adxal"]
 [ext_resource type="Script" uid="uid://3vjtbq2kcl8g" path="res://src/characters/detector.gd" id="3_imyk4"]
-[ext_resource type="PackedScene" uid="uid://bhwyakrca4pgo" path="res://characters/blood_particles.tscn" id="5_vp52c"]
+[ext_resource type="PackedScene" uid="uid://bhwyakrca4pgo" path="res://world/characters/blood_particles.tscn" id="5_vp52c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ab3xg"]
 atlas = ExtResource("2_oo2ix")
