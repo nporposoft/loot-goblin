@@ -13,7 +13,7 @@ var _interact_target: Interactable = null
 var _picking_up: bool = false
 #var _charging_throw: bool = false
 
-const CHARGE_DELAY = 0.1
+const CHARGE_DELAY = 0.12
 
 func _ready():
 	throwBar = character.find_child("ThrowMeter", true)

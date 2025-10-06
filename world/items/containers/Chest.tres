@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://bparvikf7wf4g"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://bparvikf7wf4g"]
 
 [ext_resource type="Script" uid="uid://ctqjnf2yg1uvt" path="res://src/items/item_data.gd" id="1_hiv1q"]
 [ext_resource type="PackedScene" uid="uid://7mdy3xr0foye" path="res://world/items/containers/ChestUI.tscn" id="2_7mxhg"]
+[ext_resource type="Resource" uid="uid://be2tyr1vni4fl" path="res://world/items/Coin.tres" id="2_o0ta1"]
+[ext_resource type="Resource" uid="uid://bhfxa754v7msh" path="res://world/items/Diamond.tres" id="3_i0c73"]
 [ext_resource type="Texture2D" uid="uid://dkrq5othh4xcw" path="res://assets/containers.png" id="3_st6a4"]
 [ext_resource type="PackedScene" uid="uid://bk6cmdekysf0j" path="res://world/items/containers/Chest.tscn" id="4_xgw2a"]
 
@@ -21,5 +23,5 @@ world_scene = ExtResource("4_xgw2a")
 is_container = true
 capacity = 16
 ui_scene = ExtResource("2_7mxhg")
-items = null
+items = Array[ExtResource("1_hiv1q")]([ExtResource("2_o0ta1"), ExtResource("2_o0ta1"), ExtResource("3_i0c73"), ExtResource("2_o0ta1")])
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"

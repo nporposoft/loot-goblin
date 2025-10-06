@@ -21,6 +21,5 @@ metadata/_custom_type_script = "uid://dj61bulh8wvlg"
 shape = SubResource("CircleShape2D_7wiff")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(1, 1, 0, 1)
 texture_filter = 1
 texture = SubResource("AtlasTexture_wnkql")

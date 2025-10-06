@@ -159,6 +159,10 @@ func die(force_direction: Vector2 = Vector2.ZERO) -> void:
 	# TODO: this doesn't do anything
 	# I think the lock_rotation change doesn't apply until the next physics frame
 	apply_torque_impulse(randf_range(-5000.0, 5000.0))
+	
+	var despawn_timer: Timer = _create_timer()
+	despawn_timer.connect("timeout",_destroy)
+	despawn_timer.start(3.0)
 
 	died.emit()
 
@@ -266,6 +270,14 @@ func _remove_held_item_sprite() -> void:
 
 	_held_item_sprite.queue_free()
 	_held_item_sprite = null
+
+
+func _get_faction() -> Faction:
+	return faction
+
+
+func _destroy() -> void:
+	queue_free()
 
 
 func _create_timer() -> Timer:

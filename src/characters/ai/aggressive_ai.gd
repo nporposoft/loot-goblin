@@ -75,7 +75,7 @@ func _process(delta: float):
 				_start_attacking(current_target)
 			else:
 				if _state_timer.is_stopped():
-					if _can_see(current_target):
+					if current_target != null and _can_see(current_target):
 						_start_searching()
 					else:
 						_start_idling()
