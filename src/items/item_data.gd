@@ -7,6 +7,7 @@ extends Resource
 @export_multiline var description: String = "A super cool item."
 @export var ui_sprite: Texture2D = null
 @export var world_scene: PackedScene = null
+@export var exclusive_spawn: bool = false
 
 @export_group("Container Properties")
 @export var is_container: bool = false

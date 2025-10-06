@@ -34,6 +34,7 @@ var height: int = 32
 #  - loot_shininess_distance_multiplier is multiplied by the distance from the starting room to
 #    determine total shininess value of loot in a room
 @export var loot_shininess_distance_multiplier: float = 0.1
+@export var max_loot_per_room: int = 20
 
 # Small tiles atlas coordinates: 
 const wallAtlas: Vector2i = Vector2i(3, 0)
@@ -262,20 +263,45 @@ func generate_catacombs() -> void:
 			var distance_from_start: float = (room_world_position - starting_room_world_position).length()
 			var total_room_value: float = distance_from_start * loot_shininess_distance_multiplier
 			var remaining_room_value: float = total_room_value
+			var exclusive_items_in_room: Array[ItemData] = []
+			var room_has_container: bool = false
+			var remaining_attempts: int = max_loot_per_room
 			while remaining_room_value > 0.0:
-				var is_container: bool = randf() < container_spawn_chance
+				remaining_attempts -= 1
+				if remaining_attempts <= 0:
+					break
+
+				# decide if next item is a container or treasure
+				var is_container: bool = false
+				# but only allow one container per room
+				if room_has_container:
+					is_container = false
+				else:
+					is_container = randf() < container_spawn_chance
 				var list := containers if is_container else treasures
+
+				# pick a random item that fits in the remaining room value
 				var possible_items := list.filter(func(i): return i.shininess <= total_room_value)
 				if possible_items.size() == 0:
 					break
 				var item_data: ItemData = possible_items[randi() % possible_items.size()]
+
+				# don't add exclusive items more than once per room
+				if item_data.exclusive_spawn:
+					if exclusive_items_in_room.has(item_data):
+						continue
+					exclusive_items_in_room.append(item_data)
+
 				var item_scene := item_data.world_scene
 				var item := item_scene.instantiate()
+				if item_data.is_container:
+					room_has_container = true
 				item.position = center_of_room + Vector2(
 					(randf() - 0.5) * float(tile_size) * 0.5,
 					(randf() - 0.5) * float(tile_size) * 0.5)
 				item.item_data = item_data
 				get_parent().call_deferred("add_child", item)
+
 				remaining_room_value -= item_data.shininess
 
 		

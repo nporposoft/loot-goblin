@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://r0rlptslyw58"]
+[gd_scene load_steps=32 format=3 uid="uid://r0rlptslyw58"]
 
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="1_nsxo0"]
 [ext_resource type="Script" uid="uid://cyjt8uhdv01dp" path="res://src/player/follow_camera.gd" id="2_ure5g"]
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://be2tyr1vni4fl" path="res://world/items/Coin.tres" id="9_qa5mw"]
 [ext_resource type="PackedScene" uid="uid://cmubnd2oc4lex" path="res://world/characters/Goblin.tscn" id="10_bbt2j"]
 [ext_resource type="Resource" uid="uid://bhfxa754v7msh" path="res://world/items/Diamond.tres" id="10_r0xmj"]
+[ext_resource type="Resource" uid="uid://bhfgsuj1i8rld" path="res://world/items/Torch.tres" id="11_gxenx"]
 [ext_resource type="Resource" uid="uid://dbufmrasvcauh" path="res://world/items/containers/Backpack.tres" id="11_v2qds"]
 [ext_resource type="Script" uid="uid://cvfwxlg4h84qg" path="res://src/world/healing_zone.gd" id="11_wni8n"]
 [ext_resource type="Resource" uid="uid://dr5gh87hu4acd" path="res://world/items/containers/Bucket.tres" id="12_hr4si"]
@@ -34,11 +35,10 @@ agent_radius = 22.0
 atlas = ExtResource("21_5n4mp")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="Resource" id="Resource_rk3es"]
+[sub_resource type="Resource" id="Resource_cwmej"]
 resource_local_to_scene = true
 script = ExtResource("6_cnrih")
 display_name = "Torch"
-shininess = 2
 description = "So bright"
 ui_sprite = SubResource("AtlasTexture_yh1pe")
 world_scene = ExtResource("7_3s1lh")
@@ -86,7 +86,7 @@ WORLD_RADIUS = 20
 ROOM_DIM_RANGE = 5
 adventurer_scenes = Array[PackedScene]([ExtResource("24_6avta")])
 monster_scenes = Array[PackedScene]([ExtResource("26_js6p4")])
-treasures = Array[ExtResource("6_cnrih")]([ExtResource("9_qa5mw"), ExtResource("10_r0xmj")])
+treasures = Array[ExtResource("6_cnrih")]([ExtResource("9_qa5mw"), ExtResource("10_r0xmj"), ExtResource("11_gxenx")])
 containers = Array[ExtResource("6_cnrih")]([ExtResource("11_v2qds"), ExtResource("12_hr4si"), ExtResource("13_mq82q"), ExtResource("14_kof4o"), ExtResource("15_6avta")])
 
 [node name="Goal" parent="World" instance=ExtResource("6_wni8n")]
@@ -97,7 +97,7 @@ color = Color(0.0672, 0.06826667, 0.08, 1)
 
 [node name="Torch" parent="World" instance=ExtResource("7_3s1lh")]
 position = Vector2(34, 102)
-item_data = SubResource("Resource_rk3es")
+item_data = SubResource("Resource_cwmej")
 
 [node name="SafeSpace" type="Area2D" parent="World"]
 collision_layer = 0
