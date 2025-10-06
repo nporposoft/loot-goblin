@@ -492,7 +492,7 @@ position = Vector2(832, 464)
 item_data = SubResource("Resource_uw5y7")
 
 [node name="Bucket" parent="World" instance=ExtResource("9_3h324")]
-position = Vector2(704, 312)
+position = Vector2(704, 324)
 item_data = SubResource("Resource_c4r58")
 
 [node name="Torch1" parent="World" instance=ExtResource("6_blpox")]
@@ -671,9 +671,7 @@ some loot?
 
 
 
-
 (Move using WASD)
-
 
 
 
@@ -819,13 +817,12 @@ horizontal_alignment = 1
 
 [node name="Score Hole" type="Label" parent="World/TutorialMessages"]
 layout_mode = 0
-offset_left = 1023.0
-offset_top = 344.0
-offset_right = 1278.9999
-offset_bottom = 855.99963
+offset_left = 1024.0
+offset_top = 396.0
+offset_right = 1279.9999
+offset_bottom = 907.99963
 scale = Vector2(0.5, 0.5)
 text = "
-
 I think I smelled more
 loot across the hall...
 
@@ -833,6 +830,7 @@ loot across the hall...
 
 Throw stuff in
 to collect it!
+
 
 
 
@@ -872,7 +870,7 @@ text = "
 
 
 
-Uh oh. Keep running!"
+Uh oh. Time to run!"
 label_settings = SubResource("LabelSettings_4xu0r")
 horizontal_alignment = 1
 
@@ -889,8 +887,8 @@ text = "
 
 
 
-Fighting is almost
-always a bad idea."
+You can't fight him!
+Keep running!"
 label_settings = SubResource("LabelSettings_4xu0r")
 horizontal_alignment = 1
 
