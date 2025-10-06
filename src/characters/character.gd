@@ -24,7 +24,7 @@ enum AttackState {
 
 var _aim_direction: Vector2 = Vector2.ZERO
 var _held_item_sprite: Sprite2D = null
-var _attack_state: AttackState
+var _attack_state: AttackState = AttackState.READY
 
 @onready var spritesheet: AnimatedSprite2D = $Spritesheet
 @onready var nav_agent := $NavigationAgent2D
