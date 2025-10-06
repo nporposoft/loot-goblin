@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://r0rlptslyw58"]
+[gd_scene load_steps=34 format=3 uid="uid://r0rlptslyw58"]
 
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="1_y6nrp"]
 [ext_resource type="Script" uid="uid://cyjt8uhdv01dp" path="res://src/player/follow_camera.gd" id="2_j2kls"]
@@ -18,17 +18,35 @@
 [ext_resource type="Resource" uid="uid://c7s5iuiotlyn1" path="res://world/items/containers/MagicBag.tres" id="16_nppw2"]
 [ext_resource type="PackedScene" uid="uid://cbyjpejpvcygo" path="res://world/Goal.tscn" id="17_wytvd"]
 [ext_resource type="PackedScene" uid="uid://cirkhmxhfm3hn" path="res://world/items/Torch.tscn" id="18_0vrax"]
+[ext_resource type="PackedScene" uid="uid://gilrfilnas3p" path="res://world/items/TorchSprite.tscn" id="19_r7b6d"]
+[ext_resource type="Texture2D" uid="uid://b656w8clmgsyk" path="res://assets/items.png" id="20_7odh5"]
 [ext_resource type="Script" uid="uid://dfv4337oq2ve7" path="res://src/world/safe_space.gd" id="20_buokf"]
 [ext_resource type="Script" uid="uid://cvfwxlg4h84qg" path="res://src/world/healing_zone.gd" id="21_yg8g0"]
 [ext_resource type="PackedScene" uid="uid://cmubnd2oc4lex" path="res://world/characters/Goblin.tscn" id="23_86tn1"]
 [ext_resource type="PackedScene" uid="uid://beq3cau0h8ycr" path="res://world/player/health_ui.tscn" id="24_ssx3i"]
 [ext_resource type="Script" uid="uid://c85wlydpy0us0" path="res://src/player/health_ui.gd" id="25_gh7h4"]
 [ext_resource type="Script" uid="uid://bwgshxllt467x" path="res://src/world/score_ui.gd" id="25_y6nrp"]
+[ext_resource type="PackedScene" uid="uid://culx71ky0dsol" path="res://world/player/game_over.tscn" id="27_57sj4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_y6jnv"]
 source_geometry_mode = 1
 source_geometry_group_name = &"navmesh_sources"
 agent_radius = 22.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh1pe"]
+atlas = ExtResource("20_7odh5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="Resource" id="Resource_r7b6d"]
+resource_local_to_scene = true
+script = ExtResource("8_3josa")
+display_name = "Torch"
+shininess = 2.0
+description = "So bright"
+ui_sprite = SubResource("AtlasTexture_yh1pe")
+scene_sprite = ExtResource("19_r7b6d")
+item_scene = ExtResource("18_0vrax")
+exclusive_spawn = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wni8n"]
 size = Vector2(129, 126)
@@ -85,7 +103,7 @@ color = Color(0.0672, 0.06826667, 0.08, 1)
 
 [node name="Torch" parent="World" instance=ExtResource("18_0vrax")]
 position = Vector2(34, 102)
-item_data = ExtResource("11_mimim")
+item_data = SubResource("Resource_r7b6d")
 
 [node name="SafeSpace" type="Area2D" parent="World"]
 collision_layer = 0
@@ -130,3 +148,7 @@ text = "0"
 label_settings = SubResource("LabelSettings_f1q7j")
 horizontal_alignment = 1
 script = ExtResource("25_y6nrp")
+
+[node name="Game Over" parent="UI" node_paths=PackedStringArray("player_character") instance=ExtResource("27_57sj4")]
+visible = false
+player_character = NodePath("../../World/PlayerGoblin")

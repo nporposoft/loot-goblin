@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://culx71ky0dsol"]
+
+[ext_resource type="Script" uid="uid://dg3uev4ufgrtk" path="res://src/world/game_over.gd" id="1_gyaq0"]
+[ext_resource type="Script" uid="uid://cewlkold744ho" path="res://world/player/scene_change_button.gd" id="2_heydd"]
+
+[node name="Game Over" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_gyaq0")
+
+[node name="Oh no" type="Label" parent="."]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 256.0
+offset_right = 298.0
+offset_bottom = 279.0
+text = "Oh no"
+
+[node name="Main Menu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 320.0
+offset_right = 288.0
+offset_bottom = 351.0
+text = "Main Menu"
+script = ExtResource("2_heydd")
+target_scene_path = "uid://cjufcr2toyf7t"
+
+[node name="Try Again" type="Button" parent="."]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 384.0
+offset_right = 271.0
+offset_bottom = 415.0
+text = "Try again"
+script = ExtResource("2_heydd")
+target_scene_path = "uid://r0rlptslyw58"
+metadata/_custom_type_script = "uid://cewlkold744ho"
