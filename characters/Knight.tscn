@@ -90,6 +90,10 @@ collision_layer = 2
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_adxal")
+move_speed = null
+max_health = null
+attack_damage = null
+attack_cooldown = null
 metadata/_custom_type_script = "uid://t6rnai4uey85"
 
 [node name="Spritesheet" type="AnimatedSprite2D" parent="."]
@@ -130,3 +134,5 @@ metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NearVisionArea"]
 shape = SubResource("CircleShape2D_oo2ix")
+
+[node name="HeldLightSource" type="PointLight2D" parent="."]

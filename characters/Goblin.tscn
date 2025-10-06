@@ -262,4 +262,4 @@ theme_override_styles/fill = SubResource("StyleBoxLine_47a61")
 max_value = 1.0
 show_percentage = false
 
-[node name="ItemLightSource" type="Node" parent="."]
+[node name="HeldLightSource" type="PointLight2D" parent="."]

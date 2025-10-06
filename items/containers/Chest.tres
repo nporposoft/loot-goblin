@@ -21,4 +21,5 @@ world_scene = ExtResource("4_xgw2a")
 is_container = true
 capacity = 16
 ui_scene = ExtResource("2_7mxhg")
+items = null
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"

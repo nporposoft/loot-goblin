@@ -4,9 +4,9 @@ extends Node
 @onready var throwBar: ProgressBar
 
 @export var character: Character = null
-@export var max_throw_charge_time: float = 2.5
+@export var max_throw_charge_time: float = 1.5
 # TODO: force multiplier should be based on character stats
-@export var throw_force_multiplier: float = 100
+@export var throw_force_multiplier: float = 165
 
 var _throw_charge_time: float = 0.0
 var _interact_target: Interactable = null
