@@ -277,7 +277,6 @@ metadata/_custom_type_script = "uid://kygkbg3kqosp"
 texture_filter = 1
 
 [node name="FollowCamera" type="Camera2D" parent="World" node_paths=PackedStringArray("target")]
-zoom = Vector2(4, 4)
 script = ExtResource("2_ure5g")
 target = NodePath("../PlayerGoblin")
 metadata/_custom_type_script = "uid://cyjt8uhdv01dp"
@@ -314,6 +313,7 @@ ROOM_DIM_RANGE = 5
 position = Vector2(65, 68)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="World"]
+visible = false
 color = Color(0.0672, 0.06826667, 0.08, 1)
 
 [node name="Torch" parent="World" instance=ExtResource("7_3s1lh")]
@@ -371,9 +371,8 @@ item_data = SubResource("Resource_6avta")
 [node name="Knight" parent="World" instance=ExtResource("24_6avta")]
 position = Vector2(-214, 187)
 
-[node name="AggressiveAI" type="Node" parent="World/Knight" node_paths=PackedStringArray("map")]
+[node name="AggressiveAI" type="Node" parent="World/Knight"]
 script = ExtResource("7_1v8wj")
-map = NodePath("../../Terrain")
 metadata/_custom_type_script = "uid://dmp2din0planr"
 
 [node name="DebugScoreTest" type="Label" parent="World"]
@@ -391,9 +390,8 @@ script = ExtResource("29_7ipd7")
 [node name="Slime" parent="World" instance=ExtResource("26_js6p4")]
 position = Vector2(211, 197)
 
-[node name="AggressiveAI" type="Node" parent="World/Slime" node_paths=PackedStringArray("map")]
+[node name="AggressiveAI" type="Node" parent="World/Slime"]
 script = ExtResource("7_1v8wj")
-map = NodePath("../../Terrain")
 metadata/_custom_type_script = "uid://dmp2din0planr"
 
 [node name="MagicBag" parent="World" instance=ExtResource("27_j26kr")]

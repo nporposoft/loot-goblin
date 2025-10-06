@@ -35,9 +35,6 @@ enum State {
 @export var last_known_target_position: Vector2 = Vector2.ZERO
 @export var visible_characters: Array[Character] = []
 
-@export_group("Components")
-@export var map: Terrain = null
-
 @onready var character: Character = get_parent() as Character
 
 @onready var _state_timer: Timer = _create_timer()
@@ -149,7 +146,7 @@ func _start_idling() -> void:
 
 func _start_wandering() -> void:
 	_set_state(State.WANDERING)
-	character.nav_agent.set_target_position(_pick_random_destination(randf_range(min_wander_distance, max_wander_distance)))
+	character.nav_agent.set_target_position(_pick_random_destination(min_wander_distance, max_wander_distance, character.global_position))
 
 
 func _start_suspicious(target: Character) -> void:
@@ -179,7 +176,7 @@ func _start_searching() -> void:
 	current_target = null
 	# pick a nearby place to walk to unless we're still walking toward the last known position
 	if character.nav_agent.is_navigation_finished():
-		character.nav_agent.set_target_position(_pick_random_destination(randf_range(min_search_distance, max_search_distance), last_known_target_position))
+		character.nav_agent.set_target_position(_pick_random_destination(min_search_distance, max_search_distance, last_known_target_position))
 	if _search_timer.is_stopped():
 		_search_timer.wait_time = randf_range(min_search_time, max_search_time)
 		_search_timer.start()
@@ -225,18 +222,10 @@ func _set_state(new_state: State) -> void:
 	state_changed.emit(new_state)
 
 
-func _pick_random_destination(max_range: float = 0.0, from: Vector2 = character.global_position) -> Vector2:
-	# TODO: it would probably make more sense to pick a random distance and angle
-	# because 99% of the time this is just going to pick a point outside the circle and
-	# then clamp it to the edge of the circle
-	var tile_size: int = map.tile_set.tile_size.x
-	var map_rect: Rect2 = map.get_used_rect()
-	var random_point = Vector2(
-		randf_range(map_rect.position.x * tile_size, map_rect.end.x * tile_size), 
-		randf_range(map_rect.position.y * tile_size, map_rect.end.y * tile_size))
-	if !is_zero_approx(max_range) and from.distance_to(random_point) > max_range:
-		random_point = from.direction_to(random_point) * max_range + from
-	return random_point
+func _pick_random_destination(min_range: float, max_range: float, from: Vector2) -> Vector2:
+	var random_direction = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)).normalized()
+	var random_distance = randf_range(min_range, max_range)
+	return from + random_direction * random_distance
 
 
 func _create_timer() -> Timer:
