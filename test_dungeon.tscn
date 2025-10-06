@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://r0rlptslyw58"]
+[gd_scene load_steps=63 format=3 uid="uid://r0rlptslyw58"]
 
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="1_nsxo0"]
 [ext_resource type="Script" uid="uid://cyjt8uhdv01dp" path="res://src/player/follow_camera.gd" id="2_ure5g"]
@@ -33,20 +33,10 @@
 [ext_resource type="PackedScene" uid="uid://beq3cau0h8ycr" path="res://world/player/health_ui.tscn" id="30_jmh8j"]
 [ext_resource type="Script" uid="uid://c85wlydpy0us0" path="res://src/player/health_ui.gd" id="31_rrqg2"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_4qov3"]
-source_geometry_mode = 1
-source_geometry_group_name = &"navmesh_sources"
-agent_radius = 8.0
-
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_y6jnv"]
 source_geometry_mode = 1
 source_geometry_group_name = &"navmesh_sources"
 agent_radius = 22.0
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_ure5g"]
-source_geometry_mode = 1
-source_geometry_group_name = &"navmesh_sources"
-agent_radius = 32.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yh1pe"]
 atlas = ExtResource("21_5n4mp")
@@ -281,22 +271,9 @@ script = ExtResource("2_ure5g")
 target = NodePath("../PlayerGoblin")
 metadata/_custom_type_script = "uid://cyjt8uhdv01dp"
 
-[node name="NavMeshSmall" type="NavigationRegion2D" parent="World" node_paths=PackedStringArray("map")]
-navigation_polygon = SubResource("NavigationPolygon_4qov3")
-script = ExtResource("3_0pqet")
-map = NodePath("../Terrain")
-metadata/_custom_type_script = "uid://5i4gw4mikjjm"
-
 [node name="NavMeshMedium" type="NavigationRegion2D" parent="World" node_paths=PackedStringArray("map")]
 navigation_polygon = SubResource("NavigationPolygon_y6jnv")
 navigation_layers = 2
-script = ExtResource("3_0pqet")
-map = NodePath("../Terrain")
-metadata/_custom_type_script = "uid://5i4gw4mikjjm"
-
-[node name="NavMeshLarge" type="NavigationRegion2D" parent="World" node_paths=PackedStringArray("map")]
-navigation_polygon = SubResource("NavigationPolygon_ure5g")
-navigation_layers = 4
 script = ExtResource("3_0pqet")
 map = NodePath("../Terrain")
 metadata/_custom_type_script = "uid://5i4gw4mikjjm"
