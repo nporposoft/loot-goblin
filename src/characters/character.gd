@@ -32,6 +32,7 @@ signal health_changed
 @export_group("State")
 @export var held_item: ItemData = null
 @export var is_dead: bool = false
+@export var is_invisible: bool = false
 
 var _aim_direction: Vector2 = Vector2.ZERO
 var _held_item_sprite: Sprite2D = null
@@ -42,6 +43,7 @@ var _last_action: Action = null
 @onready var reach := $ReachArea
 @onready var far_vision := $FarVisionArea
 @onready var near_vision := $NearVisionArea
+@onready var sleep_area := $SleepArea
 @onready var blood_particles := $BloodParticles
 @onready var attack_timer: Timer = _create_timer()
 @onready var current_health: int = max_health
@@ -125,8 +127,6 @@ func heal(amount: int) -> void:
 func take_damage(amount: int, force_direction: Vector2 = Vector2.ZERO) -> void:
 	force_direction = force_direction.normalized()
 	current_health -= amount
-
-	print("Ouch! %s took %d damage, current health: %d" % [name, amount, current_health])
 
 	blood_particles.emitting = true
 	blood_particles.rotation = force_direction.angle()
@@ -235,7 +235,6 @@ func _process_attack(action: Action) -> void:
 
 func _handle_collision(body: Node) -> void:
 	if body is Character:
-		print("%s collided with %s" % [name, body.name])
 		var other: Character = body
 		if other._attack_state == AttackState.SWING:
 			var force_direction = (global_position - other.global_position)

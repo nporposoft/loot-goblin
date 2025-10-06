@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://r0rlptslyw58"]
+[gd_scene load_steps=63 format=3 uid="uid://r0rlptslyw58"]
 
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="1_nsxo0"]
 [ext_resource type="Script" uid="uid://cyjt8uhdv01dp" path="res://src/player/follow_camera.gd" id="2_ure5g"]
@@ -9,10 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://cbyjpejpvcygo" path="res://world/Goal.tscn" id="6_wni8n"]
 [ext_resource type="PackedScene" uid="uid://cirkhmxhfm3hn" path="res://world/items/Torch.tscn" id="7_3s1lh"]
 [ext_resource type="PackedScene" uid="uid://cmubnd2oc4lex" path="res://world/characters/Goblin.tscn" id="10_bbt2j"]
-[ext_resource type="PackedScene" uid="uid://bpt6oiwfdahj5" path="res://world/healing_zone.tscn" id="10_rk3es"]
 [ext_resource type="PackedScene" uid="uid://ykf6nsdak0fj" path="res://world/items/Diamond.tscn" id="11_vjn46"]
 [ext_resource type="Script" uid="uid://cvfwxlg4h84qg" path="res://src/world/healing_zone.gd" id="11_wni8n"]
 [ext_resource type="PackedScene" uid="uid://d3u6nyytl22wp" path="res://world/items/containers/Bucket.tscn" id="12_j7t5g"]
+[ext_resource type="Script" uid="uid://dfv4337oq2ve7" path="res://src/world/safe_space.gd" id="12_wni8n"]
 [ext_resource type="Texture2D" uid="uid://dkrq5othh4xcw" path="res://assets/containers.png" id="13_0ak11"]
 [ext_resource type="Script" uid="uid://d4mgxpys1m80c" path="res://src/player/container_ui.gd" id="15_w2phg"]
 [ext_resource type="Texture2D" uid="uid://cdlafytbjx7lg" path="res://assets/bag slot.png" id="16_cx5mk"]
@@ -33,26 +33,16 @@
 [ext_resource type="PackedScene" uid="uid://beq3cau0h8ycr" path="res://world/player/health_ui.tscn" id="30_jmh8j"]
 [ext_resource type="Script" uid="uid://c85wlydpy0us0" path="res://src/player/health_ui.gd" id="31_rrqg2"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_4qov3"]
-source_geometry_mode = 1
-source_geometry_group_name = &"navmesh_sources"
-agent_radius = 8.0
-
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_y6jnv"]
 source_geometry_mode = 1
 source_geometry_group_name = &"navmesh_sources"
 agent_radius = 22.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_ure5g"]
-source_geometry_mode = 1
-source_geometry_group_name = &"navmesh_sources"
-agent_radius = 32.0
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_yh1pe"]
 atlas = ExtResource("21_5n4mp")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="Resource" id="Resource_wni8n"]
+[sub_resource type="Resource" id="Resource_rk3es"]
 resource_local_to_scene = true
 script = ExtResource("6_cnrih")
 display_name = "Torch"
@@ -75,6 +65,16 @@ outline_size = 1
 [sub_resource type="AtlasTexture" id="AtlasTexture_ipdfa"]
 atlas = ExtResource("21_5n4mp")
 region = Rect2(17, 17, 15, 15)
+
+[sub_resource type="Resource" id="Resource_wni8n"]
+resource_local_to_scene = true
+script = ExtResource("6_cnrih")
+display_name = "Diamond"
+shininess = 100.0
+description = "So shiny!"
+ui_sprite = SubResource("AtlasTexture_ipdfa")
+world_scene = ExtResource("11_vjn46")
+metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
 [sub_resource type="Resource" id="Resource_3s1lh"]
 resource_local_to_scene = true
@@ -106,16 +106,6 @@ ui_sprite = SubResource("AtlasTexture_ipdfa")
 world_scene = ExtResource("11_vjn46")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="Resource" id="Resource_j7t5g"]
-resource_local_to_scene = true
-script = ExtResource("6_cnrih")
-display_name = "Diamond"
-shininess = 100.0
-description = "So shiny!"
-ui_sprite = SubResource("AtlasTexture_ipdfa")
-world_scene = ExtResource("11_vjn46")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_4yo1c"]
 atlas = ExtResource("16_cx5mk")
 region = Rect2(0, 0, 32, 32)
@@ -124,7 +114,7 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("16_cx5mk")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="PackedScene" id="PackedScene_xhbl4"]
+[sub_resource type="PackedScene" id="PackedScene_j7t5g"]
 resource_local_to_scene = true
 _bundled = {
 "conn_count": 0,
@@ -148,7 +138,7 @@ size = Vector2(14, 14)
 [sub_resource type="CircleShape2D" id="CircleShape2D_2okec"]
 radius = 26.019224
 
-[sub_resource type="PackedScene" id="PackedScene_qa5mw"]
+[sub_resource type="PackedScene" id="PackedScene_xhbl4"]
 resource_local_to_scene = true
 _bundled = {
 "conn_count": 1,
@@ -162,16 +152,16 @@ _bundled = {
 "version": 3
 }
 
-[sub_resource type="Resource" id="Resource_r0xmj"]
+[sub_resource type="Resource" id="Resource_qa5mw"]
 resource_local_to_scene = true
 script = ExtResource("6_cnrih")
 display_name = "Bucket"
 shininess = 1
 description = "What a nice bucket"
 ui_sprite = SubResource("AtlasTexture_l2qbg")
-world_scene = SubResource("PackedScene_qa5mw")
+world_scene = SubResource("PackedScene_xhbl4")
 is_container = true
-ui_scene = SubResource("PackedScene_xhbl4")
+ui_scene = SubResource("PackedScene_j7t5g")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lr2a3"]
@@ -199,7 +189,7 @@ _bundled = {
 atlas = ExtResource("13_0ak11")
 region = Rect2(17, 0, 16, 16)
 
-[sub_resource type="Resource" id="Resource_v2qds"]
+[sub_resource type="Resource" id="Resource_r0xmj"]
 resource_local_to_scene = true
 script = ExtResource("6_cnrih")
 display_name = "Carton"
@@ -211,54 +201,54 @@ is_container = true
 ui_scene = SubResource("PackedScene_gxenx")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hr4si"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2qds"]
 resource_local_to_scene = true
 atlas = ExtResource("13_0ak11")
 region = Rect2(0, 17, 16, 16)
 
-[sub_resource type="Resource" id="Resource_mq82q"]
+[sub_resource type="Resource" id="Resource_hr4si"]
 resource_local_to_scene = true
 script = ExtResource("6_cnrih")
 display_name = "Bucket"
 shininess = 20
 description = "What a nice bucket"
-ui_sprite = SubResource("AtlasTexture_hr4si")
+ui_sprite = SubResource("AtlasTexture_v2qds")
 world_scene = ExtResource("20_v2qds")
 is_container = true
 capacity = 9
 ui_scene = ExtResource("21_hr4si")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kof4o"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mq82q"]
 resource_local_to_scene = true
 atlas = ExtResource("13_0ak11")
 region = Rect2(0, 34, 16, 16)
 
-[sub_resource type="Resource" id="Resource_6avta"]
+[sub_resource type="Resource" id="Resource_kof4o"]
 resource_local_to_scene = true
 script = ExtResource("6_cnrih")
 display_name = "Chest"
 shininess = 250
 description = "Look at that chest!"
-ui_sprite = SubResource("AtlasTexture_kof4o")
+ui_sprite = SubResource("AtlasTexture_mq82q")
 world_scene = ExtResource("22_mq82q")
 is_container = true
 capacity = 16
 ui_scene = ExtResource("23_kof4o")
 metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_js6p4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6avta"]
 resource_local_to_scene = true
 atlas = ExtResource("13_0ak11")
 region = Rect2(34, 34, 16, 16)
 
-[sub_resource type="Resource" id="Resource_j26kr"]
+[sub_resource type="Resource" id="Resource_js6p4"]
 resource_local_to_scene = true
 script = ExtResource("6_cnrih")
 display_name = "Magic Bag"
 shininess = 850.0
 description = "There's a ton of space in here!"
-ui_sprite = SubResource("AtlasTexture_js6p4")
+ui_sprite = SubResource("AtlasTexture_6avta")
 world_scene = ExtResource("27_j26kr")
 is_container = true
 capacity = 25
@@ -281,22 +271,9 @@ script = ExtResource("2_ure5g")
 target = NodePath("../PlayerGoblin")
 metadata/_custom_type_script = "uid://cyjt8uhdv01dp"
 
-[node name="NavMeshSmall" type="NavigationRegion2D" parent="World" node_paths=PackedStringArray("map")]
-navigation_polygon = SubResource("NavigationPolygon_4qov3")
-script = ExtResource("3_0pqet")
-map = NodePath("../Terrain")
-metadata/_custom_type_script = "uid://5i4gw4mikjjm"
-
 [node name="NavMeshMedium" type="NavigationRegion2D" parent="World" node_paths=PackedStringArray("map")]
 navigation_polygon = SubResource("NavigationPolygon_y6jnv")
 navigation_layers = 2
-script = ExtResource("3_0pqet")
-map = NodePath("../Terrain")
-metadata/_custom_type_script = "uid://5i4gw4mikjjm"
-
-[node name="NavMeshLarge" type="NavigationRegion2D" parent="World" node_paths=PackedStringArray("map")]
-navigation_polygon = SubResource("NavigationPolygon_ure5g")
-navigation_layers = 4
 script = ExtResource("3_0pqet")
 map = NodePath("../Terrain")
 metadata/_custom_type_script = "uid://5i4gw4mikjjm"
@@ -319,9 +296,20 @@ color = Color(0.0672, 0.06826667, 0.08, 1)
 
 [node name="Torch" parent="World" instance=ExtResource("7_3s1lh")]
 position = Vector2(34, 102)
-item_data = SubResource("Resource_wni8n")
+item_data = SubResource("Resource_rk3es")
 
-[node name="HealingZone" parent="World" instance=ExtResource("10_rk3es")]
+[node name="SafeSpace" type="Area2D" parent="World"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("12_wni8n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/SafeSpace"]
+position = Vector2(63.5, 64)
+shape = SubResource("RectangleShape2D_wni8n")
+
+[node name="HealingZone" type="Area2D" parent="World"]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("11_wni8n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/HealingZone"]
@@ -346,44 +334,44 @@ position = Vector2(64, 32)
 [node name="Diamond" parent="World" instance=ExtResource("11_vjn46")]
 position = Vector2(23.999989, 174)
 rotation = 0.41302407
-item_data = SubResource("Resource_3s1lh")
+item_data = SubResource("Resource_wni8n")
 
 [node name="Diamond2" parent="World" instance=ExtResource("11_vjn46")]
 position = Vector2(98, 157.00002)
 rotation = 0.41302407
-item_data = SubResource("Resource_bbt2j")
+item_data = SubResource("Resource_3s1lh")
 
 [node name="Diamond3" parent="World" instance=ExtResource("11_vjn46")]
 position = Vector2(25.999998, 232.00003)
 rotation = 0.41302407
-item_data = SubResource("Resource_vjn46")
+item_data = SubResource("Resource_bbt2j")
 
 [node name="Diamond4" parent="World" instance=ExtResource("11_vjn46")]
 position = Vector2(46, 154.00002)
 rotation = 0.41302407
-item_data = SubResource("Resource_j7t5g")
+item_data = SubResource("Resource_vjn46")
 
 [node name="Bucket" parent="World" instance=ExtResource("12_j7t5g")]
 position = Vector2(95.99988, 217.99988)
 rotation = -0.38087726
-item_data = SubResource("Resource_r0xmj")
+item_data = SubResource("Resource_qa5mw")
 
 [node name="Carton" parent="World" instance=ExtResource("19_r0xmj")]
 position = Vector2(55, 229)
-item_data = SubResource("Resource_v2qds")
+item_data = SubResource("Resource_r0xmj")
 
 [node name="Backpack" parent="World" instance=ExtResource("20_v2qds")]
 position = Vector2(-47, 233)
-item_data = SubResource("Resource_mq82q")
+item_data = SubResource("Resource_hr4si")
 
 [node name="Chest" parent="World" instance=ExtResource("22_mq82q")]
 position = Vector2(64, 128)
 linear_damp = 60.0
-item_data = SubResource("Resource_6avta")
+item_data = SubResource("Resource_kof4o")
 
 [node name="MagicBag" parent="World" instance=ExtResource("27_j26kr")]
 position = Vector2(56, 333)
-item_data = SubResource("Resource_j26kr")
+item_data = SubResource("Resource_js6p4")
 
 [node name="UI" type="CanvasLayer" parent="."]
 scale = Vector2(2, 2)
