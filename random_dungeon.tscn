@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://r0rlptslyw58"]
+[gd_scene load_steps=29 format=3 uid="uid://r0rlptslyw58"]
 
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="1_y6nrp"]
 [ext_resource type="Script" uid="uid://cyjt8uhdv01dp" path="res://src/player/follow_camera.gd" id="2_j2kls"]
@@ -18,7 +18,6 @@
 [ext_resource type="Resource" uid="uid://c7s5iuiotlyn1" path="res://world/items/containers/MagicBag.tres" id="16_nppw2"]
 [ext_resource type="PackedScene" uid="uid://cbyjpejpvcygo" path="res://world/Goal.tscn" id="17_wytvd"]
 [ext_resource type="PackedScene" uid="uid://cirkhmxhfm3hn" path="res://world/items/Torch.tscn" id="18_0vrax"]
-[ext_resource type="Texture2D" uid="uid://b656w8clmgsyk" path="res://assets/items.png" id="19_66wol"]
 [ext_resource type="Script" uid="uid://dfv4337oq2ve7" path="res://src/world/safe_space.gd" id="20_buokf"]
 [ext_resource type="Script" uid="uid://cvfwxlg4h84qg" path="res://src/world/healing_zone.gd" id="21_yg8g0"]
 [ext_resource type="PackedScene" uid="uid://cmubnd2oc4lex" path="res://world/characters/Goblin.tscn" id="23_86tn1"]
@@ -30,19 +29,6 @@
 source_geometry_mode = 1
 source_geometry_group_name = &"navmesh_sources"
 agent_radius = 22.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yh1pe"]
-atlas = ExtResource("19_66wol")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="Resource" id="Resource_y6nrp"]
-resource_local_to_scene = true
-script = ExtResource("8_3josa")
-display_name = "Torch"
-description = "So bright"
-ui_sprite = SubResource("AtlasTexture_yh1pe")
-world_scene = ExtResource("18_0vrax")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wni8n"]
 size = Vector2(129, 126)
@@ -99,7 +85,7 @@ color = Color(0.0672, 0.06826667, 0.08, 1)
 
 [node name="Torch" parent="World" instance=ExtResource("18_0vrax")]
 position = Vector2(34, 102)
-item_data = SubResource("Resource_y6nrp")
+item_data = ExtResource("11_mimim")
 
 [node name="SafeSpace" type="Area2D" parent="World"]
 collision_layer = 0

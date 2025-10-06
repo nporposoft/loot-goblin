@@ -1,6 +1,6 @@
 [gd_scene load_steps=35 format=3 uid="uid://cmubnd2oc4lex"]
 
-[ext_resource type="Script" uid="uid://t6rnai4uey85" path="res://src/characters/character.gd" id="1_bjga1"]
+[ext_resource type="Script" uid="uid://8ovxfpgjvbcw" path="res://src/characters/character.gd" id="1_bjga1"]
 [ext_resource type="Texture2D" uid="uid://cc35tdwbren27" path="res://assets/goblinsheet1.png" id="2_bjga1"]
 [ext_resource type="Script" uid="uid://3vjtbq2kcl8g" path="res://src/characters/detector.gd" id="3_5xsi5"]
 [ext_resource type="Script" uid="uid://dyj3ol16bsv2u" path="res://src/characters/character_sprite.gd" id="3_47a61"]
@@ -229,7 +229,6 @@ max_contacts_reported = 10
 linear_damp = 15.0
 script = ExtResource("1_bjga1")
 move_speed = 50000.0
-metadata/_custom_type_script = "uid://t6rnai4uey85"
 
 [node name="Spritesheet" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -237,7 +236,6 @@ sprite_frames = SubResource("SpriteFrames_7rm0i")
 animation = &"dead"
 autoplay = "idle"
 script = ExtResource("3_47a61")
-metadata/_custom_type_script = "uid://bwtojbye1rncn"
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_bjga1")

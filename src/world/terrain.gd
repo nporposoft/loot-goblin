@@ -292,7 +292,7 @@ func generate_catacombs() -> void:
 						continue
 					exclusive_items_in_room.append(item_data)
 
-				var item_scene := item_data.world_scene
+				var item_scene := item_data.item_scene
 				var item := item_scene.instantiate()
 				if item_data.is_container:
 					room_has_container = true

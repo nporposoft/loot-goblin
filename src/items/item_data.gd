@@ -6,7 +6,8 @@ extends Resource
 @export var shininess: float = 0.0
 @export_multiline var description: String = "A super cool item."
 @export var ui_sprite: Texture2D = null
-@export var world_scene: PackedScene = null
+@export var scene_sprite: PackedScene = null
+@export var item_scene: PackedScene = null
 @export var exclusive_spawn: bool = false
 
 @export_group("Container Properties")

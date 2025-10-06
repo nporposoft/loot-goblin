@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://c7s5iuiotlyn1"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://c7s5iuiotlyn1"]
 
 [ext_resource type="Script" uid="uid://c0c8qdg6074bn" path="res://src/items/item_data.gd" id="1_x7w2g"]
 [ext_resource type="PackedScene" uid="uid://cv0ddx1nj18nt" path="res://world/items/containers/MagicBagUI.tscn" id="2_xhbgq"]
+[ext_resource type="PackedScene" uid="uid://bdo78v0rhf4y" path="res://world/items/containers/MagicBagSprite.tscn" id="3_0x67b"]
 [ext_resource type="Texture2D" uid="uid://dkrq5othh4xcw" path="res://assets/containers.png" id="3_7sd5y"]
 [ext_resource type="PackedScene" uid="uid://dpuk2ctpkbrij" path="res://world/items/containers/MagicBag.tscn" id="4_jjfeu"]
 
@@ -17,9 +18,9 @@ display_name = "Magic Bag"
 shininess = 850.0
 description = "There's a ton of space in here!"
 ui_sprite = SubResource("AtlasTexture_l2qbg")
-world_scene = ExtResource("4_jjfeu")
+scene_sprite = ExtResource("3_0x67b")
+item_scene = ExtResource("4_jjfeu")
 exclusive_spawn = true
 is_container = true
 capacity = 25
 ui_scene = ExtResource("2_xhbgq")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"

@@ -15,5 +15,4 @@ display_name = "Diamond"
 shininess = 100.0
 description = "So shiny!"
 ui_sprite = SubResource("AtlasTexture_ipdfa")
-world_scene = ExtResource("3_vxkwb")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
+item_scene = ExtResource("3_vxkwb")

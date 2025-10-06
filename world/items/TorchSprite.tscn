@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://gilrfilnas3p"]
+
+[ext_resource type="Texture2D" uid="uid://b656w8clmgsyk" path="res://assets/items.png" id="1_o8k8s"]
+[ext_resource type="Texture2D" uid="uid://ilgj2qhbrqb4" path="res://assets/white.png" id="2_nxhfj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyxqr"]
+atlas = ExtResource("1_o8k8s")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iiip8"]
+atlas = ExtResource("1_o8k8s")
+region = Rect2(17, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkgbg"]
+atlas = ExtResource("1_o8k8s")
+region = Rect2(34, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ws2ab"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xyxqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iiip8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkgbg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_ws2ab")
+autoplay = "default"
+
+[node name="ItemLightSource" type="PointLight2D" parent="."]
+position = Vector2(0, -3)
+color = Color(0.51, 0.272, 0, 1)
+shadow_enabled = true
+texture = ExtResource("2_nxhfj")

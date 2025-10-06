@@ -15,5 +15,4 @@ display_name = "Coin"
 shininess = 10.0
 description = "Lucky!"
 ui_sprite = SubResource("AtlasTexture_nwlm4")
-world_scene = ExtResource("3_os0x8")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
+item_scene = ExtResource("3_os0x8")

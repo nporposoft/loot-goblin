@@ -3,11 +3,11 @@ extends Node
 
 
 func spawn_item(item_data: ItemData, position: Vector2, velocity: Vector2 = Vector2.ZERO) -> Item:
-	if item_data == null or item_data.world_scene == null:
+	if item_data == null or item_data.item_scene == null:
 		push_error("Invalid item data or world scene.")
 		return null
 
-	var item_instance = item_data.world_scene.instantiate() as Item
+	var item_instance = item_data.item_scene.instantiate() as Item
 	if item_instance == null:
 		push_error("Failed to instantiate item scene.")
 		return null

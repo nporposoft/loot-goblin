@@ -36,7 +36,7 @@ signal health_changed
 
 var aim_direction: Vector2 = Vector2.ZERO
 
-var _held_item_sprite: Sprite2D = null
+var _held_item_node: Node2D = null
 var _attack_state: AttackState = AttackState.READY
 var _last_action: Action = null
 
@@ -253,19 +253,24 @@ func _can_change_direction() -> bool:
 func _create_held_item_sprite() -> void:
 	if held_item == null: return
 
-	if _held_item_sprite != null: _remove_held_item_sprite()
+	if _held_item_node != null: _remove_held_item_sprite()
 
-	_held_item_sprite = Sprite2D.new()
-	_held_item_sprite.texture = held_item.ui_sprite
-	_held_item_sprite.position = Vector2(0, -16)
-	add_child(_held_item_sprite)
+	if held_item.scene_sprite != null:
+		_held_item_node = held_item.scene_sprite.instantiate() as Node2D
+		_held_item_node.position = Vector2(0, -16)
+	else:
+		_held_item_node = Sprite2D.new()
+		_held_item_node.texture = held_item.ui_sprite
+		_held_item_node.position = Vector2(0, -16)
+
+	add_child(_held_item_node)
 
 
 func _remove_held_item_sprite() -> void:
-	if _held_item_sprite == null: return
+	if _held_item_node == null: return
 
-	_held_item_sprite.queue_free()
-	_held_item_sprite = null
+	_held_item_node.queue_free()
+	_held_item_node = null
 
 
 func _get_faction() -> Faction:

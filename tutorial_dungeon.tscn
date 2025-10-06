@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=4 uid="uid://ddd1x1urm4m5n"]
+[gd_scene load_steps=38 format=4 uid="uid://ddd1x1urm4m5n"]
 
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="1_0qo5l"]
 [ext_resource type="Script" uid="uid://cyjt8uhdv01dp" path="res://src/player/follow_camera.gd" id="2_npv87"]
@@ -7,262 +7,31 @@
 [ext_resource type="Script" uid="uid://chg7uwn1y5tmi" path="res://src/world/navmesh.gd" id="5_12nxt"]
 [ext_resource type="PackedScene" uid="uid://cmubnd2oc4lex" path="res://world/characters/Goblin.tscn" id="5_hbteb"]
 [ext_resource type="PackedScene" uid="uid://cirkhmxhfm3hn" path="res://world/items/Torch.tscn" id="6_blpox"]
-[ext_resource type="Script" uid="uid://c0c8qdg6074bn" path="res://src/items/item_data.gd" id="7_l5prm"]
 [ext_resource type="PackedScene" uid="uid://dehu0venmupva" path="res://world/items/Coin.tscn" id="8_13fke"]
-[ext_resource type="Texture2D" uid="uid://b656w8clmgsyk" path="res://assets/items.png" id="8_k4d2j"]
 [ext_resource type="PackedScene" uid="uid://d3u6nyytl22wp" path="res://world/items/containers/Bucket.tscn" id="9_3h324"]
+[ext_resource type="Resource" uid="uid://bhfgsuj1i8rld" path="res://world/items/Torch.tres" id="10_d6qeq"]
 [ext_resource type="PackedScene" uid="uid://ch0vybwm8dojh" path="res://world/characters/Knight.tscn" id="11_k4d2j"]
-[ext_resource type="PackedScene" uid="uid://c1ejvgyrv6nmb" path="res://world/items/containers/BucketUI.tscn" id="11_r2ti0"]
-[ext_resource type="Texture2D" uid="uid://dkrq5othh4xcw" path="res://assets/containers.png" id="12_0x6fr"]
+[ext_resource type="Resource" uid="uid://be2tyr1vni4fl" path="res://world/items/Coin.tres" id="12_qs4bo"]
 [ext_resource type="PackedScene" uid="uid://bpwkmmuxig2d7" path="res://world/characters/Slime.tscn" id="12_r2ti0"]
 [ext_resource type="PackedScene" uid="uid://bk6cmdekysf0j" path="res://world/items/containers/Chest.tscn" id="13_0x6fr"]
+[ext_resource type="Resource" uid="uid://dr5gh87hu4acd" path="res://world/items/containers/Bucket.tres" id="14_jofr1"]
 [ext_resource type="PackedScene" uid="uid://ykf6nsdak0fj" path="res://world/items/Diamond.tscn" id="14_tq2v2"]
-[ext_resource type="PackedScene" uid="uid://cxr24qd1d0l3m" path="res://world/items/containers/BackpackUI.tscn" id="15_4xu0r"]
 [ext_resource type="PackedScene" uid="uid://cpyhtok5on2tr" path="res://world/items/containers/Backpack.tscn" id="15_fc2j6"]
+[ext_resource type="Resource" uid="uid://bhfxa754v7msh" path="res://world/items/Diamond.tres" id="16_476hu"]
 [ext_resource type="PackedScene" uid="uid://dvwyd2tet2qr5" path="res://world/items/containers/Carton.tscn" id="16_v617q"]
-[ext_resource type="PackedScene" uid="uid://c5xfwj86lxpwo" path="res://world/items/containers/CartonUI.tscn" id="17_kt4iy"]
+[ext_resource type="Resource" uid="uid://dbufmrasvcauh" path="res://world/items/containers/Backpack.tres" id="18_d6qeq"]
 [ext_resource type="Script" uid="uid://dmp2din0planr" path="res://src/characters/ai/aggressive_ai.gd" id="19_12nxt"]
+[ext_resource type="Resource" uid="uid://dfeldsb6mbdi1" path="res://world/items/containers/Carton.tres" id="20_vlco8"]
 [ext_resource type="Script" uid="uid://bofbv8viin64f" path="res://src/world/goal.gd" id="23_syjho"]
 [ext_resource type="Script" uid="uid://3vjtbq2kcl8g" path="res://src/characters/detector.gd" id="24_5fpyr"]
 [ext_resource type="Script" uid="uid://b48b0vw5i240l" path="res://src/world/scene_change_area.gd" id="25_8jt1m"]
-[ext_resource type="Script" uid="uid://d4mgxpys1m80c" path="res://src/player/container_ui.gd" id="25_36hq2"]
-[ext_resource type="Texture2D" uid="uid://cdlafytbjx7lg" path="res://assets/bag slot.png" id="26_0igj0"]
-[ext_resource type="Script" uid="uid://bqtvaidnp5b3q" path="res://src/player/container_ui_slot.gd" id="27_4e5o0"]
-[ext_resource type="Script" uid="uid://dj61bulh8wvlg" path="res://src/items/item.gd" id="28_583nj"]
-[ext_resource type="Script" uid="uid://4x62ah40g3dn" path="res://src/player/interactable.gd" id="29_dqtmb"]
+[ext_resource type="Resource" uid="uid://bparvikf7wf4g" path="res://world/items/containers/Chest.tres" id="26_3rvtv"]
 [ext_resource type="Script" uid="uid://bwgshxllt467x" path="res://src/world/score_ui.gd" id="33_syjho"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5fpyr"]
 source_geometry_mode = 1
 source_geometry_group_name = &"navmesh_sources"
 agent_radius = 22.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yh1pe"]
-atlas = ExtResource("8_k4d2j")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="Resource" id="Resource_vlco8"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Torch"
-shininess = 2.0
-description = "So bright"
-ui_sprite = SubResource("AtlasTexture_yh1pe")
-world_scene = ExtResource("6_blpox")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nwlm4"]
-atlas = ExtResource("8_k4d2j")
-region = Rect2(34, 17, 16, 16)
-
-[sub_resource type="Resource" id="Resource_3rvtv"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Coin"
-shininess = 10.0
-description = "Lucky!"
-ui_sprite = SubResource("AtlasTexture_nwlm4")
-world_scene = ExtResource("8_13fke")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_12nxt"]
-atlas = ExtResource("8_k4d2j")
-region = Rect2(34, 17, 16, 16)
-
-[sub_resource type="Resource" id="Resource_uw5y7"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Coin"
-shininess = 10.0
-description = "Lucky!"
-ui_sprite = SubResource("AtlasTexture_12nxt")
-world_scene = ExtResource("8_13fke")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jouus"]
-resource_local_to_scene = true
-atlas = ExtResource("12_0x6fr")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="Resource" id="Resource_c4r58"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Bucket"
-shininess = 1.0
-description = "What a nice bucket"
-ui_sprite = SubResource("AtlasTexture_jouus")
-world_scene = ExtResource("9_3h324")
-is_container = true
-capacity = 4
-ui_scene = ExtResource("11_r2ti0")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fd6tg"]
-atlas = ExtResource("8_k4d2j")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="Resource" id="Resource_loi7q"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Torch"
-shininess = 2.0
-description = "So bright"
-ui_sprite = SubResource("AtlasTexture_fd6tg")
-world_scene = ExtResource("6_blpox")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="Resource" id="Resource_rki5h"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Torch"
-shininess = 2.0
-description = "So bright"
-ui_sprite = SubResource("AtlasTexture_fd6tg")
-world_scene = ExtResource("6_blpox")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="Resource" id="Resource_f46f4"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Torch"
-shininess = 2.0
-description = "So bright"
-ui_sprite = SubResource("AtlasTexture_fd6tg")
-world_scene = ExtResource("6_blpox")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="Resource" id="Resource_nik0s"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Torch"
-shininess = 2.0
-description = "So bright"
-ui_sprite = SubResource("AtlasTexture_fd6tg")
-world_scene = ExtResource("6_blpox")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dqtmb"]
-atlas = ExtResource("8_k4d2j")
-region = Rect2(34, 17, 16, 16)
-
-[sub_resource type="Resource" id="Resource_mv2un"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Coin"
-shininess = 10.0
-description = "Lucky!"
-ui_sprite = SubResource("AtlasTexture_dqtmb")
-world_scene = ExtResource("8_13fke")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="Resource" id="Resource_y65ns"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Coin"
-shininess = 10.0
-description = "Lucky!"
-ui_sprite = SubResource("AtlasTexture_dqtmb")
-world_scene = ExtResource("8_13fke")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="Resource" id="Resource_37jp0"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Coin"
-shininess = 10.0
-description = "Lucky!"
-ui_sprite = SubResource("AtlasTexture_dqtmb")
-world_scene = ExtResource("8_13fke")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="Resource" id="Resource_ixn72"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Coin"
-shininess = 10.0
-description = "Lucky!"
-ui_sprite = SubResource("AtlasTexture_dqtmb")
-world_scene = ExtResource("8_13fke")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ipdfa"]
-atlas = ExtResource("8_k4d2j")
-region = Rect2(17, 17, 15, 15)
-
-[sub_resource type="Resource" id="Resource_ts4aa"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Diamond"
-shininess = 100.0
-description = "So shiny!"
-ui_sprite = SubResource("AtlasTexture_ipdfa")
-world_scene = ExtResource("14_tq2v2")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="Resource" id="Resource_qlg1m"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Diamond"
-shininess = 100.0
-description = "So shiny!"
-ui_sprite = SubResource("AtlasTexture_ipdfa")
-world_scene = ExtResource("14_tq2v2")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="Resource" id="Resource_m8wc5"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Diamond"
-shininess = 100.0
-description = "So shiny!"
-ui_sprite = SubResource("AtlasTexture_ipdfa")
-world_scene = ExtResource("14_tq2v2")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="Resource" id="Resource_d7sxp"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Diamond"
-shininess = 100.0
-description = "So shiny!"
-ui_sprite = SubResource("AtlasTexture_ipdfa")
-world_scene = ExtResource("14_tq2v2")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_imfu1"]
-resource_local_to_scene = true
-atlas = ExtResource("12_0x6fr")
-region = Rect2(0, 17, 16, 16)
-
-[sub_resource type="Resource" id="Resource_4gmeu"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Backpack"
-shininess = 20.0
-description = "Trendy backpack!"
-ui_sprite = SubResource("AtlasTexture_imfu1")
-world_scene = ExtResource("15_fc2j6")
-is_container = true
-capacity = 9
-ui_scene = ExtResource("15_4xu0r")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cwmej"]
-atlas = ExtResource("12_0x6fr")
-region = Rect2(17, 0, 16, 16)
-
-[sub_resource type="Resource" id="Resource_dim76"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Carton"
-shininess = 1.0
-description = "What a nice carton"
-ui_sprite = SubResource("AtlasTexture_cwmej")
-world_scene = ExtResource("16_v617q")
-is_container = true
-capacity = 4
-ui_scene = ExtResource("17_kt4iy")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s7612"]
 size = Vector2(32, 16)
@@ -275,142 +44,6 @@ size = Vector2(256, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g5lct"]
 size = Vector2(384, 320)
-
-[sub_resource type="Resource" id="Resource_otryk"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Coin"
-shininess = 10.0
-description = "Lucky!"
-ui_sprite = SubResource("AtlasTexture_dqtmb")
-world_scene = ExtResource("8_13fke")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="Resource" id="Resource_fy4or"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Diamond"
-shininess = 100.0
-description = "So shiny!"
-ui_sprite = SubResource("AtlasTexture_ipdfa")
-world_scene = ExtResource("14_tq2v2")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4yo1c"]
-atlas = ExtResource("26_0igj0")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rkvuq"]
-atlas = ExtResource("26_0igj0")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="PackedScene" id="PackedScene_5t88y"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"names": PackedStringArray("ChestUI", "Control", "texture_filter", "layout_mode", "anchors_preset", "anchor_right", "anchor_bottom", "offset_right", "offset_bottom", "grow_horizontal", "grow_vertical", "script", "Slot 1", "TextureButton", "layout_mode", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 2", "TextureButton", "layout_mode", "offset_left", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 3", "TextureButton", "layout_mode", "offset_left", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 4", "TextureButton", "layout_mode", "offset_left", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 5", "TextureButton", "layout_mode", "offset_top", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 6", "TextureButton", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 7", "TextureButton", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 8", "TextureButton", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 9", "TextureButton", "layout_mode", "offset_top", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 10", "TextureButton", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 11", "TextureButton", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 12", "TextureButton", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 13", "TextureButton", "layout_mode", "offset_top", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 14", "TextureButton", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 15", "TextureButton", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode", "Slot 16", "TextureButton", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "texture_normal", "texture_hover", "script", "metadata/_custom_type_script", "Item", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "expand_mode", "stretch_mode"),
-"node_count": 33,
-"node_paths": [NodePath("."), NodePath("./Slot 1"), NodePath("."), NodePath("./Slot 2"), NodePath("."), NodePath("./Slot 3"), NodePath("."), NodePath("./Slot 4"), NodePath("."), NodePath("./Slot 5"), NodePath("."), NodePath("./Slot 6"), NodePath("."), NodePath("./Slot 7"), NodePath("."), NodePath("./Slot 8"), NodePath("."), NodePath("./Slot 9"), NodePath("."), NodePath("./Slot 10"), NodePath("."), NodePath("./Slot 11"), NodePath("."), NodePath("./Slot 12"), NodePath("."), NodePath("./Slot 13"), NodePath("."), NodePath("./Slot 14"), NodePath("."), NodePath("./Slot 15"), NodePath("."), NodePath("./Slot 16")],
-"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 10, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 10, 8, 11, 9, 0, 1073741824, 0, 13, 12, -1, 7, 14, 10, 15, 11, 16, 12, 17, 13, 18, 14, 19, 15, 20, 16, 0, 1073741825, 0, 22, 21, -1, 7, 23, 17, 24, 18, 25, 19, 26, 20, 27, 21, 28, 22, 29, 23, 0, 1073741826, 0, 31, 30, -1, 8, 32, 24, 33, 25, 34, 26, 35, 27, 36, 28, 37, 29, 38, 30, 39, 31, 0, 1073741827, 0, 41, 40, -1, 7, 42, 32, 43, 33, 44, 34, 45, 35, 46, 36, 47, 37, 48, 38, 0, 1073741828, 0, 50, 49, -1, 8, 51, 39, 52, 40, 53, 41, 54, 42, 55, 43, 56, 44, 57, 45, 58, 46, 0, 1073741829, 0, 60, 59, -1, 7, 61, 47, 62, 48, 63, 49, 64, 50, 65, 51, 66, 52, 67, 53, 0, 1073741830, 0, 69, 68, -1, 8, 70, 54, 71, 55, 72, 56, 73, 57, 74, 58, 75, 59, 76, 60, 77, 61, 0, 1073741831, 0, 79, 78, -1, 7, 80, 62, 81, 63, 82, 64, 83, 65, 84, 66, 85, 67, 86, 68, 0, 1073741832, 0, 88, 87, -1, 8, 89, 69, 90, 70, 91, 71, 92, 72, 93, 73, 94, 74, 95, 75, 96, 76, 0, 1073741833, 0, 98, 97, -1, 7, 99, 77, 100, 78, 101, 79, 102, 80, 103, 81, 104, 82, 105, 83, 0, 1073741834, 0, 107, 106, -1, 9, 108, 84, 109, 85, 110, 86, 111, 87, 112, 88, 113, 89, 114, 90, 115, 91, 116, 92, 0, 1073741835, 0, 118, 117, -1, 7, 119, 93, 120, 94, 121, 95, 122, 96, 123, 97, 124, 98, 125, 99, 0, 1073741836, 0, 127, 126, -1, 9, 128, 100, 129, 101, 130, 102, 131, 103, 132, 104, 133, 105, 134, 106, 135, 107, 136, 108, 0, 1073741837, 0, 138, 137, -1, 7, 139, 109, 140, 110, 141, 111, 142, 112, 143, 113, 144, 114, 145, 115, 0, 1073741838, 0, 147, 146, -1, 9, 148, 116, 149, 117, 150, 118, 151, 119, 152, 120, 153, 121, 154, 122, 155, 123, 156, 124, 0, 1073741839, 0, 158, 157, -1, 7, 159, 125, 160, 126, 161, 127, 162, 128, 163, 129, 164, 130, 165, 131, 0, 1073741840, 0, 167, 166, -1, 8, 168, 132, 169, 133, 170, 134, 171, 135, 172, 136, 173, 137, 174, 138, 175, 139, 0, 1073741841, 0, 177, 176, -1, 7, 178, 140, 179, 141, 180, 142, 181, 143, 182, 144, 183, 145, 184, 146, 0, 1073741842, 0, 186, 185, -1, 9, 187, 147, 188, 148, 189, 149, 190, 150, 191, 151, 192, 152, 193, 153, 194, 154, 195, 155, 0, 1073741843, 0, 197, 196, -1, 7, 198, 156, 199, 157, 200, 158, 201, 159, 202, 160, 203, 161, 204, 162, 0, 1073741844, 0, 206, 205, -1, 9, 207, 163, 208, 164, 209, 165, 210, 166, 211, 167, 212, 168, 213, 169, 214, 170, 215, 171, 0, 1073741845, 0, 217, 216, -1, 7, 218, 172, 219, 173, 220, 174, 221, 175, 222, 176, 223, 177, 224, 178, 0, 1073741846, 0, 226, 225, -1, 9, 227, 179, 228, 180, 229, 181, 230, 182, 231, 183, 232, 184, 233, 185, 234, 186, 235, 187, 0, 1073741847, 0, 237, 236, -1, 7, 238, 188, 239, 189, 240, 190, 241, 191, 242, 192, 243, 193, 244, 194, 0, 1073741848, 0, 246, 245, -1, 8, 247, 195, 248, 196, 249, 197, 250, 198, 251, 199, 252, 200, 253, 201, 254, 202, 0, 1073741849, 0, 256, 255, -1, 7, 257, 203, 258, 204, 259, 205, 260, 206, 261, 207, 262, 208, 263, 209, 0, 1073741850, 0, 265, 264, -1, 9, 266, 210, 267, 211, 268, 212, 269, 213, 270, 214, 271, 215, 272, 216, 273, 217, 274, 218, 0, 1073741851, 0, 276, 275, -1, 7, 277, 219, 278, 220, 279, 221, 280, 222, 281, 223, 282, 224, 283, 225, 0, 1073741852, 0, 285, 284, -1, 9, 286, 226, 287, 227, 288, 228, 289, 229, 290, 230, 291, 231, 292, 232, 293, 233, 294, 234, 0, 1073741853, 0, 296, 295, -1, 7, 297, 235, 298, 236, 299, 237, 300, 238, 301, 239, 302, 240, 303, 241, 0, 1073741854, 0, 305, 304, -1, 9, 306, 242, 307, 243, 308, 244, 309, 245, 310, 246, 311, 247, 312, 248, 313, 249, 314, 250, 0, 1073741855, 0, 316, 315, -1, 7, 317, 251, 318, 252, 319, 253, 320, 254, 321, 255, 322, 256, 323, 257, 0),
-"variants": [1, 3, 15, 1.0, 1.0, -1553.0, -790.0, 2, 2, ExtResource("25_36hq2"), 0, 32.0, 32.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("27_4e5o0"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 32.0, 64.0, 32.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("27_4e5o0"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 64.0, 96.0, 32.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("27_4e5o0"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 96.0, 128.0, 32.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("27_4e5o0"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 32.0, 32.0, 64.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("27_4e5o0"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 32.0, 32.0, 64.0, 64.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("27_4e5o0"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 64.0, 32.0, 96.0, 64.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("27_4e5o0"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 96.0, 32.0, 128.0, 64.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("27_4e5o0"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 64.0, 32.0, 96.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("27_4e5o0"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 32.0, 64.0, 64.0, 96.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("27_4e5o0"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 64.0, 64.0, 96.0, 96.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("27_4e5o0"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 96.0, 64.0, 128.0, 96.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("27_4e5o0"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 96.0, 32.0, 128.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("27_4e5o0"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 32.0, 96.0, 64.0, 128.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("27_4e5o0"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 64.0, 96.0, 96.0, 128.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("27_4e5o0"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5, 0, 96.0, 96.0, 128.0, 128.0, SubResource("AtlasTexture_4yo1c"), SubResource("AtlasTexture_rkvuq"), ExtResource("27_4e5o0"), "uid://bqtvaidnp5b3q", 0, 8.0, 8.0, 24.0, 24.0, 3, 5],
-"version": 3
-}
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_a77f3"]
-load_path = "res://.godot/imported/containers.png-b8c37b60a0b833cc1f8632a5d8db063c.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l443q"]
-resource_local_to_scene = true
-atlas = SubResource("CompressedTexture2D_a77f3")
-region = Rect2(0, 34, 16, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_udecq"]
-size = Vector2(16, 16)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_2okec"]
-radius = 26.019224
-
-[sub_resource type="PackedScene" id="PackedScene_y3u8e"]
-_bundled = {
-"conn_count": 1,
-"conns": PackedInt32Array(1073741829, 1073741828, 29, 28, 2, 0, 0),
-"editable_instances": [],
-"names": PackedStringArray("Chest", "RigidBody2D", "collision_layer", "mass", "gravity_scale", "lock_rotation", "linear_damp", "script", "metadata/_custom_type_script", "CollisionShape2D", "CollisionShape2D", "texture_filter", "shape", "Sprite2D", "Sprite2D", "texture_filter", "texture", "region_enabled", "region_rect", "Interactable", "Area2D", "collision_layer", "collision_mask", "script", "metadata/_custom_type_script", "CollisionShape2D", "CollisionShape2D", "shape", "interact", "on_interact"),
-"node_count": 5,
-"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath("Interactable"), NodePath("."), NodePath("Interactable")],
-"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 7, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 0, 1073741824, 0, 10, 9, -1, 2, 11, 7, 12, 8, 0, 1073741825, 0, 14, 13, -1, 4, 15, 9, 16, 10, 17, 11, 18, 12, 0, 1073741826, 0, 20, 19, -1, 4, 21, 13, 22, 14, 23, 15, 24, 16, 0, 1073741827, 0, 26, 25, -1, 1, 27, 17, 0),
-"variants": [4, 25.0, 0.0, true, 4.0, ExtResource("28_583nj"), "uid://dj61bulh8wvlg", 1, SubResource("RectangleShape2D_udecq"), 1, ExtResource("12_0x6fr"), true, Rect2(0, 34, 16, 16), 8, 0, ExtResource("29_dqtmb"), "uid://4x62ah40g3dn", SubResource("CircleShape2D_2okec")],
-"version": 3
-}
-
-[sub_resource type="Resource" id="Resource_as51s"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Chest"
-shininess = 60.0
-description = "Look at that chest!"
-ui_sprite = SubResource("AtlasTexture_l443q")
-world_scene = SubResource("PackedScene_y3u8e")
-is_container = true
-capacity = 16
-ui_scene = SubResource("PackedScene_5t88y")
-items = Array[ExtResource("7_l5prm")]([SubResource("Resource_otryk"), SubResource("Resource_otryk"), SubResource("Resource_fy4or"), SubResource("Resource_otryk")])
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g5lct"]
-atlas = ExtResource("8_k4d2j")
-region = Rect2(17, 17, 15, 15)
-
-[sub_resource type="Resource" id="Resource_8betw"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Diamond"
-shininess = 100.0
-description = "So shiny!"
-ui_sprite = SubResource("AtlasTexture_g5lct")
-world_scene = ExtResource("14_tq2v2")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="Resource" id="Resource_tx3e1"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Diamond"
-shininess = 100.0
-description = "So shiny!"
-ui_sprite = SubResource("AtlasTexture_g5lct")
-world_scene = ExtResource("14_tq2v2")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="Resource" id="Resource_xmi2t"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Diamond"
-shininess = 100.0
-description = "So shiny!"
-ui_sprite = SubResource("AtlasTexture_g5lct")
-world_scene = ExtResource("14_tq2v2")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="Resource" id="Resource_efjvc"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Diamond"
-shininess = 100.0
-description = "So shiny!"
-ui_sprite = SubResource("AtlasTexture_g5lct")
-world_scene = ExtResource("14_tq2v2")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
-
-[sub_resource type="Resource" id="Resource_3w5eq"]
-resource_local_to_scene = true
-script = ExtResource("7_l5prm")
-display_name = "Diamond"
-shininess = 100.0
-description = "So shiny!"
-ui_sprite = SubResource("AtlasTexture_g5lct")
-world_scene = ExtResource("14_tq2v2")
-metadata/_custom_type_script = "uid://ctqjnf2yg1uvt"
 
 [sub_resource type="SystemFont" id="SystemFont_4xu0r"]
 font_names = PackedStringArray("Sans-Serif")
@@ -481,75 +114,75 @@ metadata/_custom_type_script = "uid://dmp2din0planr"
 
 [node name="Torch" parent="World" instance=ExtResource("6_blpox")]
 position = Vector2(232, 616)
-item_data = SubResource("Resource_vlco8")
+item_data = ExtResource("10_d6qeq")
 
 [node name="Coin" parent="World" instance=ExtResource("8_13fke")]
 position = Vector2(576, 320)
-item_data = SubResource("Resource_3rvtv")
+item_data = ExtResource("12_qs4bo")
 
 [node name="Coin1" parent="World" instance=ExtResource("8_13fke")]
 position = Vector2(832, 464)
-item_data = SubResource("Resource_uw5y7")
+item_data = ExtResource("12_qs4bo")
 
 [node name="Bucket" parent="World" instance=ExtResource("9_3h324")]
 position = Vector2(704, 324)
-item_data = SubResource("Resource_c4r58")
+item_data = ExtResource("14_jofr1")
 
 [node name="Torch1" parent="World" instance=ExtResource("6_blpox")]
 position = Vector2(1088, 400)
-item_data = SubResource("Resource_loi7q")
+item_data = ExtResource("10_d6qeq")
 
 [node name="Torch2" parent="World" instance=ExtResource("6_blpox")]
 position = Vector2(664, 960)
-item_data = SubResource("Resource_rki5h")
+item_data = ExtResource("10_d6qeq")
 
 [node name="Torch3" parent="World" instance=ExtResource("6_blpox")]
 position = Vector2(1512, 960)
-item_data = SubResource("Resource_f46f4")
+item_data = ExtResource("10_d6qeq")
 
 [node name="Torch4" parent="World" instance=ExtResource("6_blpox")]
 position = Vector2(486, 1438)
-item_data = SubResource("Resource_nik0s")
+item_data = ExtResource("10_d6qeq")
 
 [node name="Coin2" parent="World" instance=ExtResource("8_13fke")]
 position = Vector2(832, 832)
-item_data = SubResource("Resource_mv2un")
+item_data = ExtResource("12_qs4bo")
 
 [node name="Coin3" parent="World" instance=ExtResource("8_13fke")]
 position = Vector2(960, 1088)
-item_data = SubResource("Resource_y65ns")
+item_data = ExtResource("12_qs4bo")
 
 [node name="Coin4" parent="World" instance=ExtResource("8_13fke")]
 position = Vector2(960, 832)
-item_data = SubResource("Resource_37jp0")
+item_data = ExtResource("12_qs4bo")
 
 [node name="Coin5" parent="World" instance=ExtResource("8_13fke")]
 position = Vector2(1472, 960)
-item_data = SubResource("Resource_ixn72")
+item_data = ExtResource("12_qs4bo")
 
 [node name="Diamond" parent="World" instance=ExtResource("14_tq2v2")]
 position = Vector2(1216, 832)
-item_data = SubResource("Resource_ts4aa")
+item_data = ExtResource("16_476hu")
 
 [node name="Diamond2" parent="World" instance=ExtResource("14_tq2v2")]
 position = Vector2(1216, 1088)
-item_data = SubResource("Resource_qlg1m")
+item_data = ExtResource("16_476hu")
 
 [node name="Diamond3" parent="World" instance=ExtResource("14_tq2v2")]
 position = Vector2(832, 1088)
-item_data = SubResource("Resource_m8wc5")
+item_data = ExtResource("16_476hu")
 
 [node name="Diamond4" parent="World" instance=ExtResource("14_tq2v2")]
 position = Vector2(1345, 1088)
-item_data = SubResource("Resource_d7sxp")
+item_data = ExtResource("16_476hu")
 
 [node name="Backpack" parent="World" instance=ExtResource("15_fc2j6")]
 position = Vector2(1344, 832)
-item_data = SubResource("Resource_4gmeu")
+item_data = ExtResource("18_d6qeq")
 
 [node name="Carton" parent="World" instance=ExtResource("16_v617q")]
 position = Vector2(704, 960)
-item_data = SubResource("Resource_dim76")
+item_data = ExtResource("20_vlco8")
 
 [node name="Slime" parent="World" instance=ExtResource("12_r2ti0")]
 position = Vector2(2048, 960)
@@ -629,27 +262,27 @@ shape = SubResource("RectangleShape2D_g5lct")
 
 [node name="Chest2" parent="World" instance=ExtResource("13_0x6fr")]
 position = Vector2(-702, 962)
-item_data = SubResource("Resource_as51s")
+item_data = ExtResource("26_3rvtv")
 
 [node name="Diamond5" parent="World" instance=ExtResource("14_tq2v2")]
 position = Vector2(-463, 949)
-item_data = SubResource("Resource_8betw")
+item_data = ExtResource("16_476hu")
 
 [node name="Diamond6" parent="World" instance=ExtResource("14_tq2v2")]
 position = Vector2(-456, 971)
-item_data = SubResource("Resource_tx3e1")
+item_data = ExtResource("16_476hu")
 
 [node name="Diamond7" parent="World" instance=ExtResource("14_tq2v2")]
 position = Vector2(-443, 955)
-item_data = SubResource("Resource_xmi2t")
+item_data = ExtResource("16_476hu")
 
 [node name="Coin6" parent="World" instance=ExtResource("8_13fke")]
 position = Vector2(-475, 987)
-item_data = SubResource("Resource_efjvc")
+item_data = ExtResource("12_qs4bo")
 
 [node name="Coin7" parent="World" instance=ExtResource("8_13fke")]
 position = Vector2(-429, 971)
-item_data = SubResource("Resource_3w5eq")
+item_data = ExtResource("12_qs4bo")
 
 [node name="TutorialMessages" type="Control" parent="World"]
 layout_mode = 3
