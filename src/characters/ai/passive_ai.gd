@@ -9,18 +9,18 @@ extends Node
 
 var _time_until_next_move: float = _random_wait_time()
 
-func _process(_delta: float):
+func _process(delta: float):
 	var action := Character.Action.new()
 	if character.nav_agent.is_navigation_finished():
 		if _time_until_next_move <= 0.0:
 			character.nav_agent.set_target_position(_pick_random_destination())
 			_time_until_next_move = _random_wait_time()
 		else:
-			_time_until_next_move -= _delta
+			_time_until_next_move -= delta
 	else:
 		action.move_input = character.nav_agent.get_next_path_position() - character.global_position
 		action.move_input = action.move_input.normalized()
-	character.act(action)
+	character.act(action, delta)
 
 
 func _random_wait_time() -> float:

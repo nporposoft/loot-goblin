@@ -1,25 +1,37 @@
 class_name Character
 extends CharacterBody2D
 
+enum AttackState {
+	READY,
+	CHARGE,
+	SWING,
+	RECOVER
+}
+
 @export_group("Stats")
 @export var move_speed: float = 200.0
 @export var max_health: int = 100
 @export var current_health: int = max_health
 @export var attack_damage: int = 10
-@export var attack_cooldown: float = 1.0
+@export var attack_range: float = 64.0
+@export var attack_impulse_strength: float = 2000.0
+@export var attack_charge_time: float = 0.2
+@export var attack_swing_time: float = 0.3
+@export var attack_recover_time: float = 1.0
 
 @export_group("State")
 @export var held_item: ItemData = null
 
 var _aim_direction: Vector2 = Vector2.ZERO
 var _held_item_sprite: Sprite2D = null
+var _attack_state: AttackState
 
-@onready var _spritesheet: AnimatedSprite2D = $Spritesheet
-@onready var _attack_cooldown_timer: Timer = _create_timer(attack_cooldown)
+@onready var spritesheet: AnimatedSprite2D = $Spritesheet
 @onready var nav_agent := $NavigationAgent2D
 @onready var reach := $ReachArea
 @onready var far_vision := $FarVisionArea
 @onready var near_vision := $NearVisionArea
+@onready var attack_timer: Timer = _create_timer()
 
 
 # Action is used by controllers to interact with characters.
@@ -43,12 +55,12 @@ func _ready() -> void:
 	_create_held_item_sprite()
 
 
-func act(action: Action) -> void:
+func act(action: Action, delta: float) -> void:
 	_process_movement(action)
 	_process_aiming(action)
 	_process_pickup_and_drop(action)
 	_process_trigger(action)
-	_process_attack(action)
+	_process_attack(action, delta)
 
 
 func is_holding() -> bool:
@@ -89,26 +101,31 @@ func _physics_process(_delta: float) -> void:
 
 
 func _process_movement(action: Action) -> void:
+	if !_can_move(): return
+
 	velocity = action.move_input.normalized() * move_speed
+	# TODO: all this sprite management needs to move onto the sprite component
 	if velocity.is_zero_approx():
-		_spritesheet.set_flip_h(_aim_direction.x < 0)
+		spritesheet.set_flip_h(_aim_direction.x < 0)
 		if is_holding():
-			_spritesheet.play("idle_carry")
+			spritesheet.play("idle_carry")
 		else:
-			_spritesheet.play("idle")
+			spritesheet.play("idle")
 	else:
 		if velocity.x < 0:
-			_spritesheet.set_flip_h(true)
+			spritesheet.set_flip_h(true)
 		elif velocity.x > 0:
-			_spritesheet.set_flip_h(false)
+			spritesheet.set_flip_h(false)
 
 		if is_holding():
-			_spritesheet.play("run_carry")
+			spritesheet.play("run_carry")
 		else:
-			_spritesheet.play("run")
+			spritesheet.play("run")
 
 
 func _process_aiming(action: Action) -> void:
+	if !_can_change_direction(): return
+
 	_aim_direction = action.aim_direction.normalized()
 
 
@@ -130,10 +147,37 @@ func _process_trigger(action: Action) -> void:
 		action.trigger.trigger()
 
 
-func _process_attack(action: Action) -> void:
-	if action.attack and _attack_cooldown_timer.is_stopped():
-		print("hiyah")
-		_attack_cooldown_timer.start()
+func _process_attack(action: Action, delta: float) -> void:
+	match _attack_state:
+		AttackState.READY:
+			if action.attack:
+				_attack_state = AttackState.CHARGE
+				spritesheet.play("attack_charge")
+				attack_timer.start(attack_charge_time)
+		AttackState.CHARGE:
+			if attack_timer.is_stopped():
+				_attack_state = AttackState.SWING
+				spritesheet.play("attack_swing")
+				attack_timer.start(attack_swing_time)
+		AttackState.SWING:
+			velocity += _aim_direction * attack_impulse_strength * delta
+			# TODO: damage enemies in reach but only once
+			if attack_timer.is_stopped():
+				spritesheet.play("attack_recover")
+				_attack_state = AttackState.RECOVER
+				attack_timer.start(attack_recover_time)
+		AttackState.RECOVER:
+			velocity = Vector2.ZERO
+			if attack_timer.is_stopped():
+				_attack_state = AttackState.READY
+
+
+func _can_move() -> bool:
+	return ![AttackState.CHARGE, AttackState.SWING, AttackState.RECOVER].has(_attack_state)
+
+
+func _can_change_direction() -> bool:
+	return ![AttackState.CHARGE, AttackState.SWING].has(_attack_state)
 
 
 func _create_held_item_sprite() -> void:
@@ -154,9 +198,8 @@ func _remove_held_item_sprite() -> void:
 	_held_item_sprite = null
 
 
-func _create_timer(wait_time: float) -> Timer:
+func _create_timer() -> Timer:
 	var timer = Timer.new()
 	timer.one_shot = true
-	timer.wait_time = wait_time
 	add_child(timer)
 	return timer

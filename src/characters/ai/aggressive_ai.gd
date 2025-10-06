@@ -49,7 +49,7 @@ func _ready() -> void:
 	_start_idling()
 
 
-func _process(_delta: float):
+func _process(delta: float):
 	var action := Character.Action.new()
 
 	if current_target and _can_see(current_target):
@@ -90,7 +90,7 @@ func _process(_delta: float):
 			if !_can_see(current_target):
 				_start_searching()
 			else:
-				if _can_reach(current_target):
+				if _in_attack_range(current_target):
 					action.aim_direction = current_target.global_position - character.global_position
 					action.attack = true
 				else:
@@ -122,7 +122,7 @@ func _process(_delta: float):
 					action.move_input = character.nav_agent.get_next_path_position() - character.global_position
 					action.aim_direction = action.move_input
 
-	character.act(action)
+	character.act(action, delta)
 
 
 func _physics_process(_delta: float) -> void:
@@ -200,8 +200,8 @@ func _want_to_attack(_target: Character) -> bool:
 	return true
 
 
-func _can_reach(target: Character) -> bool:
-	return character.reach.get_characters().has(target)
+func _in_attack_range(target: Character) -> bool:
+	return character.global_position.distance_to(target.global_position) < character.attack_range
 
 
 func _can_see(target: Character) -> bool:

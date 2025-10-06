@@ -211,7 +211,7 @@ metadata/_custom_type_script = "uid://t6rnai4uey85"
 [node name="Spritesheet" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_7rm0i")
-animation = &"run_carry"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="Collider" type="CollisionShape2D" parent="."]

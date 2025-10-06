@@ -16,7 +16,7 @@ var _charging_throw: bool = false
 func _ready():
 	throwBar = character.find_child("ThrowMeter", true)
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if not _has_character():
 		return
 
@@ -51,7 +51,7 @@ func _process(_delta: float) -> void:
 	# Only process pickup/throw if we're not interacting with something
 	if _interact_target == null:
 		if _charging_throw:
-			_throw_charge_time += _delta
+			_throw_charge_time += delta
 			var charge_percent = _throw_charge_time / max_throw_charge_time
 			throwBar.value = charge_percent
 			# Smoothly blend RGB values from green->yellow->red by throw charge:
@@ -79,7 +79,7 @@ func _process(_delta: float) -> void:
 				throwBar.value = _throw_charge_time
 				
 
-	character.act(action)
+	character.act(action, delta)
 
 
 func _has_character() -> bool:
