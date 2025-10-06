@@ -47,6 +47,20 @@ func _ready() -> void:
 	_create_state_indicator()
 	character.is_invisible = true
 
+	character.sleep_area.body_entered.connect(func(body: Node) -> void:
+		if body is Character and body.faction == Character.Faction.GOBLIN:
+			print("%s is waking up" % character.name)
+			character.is_invisible = false
+			_set_state(State.IDLING)
+	)
+	character.sleep_area.body_exited.connect(func(body: Node) -> void:
+		if body is Character and body.faction == Character.Faction.GOBLIN:
+			print("%s is going to sleep" % character.name)
+			character.is_invisible = true
+			_set_state(State.ASLEEP)
+	)
+
+
 func _process(delta: float):
 	var action := Character.Action.new()
 
@@ -55,10 +69,6 @@ func _process(delta: float):
 		
 	match state:
 		State.ASLEEP:
-			for target in character.sleep_area.get_characters():
-				# HACK: AI wakes up to _any_ goblin, not just the player
-				if target.faction == Character.Faction.GOBLIN:
-					_start_idling()
 			pass
 		State.IDLING:
 			var target: Character = _pick_target()
@@ -150,7 +160,6 @@ func _physics_process(_delta: float) -> void:
 
 func _start_idling() -> void:
 	_set_state(State.IDLING)
-	character.is_invisible = false
 	_state_timer.wait_time = randf_range(min_idle_time, max_idle_time)
 	_state_timer.start()
 
