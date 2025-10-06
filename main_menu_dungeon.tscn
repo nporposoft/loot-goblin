@@ -135,8 +135,10 @@ offset_bottom = 128.0
 
 [node name="Title" type="Label" parent="World/Control"]
 layout_mode = 0
-offset_right = 256.0
-offset_bottom = 128.0
+offset_left = -49.0
+offset_top = 40.0
+offset_right = 307.0
+offset_bottom = 168.0
 text = "LOOT GOBLIN"
 label_settings = SubResource("LabelSettings_x2hlg")
 horizontal_alignment = 1
