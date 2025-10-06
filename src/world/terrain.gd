@@ -293,9 +293,11 @@ func generate_catacombs() -> void:
 					exclusive_items_in_room.append(item_data)
 
 				var item_scene := item_data.item_scene
-				var item := item_scene.instantiate()
 				if item_data.is_container:
+					item_data = item_data.duplicate(true)
 					room_has_container = true
+
+				var item := item_scene.instantiate()
 				item.position = center_of_room + Vector2(
 					(randf() - 0.5) * float(tile_size) * 0.5,
 					(randf() - 0.5) * float(tile_size) * 0.5)
