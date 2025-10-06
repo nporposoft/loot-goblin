@@ -13,7 +13,7 @@ var _interact_target: Interactable = null
 var _picking_up: bool = false
 #var _charging_throw: bool = false
 
-const CHARGE_T_DELAY = 0.1
+const CHARGE_DELAY = 0.1
 
 func _ready():
 	throwBar = character.find_child("ThrowMeter", true)
@@ -52,10 +52,12 @@ func _process(delta: float) -> void:
 
 	# Only process pickup/throw if we're not interacting with something
 	if _interact_target == null:
-		if Input.is_action_just_released("pickup") and _throw_charge_time <= CHARGE_T_DELAY and (!character.is_holding() or (character.held_item.is_container and character.held_item.items.size() < character.held_item.capacity)):
-			action.pickup_item = _get_item_target()
-			_picking_up = true
-		elif Input.is_action_just_released("pickup") and _throw_charge_time > CHARGE_T_DELAY and character.is_holding():
+		if Input.is_action_just_released("pickup"):
+			if _throw_charge_time <= CHARGE_DELAY and (!character.is_holding()
+			or (character.held_item.is_container and character.held_item.items.size() < character.held_item.capacity)):
+				action.pickup_item = _get_item_target()
+				_picking_up = true
+			elif _throw_charge_time > CHARGE_DELAY and character.is_holding():
 				action.throw = true
 				_throw_charge_time = clamp(_throw_charge_time, 0.0, max_throw_charge_time)
 				action.throw_force = _throw_charge_time**2 * throw_force_multiplier
@@ -65,38 +67,13 @@ func _process(delta: float) -> void:
 		
 		if Input.is_action_pressed("pickup"):
 			_throw_charge_time += delta
-			var charge_percent = max(_throw_charge_time-CHARGE_T_DELAY, 0.0) / max_throw_charge_time
+			var charge_percent = max(_throw_charge_time-CHARGE_DELAY, 0.0) / max_throw_charge_time
 			throwBar.value = charge_percent
 			# Smoothly blend RGB values from green->yellow->red by throw charge:
 			throwBar.get_theme_stylebox("fill").set_color(Color(clamp(2.0 * charge_percent, 0.0, 1.0), clamp(2.0 - 2.0 * charge_percent, 0.0, 1.0), 0.0))
 		else:
 			_throw_charge_time = 0.0
-		#if _charging_throw:
-			#_throw_charge_time += delta
-			#var charge_percent = _throw_charge_time / max_throw_charge_time
-			#throwBar.value = charge_percent
-			## Smoothly blend RGB values from green->yellow->red by throw charge:
-			#throwBar.get_theme_stylebox("fill").set_color(Color(clamp(2.0 * charge_percent, 0.0, 1.0), clamp(2.0 - 2.0 * charge_percent, 0.0, 1.0), 0.0))
-#
-		#if Input.is_action_just_pressed("pickup") and (!character.is_holding() or (character.held_item.is_container and character.held_item.items.size() < character.held_item.capacity)):
-			#action.pickup_item = _get_item_target()
-			#_picking_up = true
-		#elif Input.is_action_just_pressed("pickup") and character.is_holding():
-				#_charging_throw = true
-		#elif Input.is_action_just_released("pickup") and character.is_holding():
-			#if _picking_up:
-				## don't throw immediately after picking up
-				#_picking_up = false
-			#else:
-				#action.throw = true
-				#_charging_throw = false
-				#_throw_charge_time = clamp(_throw_charge_time, 0.0, max_throw_charge_time)
-				#action.throw_force = _throw_charge_time**2 * throw_force_multiplier
-				##action.throw_force = ((0.67 * _throw_charge_time**4 - _throw_charge_time**3 + _throw_charge_time) / 2.0) * throw_force_multiplier
-				#_throw_charge_time = 0.0
-				#throwBar.value = _throw_charge_time
 				
-
 	character.act(action, delta)
 
 
