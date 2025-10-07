@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://bpwkmmuxig2d7"]
 
-[ext_resource type="Script" uid="uid://t6rnai4uey85" path="res://src/characters/character.gd" id="1_seyq0"]
+[ext_resource type="Script" uid="uid://8ovxfpgjvbcw" path="res://src/characters/character.gd" id="1_seyq0"]
 [ext_resource type="Texture2D" uid="uid://0tlghsq0pfgq" path="res://assets/Slime.png" id="2_seyq0"]
 [ext_resource type="Script" uid="uid://dyj3ol16bsv2u" path="res://src/characters/character_sprite.gd" id="3_0eihl"]
 [ext_resource type="Script" uid="uid://3vjtbq2kcl8g" path="res://src/characters/detector.gd" id="3_k655p"]
@@ -150,7 +150,6 @@ faction = 1
 enemies = Array[int]([2])
 move_speed = 150000.0
 attack_impulse_strength = 400000.0
-metadata/_custom_type_script = "uid://t6rnai4uey85"
 
 [node name="Spritesheet" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -158,7 +157,6 @@ sprite_frames = SubResource("SpriteFrames_0brmi")
 animation = &"dead"
 autoplay = "idle"
 script = ExtResource("3_0eihl")
-metadata/_custom_type_script = "uid://bwtojbye1rncn"
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 visible = false

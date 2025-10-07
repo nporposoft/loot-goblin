@@ -54,11 +54,11 @@ func _process(delta: float):
 	var nearby_goblins = character.sleep_area.get_characters().filter(func(c: Character) -> bool:
 		return c.faction == Character.Faction.GOBLIN
 	)
-	if nearby_goblins.size() > 0:
+	if nearby_goblins.size() > 0 and state == State.ASLEEP:
 		# wake up if there are other goblins nearby
 		character.is_invisible = false
 		_set_state(State.IDLING)
-	else:
+	elif nearby_goblins.size() == 0 and state != State.ASLEEP:
 		# go to sleep if there are no goblins nearby
 		character.is_invisible = true
 		_set_state(State.ASLEEP)
