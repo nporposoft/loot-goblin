@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://cjufcr2toyf7t"]
+[gd_scene load_steps=25 format=4 uid="uid://cjufcr2toyf7t"]
 
 [ext_resource type="TileSet" uid="uid://bnx45rbbsfeci" path="res://assets/catacombs_tileset.tres" id="1_2hkqh"]
 [ext_resource type="Script" uid="uid://ps0hext23k73" path="res://src/world/terrain.gd" id="2_iyt7o"]
@@ -7,9 +7,10 @@
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="4_onm6l"]
 [ext_resource type="Script" uid="uid://cyjt8uhdv01dp" path="res://src/player/follow_camera.gd" id="5_frud3"]
 [ext_resource type="Script" uid="uid://c0c8qdg6074bn" path="res://src/items/item_data.gd" id="7_85iv0"]
+[ext_resource type="PackedScene" uid="uid://7mdy3xr0foye" path="res://world/items/containers/ChestUI.tscn" id="8_cn1ij"]
 [ext_resource type="Texture2D" uid="uid://b656w8clmgsyk" path="res://assets/items.png" id="8_xdg1s"]
+[ext_resource type="Texture2D" uid="uid://dkrq5othh4xcw" path="res://assets/containers.png" id="9_85iv0"]
 [ext_resource type="PackedScene" uid="uid://cirkhmxhfm3hn" path="res://world/items/Torch.tscn" id="9_w5suy"]
-[ext_resource type="Resource" uid="uid://bparvikf7wf4g" path="res://world/items/containers/Chest.tres" id="12_85iv0"]
 [ext_resource type="Script" uid="uid://b48b0vw5i240l" path="res://src/world/scene_change_area.gd" id="13_45x0d"]
 [ext_resource type="PackedScene" uid="uid://gilrfilnas3p" path="res://world/items/TorchSprite.tscn" id="14_xdg1s"]
 
@@ -23,8 +24,42 @@ subpixel_positioning = 0
 font = SubResource("SystemFont_srrxd")
 font_size = 50
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdg1s"]
+resource_local_to_scene = true
+atlas = ExtResource("9_85iv0")
+region = Rect2(0, 34, 16, 16)
+
+[sub_resource type="Resource" id="Resource_45x0d"]
+resource_local_to_scene = true
+script = ExtResource("7_85iv0")
+display_name = "Chest"
+shininess = 60.0
+description = "Look at that chest!"
+ui_sprite = SubResource("AtlasTexture_xdg1s")
+item_scene = ExtResource("4_frud3")
+is_container = true
+capacity = 16
+ui_scene = ExtResource("8_cn1ij")
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_oh7y7"]
 radius = 48.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkoud"]
+resource_local_to_scene = true
+atlas = ExtResource("9_85iv0")
+region = Rect2(0, 34, 16, 16)
+
+[sub_resource type="Resource" id="Resource_q2kkg"]
+resource_local_to_scene = true
+script = ExtResource("7_85iv0")
+display_name = "Chest"
+shininess = 60.0
+description = "Look at that chest!"
+ui_sprite = SubResource("AtlasTexture_qkoud")
+item_scene = ExtResource("4_frud3")
+is_container = true
+capacity = 16
+ui_scene = ExtResource("8_cn1ij")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cn1ij"]
 radius = 48.0
@@ -33,7 +68,7 @@ radius = 48.0
 atlas = ExtResource("8_xdg1s")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="Resource" id="Resource_rd0ix"]
+[sub_resource type="Resource" id="Resource_qdy20"]
 resource_local_to_scene = true
 script = ExtResource("7_85iv0")
 display_name = "Torch"
@@ -44,7 +79,7 @@ scene_sprite = ExtResource("14_xdg1s")
 item_scene = ExtResource("9_w5suy")
 exclusive_spawn = true
 
-[sub_resource type="Resource" id="Resource_n1bwx"]
+[sub_resource type="Resource" id="Resource_rd0ix"]
 resource_local_to_scene = true
 script = ExtResource("7_85iv0")
 display_name = "Torch"
@@ -63,6 +98,7 @@ exclusive_spawn = true
 tile_map_data = PackedByteArray("AAD//wAAAQAAAAMAAAAAAAAAAQAAAAMAAAABAAAAAQAAAAMAAAACAAAAAQAAAAMAAAADAAAAAQAAAAMAAAAEAAAAAQAAAAMAAAAFAAAAAQAAAAMAAAAGAAAAAQAAAAMAAAAGAAIAAQAAAAMAAAAFAAIAAQAAAAMAAAAEAAIAAQAAAAMAAAADAAIAAQAAAAMAAAACAAIAAQAAAAMAAAABAAIAAQAAAAMAAAAAAAIAAQAAAAMAAAD//wIAAQAAAAMAAAD+/wIAAQAAAAMAAAD9/wIAAQAAAAMAAAD8/wIAAQAAAAMAAAD8//7/AQAAAAMAAAD9//7/AQAAAAMAAAD+//7/AQAAAAMAAAD///7/AQAAAAMAAAAAAP7/AQAAAAMAAAABAP7/AQAAAAMAAAACAP7/AQAAAAMAAAADAP7/AQAAAAMAAAADAP//AQAAAAMAAAAEAP//AQAAAAMAAAAFAP//AQAAAAMAAAAGAP//AQAAAAMAAAAGAP7/AQAAAAMAAAAFAP7/AQAAAAMAAAAEAP7/AQAAAAMAAAD8////AQAAAAMAAAD8/wAAAQAAAAMAAAD8/wEAAQAAAAMAAAD9/wEAAQAAAAMAAAD//wEAAQAAAAMAAAAAAAEAAQAGAAMAAAABAAEAAQAFAAMAAAACAP//AQAAAAMAAAABAP//AQAAAAMAAAAAAP//AQAAAAMAAAD/////AQAAAAMAAAD+////AQAAAAMAAAD9////AQAAAAMAAAD9/wAAAQAAAAMAAAD+/wEAAQAAAAMAAAD+/wAAAQAAAAMAAAACAAEAAQAGAAEAAAADAAEAAQAAAAMAAAAEAAEAAQAAAAMAAAAFAAEAAQAAAAMAAAAGAAEAAQAAAAMAAAD8//3/AQAAAAMAAAD9//3/AQAAAAMAAAD+//3/AQAAAAMAAAD///3/AQAAAAMAAAAAAP3/AQAAAAMAAAABAP3/AQAAAAMAAAACAP3/AQAAAAMAAAADAP3/AQAAAAMAAAAEAP3/AQAAAAMAAAAFAP3/AQAAAAMAAAAGAP3/AQAAAAMAAAD9/wMAAQAAAAMAAAD+/wMAAQAAAAMAAAD//wMAAQAAAAMAAAAAAAMAAQAAAAMAAAABAAMAAQAAAAMAAAACAAMAAQAAAAMAAAADAAMAAQAAAAMAAAAEAAMAAQAAAAMAAAAFAAMAAQAAAAMAAAD9/wQAAQAAAAMAAAD+/wQAAQAAAAMAAAD//wQAAQAAAAMAAAAAAAQAAQAAAAMAAAABAAQAAQAAAAMAAAACAAQAAQAAAAMAAAADAAQAAQAAAAMAAAAEAAQAAQAAAAMAAAAFAAQAAQAAAAMAAAD9/wUAAQAAAAMAAAD+/wUAAQAAAAMAAAD//wUAAQAAAAMAAAAAAAUAAQAAAAMAAAABAAUAAQAAAAMAAAACAAUAAQAAAAMAAAADAAUAAQAAAAMAAAAEAAUAAQAAAAMAAAAFAAUAAQAAAAMAAAD8/wMAAQAAAAMAAAD8/wQAAQAAAAMAAAD8/wUAAQAAAAMAAAAGAAMAAQAAAAMAAAAGAAQAAQAAAAMAAAAGAAUAAQAAAAMAAAA=")
 tile_set = ExtResource("1_2hkqh")
 script = ExtResource("2_iyt7o")
+MAX_CATACOMBS_ROOMS = 200
 
 [node name="Control" type="Control" parent="World"]
 layout_mode = 3
@@ -121,7 +157,7 @@ metadata/_custom_type_script = "uid://kygkbg3kqosp"
 
 [node name="Tutorial Chest" parent="World" instance=ExtResource("4_frud3")]
 position = Vector2(64, 192)
-item_data = ExtResource("12_85iv0")
+item_data = SubResource("Resource_45x0d")
 
 [node name="StartTutorialArea" type="Area2D" parent="World"]
 position = Vector2(64, 192)
@@ -135,7 +171,7 @@ shape = SubResource("CircleShape2D_oh7y7")
 
 [node name="Start Chest" parent="World" instance=ExtResource("4_frud3")]
 position = Vector2(320, 192)
-item_data = ExtResource("12_85iv0")
+item_data = SubResource("Resource_q2kkg")
 
 [node name="StartGameArea" type="Area2D" parent="World"]
 position = Vector2(320, 192)
@@ -152,8 +188,8 @@ color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 
 [node name="Torch" parent="World" instance=ExtResource("9_w5suy")]
 position = Vector2(24, 160)
-item_data = SubResource("Resource_rd0ix")
+item_data = SubResource("Resource_qdy20")
 
 [node name="Torch2" parent="World" instance=ExtResource("9_w5suy")]
 position = Vector2(360, 160)
-item_data = SubResource("Resource_n1bwx")
+item_data = SubResource("Resource_rd0ix")

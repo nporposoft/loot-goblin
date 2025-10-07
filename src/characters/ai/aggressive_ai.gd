@@ -47,22 +47,21 @@ func _ready() -> void:
 	_create_state_indicator()
 	character.is_invisible = true
 
-	character.sleep_area.body_entered.connect(func(body: Node) -> void:
-		if body is Character and body.faction == Character.Faction.GOBLIN:
-			print("%s is waking up" % character.name)
-			character.is_invisible = false
-			_set_state(State.IDLING)
-	)
-	character.sleep_area.body_exited.connect(func(body: Node) -> void:
-		if body is Character and body.faction == Character.Faction.GOBLIN:
-			print("%s is going to sleep" % character.name)
-			character.is_invisible = true
-			_set_state(State.ASLEEP)
-	)
-
 
 func _process(delta: float):
 	var action := Character.Action.new()
+
+	var nearby_goblins = character.sleep_area.get_characters().filter(func(c: Character) -> bool:
+		return c.faction == Character.Faction.GOBLIN
+	)
+	if nearby_goblins.size() > 0:
+		# wake up if there are other goblins nearby
+		character.is_invisible = false
+		_set_state(State.IDLING)
+	else:
+		# go to sleep if there are no goblins nearby
+		character.is_invisible = true
+		_set_state(State.ASLEEP)
 
 	if current_target and _can_see(current_target):
 		last_known_target_position = current_target.global_position
