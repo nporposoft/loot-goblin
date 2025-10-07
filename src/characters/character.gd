@@ -88,6 +88,7 @@ func act(action: Action, _delta: float) -> void:
 	_process_pickup_and_drop(action)
 	_process_trigger(action)
 	_process_attack(action)
+	if _last_action: _last_action.free()
 	_last_action = action
 
 
@@ -289,4 +290,3 @@ func _create_timer() -> Timer:
 	timer.one_shot = true
 	add_child(timer)
 	return timer
-

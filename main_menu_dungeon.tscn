@@ -24,6 +24,26 @@ subpixel_positioning = 0
 font = SubResource("SystemFont_srrxd")
 font_size = 50
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_cn1ij"]
+resource_local_to_scene = true
+atlas = ExtResource("9_85iv0")
+region = Rect2(0, 34, 16, 16)
+
+[sub_resource type="Resource" id="Resource_85iv0"]
+resource_local_to_scene = true
+script = ExtResource("7_85iv0")
+display_name = "Chest"
+shininess = 60.0
+description = "Look at that chest!"
+ui_sprite = SubResource("AtlasTexture_cn1ij")
+item_scene = ExtResource("4_frud3")
+is_container = true
+capacity = 16
+ui_scene = ExtResource("8_cn1ij")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oh7y7"]
+radius = 48.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_xdg1s"]
 resource_local_to_scene = true
 atlas = ExtResource("9_85iv0")
@@ -41,26 +61,6 @@ is_container = true
 capacity = 16
 ui_scene = ExtResource("8_cn1ij")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_oh7y7"]
-radius = 48.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qkoud"]
-resource_local_to_scene = true
-atlas = ExtResource("9_85iv0")
-region = Rect2(0, 34, 16, 16)
-
-[sub_resource type="Resource" id="Resource_q2kkg"]
-resource_local_to_scene = true
-script = ExtResource("7_85iv0")
-display_name = "Chest"
-shininess = 60.0
-description = "Look at that chest!"
-ui_sprite = SubResource("AtlasTexture_qkoud")
-item_scene = ExtResource("4_frud3")
-is_container = true
-capacity = 16
-ui_scene = ExtResource("8_cn1ij")
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_cn1ij"]
 radius = 48.0
 
@@ -68,7 +68,7 @@ radius = 48.0
 atlas = ExtResource("8_xdg1s")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="Resource" id="Resource_qdy20"]
+[sub_resource type="Resource" id="Resource_qkoud"]
 resource_local_to_scene = true
 script = ExtResource("7_85iv0")
 display_name = "Torch"
@@ -79,7 +79,7 @@ scene_sprite = ExtResource("14_xdg1s")
 item_scene = ExtResource("9_w5suy")
 exclusive_spawn = true
 
-[sub_resource type="Resource" id="Resource_rd0ix"]
+[sub_resource type="Resource" id="Resource_q2kkg"]
 resource_local_to_scene = true
 script = ExtResource("7_85iv0")
 display_name = "Torch"
@@ -157,7 +157,7 @@ metadata/_custom_type_script = "uid://kygkbg3kqosp"
 
 [node name="Tutorial Chest" parent="World" instance=ExtResource("4_frud3")]
 position = Vector2(64, 192)
-item_data = SubResource("Resource_45x0d")
+item_data = SubResource("Resource_85iv0")
 
 [node name="StartTutorialArea" type="Area2D" parent="World"]
 position = Vector2(64, 192)
@@ -171,7 +171,7 @@ shape = SubResource("CircleShape2D_oh7y7")
 
 [node name="Start Chest" parent="World" instance=ExtResource("4_frud3")]
 position = Vector2(320, 192)
-item_data = SubResource("Resource_q2kkg")
+item_data = SubResource("Resource_45x0d")
 
 [node name="StartGameArea" type="Area2D" parent="World"]
 position = Vector2(320, 192)
@@ -188,8 +188,8 @@ color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 
 [node name="Torch" parent="World" instance=ExtResource("9_w5suy")]
 position = Vector2(24, 160)
-item_data = SubResource("Resource_qdy20")
+item_data = SubResource("Resource_qkoud")
 
 [node name="Torch2" parent="World" instance=ExtResource("9_w5suy")]
 position = Vector2(360, 160)
-item_data = SubResource("Resource_rd0ix")
+item_data = SubResource("Resource_q2kkg")
