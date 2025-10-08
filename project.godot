@@ -82,11 +82,13 @@ interact={
 
 2d_physics/layer_1="World"
 2d_navigation/layer_1="Small"
-2d_physics/layer_2="Characters"
+2d_physics/layer_2="Goblin"
 2d_navigation/layer_2="Medium"
 2d_physics/layer_3="Items"
 2d_navigation/layer_3="Large"
 2d_physics/layer_4="Interactables"
+2d_physics/layer_5="Adventurers"
+2d_physics/layer_6="Monsters"
 
 [rendering]
 

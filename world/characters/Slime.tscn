@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://bpwkmmuxig2d7"]
 
-[ext_resource type="Script" uid="uid://8ovxfpgjvbcw" path="res://src/characters/character.gd" id="1_seyq0"]
+[ext_resource type="Script" uid="uid://ibm1qthip36l" path="res://src/characters/character.gd" id="1_seyq0"]
 [ext_resource type="Texture2D" uid="uid://0tlghsq0pfgq" path="res://assets/Slime.png" id="2_seyq0"]
 [ext_resource type="Script" uid="uid://dyj3ol16bsv2u" path="res://src/characters/character_sprite.gd" id="3_0eihl"]
 [ext_resource type="Script" uid="uid://3vjtbq2kcl8g" path="res://src/characters/detector.gd" id="3_k655p"]
@@ -138,18 +138,19 @@ scale_max = 2.0
 color = Color(0, 0.4862745, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oxdwm"]
-radius = 500.0
+radius = 384.0
 
 [node name="Slime" type="RigidBody2D"]
-collision_layer = 2
-collision_mask = 3
+collision_layer = 32
+collision_mask = 49
 mass = 150.0
 linear_damp = 15.0
 script = ExtResource("1_seyq0")
 faction = 1
 enemies = Array[int]([2])
-move_speed = 150000.0
-attack_impulse_strength = 400000.0
+move_speed = 100000.0
+attack_range = 80.0
+attack_impulse_strength = 300000.0
 
 [node name="Spritesheet" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -159,13 +160,11 @@ autoplay = "idle"
 script = ExtResource("3_0eihl")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_bjga1")
 
 [node name="ReachArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
-collision_mask = 15
+collision_mask = 63
 script = ExtResource("3_k655p")
 metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
 
@@ -176,9 +175,8 @@ shape = SubResource("CircleShape2D_7ybme")
 navigation_layers = 2
 
 [node name="FarVisionArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
-collision_mask = 15
+collision_mask = 55
 script = ExtResource("3_k655p")
 metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
 
@@ -186,9 +184,8 @@ metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
 shape = SubResource("CircleShape2D_47a61")
 
 [node name="NearVisionArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
-collision_mask = 15
+collision_mask = 55
 script = ExtResource("3_k655p")
 metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
 
@@ -199,7 +196,6 @@ shape = SubResource("CircleShape2D_oo2ix")
 process_material = SubResource("ParticleProcessMaterial_wflep")
 
 [node name="SleepArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("3_k655p")

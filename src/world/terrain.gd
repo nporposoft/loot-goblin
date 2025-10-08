@@ -16,6 +16,7 @@ var height: int = 32
 @export var ROOM_DIM_RANGE: int = 10
 @export var BOX_ROOMS_QTY: int = 60
 @export var MAX_CATACOMBS_ROOMS: int = 1000
+@export var MODE_SWITCH_COUNT_MAX: int = 25
 
 @export_group("Character spawn parameters")
 @export var adventurer_scenes: Array[PackedScene]
@@ -37,6 +38,8 @@ var height: int = 32
 @export var max_loot_per_room: int = 20
 
 # Small tiles atlas coordinates: 
+const homeAtlas: Vector2i = Vector2i(0, 0)
+const entranceAtlas: Vector2i = Vector2i(0, 1)
 const wallAtlas: Vector2i = Vector2i(3, 0)
 const floorAtlas: Vector2i = Vector2i(3, 2)
 const fancyFloorAtlas: Vector2i = Vector2i(0, 0)
@@ -84,12 +87,11 @@ func generate_catacombs() -> void:
 		starting_room.y * tile_size + float(tile_size) / 2)
 	var roomsToGen: Array = [Vector2i(1, 1), Vector2i(0, 2), Vector2i(-1, 1)]
 	var validAtlasCoords: Array
+	var roomsGenerated: int = 0
 	var roomsLeft:int = MAX_CATACOMBS_ROOMS
-	
-	var debug_DeadEndRerolls: int = 0
-	# var debug_HallRerolls: int = 0
-	var debug_4WayRerolls: int = 0
-	var debug_TeeRerolls: int = 0
+	var homeCount: int = 1
+	var breadthFirstMode: bool = true
+	var modeSwitchCountdown: int = randi() % MODE_SWITCH_COUNT_MAX
 	
 	while roomsToGen.size() > 0 and roomsLeft > 0:
 		var currentRoom: Vector2i = roomsToGen.pop_front()
@@ -224,6 +226,7 @@ func generate_catacombs() -> void:
 				#validAtlasCoords.erase(hall_EW_Atlas)
 				#validAtlasCoords.erase(hallBars_NS_Atlas)
 				#validAtlasCoords.erase(hallBars_EW_Atlas)
+		
 		var roomChoice: Vector2i
 		if validAtlasCoords.size() > 0:
 			roomChoice = validAtlasCoords[randi() % validAtlasCoords.size()]
@@ -232,16 +235,21 @@ func generate_catacombs() -> void:
 		
 		# var stackSize: int = roomsToGen.size()
 		
-		# Chance to force re-roll if dead-end room is picked, especially early in dungeon generation
-		#if stackSize <= 15 and [deadEnd_S_Atlas, deadEnd_W_Atlas, deadEnd_N_Atlas, deadEnd_E_Atlas].has(roomChoice) and randf() < 1.0 * float(roomsLeft) / float(MAX_CATACOMBS_ROOMS):
-			#debug_DeadEndRerolls = debug_DeadEndRerolls + 1
-			#continue
-		#if stackSize <= 10 and [corner_NE_Atlas, corner_SE_Atlas, corner_SW_Atlas, corner_NW_Atlas,
-				#hall_NS_Atlas, hall_EW_Atlas, hallBars_NS_Atlas, hallBars_EW_Atlas].has(roomChoice) and randf() < 1.0 * float(roomsLeft) / float(MAX_CATACOMBS_ROOMS):
-			#debug_HallRerolls = debug_HallRerolls + 1
-			#continue
-		
+		## Spawn secondary home tiles:
+		#if roomChoice == deadEnd_S_Atlas and float(homeCount) / roomsGenerated < 0.0075:
+			#set_cell(currentRoom, 1, homeAtlas)
+			#set_cell(Vector2i(currentRoom.x, currentRoom.y + 1), 1, entranceAtlas)
+			#roomsToGen.erase(Vector2i(currentRoom.x, currentRoom.y + 1))
+			#homeCount = homeCount + 1
+		#else:
 		set_cell(currentRoom, 1, roomChoice)
+		
+		roomsGenerated = roomsGenerated + 1
+		modeSwitchCountdown = modeSwitchCountdown - 1
+		if modeSwitchCountdown == 0:
+			breadthFirstMode = !breadthFirstMode
+			modeSwitchCountdown = randi() % MODE_SWITCH_COUNT_MAX
+		
 		var room_world_position: Vector2 = currentRoom * tile_size
 		var center_of_room: Vector2 = room_world_position + Vector2(float(tile_size) / 2, float(tile_size) / 2)
 		if randf() < adventurer_spawn_chance:
@@ -309,12 +317,67 @@ func generate_catacombs() -> void:
 		
 		var roomsToStack: Array = get_rooms_to_stack(currentRoom)
 		for r in roomsToStack:
-			roomsToGen.push_back(r) # Breadth-first
-			#roomsToGen.push_front(r) # Depth-first
+			if breadthFirstMode:
+				roomsToGen.push_back(r) # Breadth-first
+			else:
+				roomsToGen.push_front(r) # Depth-first
 		
 		roomsLeft = roomsLeft - 1
+		
+		#print_debug("RoomsLeft=", roomsLeft, ", roomsToGen.size()=", roomsToGen.size())
+		while roomsLeft > 0 and roomsToGen.size() <= 3: # if dungeon generation would stall out early, force more options
+				print_debug("DUNGEON GEN ENDING WITH ", roomsLeft, " ROOMS LEFT; FORCING CONTINUATION...")
+				var mapRect = get_used_rect()
+				match randi() % 4:	# pick a random direction to grow in
+					0: # E
+						for j in range(mapRect.position.y, mapRect.position.y + mapRect.size.y):
+							currentRoom = Vector2(mapRect.position.x + mapRect.size.x, mapRect.position.y + j)
+							if get_cell_atlas_coords(currentRoom) != emptyAtlas:
+								set_cell(currentRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
+								roomsToStack = get_rooms_to_stack(currentRoom)
+								for r in roomsToStack:
+									if breadthFirstMode:
+										roomsToGen.push_back(r) # Breadth-first
+									else:
+										roomsToGen.push_front(r) # Depth-first
+					1: # N
+						for i in range(mapRect.position.x, mapRect.position.x + mapRect.size.x):
+							currentRoom = Vector2(mapRect.position.x + i, mapRect.position.y)
+							if get_cell_atlas_coords(currentRoom) != emptyAtlas:
+								set_cell(currentRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
+								roomsToStack = get_rooms_to_stack(currentRoom)
+								for r in roomsToStack:
+									if breadthFirstMode:
+										roomsToGen.push_back(r) # Breadth-first
+									else:
+										roomsToGen.push_front(r) # Depth-first
+					2: # W
+						for j in range(mapRect.position.y, mapRect.position.y + mapRect.size.y):
+							currentRoom = Vector2(mapRect.position.x, mapRect.position.y + j)
+							if get_cell_atlas_coords(currentRoom) != emptyAtlas:
+								set_cell(currentRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
+								roomsToStack = get_rooms_to_stack(currentRoom)
+								for r in roomsToStack:
+									if breadthFirstMode:
+										roomsToGen.push_back(r) # Breadth-first
+									else:
+										roomsToGen.push_front(r) # Depth-first
+					3: # S
+						for i in range(mapRect.position.x, mapRect.position.x + mapRect.size.x):
+							currentRoom = Vector2(mapRect.position.x + i, mapRect.position.y + mapRect.size.y)
+							if get_cell_atlas_coords(currentRoom) != emptyAtlas:
+								set_cell(currentRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
+								roomsToStack = get_rooms_to_stack(currentRoom)
+								for r in roomsToStack:
+									if breadthFirstMode:
+										roomsToGen.push_back(r) # Breadth-first
+									else:
+										roomsToGen.push_front(r) # Depth-first
+		
+	
+	fill_empty_cells()
+	
 	print_debug("Finished dungeon generation with ", roomsLeft, " rooms left of allotted ", MAX_CATACOMBS_ROOMS)
-	print_debug("deadEndRerolls=", debug_DeadEndRerolls, ", 4WayRerolls=", debug_4WayRerolls, ", teeRerolls=", debug_TeeRerolls)
 
 func get_rooms_to_stack(newRoom: Vector2i) -> Array:
 	var outputArray: Array
@@ -337,6 +400,7 @@ func get_rooms_to_stack(newRoom: Vector2i) -> Array:
 			outputArray.push_back(Vector2i(newRoom.x,newRoom.y+1)) # queue room to be gen'd S
 		
 	return outputArray
+
 
 func findPaths(room: Vector2i) -> Array:
 	var outputArray: Array
@@ -408,3 +472,16 @@ func findPaths(room: Vector2i) -> Array:
 				#var S = get_cell_tile_data(Vector2i(i,j+1))
 				#if E or N or W or S:
 					#set_cell(Vector2i(i, j), 0, wallAtlas)
+
+
+func fill_empty_cells() -> void:
+	var dungeonFill: Rect2 = get_used_rect()
+	dungeonFill.position.x = dungeonFill.position.x - 2 # default camera can see 2 rooms away aE-W
+	dungeonFill.position.y = dungeonFill.position.y - 1 # default camera can see 1 room away N-S
+	dungeonFill.size.x = dungeonFill.size.x + 4
+	dungeonFill.size.y = dungeonFill.size.y + 2
+	for i in range(dungeonFill.position.x, dungeonFill.position.x + dungeonFill.size.x):
+		for j in range(dungeonFill.position.y, dungeonFill.position.y + dungeonFill.size.y):
+			var aCoords = get_cell_atlas_coords(Vector2(i, j))
+			if aCoords == emptyAtlas:
+				set_cell(Vector2(i, j), 1, solidBlock_Atlas)

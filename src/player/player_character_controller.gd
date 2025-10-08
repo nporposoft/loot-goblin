@@ -13,7 +13,7 @@ var _interact_target: Interactable = null
 var _picking_up: bool = false
 #var _charging_throw: bool = false
 
-const CHARGE_DELAY = 0.12
+const CHARGE_DELAY = 0.2
 
 func _ready():
 	throwBar = character.find_child("ThrowMeter", true)
@@ -67,7 +67,7 @@ func _process(delta: float) -> void:
 		
 		if Input.is_action_pressed("pickup"):
 			_throw_charge_time += delta
-			var charge_percent = max(_throw_charge_time-CHARGE_DELAY, 0.0) / max_throw_charge_time
+			var charge_percent = max(_throw_charge_time - CHARGE_DELAY, 0.0) / (max_throw_charge_time - CHARGE_DELAY)
 			throwBar.value = charge_percent
 			# Smoothly blend RGB values from green->yellow->red by throw charge:
 			throwBar.get_theme_stylebox("fill").set_color(Color(clamp(2.0 * charge_percent, 0.0, 1.0), clamp(2.0 - 2.0 * charge_percent, 0.0, 1.0), 0.0))

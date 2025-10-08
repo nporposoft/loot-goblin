@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://kygkbg3kqosp" path="res://src/player/player_character_controller.gd" id="1_y6nrp"]
 [ext_resource type="Script" uid="uid://cyjt8uhdv01dp" path="res://src/player/follow_camera.gd" id="2_j2kls"]
-[ext_resource type="Script" uid="uid://chg7uwn1y5tmi" path="res://src/world/navmesh.gd" id="3_r7b6d"]
+[ext_resource type="Script" uid="uid://5i4gw4mikjjm" path="res://src/world/navmesh.gd" id="3_r7b6d"]
 [ext_resource type="TileSet" uid="uid://bnx45rbbsfeci" path="res://assets/catacombs_tileset.tres" id="4_7odh5"]
 [ext_resource type="Script" uid="uid://ps0hext23k73" path="res://src/world/terrain.gd" id="5_57sj4"]
 [ext_resource type="PackedScene" uid="uid://ch0vybwm8dojh" path="res://world/characters/Knight.tscn" id="6_us2dd"]
@@ -25,7 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://cmubnd2oc4lex" path="res://world/characters/Goblin.tscn" id="23_86tn1"]
 [ext_resource type="PackedScene" uid="uid://beq3cau0h8ycr" path="res://world/player/health_ui.tscn" id="24_ssx3i"]
 [ext_resource type="Script" uid="uid://c85wlydpy0us0" path="res://src/player/health_ui.gd" id="25_gh7h4"]
-[ext_resource type="Script" uid="uid://bwgshxllt467x" path="res://src/world/score_ui.gd" id="25_y6nrp"]
+[ext_resource type="Script" uid="uid://bvkkn10qp03c0" path="res://src/world/score_ui.gd" id="25_y6nrp"]
 [ext_resource type="PackedScene" uid="uid://culx71ky0dsol" path="res://world/player/game_over.tscn" id="27_57sj4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_y6jnv"]
@@ -99,6 +99,7 @@ containers = Array[ExtResource("8_3josa")]([ExtResource("12_rp1lr"), ExtResource
 position = Vector2(65, 68)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="World"]
+visible = false
 color = Color(0.0672, 0.06826667, 0.08, 1)
 
 [node name="Torch" parent="World" instance=ExtResource("18_0vrax")]

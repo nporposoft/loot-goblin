@@ -12,7 +12,6 @@ func _process(_delta: float) -> void:
 	if not transition_started:
 		for c in get_characters():
 			if c._get_faction() == c.Faction.GOBLIN:
-				print("Beginning transition to next scene: ", next_scene)
 				begin_transition()
 				transition_started = true
 
