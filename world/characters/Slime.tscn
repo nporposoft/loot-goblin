@@ -142,7 +142,7 @@ radius = 384.0
 
 [node name="Slime" type="RigidBody2D"]
 collision_layer = 32
-collision_mask = 49
+collision_mask = 17
 mass = 150.0
 linear_damp = 15.0
 script = ExtResource("1_seyq0")
@@ -176,7 +176,7 @@ navigation_layers = 2
 
 [node name="FarVisionArea" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 55
+collision_mask = 63
 script = ExtResource("3_k655p")
 metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
 
@@ -185,7 +185,7 @@ shape = SubResource("CircleShape2D_47a61")
 
 [node name="NearVisionArea" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 55
+collision_mask = 63
 script = ExtResource("3_k655p")
 metadata/_custom_type_script = "uid://3vjtbq2kcl8g"
 

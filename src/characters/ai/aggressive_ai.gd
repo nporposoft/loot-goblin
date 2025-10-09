@@ -151,7 +151,17 @@ func _physics_process(_delta: float) -> void:
 		if target.is_dead or target.is_invisible:
 			continue
 
-		var query = PhysicsRayQueryParameters2D.create(character.global_position, target.global_position, 1 << 0 | 1 << 1, [character])
+		var query = PhysicsRayQueryParameters2D.create(
+			character.global_position, 
+			target.global_position, 
+			(
+				1 << Character.CollisionLayer.WORLD |
+				1 << Character.CollisionLayer.GOBLINS |
+				1 << Character.CollisionLayer.ADVENTURERS |
+				1 << Character.CollisionLayer.MONSTERS
+			),
+			[character]
+		)
 		var result = space_state.intersect_ray(query)
 		if result.has("collider") and result["collider"] == target:
 			visible_characters.append(target)

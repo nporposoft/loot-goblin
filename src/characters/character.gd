@@ -14,6 +14,15 @@ enum Faction {
 	ADVENTURER,
 }
 
+enum CollisionLayer {
+	WORLD = 0,
+	GOBLINS = 1,
+	ITEMS = 2,
+	INTERACTABLES = 3,
+	ADVENTURERS = 4,
+	MONSTERS = 5,
+}
+
 signal died
 signal health_changed
 
