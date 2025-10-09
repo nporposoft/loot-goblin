@@ -162,8 +162,8 @@ func die(force_direction: Vector2 = Vector2.ZERO) -> void:
 	if is_holding(): toss_item(toss_direction * 50)
 
 	# disable collision with other characters
-	set_collision_layer_value(2, false)
-	set_collision_mask_value(2, false)
+	set_collision_layer(CollisionLayer.WORLD)
+	set_collision_mask(CollisionLayer.WORLD)
 
 	# ragdoll sort of
 	lock_rotation = false
