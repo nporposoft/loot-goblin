@@ -62,7 +62,7 @@ var _last_action: Action = null
 # Action is used by controllers to interact with characters.
 # Specifically -- player controller can pass to the player character,
 # AI controller can pass to AI characters, etc.
-class Action extends Object:
+class Action extends RefCounted:
 	var move_input: Vector2 = Vector2.ZERO
 	var aim_direction: Vector2 = Vector2.ZERO
 
@@ -97,7 +97,6 @@ func act(action: Action, _delta: float) -> void:
 	_process_pickup_and_drop(action)
 	_process_trigger(action)
 	_process_attack(action)
-	if _last_action: _last_action.free()
 	_last_action = action
 
 
