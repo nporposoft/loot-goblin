@@ -20,4 +20,3 @@ func _create_heal_timer() -> void:
 	timer.autostart = true
 	timer.timeout.connect(_heal)
 	add_child(timer)
-

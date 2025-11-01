@@ -18,13 +18,13 @@ enum State {
 
 @export_group("Behavior")
 @export var min_idle_time: float = 2.0
-@export var max_idle_time: float = 10.0
+@export var max_idle_time: float = 5.0
 @export var min_wander_distance: float = 200.0
 @export var max_wander_distance: float = 600.0
 @export var min_suspicious_time: float = 2.0
-@export var max_suspicious_time: float = 10.0
-@export var min_looking_time: float = 5.0
-@export var max_looking_time: float = 10.0
+@export var max_suspicious_time: float = 5.0
+@export var min_looking_time: float = 3.0
+@export var max_looking_time: float = 7.0
 @export var min_search_time: float = 30.0
 @export var max_search_time: float = 60.0
 @export var min_search_distance: float = 20.0

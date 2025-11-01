@@ -96,6 +96,10 @@ func generate_catacombs() -> void:
 	while roomsToGen.size() > 0 and roomsLeft > 0:
 		var currentRoom: Vector2i = roomsToGen.pop_front()
 		if get_cell_atlas_coords(currentRoom) != emptyAtlas:
+			#for some reason, uncommenting this block breaks compiling:
+			#while roomsLeft > 0 and roomsToGen.size() == 0: # if dungeon generation would stall out early, force more options
+				#print_debug("DUNGEON GEN ENDING WITH ", roomsLeft, " ROOMS LEFT; FORCING CONTINUATION...")
+				#roomsToGen = force_continuation(roomsToGen, roomsLeft)
 			continue
 		var currentPaths: Array = findPaths(currentRoom)
 		validAtlasCoords = [crossAtlas, deadEnd_S_Atlas, deadEnd_W_Atlas,
@@ -325,54 +329,55 @@ func generate_catacombs() -> void:
 		roomsLeft = roomsLeft - 1
 		
 		#print_debug("RoomsLeft=", roomsLeft, ", roomsToGen.size()=", roomsToGen.size())
-		while roomsLeft > 0 and roomsToGen.size() <= 3: # if dungeon generation would stall out early, force more options
+		while roomsLeft > 0 and roomsToGen.size() == 0: # if dungeon generation would stall out early, force more options
 				print_debug("DUNGEON GEN ENDING WITH ", roomsLeft, " ROOMS LEFT; FORCING CONTINUATION...")
-				var mapRect = get_used_rect()
-				match randi() % 4:	# pick a random direction to grow in
-					0: # E
-						for j in range(mapRect.position.y, mapRect.position.y + mapRect.size.y):
-							currentRoom = Vector2(mapRect.position.x + mapRect.size.x, mapRect.position.y + j)
-							if get_cell_atlas_coords(currentRoom) != emptyAtlas:
-								set_cell(currentRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
-								roomsToStack = get_rooms_to_stack(currentRoom)
-								for r in roomsToStack:
-									if breadthFirstMode:
-										roomsToGen.push_back(r) # Breadth-first
-									else:
-										roomsToGen.push_front(r) # Depth-first
-					1: # N
-						for i in range(mapRect.position.x, mapRect.position.x + mapRect.size.x):
-							currentRoom = Vector2(mapRect.position.x + i, mapRect.position.y)
-							if get_cell_atlas_coords(currentRoom) != emptyAtlas:
-								set_cell(currentRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
-								roomsToStack = get_rooms_to_stack(currentRoom)
-								for r in roomsToStack:
-									if breadthFirstMode:
-										roomsToGen.push_back(r) # Breadth-first
-									else:
-										roomsToGen.push_front(r) # Depth-first
-					2: # W
-						for j in range(mapRect.position.y, mapRect.position.y + mapRect.size.y):
-							currentRoom = Vector2(mapRect.position.x, mapRect.position.y + j)
-							if get_cell_atlas_coords(currentRoom) != emptyAtlas:
-								set_cell(currentRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
-								roomsToStack = get_rooms_to_stack(currentRoom)
-								for r in roomsToStack:
-									if breadthFirstMode:
-										roomsToGen.push_back(r) # Breadth-first
-									else:
-										roomsToGen.push_front(r) # Depth-first
-					3: # S
-						for i in range(mapRect.position.x, mapRect.position.x + mapRect.size.x):
-							currentRoom = Vector2(mapRect.position.x + i, mapRect.position.y + mapRect.size.y)
-							if get_cell_atlas_coords(currentRoom) != emptyAtlas:
-								set_cell(currentRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
-								roomsToStack = get_rooms_to_stack(currentRoom)
-								for r in roomsToStack:
-									if breadthFirstMode:
-										roomsToGen.push_back(r) # Breadth-first
-									else:
-										roomsToGen.push_front(r) # Depth-first
+				roomsToGen = force_continuation(roomsToGen, roomsLeft)
+				#var mapRect = get_used_rect()
+				#match randi() % 4:	# pick a random direction to grow in
+					#0: # E
+						#for j in range(mapRect.position.y, mapRect.position.y + mapRect.size.y):
+							#currentRoom = Vector2(mapRect.position.x + mapRect.size.x, mapRect.position.y + j)
+							#if get_cell_atlas_coords(currentRoom) != emptyAtlas:
+								#set_cell(currentRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
+								#roomsToStack = get_rooms_to_stack(currentRoom)
+								#for r in roomsToStack:
+									#if breadthFirstMode:
+										#roomsToGen.push_back(r) # Breadth-first
+									#else:
+										#roomsToGen.push_front(r) # Depth-first
+					#1: # N
+						#for i in range(mapRect.position.x, mapRect.position.x + mapRect.size.x):
+							#currentRoom = Vector2(mapRect.position.x + i, mapRect.position.y)
+							#if get_cell_atlas_coords(currentRoom) != emptyAtlas:
+								#set_cell(currentRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
+								#roomsToStack = get_rooms_to_stack(currentRoom)
+								#for r in roomsToStack:
+									#if breadthFirstMode:
+										#roomsToGen.push_back(r) # Breadth-first
+									#else:
+										#roomsToGen.push_front(r) # Depth-first
+					#2: # W
+						#for j in range(mapRect.position.y, mapRect.position.y + mapRect.size.y):
+							#currentRoom = Vector2(mapRect.position.x, mapRect.position.y + j)
+							#if get_cell_atlas_coords(currentRoom) != emptyAtlas:
+								#set_cell(currentRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
+								#roomsToStack = get_rooms_to_stack(currentRoom)
+								#for r in roomsToStack:
+									#if breadthFirstMode:
+										#roomsToGen.push_back(r) # Breadth-first
+									#else:
+										#roomsToGen.push_front(r) # Depth-first
+					#3: # S
+						#for i in range(mapRect.position.x, mapRect.position.x + mapRect.size.x):
+							#currentRoom = Vector2(mapRect.position.x + i, mapRect.position.y + mapRect.size.y)
+							#if get_cell_atlas_coords(currentRoom) != emptyAtlas:
+								#set_cell(currentRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
+								#roomsToStack = get_rooms_to_stack(currentRoom)
+								#for r in roomsToStack:
+									#if breadthFirstMode:
+										#roomsToGen.push_back(r) # Breadth-first
+									#else:
+										#roomsToGen.push_front(r) # Depth-first
 		
 	
 	fill_empty_cells()
@@ -400,6 +405,57 @@ func get_rooms_to_stack(newRoom: Vector2i) -> Array:
 			outputArray.push_back(Vector2i(newRoom.x,newRoom.y+1)) # queue room to be gen'd S
 		
 	return outputArray
+
+
+func force_continuation(roomsIn: Array, breadthRooms: bool) -> Array:
+	var roomsOut: Array = roomsIn
+	var mapRect = get_used_rect()
+	match randi() % 4:	# pick a random direction to grow in
+		0: # E
+			for j in range(mapRect.position.y, mapRect.position.y + mapRect.size.y):
+				var thisRoom = Vector2(mapRect.position.x + mapRect.size.x, mapRect.position.y + j)
+				if get_cell_atlas_coords(thisRoom) != emptyAtlas:
+					set_cell(thisRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
+					var roomsToStack = get_rooms_to_stack(thisRoom)
+					for r in roomsToStack:
+						if breadthRooms:
+							roomsOut.push_back(r) # Breadth-first
+						else:
+							roomsOut.push_front(r) # Depth-first
+		1: # N
+			for i in range(mapRect.position.x, mapRect.position.x + mapRect.size.x):
+				var thisRoom = Vector2(mapRect.position.x + i, mapRect.position.y)
+				if get_cell_atlas_coords(thisRoom) != emptyAtlas:
+					set_cell(thisRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
+					var roomsToStack = get_rooms_to_stack(thisRoom)
+					for r in roomsToStack:
+						if breadthRooms:
+							roomsOut.push_back(r) # Breadth-first
+						else:
+							roomsOut.push_front(r) # Depth-first
+		2: # W
+			for j in range(mapRect.position.y, mapRect.position.y + mapRect.size.y):
+				var thisRoom = Vector2(mapRect.position.x, mapRect.position.y + j)
+				if get_cell_atlas_coords(thisRoom) != emptyAtlas:
+					set_cell(thisRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
+					var roomsToStack = get_rooms_to_stack(thisRoom)
+					for r in roomsToStack:
+						if breadthRooms:
+							roomsOut.push_back(r) # Breadth-first
+						else:
+							roomsOut.push_front(r) # Depth-first
+		3: # S
+			for i in range(mapRect.position.x, mapRect.position.x + mapRect.size.x):
+				var thisRoom = Vector2(mapRect.position.x + i, mapRect.position.y + mapRect.size.y)
+				if get_cell_atlas_coords(thisRoom) != emptyAtlas:
+					set_cell(thisRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
+					var roomsToStack = get_rooms_to_stack(thisRoom)
+					for r in roomsToStack:
+						if breadthRooms:
+							roomsOut.push_back(r) # Breadth-first
+						else:
+							roomsOut.push_front(r) # Depth-first
+	return roomsOut
 
 
 func findPaths(room: Vector2i) -> Array:

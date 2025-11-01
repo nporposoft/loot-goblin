@@ -13,4 +13,3 @@ func _ready() -> void:
 		if body is Character and body.faction in safe_factions:
 			body.is_invisible = false
 	)
-
