@@ -23,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://dvwyd2tet2qr5" path="res://world/items/containers/Carton.tscn" id="16_v617q"]
 [ext_resource type="PackedScene" uid="uid://c5xfwj86lxpwo" path="res://world/items/containers/CartonUI.tscn" id="17_kt4iy"]
 [ext_resource type="Script" uid="uid://dmp2din0planr" path="res://src/characters/ai/aggressive_ai.gd" id="19_12nxt"]
-[ext_resource type="Script" uid="uid://dn8dhqtw4npht" path="res://src/world/goal.gd" id="23_syjho"]
+[ext_resource type="Script" uid="uid://bofbv8viin64f" path="res://src/world/goal.gd" id="23_syjho"]
 [ext_resource type="Script" uid="uid://3vjtbq2kcl8g" path="res://src/characters/detector.gd" id="24_5fpyr"]
 [ext_resource type="Script" uid="uid://b48b0vw5i240l" path="res://src/world/scene_change_area.gd" id="25_8jt1m"]
 [ext_resource type="PackedScene" uid="uid://7mdy3xr0foye" path="res://world/items/containers/ChestUI.tscn" id="27_476hu"]
@@ -753,7 +753,6 @@ position = Vector2(1728, 496)
 move_speed = 375000.0
 attack_damage = 0
 attack_impulse_strength = 350000.0
-attack_recover_time = 0.15
 
 [node name="AggressiveAI" type="Node" parent="World/Knight"]
 script = ExtResource("19_12nxt")

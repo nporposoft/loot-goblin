@@ -38,14 +38,14 @@ var height: int = 32
 @export var max_loot_per_room: int = 20
 
 # Small tiles atlas coordinates: 
-const homeAtlas: Vector2i = Vector2i(0, 0)
-const entranceAtlas: Vector2i = Vector2i(0, 1)
+const homeAtlas: Vector2i = Vector2i(0, 0)		# horde scoring tile
+const entranceAtlas: Vector2i = Vector2i(0, 1)	# entrance tile to horde
 const wallAtlas: Vector2i = Vector2i(3, 0)
 const floorAtlas: Vector2i = Vector2i(3, 2)
 const fancyFloorAtlas: Vector2i = Vector2i(0, 0)
 # Catacomb rooms atlas coordinates:
 const emptyAtlas: Vector2i = Vector2i(-1, -1)
-const startRoomAtlas: Vector2i = Vector2i(0, 1)
+#const startRoomAtlas: Vector2i = Vector2i(0, 1)
 const crossAtlas: Vector2i = Vector2i(0, 2)
 const solidBlock_Atlas: Vector2i = Vector2i(0, 3)
 const deadEnd_S_Atlas: Vector2i = Vector2i(1, 0)
@@ -76,7 +76,7 @@ func _ready():
 	#generate_random_world()		# works bad
 	#generate_dungeon_world()	# works worse
 	#generate_box_world()		# kinda works, but still sucks
-	generate_catacombs()
+	generate_catacombs()			# old hat, but it's good enough
 	on_finished_generating.emit()
 
 
@@ -89,7 +89,7 @@ func generate_catacombs() -> void:
 	var validAtlasCoords: Array
 	var roomsGenerated: int = 0
 	var roomsLeft:int = MAX_CATACOMBS_ROOMS
-	var homeCount: int = 1
+	#var homeCount: int = 1
 	var breadthFirstMode: bool = true
 	var modeSwitchCountdown: int = randi() % MODE_SWITCH_COUNT_MAX
 	
@@ -102,6 +102,7 @@ func generate_catacombs() -> void:
 				#roomsToGen = force_continuation(roomsToGen, roomsLeft)
 			continue
 		var currentPaths: Array = findPaths(currentRoom)
+		# Initialize list with all valid rooms; remove them as they are found unsuitable:
 		validAtlasCoords = [crossAtlas, deadEnd_S_Atlas, deadEnd_W_Atlas,
 			deadEnd_N_Atlas, deadEnd_E_Atlas, corner_NE_Atlas, corner_SE_Atlas,
 			corner_SW_Atlas, corner_NW_Atlas, tee_NSW_Atlas, tee_NWE_Atlas,
@@ -410,51 +411,62 @@ func get_rooms_to_stack(newRoom: Vector2i) -> Array:
 func force_continuation(roomsIn: Array, breadthRooms: bool) -> Array:
 	var roomsOut: Array = roomsIn
 	var mapRect = get_used_rect()
-	match randi() % 4:	# pick a random direction to grow in
-		0: # E
-			for j in range(mapRect.position.y, mapRect.position.y + mapRect.size.y):
-				var thisRoom = Vector2(mapRect.position.x + mapRect.size.x, mapRect.position.y + j)
-				if get_cell_atlas_coords(thisRoom) != emptyAtlas:
-					set_cell(thisRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
-					var roomsToStack = get_rooms_to_stack(thisRoom)
-					for r in roomsToStack:
-						if breadthRooms:
-							roomsOut.push_back(r) # Breadth-first
-						else:
-							roomsOut.push_front(r) # Depth-first
-		1: # N
-			for i in range(mapRect.position.x, mapRect.position.x + mapRect.size.x):
-				var thisRoom = Vector2(mapRect.position.x + i, mapRect.position.y)
-				if get_cell_atlas_coords(thisRoom) != emptyAtlas:
-					set_cell(thisRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
-					var roomsToStack = get_rooms_to_stack(thisRoom)
-					for r in roomsToStack:
-						if breadthRooms:
-							roomsOut.push_back(r) # Breadth-first
-						else:
-							roomsOut.push_front(r) # Depth-first
-		2: # W
-			for j in range(mapRect.position.y, mapRect.position.y + mapRect.size.y):
-				var thisRoom = Vector2(mapRect.position.x, mapRect.position.y + j)
-				if get_cell_atlas_coords(thisRoom) != emptyAtlas:
-					set_cell(thisRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
-					var roomsToStack = get_rooms_to_stack(thisRoom)
-					for r in roomsToStack:
-						if breadthRooms:
-							roomsOut.push_back(r) # Breadth-first
-						else:
-							roomsOut.push_front(r) # Depth-first
-		3: # S
-			for i in range(mapRect.position.x, mapRect.position.x + mapRect.size.x):
-				var thisRoom = Vector2(mapRect.position.x + i, mapRect.position.y + mapRect.size.y)
-				if get_cell_atlas_coords(thisRoom) != emptyAtlas:
-					set_cell(thisRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
-					var roomsToStack = get_rooms_to_stack(thisRoom)
-					for r in roomsToStack:
-						if breadthRooms:
-							roomsOut.push_back(r) # Breadth-first
-						else:
-							roomsOut.push_front(r) # Depth-first
+	var findingRoom: bool = true
+	var protectedRoomTypes = [emptyAtlas, homeAtlas, entranceAtlas]
+	while findingRoom:
+		match randi() % 4:	# pick a random direction to grow in
+			0: # E
+				for j in range(mapRect.position.y, mapRect.position.y + mapRect.size.y):
+					var thisRoom = Vector2(mapRect.position.x + mapRect.size.x, mapRect.position.y + j)
+					if not protectedRoomTypes.has(get_cell_atlas_coords(thisRoom)):	# check for rooms that shouldn't be overwritten
+						set_cell(thisRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
+						findingRoom = false
+						var roomsToStack = get_rooms_to_stack(thisRoom)
+						for r in roomsToStack:
+							if breadthRooms:
+								roomsOut.push_back(r) # Breadth-first
+							else:
+								roomsOut.push_front(r) # Depth-first
+						break
+			1: # N
+				for i in range(mapRect.position.x, mapRect.position.x + mapRect.size.x):
+					var thisRoom = Vector2(mapRect.position.x + i, mapRect.position.y)
+					if not protectedRoomTypes.has(get_cell_atlas_coords(thisRoom)):	# check for rooms that shouldn't be overwritten
+						set_cell(thisRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
+						findingRoom = false
+						var roomsToStack = get_rooms_to_stack(thisRoom)
+						for r in roomsToStack:
+							if breadthRooms:
+								roomsOut.push_back(r) # Breadth-first
+							else:
+								roomsOut.push_front(r) # Depth-first
+						break
+			2: # W
+				for j in range(mapRect.position.y, mapRect.position.y + mapRect.size.y):
+					var thisRoom = Vector2(mapRect.position.x, mapRect.position.y + j)
+					if not protectedRoomTypes.has(get_cell_atlas_coords(thisRoom)):	# check for rooms that shouldn't be overwritten
+						set_cell(thisRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
+						findingRoom = false
+						var roomsToStack = get_rooms_to_stack(thisRoom)
+						for r in roomsToStack:
+							if breadthRooms:
+								roomsOut.push_back(r) # Breadth-first
+							else:
+								roomsOut.push_front(r) # Depth-first
+						break
+			3: # S
+				for i in range(mapRect.position.x, mapRect.position.x + mapRect.size.x):
+					var thisRoom = Vector2(mapRect.position.x + i, mapRect.position.y + mapRect.size.y)
+					if not protectedRoomTypes.has(get_cell_atlas_coords(thisRoom)):	# check for rooms that shouldn't be overwritten
+						set_cell(thisRoom, 1, crossAtlas)	# replace existing edge room with cross intersection
+						findingRoom = false
+						var roomsToStack = get_rooms_to_stack(thisRoom)
+						for r in roomsToStack:
+							if breadthRooms:
+								roomsOut.push_back(r) # Breadth-first
+							else:
+								roomsOut.push_front(r) # Depth-first
+						break
 	return roomsOut
 
 
@@ -468,7 +480,7 @@ func findPaths(room: Vector2i) -> Array:
 	if get_cell_atlas_coords(currentNeighbor) == emptyAtlas:
 		outputArray.push_back(Path.ANY)
 	else:
-		openNeighbors = [startRoomAtlas, crossAtlas, deadEnd_W_Atlas, corner_SW_Atlas,
+		openNeighbors = [entranceAtlas, crossAtlas, deadEnd_W_Atlas, corner_SW_Atlas,
 			corner_NW_Atlas, tee_NSW_Atlas, tee_NWE_Atlas, tee_ESW_Atlas,
 			hall_EW_Atlas, hallBars_EW_Atlas] # atlas coords with W facing doors
 		if openNeighbors.has(get_cell_atlas_coords(currentNeighbor)):
@@ -481,7 +493,7 @@ func findPaths(room: Vector2i) -> Array:
 	if get_cell_atlas_coords(currentNeighbor) == emptyAtlas:
 		outputArray.push_back(Path.ANY)
 	else:
-		openNeighbors = [startRoomAtlas, crossAtlas, deadEnd_S_Atlas, corner_SE_Atlas,
+		openNeighbors = [entranceAtlas, crossAtlas, deadEnd_S_Atlas, corner_SE_Atlas,
 			corner_SW_Atlas, tee_NSW_Atlas, tee_NES_Atlas, tee_ESW_Atlas,
 			hall_NS_Atlas, hallBars_NS_Atlas] # atlas coords with S facing doors
 		if openNeighbors.has(get_cell_atlas_coords(currentNeighbor)):
@@ -494,7 +506,7 @@ func findPaths(room: Vector2i) -> Array:
 	if get_cell_atlas_coords(currentNeighbor) == emptyAtlas:
 		outputArray.push_back(Path.ANY)
 	else:
-		openNeighbors = [startRoomAtlas, crossAtlas, deadEnd_E_Atlas, corner_NE_Atlas,
+		openNeighbors = [entranceAtlas, crossAtlas, deadEnd_E_Atlas, corner_NE_Atlas,
 			corner_SE_Atlas, tee_NWE_Atlas, tee_NES_Atlas, tee_ESW_Atlas,
 			hall_EW_Atlas, hallBars_EW_Atlas] # atlas coords with E facing doors
 		if openNeighbors.has(get_cell_atlas_coords(currentNeighbor)):

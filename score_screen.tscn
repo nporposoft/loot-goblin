@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=3 uid="uid://bwfoof2bikx7a"]
+
+[ext_resource type="Script" uid="uid://dn22nlv343pd3" path="res://score_screen.gd" id="1_7byvd"]
+[ext_resource type="PackedScene" uid="uid://cirkhmxhfm3hn" path="res://world/items/Torch.tscn" id="2_3r2db"]
+[ext_resource type="Script" uid="uid://cewlkold744ho" path="res://world/player/scene_change_button.gd" id="2_juxjb"]
+
+[sub_resource type="Gradient" id="Gradient_a1flm"]
+colors = PackedColorArray(0.04, 0.032, 0.027999999, 1, 0.41, 0.30886665, 0.2583, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7byvd"]
+gradient = SubResource("Gradient_a1flm")
+
+[node name="ScoreScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_7byvd")
+
+[node name="Hole" type="RigidBody2D" parent="."]
+position = Vector2(2, 8)
+mass = 1000.0
+lock_rotation = true
+freeze = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hole"]
+position = Vector2(591, 21)
+polygon = PackedVector2Array(138, 111, 130, 976, 540, 972, 506, 99, 585, -29, 770, -74, 668, 1068, -28, 1086, -35, -44, 84, -28)
+
+[node name="Polygon2D" type="Polygon2D" parent="Hole"]
+texture = SubResource("GradientTexture1D_7byvd")
+texture_offset = Vector2(1080, 0)
+texture_scale = Vector2(0.3, 0.3)
+texture_rotation = 1.5707964
+polygon = PackedVector2Array(729, 132, 720, 1000, 1133, 994, 1097, 122, 1177, -8, 1361, -53, 1262, 1086, 563, 1108, 556, -24, 675, -7)
+
+[node name="SpawnLocus" type="Node2D" parent="Hole"]
+position = Vector2(1047, 84)
+
+[node name="Torch" parent="." instance=ExtResource("2_3r2db")]
+position = Vector2(927, 57)
+gravity_scale = 1.0
+lock_rotation = false
+
+[node name="UI" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ReplayTime" type="Label" parent="UI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ShiniesEarned" type="Label" parent="UI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Oh no" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 128.0
+offset_right = 298.0
+offset_bottom = 151.0
+text = "Oh no"
+
+[node name="Main Menu" type="Button" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 192.0
+offset_top = 192.0
+offset_right = 288.0
+offset_bottom = 223.0
+text = "Main Menu"
+script = ExtResource("2_juxjb")
+target_scene_path = "uid://cjufcr2toyf7t"
+
+[node name="Try Again" type="Button" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 192.0
+offset_top = 256.0
+offset_right = 271.0
+offset_bottom = 287.0
+text = "Try again"
+script = ExtResource("2_juxjb")
+target_scene_path = "uid://r0rlptslyw58"
+metadata/_custom_type_script = "uid://cewlkold744ho"
